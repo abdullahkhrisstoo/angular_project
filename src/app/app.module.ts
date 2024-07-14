@@ -7,7 +7,7 @@ import { LayoutModule } from './layout/layout.module';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-
+import { HomeModule } from './layout/home/home.module'; 
 @NgModule({
   declarations: [
     AppComponent
@@ -21,7 +21,8 @@ import { CommonModule } from '@angular/common';
     AppRoutingModule,
     // CoreModule,
     SharedModule,
-    LayoutModule
+    LayoutModule,
+    HomeModule
     
 ],
   providers: [
