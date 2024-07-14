@@ -1,1 +1,87 @@
-/* You can add global styles to this file, and also import other style files */
+/* Light Theme */
+:root {
+    --light-primary-color: #007bff;
+    --light-on-primary-color: #ffffff;
+  
+    --light-secondary-color: #6c757d;
+    --light-on-secondary-color: #ffffff;
+  
+    --light-tertiary-color: #28a745;
+    --light-on-tertiary-color: #ffffff;
+  
+    --light-success-color: #28a745;
+    --light-on-success-color: #ffffff;
+  
+    --light-error-color: #dc3545;
+    --light-on-error-color: #ffffff;
+  
+    --light-info-color: #17a2b8;
+    --light-on-info-color: #ffffff;
+  
+    --light-warning-color: #ffc107;
+    --light-on-warning-color: #000000;
+  
+    --light-background-color: #f8f9fa;
+    --light-surface-color: #ffffff;
+  
+    --light-text-color: #343a40;
+  }
+  
+  /* Dark Theme */
+  :root {
+    --dark-primary-color: #1e90ff;
+    --dark-on-primary-color: #ffffff;
+  
+    --dark-secondary-color: #adb5bd;
+    --dark-on-secondary-color: #ffffff;
+  
+    --dark-tertiary-color: #28a745;
+    --dark-on-tertiary-color: #ffffff;
+  
+    --dark-success-color: #28a745;
+    --dark-on-success-color: #ffffff;
+  
+    --dark-error-color: #dc3545;
+    --dark-on-error-color: #ffffff;
+  
+    --dark-info-color: #17a2b8;
+    --dark-on-info-color: #ffffff;
+  
+    --dark-warning-color: #ffc107;
+    --dark-on-warning-color: #000000;
+  
+    --dark-background-color: #343a40;
+    --dark-surface-color: #495057;
+  
+    --dark-text-color: #ffffff;
+  }
+  
+  /* Default to Light Theme */
+  :root {
+    --primary-color: var(--light-primary-color);
+    --on-primary-color: var(--light-on-primary-color);
+  
+    --secondary-color: var(--light-secondary-color);
+    --on-secondary-color: var(--light-on-secondary-color);
+  
+    --tertiary-color: var(--light-tertiary-color);
+    --on-tertiary-color: var(--light-on-tertiary-color);
+  
+    --success-color: var(--light-success-color);
+    --on-success-color: var(--light-on-success-color);
+  
+    --error-color: var(--light-error-color);
+    --on-error-color: var(--light-on-error-color);
+  
+    --info-color: var(--light-info-color);
+    --on-info-color: var(--light-on-info-color);
+  
+    --warning-color: var(--light-warning-color);
+    --on-warning-color: var(--light-on-warning-color);
+  
+    --background-color: var(--light-background-color);
+    --surface-color: var(--light-surface-color);
+  
+    --text-color: var(--light-text-color);
+  }
+  
