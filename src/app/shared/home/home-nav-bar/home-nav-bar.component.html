@@ -8,17 +8,17 @@
 
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="header.html" class="active">Home<br></a></li>
-                <li><a href="about">About</a></li>
+                <li><a routerLink="home/homepage" class="active">Home</a></li>
+                <li><a routerLink="home/about">About</a></li>
                <!--<li><a href="courses.html">Courses</a></li>
                 <li><a href="trainers.html">Trainers</a></li>
                 <li><a href="events.html">Events</a></li>-->
-                <li><a href="header.html">Pricing</a></li>
+                <li><a routerLink="/home/Pricing">Pricing</a></li>
                 <li class="dropdown">
                     <a href="#"><span>Accounts</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
-                        <li><a href="#">Sign In</a></li>
-                        <li><a href="#">Sign Out</a></li>
+                        <li><a routerLink="/auth/sign-in">Sign In</a></li>
+                        <li><a routerLink="/auth/sign-up">Sign Out</a></li>
                     </ul>
                 </li>
                 <li><a href="header.html">Contact</a></li>

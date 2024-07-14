@@ -8,6 +8,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 import { AboutComponent } from './components/about/about.component';
 import { SharedModule } from '../../shared/shared.module';
+import { HomepageComponent } from './components/homepage/homepage.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { SharedModule } from '../../shared/shared.module';
     ContactComponent,
     TestimonialsComponent,
     AboutComponent,
+    HomepageComponent,
 
   ],
   imports: [
