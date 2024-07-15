@@ -11,22 +11,17 @@ const routes: Routes = [
     path: '',
     component: HomeLayoutComponent,
     children: [
-       { path: '', redirectTo: 'homepage', pathMatch: 'full' },
-      { path: 'pricing', component: PricingComponent } ,
-      {path:'contact',component:ContactComponent},
-      {
-        path:'about',component:AboutComponent
-      },
-      {
-        path:'homepage',component:HomepageComponent
-      }
-        // { path: 'dashboard', component: HomeDashboardComponent },
-      // { path: 'profile', component: HomeProfileComponent },
-    ]
-  }
+      { path: '', redirectTo: 'homepage', pathMatch: 'full' },
+      { path: 'pricing', component: PricingComponent },
+      { path: 'contact', component: ContactComponent },
+      { path: 'about', component: AboutComponent },
+      { path: 'homepage', component: HomepageComponent },
+    ],
+  },
 ];
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class HomeRoutingModule { }
+export class HomeRoutingModule {}

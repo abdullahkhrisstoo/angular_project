@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation ,ChangeDetectorRef} from '@angular/core';
 
 @Component({
   selector: 'app-auth-layout',
@@ -7,5 +7,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.ShadowDom, 
 })
 export class AuthLayoutComponent {
-
+  constructor(private cdr: ChangeDetectorRef) {}
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
 }
+
+
+
+

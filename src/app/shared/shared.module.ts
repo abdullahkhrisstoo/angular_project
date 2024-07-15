@@ -11,46 +11,31 @@ import { DashNavBarComponent } from './dash/dash-nav-bar/dash-nav-bar.component'
 import { DashbardAssetsComponent } from './dash/dashbard-assets/dashbard-assets.component';
 import { HomeAssetsComponent } from './dash/home-assets/home-assets.component';
 import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
-
-
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AdminSideBarComponent,
-
     HomeNavBarComponent,
     HomeFooterComponent,
-
     ProctorSideBarComponent,
-
     ExamProviderSideBarComponent,
-
     StudentNavBarComponent,
     StudentFooterComponent,
-
-      DashNavBarComponent,
-      DashbardAssetsComponent,
-      HomeAssetsComponent,
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
-  exports:[
-    AdminSideBarComponent,
-
-    HomeNavBarComponent,
-    HomeFooterComponent,
-
-    ProctorSideBarComponent,
-
-    ExamProviderSideBarComponent,
-    
-    StudentNavBarComponent,
-    StudentFooterComponent,
-
     DashNavBarComponent,
-
-  ]
+    DashbardAssetsComponent,
+    HomeAssetsComponent,
+  ],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  exports: [
+    AdminSideBarComponent,
+    HomeNavBarComponent,
+    HomeFooterComponent,
+    ProctorSideBarComponent,
+    ExamProviderSideBarComponent,
+    StudentNavBarComponent,
+    StudentFooterComponent,
+    DashNavBarComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
