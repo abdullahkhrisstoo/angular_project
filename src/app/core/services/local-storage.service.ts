@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class LocalStorageService {
 
-  private KEY_ONE:string="key-one";
-  private KEY_TWO:string="key-one";
-  private KEY_THREE:string="key-one";
+  public AUTH_TOKEN:string="auth-token";
+  public USER_SESSION_KEY:string="user-session-key";
+  public KEY_THREE:string="key-one";
 
   constructor() { } 
 

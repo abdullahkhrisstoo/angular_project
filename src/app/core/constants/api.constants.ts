@@ -1,10 +1,6 @@
 export const API_ENDPOINTS = {
-    USERS: '/api/users',
-    PRODUCTS: '/api/products',
-    LOGIN: '/auth/login',
-    LOGOUT: '/auth/logout',
+  baseUrl : 'https://192.168.1.17:1111/api/',
 
-    baseUrl : 'http://192.168.1.17:2222/api/',
     GET_ALL_COMPLEMENT : 'Complement/GetAll',
     CREATE_COMPLEMENT : 'Complement/create',
     GET_COMPMLEMENT_BY_ID : 'Complement/GetById',

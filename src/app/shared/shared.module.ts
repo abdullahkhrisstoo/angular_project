@@ -10,8 +10,10 @@ import { StudentFooterComponent } from './student/student-footer/student-footer.
 import { DashNavBarComponent } from './dash/dash-nav-bar/dash-nav-bar.component';
 import { DashbardAssetsComponent } from './dash/dashbard-assets/dashbard-assets.component';
 import { HomeAssetsComponent } from './dash/home-assets/home-assets.component';
-import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { RouterModule } from '@angular/router';
+import { InputComponent } from './components/input/input.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,8 +27,12 @@ import { RouterModule } from '@angular/router';
     DashNavBarComponent,
     DashbardAssetsComponent,
     HomeAssetsComponent,
+    InputComponent,
+  
   ],
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [
+    CommonModule, ReactiveFormsModule, RouterModule,HttpClientModule, FormsModule   
+    ],
   exports: [
     AdminSideBarComponent,
     HomeNavBarComponent,
@@ -36,6 +42,10 @@ import { RouterModule } from '@angular/router';
     StudentNavBarComponent,
     StudentFooterComponent,
     DashNavBarComponent,
+    ReactiveFormsModule,
+    InputComponent,
+    HttpClientModule,   
+    FormsModule 
   ],
 })
 export class SharedModule {}

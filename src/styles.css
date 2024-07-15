@@ -1,3 +1,42 @@
+@import "~ngx-toastr/toastr.css";
+
+.toast-top-right {
+  top: 12px;
+  right: 12px;
+}
+
+.toast-success {
+  background-color: #28a745 !important;
+  color: #fff !important;
+}
+
+.toast-error {
+  background-color: #dc3545 !important;
+  color: #fff !important;
+}
+
+.toast-info {
+  background-color: #17a2b8 !important;
+  color: #fff !important;
+}
+
+.toast-warning {
+  background-color: #ffc107 !important;
+  color: #212529 !important;
+}
+
+.toast-progress {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.toast-title {
+  font-weight: bold !important;
+}
+
+.toast-message {
+  font-size: 14px !important;
+}
+
 /* Light Theme */
 :root {
     --light-primary-color: #007bff;
@@ -85,3 +124,4 @@
     --text-color: var(--light-text-color);
   }
   
+

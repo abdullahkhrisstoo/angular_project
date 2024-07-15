@@ -5,28 +5,40 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { SharedModule } from './shared/shared.module';
-import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { HomeModule } from './layout/home/home.module'; 
+import { HomeModule } from './layout/home/home.module';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+import { THREE_SECOND_TOASTER } from './core/constants/app.constants';
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    // MaterialModule,
-    // FormsModule, 
     CommonModule,
     BrowserModule,
-    // HttpClientModule,
     AppRoutingModule,
-    // CoreModule,
     SharedModule,
     LayoutModule,
-    HomeModule
+    HomeModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      closeButton: true, 
+      tapToDismiss: true 
+    })
     
 ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
