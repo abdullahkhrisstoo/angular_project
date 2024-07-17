@@ -7,9 +7,9 @@ import { FormGroup } from '@angular/forms';
     <div [formGroup]="formGroup">
       <label class="form-label" [for]="controlName">{{ label }}</label>
       <input [placeholder]="placeholder"
-             class="form-control" [id]="controlName" [formControlName]="controlName" [type]="type"
-             [class.is-invalid]="formGroup.get(controlName)?.invalid && (formGroup.get(controlName)?.dirty || formGroup.get(controlName)?.touched)"
-             [class.is-valid]="formGroup.get(controlName)?.valid && (formGroup.get(controlName)?.dirty || formGroup.get(controlName)?.touched)">
+      class="form-control" [id]="controlName" [formControlName]="controlName" [type]="type"
+      [class.is-invalid]="formGroup.get(controlName)?.invalid && (formGroup.get(controlName)?.dirty || formGroup.get(controlName)?.touched)"
+      [class.is-valid]="formGroup.get(controlName)?.valid && (formGroup.get(controlName)?.dirty || formGroup.get(controlName)?.touched)">
       <ng-container *ngIf="formGroup.get(controlName)?.invalid && (formGroup.get(controlName)?.dirty || formGroup.get(controlName)?.touched)">
         <span *ngFor="let error of getErrorMessages()" class="invalid-feedback">{{ error }}</span>
       </ng-container>

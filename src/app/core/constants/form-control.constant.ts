@@ -20,7 +20,27 @@ export const AGE_CONTROL: FormControl = new FormControl('', [
   Validators.required,
   Validators.min(18),
 ]);
+
 export const PASSWORD_CONTROL: FormControl = new FormControl('', [
   Validators.required,
   Validators.minLength(6),
+]);
+
+export const FULL_NAME_CONTROL: FormControl = new FormControl('', [
+  Validators.required,
+  Validators.maxLength(20),
+  Validators.minLength(3),
+]);
+
+
+export const SUBJECT_CONTACT_CONTROL: FormControl = new FormControl('', [
+  Validators.required,
+  Validators.maxLength(20),
+  Validators.minLength(3),
+]);
+
+export const CONTACT_MSG_CONTROL: FormControl = new FormControl('', [
+  Validators.required,
+  Validators.maxLength(255),
+  Validators.minLength(3),
 ]);

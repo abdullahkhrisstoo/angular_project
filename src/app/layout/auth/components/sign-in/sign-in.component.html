@@ -9,27 +9,30 @@
             <div class="card-body">
                 <h2 class="h2 text-center mb-4">Login to your account</h2>
                 <form [formGroup]="loginForm" method="get" (ngSubmit)="login()">
-                    <!-- <div class="mb-3">
-                        <label class="form-label">Email address</label>
-                        <input type="email" class="form-control" placeholder="your@email.com">
-                    </div> -->
-                    
+
+
+
+                 
+
                     <!-- todo: email form feild -->
                     <app-input placeholder="ex@mail.com" [formGroup]="loginForm" controlName="email" label="Email"
-                        [type]="'email'" [errorMessages]="{
-                                            required: 'Email is required.',
-                                            email: 'Invalid email format.'
-                                        }">
+                        [type]="'email'" 
+                        [errorMessages]="{
+                            required: AppMessages.REQUIRED_FIELD,
+                            email: AppMessages.INVALID_EMAIL
+                        }">
                     </app-input>
                     <br>
                     <!-- todo: password form feild -->
+                    
                     <app-input [formGroup]="loginForm" controlName="password" label="Password"
                     [type]="'password'"
                     [placeholder]="'Enter your password'"
                     [errorMessages]="{
-                    required: 'Password is required.',
-                    minLength: 'Password must be at least 6 characters long.'
+                    required: AppMessages.REQUIRED_FIELD,
+                    minLength: AppMessages.PASSWORD_LENGTH
                     }">
+
             </app-input>
                     <br>
                     <label class="form-label">
@@ -75,7 +78,59 @@
             </div>
         </div>
         <div class="text-center text-secondary mt-3">
-            Don't have account yet? <a href="./sign-up.html" tabindex="-1">Sign up</a>
+            Don't have account yet? <a routerLink="/auth/sign-up" tabindex="-1">Sign up</a>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+  
+  <div class="col-lg-8">
+    <form [formGroup]="contactForm" (ngSubmit)="createContact()" method="post" class="php-email-form"
+     >
+      <div class="row gy-4">
+        <app-input placeholder="your name" [formGroup]="contactForm" controlName="name" label="Full Name"
+          [type]="'text'" [errorMessages]="{
+              required: AppMessages.REQUIRED_FIELD,
+          }">
+        </app-input>
+        <app-input placeholder="ex@mail.com" [formGroup]="contactForm" controlName="email" label="Email"
+          [type]="'email'" [errorMessages]="{
+              required: AppMessages.REQUIRED_FIELD,
+              email: AppMessages.INVALID_EMAIL
+          }">
+        </app-input>
+  
+        <app-input placeholder="subject" [formGroup]="contactForm" controlName="phone" label="subject"
+          [type]="'text'" [errorMessages]="{
+              required: AppMessages.REQUIRED_FIELD,
+          }">
+        </app-input>
+  
+        <app-input placeholder="message" [formGroup]="contactForm" controlName="message" label="subject"
+        [type]="'text'" [errorMessages]="{
+            required: AppMessages.REQUIRED_FIELD,
+        }">
+      </app-input>
+  
+        <div class="col-md-12 text-center">
+          <button [disabled]="!contactForm.valid" type="submit" class="btn btn-primary w-100">Send Message</button>
+        </div>
+      </div>
+    </form>
+  </div>
+   -->

@@ -9,9 +9,12 @@ import { CommonModule } from '@angular/common';
 import { HomeModule } from './layout/home/home.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+// Import library module
+import { NgxSpinnerModule } from "ngx-spinner";
 import { ToastrModule } from 'ngx-toastr';
-import { THREE_SECOND_TOASTER } from './core/constants/app.constants';
+import { SpinnerService } from './core/services/spinner.service';
+import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,7 @@ import { THREE_SECOND_TOASTER } from './core/constants/app.constants';
     SharedModule,
     LayoutModule,
     HomeModule,
+    NgxSpinnerModule,
     BrowserAnimationsModule, 
     ToastrModule.forRoot({
       timeOut: 3000,
@@ -33,12 +37,19 @@ import { THREE_SECOND_TOASTER } from './core/constants/app.constants';
       progressAnimation: 'increasing',
       closeButton: true, 
       tapToDismiss: true 
-    })
-    
+    }),
 ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+  
+      SpinnerService,
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: SpinnerInterceptor,
+        multi: true
+      }
+    
   ],
   bootstrap: [AppComponent]
 })

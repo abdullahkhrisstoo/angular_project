@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
 import { EMAIL_CONTROL, PASSWORD_CONTROL } from '../../../../core/constants/form-control.constant';
 import { LocalStorageService } from '../../../../core/services/local-storage.service';
 import { ToastMsgService } from '../../../../core/services/toast.service';
-import { count } from 'console';
-
+import { APP_MESSAGES } from '../../../../core/constants/error-messages.constants';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -19,7 +18,8 @@ import { count } from 'console';
 export class SignInComponent {
   loginForm: FormGroup;
   rememberMe: boolean = false; 
-  // static count: number = 0;
+  AppMessages = APP_MESSAGES;
+
 
 
   constructor(
@@ -34,17 +34,7 @@ export class SignInComponent {
       password: PASSWORD_CONTROL
     });
   }
-  // ngOnInit(): void {
-  //   SignInComponent.count++;
-  //   if(SignInComponent.count===1){
-  //     console.log(SignInComponent.count)
-  //     debugger;
 
-  //     window.location.reload();
-
-  //   }
-  // }
-  
 
   login(): void {
     let credentials: GetUserByCredential = <GetUserByCredential>this.loginForm.value;
@@ -55,16 +45,12 @@ export class SignInComponent {
           if (this.rememberMe) {  
             this.cache.setItem(this.cache.USER_SESSION_KEY, response.data);
           }
-          
           this.router.navigate(['/home/homepage']);
-        } else {
-          console.error('Login failed:', response.message);
-          this.toast.showError('Login failed. Please check your credentials.'); 
-        }
+        } 
       },
       error => {
         console.error('Login error:', error);
-        this.toast.showError('Login error. Please try again later.'); 
+        this.toast.showError(this.AppMessages.CHECK_EMAIL_PASSWORD); 
       }
     );
   }

@@ -27,11 +27,12 @@ import { HttpClientModule } from '@angular/common/http';
     DashNavBarComponent,
     DashbardAssetsComponent,
     HomeAssetsComponent,
-    InputComponent,
+    InputComponent
   
   ],
   imports: [
-    CommonModule, ReactiveFormsModule, RouterModule,HttpClientModule, FormsModule   
+    CommonModule, ReactiveFormsModule, RouterModule,HttpClientModule, FormsModule   ,
+    
     ],
   exports: [
     AdminSideBarComponent,
@@ -45,7 +46,6 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     InputComponent,
     HttpClientModule,   
-    FormsModule 
-  ],
+    FormsModule   ],
 })
 export class SharedModule {}
