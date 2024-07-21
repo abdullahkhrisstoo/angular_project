@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { EXAM_PROVIDER_ROLE } from '../../../core/constants/app.constants';
 
 @Component({
   selector: 'app-admin-layout',

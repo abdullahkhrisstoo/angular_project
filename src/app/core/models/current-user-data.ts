@@ -7,4 +7,5 @@ export interface CurrentUserData {
     email: string;
     phonenum: string;
     roleId: number;
+    credentialId:number;
 }

@@ -4,13 +4,14 @@ import { tap } from 'rxjs/operators';
 import { GenericApiHandlerService } from './api.service';
 import { CurrentUserData } from '../models/current-user-data';
 import { UpdateNameViewModel } from '../DTO/update-name-view-model';
-import { UpdateEmailViewModel } from '../DTO/UpdateEmailViewModel';
 import { UpdatePhoneViewModel } from '../DTO/Update-Phone-View-Model';
 import { GetUserByCredential } from '../DTO/get-user-by-credential';
 import { ApiResponse } from '../utils/ApiResponse';
 import { CreateAccountViewModel } from '../DTO/create-account-view-model';
 import { API_ENDPOINTS } from '../constants/api.constants';
 import { LocalStorageService } from './local-storage.service';
+import { UpdateEmailViewModel } from '../DTO/update-email-view-model';
+import { UpdatePasswordViewModel } from '../DTO/update-password-view-model';
 
 
 @Injectable({
@@ -18,7 +19,7 @@ import { LocalStorageService } from './local-storage.service';
 })
 export class AuthService {
 
-  private currentUser: CurrentUserData | null = null;
+  // private currentUser: CurrentUserData | null = null;
 
   constructor(private apiHandler: GenericApiHandlerService, private  cache : LocalStorageService) { }
 
@@ -40,7 +41,7 @@ export class AuthService {
         })
       );
   }
-  updateUser(data: UpdateNameViewModel): Observable<ApiResponse<UpdateNameViewModel>> {
+  updateUserName(data: UpdateNameViewModel): Observable<ApiResponse<UpdateNameViewModel>> {
     return this.apiHandler.put<ApiResponse<UpdateNameViewModel>>(API_ENDPOINTS.UPDATE_NAME, data);
   }
   updateEmail(data: UpdateEmailViewModel): Observable<ApiResponse<UpdateEmailViewModel>> {
@@ -50,16 +51,21 @@ export class AuthService {
     return this.apiHandler.put<ApiResponse<UpdatePhoneViewModel>>(API_ENDPOINTS.UPDATE_PHONE, data);
   }
 
+  updatePassword(data: UpdatePasswordViewModel): Observable<ApiResponse<UpdatePasswordViewModel>> {
+    return this.apiHandler.put<ApiResponse<UpdatePasswordViewModel>>(API_ENDPOINTS.UPDATE_PASSWORD, data);
+  }
+
+
   private setToken(token: string): void {
     this.cache.setItem(this.cache.AUTH_TOKEN, token);
   }
 
   private setCurrentUser(user: CurrentUserData): void {
-    this.currentUser = user;
+    this.cache.setItem(this.cache.USER_SESSION_KEY,user);
   }
 
   getCurrentUser(): CurrentUserData | null {
-    return this.currentUser;
+    return this.cache.getItem(this.cache.USER_SESSION_KEY);
   }
 
   getToken(): string | null {
@@ -70,8 +76,8 @@ export class AuthService {
     return !!this.getToken();
   }
 
-  logout(): void {
-    this.cache.removeItem(this.cache.AUTH_TOKEN);
-    this.currentUser = null;
-  }
+  // logout(): void {
+  //   this.cache.removeItem(this.cache.AUTH_TOKEN);
+  //   this.currentUser = null;
+  // }
 }

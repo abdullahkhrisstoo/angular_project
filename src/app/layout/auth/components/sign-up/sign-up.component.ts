@@ -8,6 +8,8 @@ import { APP_MESSAGES } from '../../../../core/constants/error-messages.constant
 import { CurrentUserData } from '../../../../core/models/current-user-data';
 import { FormControllerService } from '../../../../core/services/form-controller.service';
 import { LocalStorageService } from '../../../../core/services/local-storage.service';
+import { EMAIL_CONTROL, FIRST_NAME_CONTROL, LAST_NAME_CONTROL, PASSWORD_CONTROL, PHONE_CONTROL } from '../../../../core/constants/form-control.constant';
+import { EXAM_PROVIDER_ROLE } from '../../../../core/constants/app.constants';
 
 @Component({
   selector: 'app-sign-up',
@@ -24,31 +26,34 @@ export class SignUpComponent {
     private toast: ToastMsgService
   ) {
     this.signUpForm = this.formController.createFormGroup({
+      firstName: FIRST_NAME_CONTROL,
+      lastName: LAST_NAME_CONTROL,
+      email: EMAIL_CONTROL,
+      phonenum: PHONE_CONTROL,
+      password: PASSWORD_CONTROL,
 
-      
+
     });
   }
-
-  get f() { return this.signUpForm.controls; }
 
   register(): void {
     if (this.signUpForm.invalid) {
       return;
     }
 
-    const user: CreateAccountViewModel = this.signUpForm.value;
+    let user: CreateAccountViewModel = <CreateAccountViewModel>this.signUpForm.value;
+    user.roleId = EXAM_PROVIDER_ROLE;
 
     this.authService.register(user).subscribe(
       (response: ApiResponse<CurrentUserData>) => {
         if (response.status === 200) {
+          this.signUpForm.reset();
           console.log('Registration successful:', response);
-          // Optionally navigate to a success page or handle success message
         }
       },
       error => {
         console.error('Registration error:', error);
         this.toast.showError(this.AppMessages.CHECK_EMAIL_PASSWORD);
-        // Handle registration error, display toast message, etc.
       }
     );
   }

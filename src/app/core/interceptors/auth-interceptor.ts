@@ -6,10 +6,10 @@ import { LocalStorageService } from '../services/local-storage.service';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
     constructor(private cache :LocalStorageService){
-        
+
     }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = this.cache.getItem(this.cache.AUTH_TOKEN); 
+    const token = this.cache.getItem(this.cache.AUTH_TOKEN);
 
     if (token) {
     const cloned = req.clone({

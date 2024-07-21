@@ -17,7 +17,7 @@ import { APP_MESSAGES } from '../../../../core/constants/error-messages.constant
 })
 export class SignInComponent {
   loginForm: FormGroup;
-  rememberMe: boolean = false; 
+  rememberMe: boolean = false;
   AppMessages = APP_MESSAGES;
 
 
@@ -42,15 +42,17 @@ export class SignInComponent {
       (response: ApiResponse<CurrentUserData>) => {
         if (response.status === 200) {
           console.log(response);
-          if (this.rememberMe) {  
+          if (this.rememberMe) {
             this.cache.setItem(this.cache.USER_SESSION_KEY, response.data);
           }
           this.router.navigate(['/home/homepage']);
-        } 
+        }
+        this.loginForm.reset();
+
       },
       error => {
         console.error('Login error:', error);
-        this.toast.showError(this.AppMessages.CHECK_EMAIL_PASSWORD); 
+        this.toast.showError(this.AppMessages.CHECK_EMAIL_PASSWORD);
       }
     );
   }

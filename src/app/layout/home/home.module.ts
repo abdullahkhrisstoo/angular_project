@@ -6,9 +6,10 @@ import { HomeRoutingModule } from './home-routing.module';
 import { PricingComponent } from './components/pricing/pricing.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
-import { AboutComponent } from './components/about/about.component';
+import { AboutComponent } from './components/about-screen/about-screen.component';
 import { SharedModule } from '../../shared/shared.module';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { AboutSectionComponent } from './components/about-section/about-section.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     TestimonialsComponent,
     AboutComponent,
     HomepageComponent,
+    AboutSectionComponent,
 
   ],
   imports: [
@@ -25,6 +27,6 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     HomeRoutingModule,
     SharedModule
   ],
- 
+
 })
 export class HomeModule { }

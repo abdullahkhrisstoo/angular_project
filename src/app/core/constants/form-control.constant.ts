@@ -25,6 +25,16 @@ export const PASSWORD_CONTROL: FormControl = new FormControl('', [
   Validators.required,
   Validators.minLength(6),
 ]);
+export const NEW_PASSWORD_CONTROL: FormControl = new FormControl('', [
+  Validators.required,
+  Validators.minLength(6),
+]);
+
+export const CONFIRM_PASSWORD_CONTROL: FormControl = new FormControl('', [
+  Validators.required,
+  Validators.minLength(6),
+]);
+
 
 export const FULL_NAME_CONTROL: FormControl = new FormControl('', [
   Validators.required,
@@ -44,3 +54,17 @@ export const CONTACT_MSG_CONTROL: FormControl = new FormControl('', [
   Validators.maxLength(255),
   Validators.minLength(3),
 ]);
+
+export const FIRST_NAME_CONTROL: FormControl = new FormControl('', [
+  Validators.required,
+  Validators.maxLength(25),
+  Validators.minLength(3),
+]);
+
+
+export const LAST_NAME_CONTROL: FormControl = new FormControl('', [
+  Validators.required,
+  Validators.maxLength(25),
+  Validators.minLength(3),
+]);
+

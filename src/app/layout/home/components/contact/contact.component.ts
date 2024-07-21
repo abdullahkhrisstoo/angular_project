@@ -14,9 +14,12 @@ import { APP_MESSAGES } from '../../../../core/constants/error-messages.constant
   styleUrl: './contact.component.css',
 })
 export class ContactComponent {
+  address:String="A108 Adam Street, New York, NY 535022";
+  callUs:string="+1 2929 2922";
+  emailUs:String="exam@gurdian.com";
   contactForm: FormGroup;
   AppMessages = APP_MESSAGES;
-  
+
   constructor(
     private contactService: ContactService,
     private formController: FormControllerService,
@@ -29,23 +32,20 @@ export class ContactComponent {
       message: CONTACT_MSG_CONTROL,
   });
   }
-  
+
   createContact(): void {
     let contactViweModel: CreateContactMessageViewModel = <CreateContactMessageViewModel>this.contactForm.value;
     this.contactService.createContact(contactViweModel).subscribe(
       (response: ApiResponse<CreateContactMessageViewModel>) => {
         console.log(response);
         if (response.status === 200) {
-          console.log(response);
-          
-          // this.router.navigate(['/home/homepage']);
-          this.toast.showSuccess(this.AppMessages.CONTACT_SUCCESS); 
-
-        } 
+          this.toast.showSuccess(this.AppMessages.CONTACT_SUCCESS);
+          this.contactForm.reset()
+        }
       },
       error => {
         console.error('Login error:', error);
-        this.toast.showError(this.AppMessages.CONTACT_ERROR); 
+        this.toast.showError(this.AppMessages.CONTACT_ERROR);
       }
     );
   }

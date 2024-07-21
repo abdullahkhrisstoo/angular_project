@@ -1,5 +1,5 @@
 export interface UpdateNameViewModel {
-    userId: number;
+    userId?: number;
     firstName?: string;
     lastName?: string;
     password?: string;

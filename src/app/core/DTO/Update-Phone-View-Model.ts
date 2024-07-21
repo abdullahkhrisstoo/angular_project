@@ -1,5 +1,5 @@
 export interface UpdatePhoneViewModel {
-    userId: number;
+    userId?: number;
     phoneNo?: string;
     password?: string;
 }

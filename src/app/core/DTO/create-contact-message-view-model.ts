@@ -1,6 +1,6 @@
 export interface CreateContactMessageViewModel {
     name: string;
     message: string;
-    phone: string;
+    Subject: string;
     email: string;
 }
