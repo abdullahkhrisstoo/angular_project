@@ -8,6 +8,7 @@ import { UpdatePhoneComponent } from '../../shared/user-profile/update-phone/upd
 import { UpdateNameComponent } from '../../shared/user-profile/update-name/update-name.component';
 import { UpdatePasswordComponent } from '../../shared/user-profile/update-password/update-password.component';
 import { MyAccountComponent } from '../../shared/user-profile/my-account/my-account.component';
+import { ReadAllAboutUsComponent } from './components/about-us/read-all-about-us/read-all-about-us.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: AdminDashboardComponent },
+      { path: 'about-us', component: ReadAllAboutUsComponent },
       { path: 'profile', component: UserProfileComponent, children: [
         { path: 'update-email', component: UpdateEmailComponent },
         { path: 'update-phone', component: UpdatePhoneComponent },

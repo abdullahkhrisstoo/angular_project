@@ -23,7 +23,7 @@ import { UpdatePasswordComponent } from './user-profile/update-password/update-p
 import { MyAccountComponent } from './user-profile/my-account/my-account.component';
 import { AuthService } from '../core/services/auth.service';
 import { TokenInterceptor } from '../core/interceptors/auth-interceptor';
-
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
@@ -44,13 +44,16 @@ import { TokenInterceptor } from '../core/interceptors/auth-interceptor';
     UpdatePhoneComponent,
     UpdateNameComponent,
     UpdatePasswordComponent,
-
-
-
   ],
   imports: [
-    CommonModule, ReactiveFormsModule, RouterModule,HttpClientModule, FormsModule   , UserProfileRoutingModule //
-    ],
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    HttpClientModule,
+    FormsModule,
+    UserProfileRoutingModule,
+    NgxDatatableModule,
+  ],
   exports: [
     AdminSideBarComponent,
     HomeNavBarComponent,
@@ -63,7 +66,7 @@ import { TokenInterceptor } from '../core/interceptors/auth-interceptor';
     ReactiveFormsModule,
     InputComponent,
     HttpClientModule,
-    FormsModule ,
+    FormsModule,
     UserProfileComponent,
     UpdateEmailComponent,
     UpdatePhoneComponent,
@@ -71,14 +74,16 @@ import { TokenInterceptor } from '../core/interceptors/auth-interceptor';
     UpdatePasswordComponent,
     MyAccountComponent,
     UserProfileRoutingModule,
+    NgxDatatableModule,
 
-     ],
-     providers:[AuthService,
-      {
-        provide: HTTP_INTERCEPTORS,
-        useClass: TokenInterceptor,
-        multi: true
-      },
-     ]
+  ],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+  ],
 })
 export class SharedModule {}
