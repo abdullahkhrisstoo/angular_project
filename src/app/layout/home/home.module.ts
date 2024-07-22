@@ -10,6 +10,8 @@ import { AboutComponent } from './components/about-screen/about-screen.component
 import { SharedModule } from '../../shared/shared.module';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { AboutSectionComponent } from './components/about-section/about-section.component';
+import { StatisticComponent } from './components/statistic/statistic.component';
+import { TopexamComponent } from './components/topexam/topexam.component';
 
 
 @NgModule({
@@ -20,13 +22,17 @@ import { AboutSectionComponent } from './components/about-section/about-section.
     AboutComponent,
     HomepageComponent,
     AboutSectionComponent,
+    StatisticComponent,
+    TopexamComponent,
 
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SharedModule
+    SharedModule,
+
   ],
+  
 
 })
 export class HomeModule { }

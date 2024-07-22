@@ -46,6 +46,12 @@ export const API_ENDPOINTS = {
 
     EXCHANGE_SDP : 'WebRTC/ExchangeSDP',
     EXCHANGE_ICE : 'WebRTC/ExchangeICE',
+     // todo:statistic
+     GET_ALL_STATITIC:'Statistics/GetAllStatistics',
+      // todo:TopExam
+      GET_TOP_EXAM:'ExamProvider/GetTopExamProvider/3',
+
+
 
 
 
