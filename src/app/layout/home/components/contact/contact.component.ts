@@ -28,14 +28,14 @@ export class ContactComponent {
     this.contactForm = formController.createFormGroup({
       email: EMAIL_CONTROL,
       name: FULL_NAME_CONTROL,
-      phone: SUBJECT_CONTACT_CONTROL,
+      subject: SUBJECT_CONTACT_CONTROL,
       message: CONTACT_MSG_CONTROL,
   });
   }
 
   createContact(): void {
     let contactViweModel: CreateContactMessageViewModel = <CreateContactMessageViewModel>this.contactForm.value;
-    this.contactService.createContact(contactViweModel).subscribe(
+    this.contactService.create(contactViweModel).subscribe(
       (response: ApiResponse<CreateContactMessageViewModel>) => {
         console.log(response);
         if (response.status === 200) {

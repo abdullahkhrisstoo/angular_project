@@ -3,7 +3,7 @@ export interface CreateAccountViewModel {
     lastName: string;
     email: string;
     phonenum: string;
-    password: string;
-    roleId: number;
+    password?: string;
+    roleId?: number;
 }
 

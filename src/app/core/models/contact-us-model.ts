@@ -1,9 +1,8 @@
-export interface ContactMessageModel {
+export interface ContactModel {
   contactId: number;
   name: string;
-  message: string;
-  phone: string;
   email: string;
+  subject: string;
+  message: string;
   createdAt: string;
-  updatedAt: string;
 }

@@ -9,7 +9,9 @@ import { MyAccountComponent } from './my-account/my-account.component';
 
 
 const routes: Routes = [
+
   { path: '', component: UserProfileComponent, children: [
+   { path: 'profile', redirectTo: 'profile/my-account', pathMatch: 'full'},
     { path: 'my-account', component: MyAccountComponent },
     { path: 'update-email', component: UpdateEmailComponent },
     { path: 'update-phone', component: UpdatePhoneComponent },

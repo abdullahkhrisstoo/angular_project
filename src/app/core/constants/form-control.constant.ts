@@ -68,3 +68,10 @@ export const LAST_NAME_CONTROL: FormControl = new FormControl('', [
   Validators.minLength(3),
 ]);
 
+
+export const ABOUT_US_TITLE: FormControl = new FormControl('', [
+  Validators.required,
+  Validators.maxLength(50),
+  Validators.minLength(3),
+]);
+
