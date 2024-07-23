@@ -23,6 +23,9 @@ export class AdminLayoutComponent  implements OnInit {
       'http://localhost:4200/dashboard-assets/dist/js/demo-theme.min.js',
       'http://localhost:4200/dashboard-assets/dist/js/tabler.min.js',
       'http://localhost:4200/dashboard-assets/dist/js/demo.min.js',
+      "https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"
+
+
     ];
     for (let i = 0; i < dynamicScripts.length; i++) {
       const node = document.createElement('script');

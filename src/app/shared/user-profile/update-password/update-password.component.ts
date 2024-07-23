@@ -27,6 +27,7 @@ export class UpdatePasswordComponent implements OnInit {
     private toast: ToastMsgService,
     private cache: LocalStorageService
   ) {
+
     this.updatePasswordForm = this.formController.createFormGroup({
       lastPassword: PASSWORD_CONTROL,
       newPassword: NEW_PASSWORD_CONTROL,
@@ -48,12 +49,12 @@ export class UpdatePasswordComponent implements OnInit {
   UpdatePassword(): void {
     if (this.updatePasswordForm.invalid) {
       return;
+
     }
 
 
     let user: UpdatePasswordViewModel = <UpdatePasswordViewModel>this.updatePasswordForm.value;
     user.credentialId = this.userData!.credentialId;
-
     this.authService.updatePassword(user).subscribe(
       (response: ApiResponse<any>) => {
         if (response.status === 200) {

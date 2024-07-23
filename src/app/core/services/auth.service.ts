@@ -12,6 +12,7 @@ import { API_ENDPOINTS } from '../constants/api.constants';
 import { LocalStorageService } from './local-storage.service';
 import { UpdateEmailViewModel } from '../DTO/update-email-view-model';
 import { UpdatePasswordViewModel } from '../DTO/update-password-view-model';
+import { EXAM_PROVIDER_ROLE } from '../constants/app.constants';
 
 
 @Injectable({
@@ -19,7 +20,6 @@ import { UpdatePasswordViewModel } from '../DTO/update-password-view-model';
 })
 export class AuthService {
 
-  // private currentUser: CurrentUserData | null = null;
 
   constructor(private apiHandler: GenericApiHandlerService, private  cache : LocalStorageService) { }
 
@@ -36,8 +36,10 @@ export class AuthService {
     return this.apiHandler.post<ApiResponse<CurrentUserData>>(API_ENDPOINTS.CREATE_ACCOUNT, user)
       .pipe(
         tap(response => {
-          this.setToken(response.data.token);
-          this.setCurrentUser(response.data);
+          if(user.roleId===EXAM_PROVIDER_ROLE){
+            this.setToken(response.data.token);
+            this.setCurrentUser(response.data);
+          }
         })
       );
   }
@@ -53,6 +55,11 @@ export class AuthService {
 
   updatePassword(data: UpdatePasswordViewModel): Observable<ApiResponse<UpdatePasswordViewModel>> {
     return this.apiHandler.put<ApiResponse<UpdatePasswordViewModel>>(API_ENDPOINTS.UPDATE_PASSWORD, data);
+  }
+
+  deleteUser(id:number): Observable<ApiResponse<any>> {
+    const endpoint = `${API_ENDPOINTS.DELETE_USER}/${id}`;
+    return this.apiHandler.delete<ApiResponse<any>>(endpoint);
   }
 
 

@@ -19,6 +19,14 @@ export class FormControllerService {
     return this.fb.array(controls);
   }
 
+  addControlToFormArray(formArray: FormArray, control: FormControl | FormGroup): void {
+    formArray.push(control);
+  }
+
+  removeControlFromFormArray(formArray: FormArray, index: number): void {
+    formArray.removeAt(index);
+  }
+
   isControlDirty(control: FormControl): boolean {
     return control.dirty;
   }

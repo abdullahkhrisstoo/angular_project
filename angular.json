@@ -130,7 +130,8 @@
               "src/assets/home-assets/vendor/glightbox/js/glightbox.min.js",
               "src/assets/home-assets/vendor/purecounter/purecounter_vanilla.js",
               "src/assets/home-assets/vendor/swiper/swiper-bundle.min.js",
-              "src/assets/home-assets/js/main.js"
+              "src/assets/home-assets/js/main.js",
+              "https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"
             ]
           }
         }

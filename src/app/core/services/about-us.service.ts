@@ -18,28 +18,27 @@ export class AboutUsService {
   }
 
   //todo: get by id
-  getById(id: number): Observable<About> {
+  getById(id: number): Observable<ApiResponse<About>> {
     const endpoint = `${API_ENDPOINTS.GET_ABOUT_US_BY_ID}/${id}`;
-    return this.apis.get<ApiResponse<About>>(endpoint)
+    return this.apis.get<ApiResponse<ApiResponse<About>>>(endpoint)
       .pipe(
         map(response => response.data)
       );
-
   }
 // todo: delete
   delete(id: number): Observable<any> {
-    const endpoint = `${API_ENDPOINTS.DELETE_COMPLEMENT}/${id}`;
+    const endpoint = `${API_ENDPOINTS.DELETE_ABOUT_US_BY_ID}/${id}`;
     return this.apis.delete<any>(endpoint);
   }
   // todo: create
   create(viewModel: CreateAboutDTO): Observable<any> {
-    return this.apis.post<ApiResponse<any>>(API_ENDPOINTS.CREATE_COMPLEMENT, viewModel)
+    return this.apis.post<ApiResponse<any>>(API_ENDPOINTS.CREATE_ABOUT, viewModel)
       .pipe();
   }
   // todo: update
-  update(id: number,viewModel: CreateAboutDTO): Observable<About> {
-    const endpoint = `${API_ENDPOINTS.UPDATE_COMPLEMENT}/${id}`;
-    return this.apis.put<ApiResponse<About>>(endpoint,viewModel)
+  update(id: number,viewModel: CreateAboutDTO): Observable<any> {
+    const endpoint = `${API_ENDPOINTS.UPDATE_ABOUT_US_BY_ID}/${id}`;
+    return this.apis.put<ApiResponse<any>>(endpoint,viewModel)
       .pipe(
         map(response => response.data)
       );

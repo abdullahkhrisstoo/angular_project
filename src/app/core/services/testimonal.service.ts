@@ -12,6 +12,11 @@ export class TestimonalService {
 
 constructor(private apis:GenericApiHandlerService) { }
 // todo: get All
+getAll(): Observable<ApiResponse<Testimonial[]>>
+{
+  return this.apis.get<ApiResponse<Testimonial[]>>(API_ENDPOINTS.GET_ALL_TESTIMONAL);
+}
+
 // todo: get by Id
 // todo: get pending
 // todo: get rejected
@@ -27,7 +32,13 @@ getApproved(): Observable<ApiResponse<Testimonial[]>>
 
 // todo: delete
 // todo: get by id
-// todo: get create
+
+// todo: update
+
+update(): Observable<ApiResponse<any>>
+{
+  return this.apis.get<ApiResponse<Testimonial[]>>(API_ENDPOINTS.GET_ALL_APPROVED_TESTIMONAL);
+}
 
 
 

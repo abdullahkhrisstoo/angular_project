@@ -10,7 +10,6 @@ export function matchPasswordValidator(): ValidatorFn {
   return (formGroup: AbstractControl): ValidationErrors | null => {
     const newPassword = formGroup.get('newPassword');
     const confirmPassword = formGroup.get('confirmPassword');
-
     if (newPassword && confirmPassword && newPassword.value !== confirmPassword.value) {
       return { passwordMismatch: true };
     }
