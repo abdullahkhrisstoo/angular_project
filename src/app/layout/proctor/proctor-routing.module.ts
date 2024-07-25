@@ -16,6 +16,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: ProctorDashboardComponent },
+      { path: 'profile', redirectTo: 'profile/my-account', pathMatch: 'full' },
       { path: 'profile', component: UserProfileComponent, children: [
         { path: 'update-email', component: UpdateEmailComponent },
         { path: 'update-phone', component: UpdatePhoneComponent },
