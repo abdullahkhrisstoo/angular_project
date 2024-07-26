@@ -1,4 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
+import {AuthService} from "../../../core/services/auth.service";
 
 @Component({
   selector: 'app-exam-provider-layout',
@@ -14,7 +15,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
 encapsulation:ViewEncapsulation.None,
 })
 export class ExamProviderLayoutComponent {
-  constructor() {
+  constructor(protected authService:AuthService) {
 
   }
   ngOnInit(): void {

@@ -1,0 +1,247 @@
+<div class="page-header d-print-none">
+  <div class="container-xl">
+    <div class="row g-2 align-items-center">
+      <div class="col">
+        <div class="page-pretitle">
+          Overview
+        </div>
+        <h2 class="page-title">
+          Proctor
+        </h2>
+      </div>
+      <div class="col-auto ms-auto d-print-none">
+
+        <div class="btn-list">
+          <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+            data-bs-target="#modal-create">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 5l0 14" />
+              <path d="M5 12l14 0" />
+            </svg>
+            create new Proctor
+          </a>
+          <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report"
+            aria-label="Create new report">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 5l0 14" />
+              <path d="M5 12l14 0" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- todo: get All Data -->
+<div class="page-body">
+  <div class="container-xl">
+    <div class="card" style="padding : 20px; ">
+      <div class="d-flex justify-content-end">
+        <input type="text" class="form-control" style="width: 30%;" placeholder="Search..."
+               (keyup)="updateFilter($event)"/>
+      </div>
+
+      <br>
+
+      <!-- Proctor Table -->
+      <ngx-datatable #table
+                     class="bootstrap"
+                     [rows]="rows"
+                     [columns]="columns"
+                     [columnMode]="'force'"
+                     [headerHeight]="50"
+                     [footerHeight]="50"
+                     [rowHeight]="'auto'"
+                     [limit]="5"
+                     style="border: 1px solid #ddd; border-radius: 4px;"
+                     [scrollbarH]="true"
+                     [sortType]=SortType.multi>
+        <ngx-datatable-column *ngFor="let column of columns" [name]="column.name">
+          <ng-template ngx-datatable-header-template let-column="column">
+            {{ column.name }}
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-row="row" let-column="column">
+            <ng-container>
+              {{ row[column.prop] }}
+            </ng-container>
+
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Actions" class="m-5">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <button class="btn btn-info btn-sm" style="margin-right: 10px"data-bs-toggle="modal" data-bs-target="#modal-update"
+                    style="margin-right: 10px;" (click)="setUpdateProctorData(row,row.userId)">Update</button>
+            <button class="btn btn-danger btn-sm" style="margin-right: 10px"data-bs-toggle="modal"
+                    data-bs-target="#modal-delete-about" (click)="setDeleteProctorId(row.userId)">Delete</button>
+          </ng-template>
+        </ngx-datatable-column>
+
+      </ngx-datatable>
+
+
+    </div>
+  </div>
+</div>
+
+<!-- todo: create Proctor -->
+<div class="modal modal-blur fade" id="modal-create" tabindex="-1" style="display: none;" aria-modal="true">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Proctor</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="proctorForm" id="createExamForm" (ngSubmit)="generateProctor()">
+          <app-input [formGroup]="proctorForm" controlName="firstName" label="First Name"
+            [errorMessages]="{ required: AppMessages.REQUIRED_FIELD }">
+          </app-input>
+
+          <app-input [formGroup]="proctorForm" controlName="lastName" label="Last Name"
+            [errorMessages]="{ required: AppMessages.REQUIRED_FIELD }">
+          </app-input>
+
+          <app-input placeholder="ex@mail.com" [formGroup]="proctorForm" controlName="email" label="Email"
+            [type]="'email'" [errorMessages]="{
+            required: AppMessages.REQUIRED_FIELD,
+            email: AppMessages.INVALID_EMAIL
+          }">
+          </app-input>
+
+          <app-input [formGroup]="proctorForm" controlName="phonenum" label="Phone Number"
+            [errorMessages]="{ required: AppMessages.REQUIRED_FIELD }">
+          </app-input>
+
+          <app-input [formGroup]="proctorForm" controlName="password" label="Password" [type]="'password'"
+            [errorMessages]="{
+            required: AppMessages.REQUIRED_FIELD,
+          }">
+          </app-input>
+
+
+          <br>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
+          Cancel
+        </a>
+        <button data-bs-dismiss="modal" href="#" type="submit" form="createExamForm" class="btn btn-primary ms-auto">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M12 5l0 14"></path>
+            <path d="M5 12l14 0"></path>
+          </svg>
+          Create new Proctor
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- todo: delete Proctor -->
+<div class="modal modal-blur fade" id="modal-delete-about" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-status bg-danger"></div>
+      <div class="modal-body text-center py-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24"
+          viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z">
+          </path>
+          <path d="M12 9v4"></path>
+          <path d="M12 17h.01"></path>
+        </svg>
+        <form id="deleteExamForm" class="" method="post">
+          <h3>Are you sure?</h3>
+          <div class="text-muted">Do you really want to remove this Item? What you've done cannot be undone.</div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="w-100">
+          <div class="row">
+            <div class="col">
+              <a href="#" class="btn w-100" data-bs-dismiss="modal">
+                Cancel
+              </a>
+            </div>
+            <div class="col">
+              <button (click)="delete()" data-bs-dismiss="modal" href="#" type="submit" form="deleteExamForm"
+                class="btn btn-danger w-100">
+                Delete this Item
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- todo: update Proctor -->
+<div class="modal modal-blur fade" id="modal-update" tabindex="-1" style="display: none;" aria-modal="true">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update proctor</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="proctorForm" id="createExamForm">
+          <app-input [formGroup]="proctorForm" controlName="firstName" label="First Name"
+            [errorMessages]="{ required: AppMessages.REQUIRED_FIELD }">
+          </app-input>
+
+          <app-input [formGroup]="proctorForm" controlName="lastName" label="Last Name"
+            [errorMessages]="{ required: AppMessages.REQUIRED_FIELD }">
+          </app-input>
+
+          <app-input placeholder="ex@mail.com" [formGroup]="proctorForm" controlName="email" label="Email"
+            [type]="'email'" [errorMessages]="{
+            required: AppMessages.REQUIRED_FIELD,
+            email: AppMessages.INVALID_EMAIL
+          }">
+          </app-input>
+
+          <app-input [formGroup]="proctorForm" controlName="phonenum" label="Phone Number"
+            [errorMessages]="{ required: AppMessages.REQUIRED_FIELD }">
+          </app-input>
+
+          <br>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
+          Cancel
+        </a>
+        <button (click)="updateProctor()" data-bs-dismiss="modal" href="#" type="submit" form="createExamForm"
+          class="btn btn-primary ms-auto">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M12 5l0 14"></path>
+            <path d="M5 12l14 0"></path>
+          </svg>
+          update Proctor
+        </button>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+</div>

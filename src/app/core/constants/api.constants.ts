@@ -1,7 +1,77 @@
 export const API_ENDPOINTS = {
   baseUrl : 'https://localhost:5001/api/',
 
-    COMPLEMENT_TABLE:'Complement/',
+
+
+
+
+  //todo:contact us
+  GET_ALL_CONTACT: 'ContactUs/GetAllContactUs',
+  CREATE_CONTACT: 'ContactUs/CreateContactUs',
+  GET_CONTACT_BY_ID: 'ContactUs/GetContactUsById',
+  DELETE_CONTACT: 'ContactUs/DeleteContactUs',
+  // todo: plans
+  GET_ALL_PLANS_WITH_FEATURES: 'Plan/GetAllPlansWithFeatures',
+  GET_PLAN_WITH_FEATURES: 'Plan/GetPlanWithFeatures',
+
+
+
+  // todo: about us
+  GET_ALL_ABOUT_US: 'About/GetAllAbout',
+  GET_ABOUT_US_BY_ID: 'About/GetAboutById',
+  DELETE_ABOUT_US_BY_ID: 'About/DeleteAbout',
+  UPDATE_ABOUT_US_BY_ID: 'About/UpdateAbout',
+  CREATE_ABOUT: 'About/CreateAbout',
+
+
+
+
+  // todo: identity
+  CREATE_ACCOUNT: 'Auth/CreateUser',
+  GET_USER_BY_CREDENTIAL: 'Auth/GetUserByCredential',
+  UPDATE_NAME: 'Auth/UpdateName',
+  UPDATE_Email: 'Auth/UpdateEmail',
+  UPDATE_PHONE: 'Auth/UpdatePhone',
+  UPDATE_PASSWORD: 'Auth/UpdateUserPassword',
+  DELETE_USER: 'Auth/DeleteUser',
+
+
+
+  EXCHANGE_SDP: 'WebRTC/ExchangeSDP',
+  EXCHANGE_ICE: 'WebRTC/ExchangeICE',
+
+  // todo: proctor
+  GET_ALL_PROCTOR: 'Proctor/GetAllProctor',
+  GET_PROCTOR_by_id: 'Proctor/GetProctorById',
+  UPDATE_PROCTOR: 'Proctor/UpdateProctor',
+  CREATE_COMPLEMENT_BY_PROCTOR:"",
+  GET_EXAM_INFO_HISTORY:"",
+  GET_EXAM_APPOINTMENT:"",
+
+
+
+  // todo: Statics
+  GET_ALL_STATITIC:'Statistics/GetAllStatistics',
+
+
+  // todo:Exam provider
+  CREATE_EXAM_PROVIDER:'ExamProvider/CreateExamProvider',
+  GET_EXAM_PROVIDER_BY_USER_ID:'ExamProvider/GetExamProvidersByUserId',
+
+
+
+
+  CREATE_ABOUT_US_BY_ID : 'About/CreateAbout',
+
+
+
+  // todo:TopExam
+  GET_TOP_EXAM:'ExamProvider/GetTopExamProvider/3',
+
+
+
+
+  COMPLEMENT_TABLE:'Complement/',
     GET_ALL_COMPLEMENT : 'Complement/GetAllComplements',
     CREATE_COMPLEMENT : 'Complement/createComplement',
     GET_COMPLEMENT_BY_ID : 'Complement/GetComplementById',
@@ -17,22 +87,6 @@ export const API_ENDPOINTS = {
 
 
 
-    //todo:contact us
-    GET_ALL_CONTACT : 'ContactUs/GetAllContactUs',
-    CREATE_CONTACT : 'ContactUs/CreateContactUs',
-    GET_CONTACT_BY_ID : 'ContactUs/GetContactUsById',
-    DELETE_CONTACT : 'ContactUs/DeleteContactUs',
-    // todo: plans
-    GET_ALL_PLANS_WITH_FEATURES : 'Plan/GetAllPlansWithFeatures',
-    GET_PLAN_WITH_FEATURES : 'Plan/GetPlanWithFeatures',
-    // todo: about us
-
-    GET_ALL_ABOUT_US : 'About/GetAllAbout',
-    GET_ABOUT_US_BY_ID : 'About/GetAboutById',
-    DELETE_ABOUT_US_BY_ID : 'About/DeleteAbout',
-    UPDATE_ABOUT_US_BY_ID : 'About/UpdateAbout',
-    CREATE_ABOUT_US_BY_ID : 'About/CreateAbout',
-
     // todo:Testimonal
     GET_ALL_TESTIMONAL : "Testimonal/GetAllTestimonial",
     GET_ALL_PENDING_TESTIMONAL : "Testimonal/GetAllPendingTestimonals",
@@ -41,20 +95,10 @@ export const API_ENDPOINTS = {
     GET_TESTIMONAL_BY_ID : "Testimonal/GetTestimonialById",
     DELETE_TESTIMONAL : "Testimonal/DeleteTestimonial",
     CREATE_TESTIMONAL : "Testimonal/CreateTestimonial",
-    // todo: identity
-    CREATE_ACCOUNT : 'Auth/CreateUser',
-    GET_USER_BY_CREDENTIAL : 'Auth/GetUserByCredential',
-    UPDATE_NAME : 'Auth/UpdateName',
-    UPDATE_Email : 'Auth/UpdateEmail',
-    UPDATE_PHONE : 'Auth/UpdatePhone',
-    UPDATE_PASSWORD : 'Auth/UpdateUserPassword',
-
-    EXCHANGE_SDP : 'WebRTC/ExchangeSDP',
-    EXCHANGE_ICE : 'WebRTC/ExchangeICE',
 
     EXAM_PROVIDER_TABLE:'ExamProvider/',
     GET_ALL_EXAM_PROVIDER: "ExamProvider/GetAllExamProviders",
-    CREATE_EXAM_PROVIDER: "ExamProvider/CreateExamProvider",
+
 
     EXAM_TABLE:'ExamInfo',
   GET_ALL_EXAMS : 'ExamInfo/GetAllExams',
@@ -63,6 +107,8 @@ export const API_ENDPOINTS = {
   DELETE_EXAM : 'ExamInfo/DeleteExam',
   UPDATE_EXAM : 'ExamInfo/UpdateExam',
   GET_ALL_EXAMS_BY_EXAM_PROVIDER: "ExamInfo/GetExamsByProvider",
+
+
   PLAN_TABLE:'Plan',
   GET_ALL_PLANS : 'Plan/GetAllPlans',
   CREATE_PLAN : 'Plan/CreatePlan',
@@ -95,7 +141,7 @@ export const API_ENDPOINTS = {
   DELETE_EXAM_RESERVATION : 'ExamReservation/DeleteExamReservation',
   UPDATE_EXAM_RESERVATION : 'ExamReservation/UpdateExamReservation',
   GET_EXAM_RESERVATIONS_BY_EXAM_ID: "ExamReservation/GetAllExamReservationsByExamId",
-
+  GET_EXAM_RESERVATIONS_BY_PROCTOR_ID: "ExamReservation/GetAllExamReservationsByProctorId",
 
   GET_PROCTOR_BY_EXAM_RESERVATION_ID : 'Proctor/GetProctorByExamReservationId',
 

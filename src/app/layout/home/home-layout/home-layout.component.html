@@ -2,16 +2,96 @@
 <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="/home-assets/vendor/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/home-assets/vendor/bootstrap-icons/bootstrap-icons.css">
-<link rel="stylesheet" href="/home-assets/vendor/aos/aos.css">
-<link rel="stylesheet" href="/home-assets/vendor/glightbox/css/glightbox.min.css">
-<link rel="stylesheet" href="/home-assets/vendor/swiper/swiper-bundle.min.css">
-<link rel="stylesheet" href='/home-assets/css/main.css'>
-<app-home-nav-bar></app-home-nav-bar>
-<router-outlet></router-outlet>
-<app-home-footer></app-home-footer>
 
+<header id="header" class="header d-flex align-items-center sticky-top">
+  <div class="container-fluid container-xl position-relative d-flex align-items-center">
+    <a routerLink="/home/homepage" class="logo d-flex align-items-center me-auto">
+      <h1 class="sitename">Guardian vue</h1>
+    </a>
+
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a routerLink="/home/homepage" routerLinkActive="active">Home</a></li>
+        <li><a routerLink="/home/about" routerLinkActive="active">About</a></li>
+        <li><a routerLink="/home/pricing" routerLinkActive="active">Pricing</a></li>
+        <li class="dropdown">
+          <a href="#"><span>Accounts</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <ul>
+            <li><a routerLink="/auth/sign-in" routerLinkActive="active">Sign In</a></li>
+            <li><a routerLink="/auth/sign-up" routerLinkActive="active">Sign Up</a></li>
+          </ul>
+        </li>
+        <li><a routerLink="/home/contact" routerLinkActive="active">Contact</a></li>
+      </ul>
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    </nav>
+
+    <a class="btn-getstarted" routerLink="/home/pricing">Partner with us</a>
+  </div>
+</header>
+
+
+
+<router-outlet></router-outlet>
+<footer id="footer" class="footer position-relative light-background">
+
+  <div class="container footer-top">
+    <div class="row gy-4">
+      <div class="col-lg-4 col-md-6 footer-about">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <span class="sitename">Guardian vue</span>
+        </a>
+        <div class="footer-contact pt-3">
+          <p>Mika Street 889</p>
+          <p>Amman, Jordan</p>
+          <p class="mt-3"><strong>Phone:</strong> <span>+971 56 207 1275</span></p>
+          <p><strong>Email:</strong> <span>system.Guardian2000&#64;gmail.com</span></p>
+        </div>
+        <div class="social-links d-flex mt-4">
+          <a href="https://twitter.com" target="_blank"><i class="bi bi-twitter"></i></a>
+          <a href="https://facebook.com" target="_blank"><i class="bi bi-facebook"></i></a>
+          <a href="https://instagram.com" target="_blank"><i class="bi bi-instagram"></i></a>
+          <a href="https://linkedin.com/in" target="_blank"><i class="bi bi-linkedin"></i></a>
+
+        </div>
+      </div>
+
+
+
+      <div class="col-lg-2 col-md-3 footer-links">
+        <h4>Our Services</h4>
+        <ul>
+          <li><a href="#">Online Exam Scheduling</a></li>
+          <li><a href="#">Proctoring Services</a></li>
+          <li><a href="#">AI-Based Cheating Detection</a></li>
+          <li><a href="#">Video Call Support</a></li>
+          <li><a href="#">Real-Time Chat Assistance</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4 col-md-12 footer-newsletter">
+        <h4>Exam Guardian Newsletter</h4>
+        <p>Subscribe to our newsletter to stay updated with the latest features, tips, and news about our exam proctoring and AI-based cheating detection services!</p>
+        <form action="forms/newsletter.php" method="post" class="php-email-form">
+          <div class="newsletter-form">
+            <input type="email" name="email" placeholder="Enter your email">
+            <input type="submit" value="Subscribe">
+          </div>
+          <div class="loading">Loading</div>
+          <div class="error-message"></div>
+          <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="container copyright text-center mt-4">
+    <p>© <span>Copyright</span> <strong class="px-1 sitename">Guardian Vue</strong> <span>All Rights Reserved</span></p>
+  </div>
+
+</footer>
 
 
 

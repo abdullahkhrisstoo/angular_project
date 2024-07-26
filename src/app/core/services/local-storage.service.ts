@@ -5,22 +5,37 @@ import { Injectable } from '@angular/core';
 })
 export class LocalStorageService {
 
-  public AUTH_TOKEN:string="auth-token";
-  public USER_SESSION_KEY:string="user-session-key";
+  public AUTH_TOKEN: string = "auth-token";
+  public USER_SESSION_KEY: string = "user-session-key";
 
   constructor() { }
 
   setItem(key: string, value: any): void {
     try {
-      localStorage.setItem(key, JSON.stringify(value));
+      if (value === undefined) {
+        console.warn(`Attempted to store 'undefined' value for key '${key}' in localStorage.`);
+        return;
+      }
+
+      const valueToStore = typeof value === 'object' ? JSON.stringify(value) : value;
+      localStorage.setItem(key, valueToStore);
     } catch (error) {
       console.error(`Error storing item with key '${key}' in localStorage:`, error);
     }
   }
+
   getItem<T>(key: string): T | null {
     try {
       const item = localStorage.getItem(key);
-      return item ? JSON.parse(item) as T : null;
+      if (item === null) {
+        return null;
+      }
+
+      try {
+        return JSON.parse(item) as T;
+      } catch {
+        return item as unknown as T;
+      }
     } catch (error) {
       console.error(`Error retrieving item with key '${key}' from localStorage:`, error);
       return null;

@@ -15,12 +15,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { SpinnerService } from './core/services/spinner.service';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CustomDateFormatPipe } from './core/pipes/custom-date-format.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent,
-
+    AppComponent
   ],
   imports: [
     CommonModule,
@@ -40,17 +38,17 @@ import { CustomDateFormatPipe } from './core/pipes/custom-date-format.pipe';
       closeButton: true,
       tapToDismiss: true
     }),
-],
+  ],
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
 
-      SpinnerService,
-      {
-        provide: HTTP_INTERCEPTORS,
-        useClass: SpinnerInterceptor,
-        multi: true
-      }
+    SpinnerService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
+      multi: true
+    }
 
   ],
   bootstrap: [AppComponent]

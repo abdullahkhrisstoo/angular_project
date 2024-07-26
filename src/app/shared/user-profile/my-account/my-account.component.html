@@ -24,13 +24,13 @@
       team to enable communication between your app and our system. Ensure that this token is kept secure and private.
     </p>
     <div class="col-md position-relative">
-      <input type="text" class="form-control" [value]="userData?.token" disabled id="tokenInput">
+      <input type="text" class="form-control" [value]="examProviderData.examProviderUniqueKey" disabled id="tokenInput">
       <button class="btn btn-secondary position-absolute top-0 end-0" (click)="copyToken()">
         Copy
       </button>
     </div>
 
-   </div>
+  </div>
 
 
     <h3 class="card-title mt-4">Email & phone</h3>

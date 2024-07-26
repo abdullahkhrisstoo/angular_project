@@ -6,16 +6,18 @@ import { UpdatePhoneComponent } from './update-phone/update-phone.component';
 import { UpdateNameComponent } from './update-name/update-name.component';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 import { MyAccountComponent } from './my-account/my-account.component';
+import { ChoosePlanComponent } from './choose-plan/choose-plan.component';
 
 
 const routes: Routes = [
+
   { path: '', component: UserProfileComponent, children: [
     { path: 'my-account', component: MyAccountComponent },
     { path: 'update-email', component: UpdateEmailComponent },
     { path: 'update-phone', component: UpdatePhoneComponent },
     { path: 'update-name', component: UpdateNameComponent },
     { path: 'update-password', component: UpdatePasswordComponent },
-    // { path: 'choose-plan', component: ChoosePlanComponent },
+    { path: 'choose-plan', component: ChoosePlanComponent },
   ] }
 ];
 

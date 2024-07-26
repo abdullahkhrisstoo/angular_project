@@ -1,0 +1,133 @@
+<div class="page-header d-print-none">
+  <div class="container-xl">
+    <div class="row g-2 align-items-center">
+      <div class="col">
+        <div class="page-pretitle">
+          Overview
+        </div>
+        <h2 class="page-title">
+          Contact Messages
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-body">
+  <div class="container-xl">
+    <div class="card" style="padding : 20px; ">
+      <div class="d-flex justify-content-end">
+        <input type="text" class="form-control" style="width: 30%;" placeholder="Search..."
+               (keyup)="updateFilter($event)"/>
+      </div>
+      <br>
+      <div >
+        <ngx-datatable #table
+                       class="bootstrap"
+                       [rows]="rows"
+                       [columns]="columns"
+                       [columnMode]="'force'"
+                       [headerHeight]="50"
+                       [footerHeight]="50"
+                       [rowHeight]="'auto'"
+                       [limit]="5"
+                       style="border: 1px solid #ddd; border-radius: 4px;"
+                       [scrollbarH]="true"
+                       [sortType]=SortType.multi>
+          <ngx-datatable-column name="Name" prop="name">
+            <ng-template ngx-datatable-cell-template let-row="row">
+              <div>
+              {{ row.name }}
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Email" prop="email">
+            <ng-template ngx-datatable-cell-template let-row="row">
+              <div>
+                {{ row.email }}
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Subject" prop="subject">
+            <ng-template ngx-datatable-cell-template let-row="row">
+              <div>
+                {{ row.subject }}
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Message" prop="message">
+            <ng-template ngx-datatable-cell-template let-row="row">
+              <div>
+                {{ row.message }}
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Created At" prop="createdAt">
+            <ng-template ngx-datatable-cell-template let-row="row">
+              <div>
+                {{ row.createdAt }}
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Actions" class="m-5">
+
+
+            <ng-template ngx-datatable-cell-template let-row="row">
+              <button class="btn btn-danger btn-sm" style="margin-right: 10px" data-bs-toggle="modal"
+                      data-bs-target="#modal-delete-about" (click)="setDeleteContactId(row.contactId)">Delete</button>
+
+
+            </ng-template>
+          </ngx-datatable-column>
+
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- todo: delete -->
+
+
+<!-- todo: delete About-us -->
+<div class="modal modal-blur fade" id="modal-delete-about" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-status bg-danger"></div>
+      <div class="modal-body text-center py-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24"
+          viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z">
+          </path>
+          <path d="M12 9v4"></path>
+          <path d="M12 17h.01"></path>
+        </svg>
+        <form id="deleteExamForm" class="" method="post">
+          <h3>Are you sure?</h3>
+          <div class="text-muted">Do you really want to remove this Item? What you've done cannot be undone.</div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="w-100">
+          <div class="row">
+            <div class="col">
+              <a href="#" class="btn w-100" data-bs-dismiss="modal">
+                Cancel
+              </a>
+            </div>
+            <div class="col">
+              <button  (click)="delete()" data-bs-dismiss="modal" form="deleteExamForm" class="btn btn-danger w-100">
+                Delete this Item
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

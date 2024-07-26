@@ -13,6 +13,7 @@ import {UpdatePlanDTO} from "../DTO/update-plan-dto";
 import {ExamReservationDTO} from "../DTO/exam-reservation-dto";
 import {CreateExamReservationDTO} from "../DTO/create-exam-reservation-dto";
 import {UpdateExamReservationDTO} from "../DTO/update-exam-reservation-dto";
+import {ExamReservationProctorDTO} from "../DTO/exam-reservation-proctor-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,11 @@ export class ExamReservationService {
   }
 
 
+  getExamReservationsByProctorId(id: number): Observable<ExamReservationProctorDTO[]> {
+    const endpoint = `${API_ENDPOINTS.GET_EXAM_RESERVATIONS_BY_PROCTOR_ID}/${id}`;
+    return this.apiHandler.get<ApiResponse<ExamReservationProctorDTO[]>>(endpoint)
+      .pipe(map(response => response.data));
+  }
 
 
 

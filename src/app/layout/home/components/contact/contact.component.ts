@@ -14,9 +14,11 @@ import { APP_MESSAGES } from '../../../../core/constants/error-messages.constant
   styleUrl: './contact.component.css',
 })
 export class ContactComponent {
-  address:String="A108 Adam Street, New York, NY 535022";
-  callUs:string="+1 2929 2922";
-  emailUs:String="exam@gurdian.com";
+  address:String="Mika Street 889, Amman, Jordan";
+  callUs:string="+971 56 207 1275";
+  emailUs:String="system.Guardian2000@gmail.com";
+
+
   contactForm: FormGroup;
   AppMessages = APP_MESSAGES;
 
@@ -28,14 +30,14 @@ export class ContactComponent {
     this.contactForm = formController.createFormGroup({
       email: EMAIL_CONTROL,
       name: FULL_NAME_CONTROL,
-      phone: SUBJECT_CONTACT_CONTROL,
+      subject: SUBJECT_CONTACT_CONTROL,
       message: CONTACT_MSG_CONTROL,
   });
   }
 
   createContact(): void {
     let contactViweModel: CreateContactMessageViewModel = <CreateContactMessageViewModel>this.contactForm.value;
-    this.contactService.createContact(contactViweModel).subscribe(
+    this.contactService.create(contactViweModel).subscribe(
       (response: ApiResponse<CreateContactMessageViewModel>) => {
         console.log(response);
         if (response.status === 200) {

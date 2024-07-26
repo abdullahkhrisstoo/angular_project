@@ -2,22 +2,25 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
-import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+
 import {MatButtonModule} from '@angular/material/button';
 import { SharedModule } from '../../shared/shared.module';
-import { CreateAboutUsComponent } from './components/about-us/create-about-us/add-about-us.component';
-import { ReadAllAboutUsComponent } from './components/about-us/read-all-about-us/read-all-about-us.component';
+
 import { ExamProviderComponent } from './components/exam-provider/exam-provider.component';
 import { PlanComponent } from './components/plan/plan.component';
 
 import {CustomDateFormatPipe} from "../../core/pipes/custom-date-format.pipe";
+import {ProctorManageComponent} from "./components/proctor-manage/proctor-manage.component";
+import {ContactUsComponent} from "./components/contact-us/contact-us.component";
+import {ReadAllAboutUsComponent} from "./components/about-us/read-all-about-us.component";
 @NgModule({
   declarations: [
-    AdminDashboardComponent,
-    CreateAboutUsComponent,
+
     ReadAllAboutUsComponent,
     ExamProviderComponent,
     PlanComponent,
+    ProctorManageComponent,
+    ContactUsComponent,
 
     CustomDateFormatPipe
   ],
@@ -28,7 +31,7 @@ import {CustomDateFormatPipe} from "../../core/pipes/custom-date-format.pipe";
     SharedModule
   ],
   exports:[
-    AdminDashboardComponent,
+
 
   ]
 

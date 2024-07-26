@@ -2,7 +2,6 @@
   <div class="container container-tight py-4">
     <div class="text-center mb-4">
       <a href="." class="navbar-brand navbar-brand-autodark">
-        <!-- <img src="./static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image"> -->
       </a>
     </div>
     <form [formGroup]="signUpForm" (ngSubmit)="register()" autocomplete="off" novalidate>
@@ -10,11 +9,11 @@
         <div class="card-body">
           <h2 class="card-title text-center mb-4">Create new account</h2>
 
-          <app-input [formGroup]="signUpForm" controlName="firstName" label="First Name"
+          <app-input [formGroup]="signUpForm" controlName="firstName" label="Project Owner Name"
             [errorMessages]="{ required: AppMessages.REQUIRED_FIELD }">
           </app-input>
 
-          <app-input [formGroup]="signUpForm" controlName="lastName" label="Last Name"
+          <app-input [formGroup]="signUpForm" controlName="lastName" label="Exam Provider Name"
             [errorMessages]="{ required: AppMessages.REQUIRED_FIELD }">
           </app-input>
 
@@ -35,10 +34,15 @@
           }">
           </app-input>
           <div class="mb-3">
+            <label  for="plan" class="form-label">Select Plan</label>
+            <select id="plan" formControlName="plan" class="form-select" (change)="updatePlan()">
+              <option *ngFor="let plan of plans" [value]="plan.planId">{{ plan.planName }} - ${{ plan.planPrice }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
             <label class="form-check">
               <input type="checkbox" class="form-check-input" />
-              <span class="form-check-label">Agree to the <a href="./terms-of-service.html" tabindex="-1">terms and
-                  policy</a>.</span>
+              <span class="form-check-label">Agree to the <a tabindex="-1">terms and policy</a>.</span>
             </label>
           </div>
           <div class="form-footer">

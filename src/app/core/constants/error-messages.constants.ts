@@ -13,5 +13,22 @@ export const APP_MESSAGES = {
   UPDATE_PASSWORD_SUCCESS: 'Password updated successfully.',
   ERROR_TO_UPDATE_PASSWORD: 'Error updating password.',
   UPDATE_PHONE_SUCCESS: 'Phone number updated successfully.',
-  ERROR_TO_UPDATE_PHONE: 'Error updating phone number.'
+  ERROR_TO_UPDATE_PHONE: 'Error updating phone number.',
+  CREATE_ABOUT_SUCCESS: 'about-us created successfully',
+  ERROR_CREATE_ABOUT: 'Error to create about-us',
+  PROCTOR_CREATED_SUCCESSFULLY: 'error to created proctor',
+  PROCTOR_UPDATED_SUCCESSFULLY: 'ated proctor',
+  ERROR_PROCTOR_CREATED: 'eda',
+  ERROR_PROCTOR_UPDATED: 'eda',
+
+  YOU_CANT_DELETED_NOW: 'you can not deleted now',
+  DELETED_SUCCESSFULLY: 'deleted successfully',
+
+
+  YOU_CANT_UPDATED_NOW: 'you can not update now',
+  UPDATED_SUCCESSFULLY: 'updated successfully',
+
+
+  LOGIN_SUCCESFULLY: 'Login successfully',
+
 };

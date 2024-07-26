@@ -1,0 +1,26 @@
+.datatable-header-cell {
+  border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
+  text-align: center !important;
+}
+.datatable-body-cell {
+  border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
+  text-align: center !important;
+}
+.column-border {
+  border-right: 10px solid #cd0b0b !important; /* Right border for columns */
+}
+
+ngx-datatable-column:last-child .column-border {
+  border-right: none; /* Remove the right border from the last column */
+}
+
+.header-class {
+  background-color: #f8f9fa !important; /* Example background color */
+  color: #333 !important; /* Example text color */
+  font-weight: bold !important;
+}
+
+.cell-class {
+  border-right: 1px solid #5c1818; /* Line between columns */
+  padding: 8px; /* Padding inside cells */
+}

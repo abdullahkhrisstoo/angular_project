@@ -8,6 +8,7 @@ import { UpdatePhoneComponent } from '../../shared/user-profile/update-phone/upd
 import { UpdateNameComponent } from '../../shared/user-profile/update-name/update-name.component';
 import { UpdatePasswordComponent } from '../../shared/user-profile/update-password/update-password.component';
 import { MyAccountComponent } from '../../shared/user-profile/my-account/my-account.component';
+import {ProctorReservationComponent} from "./components/proctor-reservation/proctor-reservation.component";
 
 const routes: Routes = [
   {
@@ -15,7 +16,9 @@ const routes: Routes = [
     component: ProctorLayoutComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'profile', redirectTo: 'profile/my-account', pathMatch: 'full' },
       { path: 'dashboard', component: ProctorDashboardComponent },
+      { path: 'reservation', component: ProctorReservationComponent},
       { path: 'profile', component: UserProfileComponent, children: [
         { path: 'update-email', component: UpdateEmailComponent },
         { path: 'update-phone', component: UpdatePhoneComponent },

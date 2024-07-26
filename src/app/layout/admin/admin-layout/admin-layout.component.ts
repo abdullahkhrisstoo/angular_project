@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { EXAM_PROVIDER_ROLE } from '../../../core/constants/app.constants';
+import {AuthService} from "../../../core/services/auth.service";
 
 @Component({
   selector: 'app-admin-layout',
@@ -15,7 +16,7 @@ import { EXAM_PROVIDER_ROLE } from '../../../core/constants/app.constants';
   encapsulation:ViewEncapsulation.None,
 })
 export class AdminLayoutComponent  implements OnInit {
-  constructor() {
+  constructor(protected authService:AuthService) {
 
   }
   ngOnInit(): void {

@@ -1,0 +1,75 @@
+/*.datatable-body-cell {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*}*/
+
+/*.datatable-header-cell-label {*/
+/*  white-space: nowrap;*/
+/*  overflow: hidden;*/
+/*  text-overflow: ellipsis;*/
+/*}*/
+
+/*.btn {*/
+/*  margin-right: 5px;*/
+/*}*/
+/* Style the card to add padding and border */
+/*.card {*/
+/*  border: 1px solid #ddd; !* Light grey border around the card *!*/
+/*  border-radius: 4px; !* Rounded corners for the card *!*/
+/*  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); !* Optional: subtle shadow *!*/
+/*  background-color: #fff; !* White background for the card *!*/
+/*}*/
+
+/*!* Container for the ngx-datatable *!*/
+/*.datatable-container {*/
+/*  border: 1px solid #ddd; !* Light grey border around the datatable *!*/
+/*  border-radius: 4px; !* Rounded corners for the datatable container *!*/
+/*  overflow: hidden; !* Ensure content doesn’t overflow *!*/
+/*}*/
+
+/*!* Ensure the datatable takes up full width of its container *!*/
+/*.custom-datatable {*/
+/*  width: 100%;*/
+/*  border-collapse: collapse; !* Collapse borders between cells *!*/
+/*}*/
+
+/*!* Style for the datatable header *!*/
+/*.custom-datatable .datatable-header {*/
+/*  border-bottom: 1px solid #ddd; !* Light grey border at the bottom of the header *!*/
+/*}*/
+
+/*!* Style for the datatable body *!*/
+/*.custom-datatable .datatable-body {*/
+/*  border-top: 1px solid #ddd; !* Light grey border at the top of the body *!*/
+/*}*/
+
+/*!* Style for the datatable footer *!*/
+/*.custom-datatable .datatable-footer {*/
+/*  border-top: 1px solid #ddd; !* Light grey border at the top of the footer *!*/
+/*}*/
+.datatable-header-cell {
+  border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
+  text-align: center !important;
+}
+.datatable-body-cell {
+  border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
+  text-align: center !important;
+}
+.column-border {
+  border-right: 10px solid #cd0b0b !important; /* Right border for columns */
+}
+
+ngx-datatable-column:last-child .column-border {
+  border-right: none; /* Remove the right border from the last column */
+}
+
+.header-class {
+  background-color: #f8f9fa !important; /* Example background color */
+  color: #333 !important; /* Example text color */
+  font-weight: bold !important;
+}
+
+.cell-class {
+  border-right: 1px solid #5c1818; /* Line between columns */
+  padding: 8px; /* Padding inside cells */
+}

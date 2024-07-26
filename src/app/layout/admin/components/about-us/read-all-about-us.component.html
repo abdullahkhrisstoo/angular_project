@@ -1,0 +1,276 @@
+<div class="page-header d-print-none">
+  <div class="container-xl">
+    <div class="row g-2 align-items-center">
+      <div class="col">
+        <div class="page-pretitle">
+          Overview
+        </div>
+        <h2 class="page-title">
+          About-us
+        </h2>
+      </div>
+      <div class="col-auto ms-auto d-print-none">
+
+        <div class="btn-list">
+          <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+            data-bs-target="#modal-create">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 5l0 14" />
+              <path d="M5 12l14 0" />
+            </svg>
+            create new About-us
+          </a>
+          <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report"
+            aria-label="Create new report">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 5l0 14" />
+              <path d="M5 12l14 0" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- todo: Get All -->
+<div class="page-body">
+  <div class="container-xl">
+    <div class="card" style="padding : 20px; ">
+      <div class="d-flex justify-content-end">
+        <input type="text" class="form-control" style="width: 30%;" placeholder="Search..."
+               (keyup)="updateFilter($event)"/>
+      </div>
+      <br>
+      <div style="overflow-x: scroll">
+        <ngx-datatable
+          #table
+          class="bootstrap"
+          [rows]="rows"
+          [columns]="columns"
+          [columnMode]="'force'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [rowHeight]="'auto'"
+          [limit]="5"
+          style="border: 1px solid #ddd; border-radius: 4px;"
+          [scrollbarH]="true"
+          [sortType]=SortType.multi>
+          <ngx-datatable-column name="Title">
+            <ng-template ngx-datatable-cell-template let-row="row">
+              <div>
+                <strong>{{ row.title }}</strong>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="About Point">
+            <ng-template ngx-datatable-cell-template let-row="row">
+              <div *ngIf="expanded[row.title]">
+                <div *ngFor="let point of row.aboutpoints">
+                  <li>
+                    {{ point.listitem }}
+                  </li>
+                </div>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Actions" class="m-5">
+            <ng-template ngx-datatable-cell-template let-row="row">
+
+
+                <button class="btn btn-info btn-sm" style="margin-right: 10px" data-bs-toggle="modal"
+                        data-bs-target="#modal-update"  (click)="setUpdateAboutData(row,row.aboutId)">Update</button>
+                <button class="btn btn-info btn-sm" style="margin-right: 10px" (click)="toggleExpand(row)">
+                  {{ expanded[row.title] ? 'Hide Info' : 'Show Info' }}
+                </button>
+                <button class="btn btn-danger btn-sm" style="margin-right: 10px" data-bs-toggle="modal"
+                        data-bs-target="#modal-delete-about" (click)="setDeleteAboutId(row.aboutId)">Delete</button>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- todo: delete About-us -->
+<div class="modal modal-blur fade" id="modal-delete-about" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-status bg-danger"></div>
+      <div class="modal-body text-center py-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24"
+          viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z">
+          </path>
+          <path d="M12 9v4"></path>
+          <path d="M12 17h.01"></path>
+        </svg>
+        <form id="deleteExamForm" class="" method="post">
+          <h3>Are you sure?</h3>
+          <div class="text-muted">Do you really want to remove this Item? What you've done cannot be undone.</div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="w-100">
+          <div class="row">
+            <div class="col">
+              <a href="#" class="btn w-100" data-bs-dismiss="modal">
+                Cancel
+              </a>
+            </div>
+            <div class="col">
+              <button (click)="delete()" type="submit" form="deleteExamForm" class="btn btn-danger w-100" data-bs-dismiss="modal">
+                Delete this Item
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- todo: create About-us -->
+<div class="modal modal-blur fade" id="modal-create" tabindex="-1" style="display: none;" aria-modal="true">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New About-us</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="aboutFormCreate" id="createExamForm" (ngSubmit)="createAbout()">
+          <app-input placeholder="Title" [formGroup]="aboutFormCreate" controlName="title" label="Title" [type]="'text'"
+            [errorMessages]="{
+              required: AppMessages.REQUIRED_FIELD,
+          }">
+          </app-input>
+
+
+          <div formArrayName="aboutPoints">
+            <div class="d-flex flex-column">
+              <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i"
+                class="position-relative mb-3">
+                <label class="form-label" for="listitem-{{i}}">About Point</label>
+                <input type="text" id="listitem-{{i}}" class="form-control" formControlName="listitem">
+                <div *ngIf="item.get('listitem')?.invalid && item.get('listitem')?.touched" class="text-danger">
+                  About Point is required.
+                </div>
+                <!-- Remove Button -->
+                <button class="btn btn-danger position-absolute top-0 end-0  me-2" style="margin-top: 28px;"
+                  type="button" (click)="removeItem(i)">
+                  Remove
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <br>
+          <button class="btn btn-info" type="button" (click)="addItem()">Add Item</button>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
+          Cancel
+        </a>
+        <button type="submit" form="createExamForm" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M12 5l0 14"></path>
+            <path d="M5 12l14 0"></path>
+          </svg>
+          Create new About
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- todo: Update About -->
+
+<div class="modal modal-blur fade" id="modal-update" tabindex="-1" style="display: none;" aria-modal="true">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update About-us</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="aboutFormCreate" id="update">
+          <app-input placeholder="Title" [formGroup]="aboutFormCreate" controlName="title" label="Title" [type]="'text'"
+            [errorMessages]="{
+              required: AppMessages.REQUIRED_FIELD,
+          }">
+          </app-input>
+
+
+          <div formArrayName="aboutPoints">
+            <div class="d-flex flex-column">
+              <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i"
+                class="position-relative mb-3">
+                <label class="form-label" for="listitem-{{i}}">About Point</label>
+                <input type="text" id="listitem-{{i}}" class="form-control" formControlName="listitem">
+                <div *ngIf="item.get('listitem')?.invalid && item.get('listitem')?.touched" class="text-danger">
+                  About Point is required.
+                </div>
+                <button class="btn btn-danger position-absolute top-0 end-0  me-2" style="margin-top: 28px;"
+                  type="button" (click)="removeItem(i)">
+                  Remove
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <br>
+          <button class="btn btn-info" type="button" (click)="addItem()">Add Item</button>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
+          Cancel
+        </a>
+        <button   (click)="update()" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M12 5l0 14"></path>
+            <path d="M5 12l14 0"></path>
+          </svg>
+          update About
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

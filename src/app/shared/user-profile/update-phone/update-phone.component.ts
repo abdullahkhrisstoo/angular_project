@@ -7,7 +7,6 @@ import { AuthService } from '../../../core/services/auth.service';
 import { ToastMsgService } from '../../../core/services/toast.service';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { PASSWORD_CONTROL, PHONE_CONTROL } from '../../../core/constants/form-control.constant';
-
 import { UpdatePhoneViewModel } from '../../../core/DTO/Update-Phone-View-Model';
 import { ApiResponse } from '../../../core/utils/ApiResponse';
 

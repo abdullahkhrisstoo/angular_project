@@ -12,16 +12,16 @@ import { API_ENDPOINTS } from '../constants/api.constants';
 import { LocalStorageService } from './local-storage.service';
 import { UpdateEmailViewModel } from '../DTO/update-email-view-model';
 import { UpdatePasswordViewModel } from '../DTO/update-password-view-model';
-
+import { EXAM_PROVIDER_ROLE } from '../constants/app.constants';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  // private currentUser: CurrentUserData | null = null;
 
-  constructor(private apiHandler: GenericApiHandlerService, private  cache : LocalStorageService) { }
+  constructor(private router: Router,private apiHandler: GenericApiHandlerService, private  cache : LocalStorageService) { }
 
   login(credentials: GetUserByCredential): Observable<ApiResponse<CurrentUserData>> {
     return this.apiHandler.post<ApiResponse<CurrentUserData>>(API_ENDPOINTS.GET_USER_BY_CREDENTIAL, credentials)
@@ -36,10 +36,13 @@ export class AuthService {
     return this.apiHandler.post<ApiResponse<CurrentUserData>>(API_ENDPOINTS.CREATE_ACCOUNT, user)
       .pipe(
         tap(response => {
-          this.setToken(response.data.token);
-          this.setCurrentUser(response.data);
+          if(user.roleId===EXAM_PROVIDER_ROLE){
+            this.setToken(response.data.token);
+            this.setCurrentUser(response.data);
+          }
         })
       );
+
   }
   updateUserName(data: UpdateNameViewModel): Observable<ApiResponse<UpdateNameViewModel>> {
     return this.apiHandler.put<ApiResponse<UpdateNameViewModel>>(API_ENDPOINTS.UPDATE_NAME, data);
@@ -53,6 +56,11 @@ export class AuthService {
 
   updatePassword(data: UpdatePasswordViewModel): Observable<ApiResponse<UpdatePasswordViewModel>> {
     return this.apiHandler.put<ApiResponse<UpdatePasswordViewModel>>(API_ENDPOINTS.UPDATE_PASSWORD, data);
+  }
+
+  deleteUser(id:number): Observable<ApiResponse<any>> {
+    const endpoint = `${API_ENDPOINTS.DELETE_USER}/${id}`;
+    return this.apiHandler.delete<ApiResponse<any>>(endpoint);
   }
 
 
@@ -76,8 +84,9 @@ export class AuthService {
     return !!this.getToken();
   }
 
-  // logout(): void {
-  //   this.cache.removeItem(this.cache.AUTH_TOKEN);
-  //   this.currentUser = null;
-  // }
+  logout(): void {
+    this.cache.clear();
+    console.log("dddd")
+    this.router.navigate(['/auth/sign-in']);
+  }
 }

@@ -12,11 +12,9 @@
 
 
 
-                 
-
                     <!-- todo: email form feild -->
                     <app-input placeholder="ex@mail.com" [formGroup]="loginForm" controlName="email" label="Email"
-                        [type]="'email'" 
+                        [type]="'email'"
                         [errorMessages]="{
                             required: AppMessages.REQUIRED_FIELD,
                             email: AppMessages.INVALID_EMAIL
@@ -24,7 +22,7 @@
                     </app-input>
                     <br>
                     <!-- todo: password form feild -->
-                    
+
                     <app-input [formGroup]="loginForm" controlName="password" label="Password"
                     [type]="'password'"
                     [placeholder]="'Enter your password'"
@@ -32,7 +30,6 @@
                     required: AppMessages.REQUIRED_FIELD,
                     minLength: AppMessages.PASSWORD_LENGTH
                     }">
-
             </app-input>
                     <br>
                     <label class="form-label">
@@ -41,11 +38,11 @@
                         </span>
                     </label>
                     <div class="mb-2">
-                        <label class="form-check">
-                          <input type="checkbox" class="form-check-input" [(ngModel)]="rememberMe" name="rememberMe" />
-                          <span class="form-check-label">Remember me on this device</span>
-                        </label>
-                      </div>
+                      <label class="form-check">
+                        <input type="checkbox" class="form-check-input" formControlName="rememberMe" />
+                        <span class="form-check-label">Remember me on this device</span>
+                      </label>
+                  </div>
                     <div class="form-footer">
                         <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary w-100">Sign in</button>
                     </div>
@@ -97,8 +94,8 @@
 
 
 
-<!-- 
-  
+<!--
+
   <div class="col-lg-8">
     <form [formGroup]="contactForm" (ngSubmit)="createContact()" method="post" class="php-email-form"
      >
@@ -114,19 +111,19 @@
               email: AppMessages.INVALID_EMAIL
           }">
         </app-input>
-  
+
         <app-input placeholder="subject" [formGroup]="contactForm" controlName="phone" label="subject"
           [type]="'text'" [errorMessages]="{
               required: AppMessages.REQUIRED_FIELD,
           }">
         </app-input>
-  
+
         <app-input placeholder="message" [formGroup]="contactForm" controlName="message" label="subject"
         [type]="'text'" [errorMessages]="{
             required: AppMessages.REQUIRED_FIELD,
         }">
       </app-input>
-  
+
         <div class="col-md-12 text-center">
           <button [disabled]="!contactForm.valid" type="submit" class="btn btn-primary w-100">Send Message</button>
         </div>

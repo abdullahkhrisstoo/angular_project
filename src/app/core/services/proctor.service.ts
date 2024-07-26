@@ -11,6 +11,9 @@ import {PlanDTO} from "../DTO/plan-dto";
 import {CreatePlanDTO} from "../DTO/create-plan-dto";
 import {UpdatePlanDTO} from "../DTO/update-plan-dto";
 import {ProctorDTO} from "../DTO/proctor-dto";
+import {ProctorModel} from "../models/proctor-model";
+import {CreateAccountViewModel} from "../DTO/create-account-view-model";
+import {UpdateAccountDTO} from "../DTO/update-account-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +21,20 @@ import {ProctorDTO} from "../DTO/proctor-dto";
 export class ProctorService {
 
   constructor(private apiHandler: GenericApiHandlerService) { }
+  getAll(): Observable<ApiResponse<ProctorModel[]>> {
+    return this.apiHandler.get<ApiResponse<ProctorModel[]>>(API_ENDPOINTS.GET_ALL_PROCTOR)
+  }
+  update(id: number,viewModel: UpdateAccountDTO): Observable<any> {
+    const endpoint = `${API_ENDPOINTS.UPDATE_PROCTOR}`;
+    return this.apiHandler.put<ApiResponse<any>>(endpoint,viewModel)
+  }
 
+  //todo: get by id
+  getById(id: number): Observable<ApiResponse<ProctorModel>> {
+    const endpoint = `${API_ENDPOINTS.GET_PROCTOR_by_id}/${id}`;
+    return this.apiHandler.get<ApiResponse<ProctorModel>>(endpoint);
+
+  }
 
   getProctorByExamReservationId(id: number): Observable<ProctorDTO> {
     const endpoint = `${API_ENDPOINTS.GET_PROCTOR_BY_EXAM_RESERVATION_ID}/${id}`;
