@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeNavBarComponent } from './home-nav-bar.component';
+import { ProctorManageComponent } from './proctor-manage.component';
 
-describe('HomeNavBarComponent', () => {
-  let component: HomeNavBarComponent;
-  let fixture: ComponentFixture<HomeNavBarComponent>;
+describe('ProctorManageComponent', () => {
+  let component: ProctorManageComponent;
+  let fixture: ComponentFixture<ProctorManageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HomeNavBarComponent]
+      declarations: [ProctorManageComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(HomeNavBarComponent);
+
+    fixture = TestBed.createComponent(ProctorManageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

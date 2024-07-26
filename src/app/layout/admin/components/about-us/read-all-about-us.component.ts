@@ -49,6 +49,7 @@ export class ReadAllAboutUsComponent implements OnInit {
   }
 
   loadAboutData(): void {
+
     this.callApi.getAll().subscribe((response: ApiResponse<About[]>) => {
       if (response.status === 200) {
         this.rows = this.transformData(response.data);
@@ -56,6 +57,7 @@ export class ReadAllAboutUsComponent implements OnInit {
       } else {
         console.error('Failed to load about data:', response.message);
       }
+      console.error("reloading")
     });
   }
 
@@ -93,6 +95,7 @@ export class ReadAllAboutUsComponent implements OnInit {
 
 
   update(): void {
+
     if (this.updateAboutId === null) {
       console.error('No update ID set.');
       return;
@@ -104,16 +107,16 @@ export class ReadAllAboutUsComponent implements OnInit {
       aboutPoints: formValue.aboutPoints.map((point: { listitem: string }) => point.listitem)
     };
 
-    console.log('Submitting:', aboutViewModel);
 
     this.callApi.update(this.updateAboutId, aboutViewModel).subscribe(
       (response: ApiResponse<About>) => {
-        console.log(response);
+        console.log("response: About"+response.message);
         if (response.status === 200) {
+          this.loadAboutData();
           this.toast.showSuccess(this.AppMessages.UPDATED_SUCCESSFULLY);
           this.aboutFormCreate.reset();
-          this.loadAboutData();
-          this.updateAboutId = null; // Clear the ID after successful update
+
+          this.updateAboutId = null;
         } else {
           console.error('Update failed:', response.message);
         }
@@ -130,12 +133,10 @@ export class ReadAllAboutUsComponent implements OnInit {
     if (this.updateAboutData) {
       const { title, aboutpoints } = this.updateAboutData;
 
-      // Set title
       this.aboutFormCreate.patchValue({ title });
 
-      // Set aboutPoints
       const aboutPointsArray = this.aboutFormCreate.get('aboutPoints') as FormArray;
-      aboutPointsArray.clear(); // Clear existing controls
+      aboutPointsArray.clear();
 
       aboutpoints.forEach(point => {
         aboutPointsArray.push(this.fb.group({

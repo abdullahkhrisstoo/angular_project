@@ -128,7 +128,7 @@
               </a>
             </div>
             <div class="col">
-              <button (click)="delete()" type="submit" form="deleteExamForm" class="btn btn-danger w-100">
+              <button (click)="delete()" type="submit" form="deleteExamForm" class="btn btn-danger w-100" data-bs-dismiss="modal">
                 Delete this Item
               </button>
             </div>
@@ -184,7 +184,7 @@
         <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
           Cancel
         </a>
-        <button type="submit" form="createExamForm" class="btn btn-primary ms-auto">
+        <button type="submit" form="createExamForm" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -244,7 +244,7 @@
         <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
           Cancel
         </a>
-        <button   (click)="update()" class="btn btn-primary ms-auto">
+        <button   (click)="update()" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

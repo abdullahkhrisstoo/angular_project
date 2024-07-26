@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
-import * as AOS from 'aos';
 
 @Component({
   selector: 'app-home-layout',
@@ -41,7 +40,6 @@ export class HomeLayoutComponent  implements OnInit {
   }
 
   removeScripts() {
-
     if (document.getElementsByTagName('script') != null) {
       const scripts = Array.from(document.getElementsByTagName('script'));
       scripts.forEach(script => {
@@ -50,7 +48,6 @@ export class HomeLayoutComponent  implements OnInit {
         }
       });
     }
-
   }
 }
 

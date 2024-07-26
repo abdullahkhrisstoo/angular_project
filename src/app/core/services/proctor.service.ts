@@ -6,6 +6,7 @@ import { ProctorModel } from '../models/proctor-model';
 import { API_ENDPOINTS } from '../constants/api.constants';
 import { AuthService } from './auth.service';
 import { CreateAccountViewModel } from '../DTO/create-account-view-model';
+import { CreateComplementByProctor } from '../DTO/create-compleent-view-model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,4 +44,17 @@ export class ProctorService {
     const endpoint = `${API_ENDPOINTS.UPDATE_PROCTOR}/${id}`;
     return this.apis.put<ApiResponse<any>>(endpoint,viewModel)
   }
+
+  // todo: create complement
+  createComplement(id: number,viewModel: CreateComplementByProctor): Observable<any> {
+    const endpoint = `${API_ENDPOINTS.CREATE_COMPLEMENT_BY_PROCTOR}/${id}`;
+    return this.apis.post<ApiResponse<any>>(endpoint,viewModel)
+  }
+
+  // todo: get all Apointment by id
+  getAllApointmentByProctorID(id: number,viewModel: CreateComplementByProctor): Observable<ApiResponse<any>> {
+    const endpoint = `${API_ENDPOINTS.GET_EXAM_APPOINTMENT}/${id}`;
+    return this.apis.post<ApiResponse<any>>(endpoint,viewModel)
+  }
+
 }

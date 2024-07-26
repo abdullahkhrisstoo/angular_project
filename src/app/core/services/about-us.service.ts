@@ -33,14 +33,11 @@ export class AboutUsService {
   // todo: create
   create(viewModel: CreateAboutDTO): Observable<any> {
     return this.apis.post<ApiResponse<any>>(API_ENDPOINTS.CREATE_ABOUT, viewModel)
-      .pipe();
+    
   }
   // todo: update
   update(id: number,viewModel: CreateAboutDTO): Observable<any> {
     const endpoint = `${API_ENDPOINTS.UPDATE_ABOUT_US_BY_ID}/${id}`;
     return this.apis.put<ApiResponse<any>>(endpoint,viewModel)
-      .pipe(
-        map(response => response.data)
-      );
   }
 }

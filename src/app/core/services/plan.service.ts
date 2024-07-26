@@ -15,4 +15,8 @@ export class PlanService {
   GetAllPlanWithFeatures(): Observable<ApiResponse<Plan[]>> {
     return this.apiHandler.get<ApiResponse<Plan[]>>(API_ENDPOINTS.GET_ALL_PLANS_WITH_FEATURES).pipe();
   }
+
+  GetAllPlan(): Observable<ApiResponse<Plan[]>> {
+    return this.apiHandler.get<ApiResponse<Plan[]>>(API_ENDPOINTS.GET_ALL_PLANS).pipe();
+  }
 }

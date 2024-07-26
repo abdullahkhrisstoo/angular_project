@@ -19,6 +19,7 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'profile', redirectTo: 'profile/my-account', pathMatch: 'full' },
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'about-us', component: ReadAllAboutUsComponent },
       { path: 'manage-proctor', component: ProctorManageComponent },

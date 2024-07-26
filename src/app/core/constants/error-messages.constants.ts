@@ -27,4 +27,8 @@ export const APP_MESSAGES = {
 
   YOU_CANT_UPDATED_NOW: 'you can not update now',
   UPDATED_SUCCESSFULLY: 'updated successfully',
+
+
+  LOGIN_SUCCESFULLY: 'Login successfully',
+
 };

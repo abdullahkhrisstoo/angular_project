@@ -14,9 +14,11 @@ import { APP_MESSAGES } from '../../../../core/constants/error-messages.constant
   styleUrl: './contact.component.css',
 })
 export class ContactComponent {
-  address:String="A108 Adam Street, New York, NY 535022";
-  callUs:string="+1 2929 2922";
-  emailUs:String="exam@gurdian.com";
+  address:String="Mika Street 889, Amman, Jordan";
+  callUs:string="+971 56 207 1275";
+  emailUs:String="system.Guardian2000@gmail.com";
+
+
   contactForm: FormGroup;
   AppMessages = APP_MESSAGES;
 

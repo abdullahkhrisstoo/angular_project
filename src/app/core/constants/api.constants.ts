@@ -18,13 +18,17 @@ export const API_ENDPOINTS = {
   // todo: plans
   GET_ALL_PLANS_WITH_FEATURES: 'Plan/GetAllPlansWithFeatures',
   GET_PLAN_WITH_FEATURES: 'Plan/GetPlanWithFeatures',
-  // todo: about us
+  GET_ALL_PLANS: 'Plan/GetAllPlans',
 
+
+  // todo: about us
   GET_ALL_ABOUT_US: 'About/GetAllAbout',
   GET_ABOUT_US_BY_ID: 'About/GetAboutById',
   DELETE_ABOUT_US_BY_ID: 'About/DeleteAbout',
   UPDATE_ABOUT_US_BY_ID: 'About/UpdateAbout',
   CREATE_ABOUT: 'About/CreateAbout',
+
+
 
   // todo:Testimonal
   GET_ALL_TESTIMONAL: 'Testimonal/GetAllTestimonial',
@@ -34,6 +38,7 @@ export const API_ENDPOINTS = {
   GET_TESTIMONAL_BY_ID: 'Testimonal/GetTestimonialById',
   DELETE_TESTIMONAL: 'Testimonal/DeleteTestimonial',
   CREATE_TESTIMONAL: 'Testimonal/CreateTestimonial',
+
   // todo: identity
   CREATE_ACCOUNT: 'Auth/CreateUser',
   GET_USER_BY_CREDENTIAL: 'Auth/GetUserByCredential',
@@ -52,4 +57,21 @@ export const API_ENDPOINTS = {
   GET_ALL_PROCTOR: 'Proctor/GetAllProctor',
   GET_PROCTOR_by_id: 'Proctor/GetProctorById',
   UPDATE_PROCTOR: 'Proctor/UpdateProctor',
+  CREATE_COMPLEMENT_BY_PROCTOR:"",
+  GET_EXAM_INFO_HISTORY:"",
+  GET_EXAM_APPOINTMENT:"",
+
+
+
+  // todo: Statics
+  GET_ALL_STATITIC:'Statistics/GetAllStatistics',
+
+
+  // todo:Exam provider
+  CREATE_EXAM_PROVIDER:'ExamProvider/CreateExamProvider',
+  GET_EXAM_PROVIDER_BY_USER_ID:'ExamProvider/GetExamProvidersByUserId',
+
+
+
+
 };

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms'; // Add FormControl import
 import { FormControllerService } from '../../../../core/services/form-controller.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { GetUserByCredential } from '../../../../core/DTO/get-user-by-credential';
@@ -10,6 +10,9 @@ import { EMAIL_CONTROL, PASSWORD_CONTROL } from '../../../../core/constants/form
 import { LocalStorageService } from '../../../../core/services/local-storage.service';
 import { ToastMsgService } from '../../../../core/services/toast.service';
 import { APP_MESSAGES } from '../../../../core/constants/error-messages.constants';
+import { jwtDecode } from "jwt-decode";
+import { ADMIN_ROLE, EXAM_PROVIDER_ROLE, PROCTOR_ROLE } from '../../../../core/constants/app.constants';
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -17,38 +20,59 @@ import { APP_MESSAGES } from '../../../../core/constants/error-messages.constant
 })
 export class SignInComponent {
   loginForm: FormGroup;
-  rememberMe: boolean = false;
   AppMessages = APP_MESSAGES;
-
-
 
   constructor(
     private formController: FormControllerService,
     private authService: AuthService,
     private router: Router,
-    private cache : LocalStorageService,
-    private toast:ToastMsgService,
+    private cache: LocalStorageService,
+    private toast: ToastMsgService
   ) {
-    this.loginForm = formController.createFormGroup({
+    this.loginForm = new FormGroup({
       email: EMAIL_CONTROL,
-      password: PASSWORD_CONTROL
+      password: PASSWORD_CONTROL,
+      rememberMe: new FormControl(false)
     });
   }
 
-
   login(): void {
-    let credentials: GetUserByCredential = <GetUserByCredential>this.loginForm.value;
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    const credentials: GetUserByCredential = <GetUserByCredential>this.loginForm.value;
+
     this.authService.login(credentials).subscribe(
       (response: ApiResponse<CurrentUserData>) => {
         if (response.status === 200) {
-          console.log(response);
-          if (this.rememberMe) {
-            this.cache.setItem(this.cache.USER_SESSION_KEY, response.data);
-          }
-          this.router.navigate(['/home/homepage']);
-        }
-        this.loginForm.reset();
+          this.toast.showSuccess(this.AppMessages.LOGIN_SUCCESFULLY);
 
+          const roleId = response.data.roleId;
+
+          switch (roleId) {
+            case EXAM_PROVIDER_ROLE:
+              this.router.navigate(['/exam-provider/profile']);
+              break;
+            case PROCTOR_ROLE:
+              this.router.navigate(['/proctor/profile']);
+              break;
+            case ADMIN_ROLE:
+              this.router.navigate(['/admin/profile']);
+              break;
+            default:
+              console.warn('Unknown role:', roleId);
+              break;
+          }
+
+          if (this.loginForm.get('rememberMe')?.value) {
+            // Implement remember me logic here if needed
+          }
+
+          this.loginForm.reset();
+        } else {
+          this.toast.showError(this.AppMessages.CHECK_EMAIL_PASSWORD);
+        }
       },
       error => {
         console.error('Login error:', error);
@@ -56,4 +80,5 @@ export class SignInComponent {
       }
     );
   }
+
 }
