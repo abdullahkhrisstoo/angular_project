@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiResponse } from '../../../../core/utils/ApiResponse';
-import { TestimonalService } from '../../../../core/services/testimonal.service';
+import { TestimonialService } from '../../../../core/services/testimonial.service';
 import { Testimonial } from '../../../../core/models/testimonal';
+import {TestimonialWithExamProviderDTO} from "../../../../core/DTO/testimonial-with-exam-provider-dto";
 
 @Component({
   selector: 'app-about',
@@ -9,21 +10,29 @@ import { Testimonial } from '../../../../core/models/testimonal';
   styleUrl: './about-screen.component.css'
 })
 export class AboutComponent implements OnInit{
-approvedTestimonal!:Testimonial[];
+  approvedTestimonial!: TestimonialWithExamProviderDTO[];
+  randomTestimonial!: TestimonialWithExamProviderDTO;
 
-constructor(private callApi:TestimonalService){}
+  constructor(private testimonialService: TestimonialService) {}
 
   ngOnInit(): void {
-  this.loadApprovedTestimonal();
-}
-loadApprovedTestimonal():void {
-  this.callApi.getApproved().subscribe((response: ApiResponse<Testimonial[]>) => {
-    if (response.status === 200) {
-      console.log(response)
-      this.approvedTestimonal = response.data;
-    } else {
-      console.error('Failed to load about data:', response.message);
+    this.loadApprovedTestimonal();
+  }
+
+  loadApprovedTestimonal(): void {
+    this.testimonialService.getTestimonialsByStateId(2)
+      .subscribe((response: TestimonialWithExamProviderDTO[]) => {
+        console.log(response);
+        this.approvedTestimonial = response;
+        this.getRandomTestimonial();
+      });
+  }
+
+  getRandomTestimonial(): void {
+    if (this.approvedTestimonial && this.approvedTestimonial.length > 0) {
+      const randomIndex = Math.floor(Math.random() * this.approvedTestimonial.length);
+      this.randomTestimonial = this.approvedTestimonial[randomIndex];
+      console.log(this.randomTestimonial);
     }
-  });
-}
+  }
 }

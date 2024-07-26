@@ -4,7 +4,14 @@ import * as AOS from 'aos';
 @Component({
   selector: 'app-home-layout',
   templateUrl: './home-layout.component.html',
-  styleUrl: './home-layout.component.css',
+  styleUrls:  ['./home-layout.component.css',
+    '../../../../../public/home-assets/vendor/bootstrap/css/bootstrap.min.css',
+    '../../../../../public/home-assets/vendor/bootstrap-icons/bootstrap-icons.css',
+    '../../../../../public/home-assets/vendor/aos/aos.css',
+    '../../../../../public/home-assets/vendor/glightbox/css/glightbox.min.css',
+    '../../../../../public/home-assets/vendor/swiper/swiper-bundle.min.css',
+    '../../../../../public/home-assets/css/main.css'
+  ],
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeLayoutComponent  implements OnInit {
@@ -38,6 +45,11 @@ export class HomeLayoutComponent  implements OnInit {
       node.async = false;
       document.getElementsByTagName('body')[0].appendChild(node);
     }
+
+
+
+
+
   }
 
   removeScripts() {
@@ -50,6 +62,11 @@ export class HomeLayoutComponent  implements OnInit {
         }
       });
     }
+
+
+
+
+
 
   }
 }

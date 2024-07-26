@@ -1,0 +1,436 @@
+<div class="page-header d-print-none">
+  <div class="container-xl">
+    <div class="row g-2 align-items-center">
+      <div class="col">
+        <div class="page-pretitle">
+          Overview
+        </div>
+        <h2 class="page-title">
+          Plan
+        </h2>
+      </div>
+      <div class="col-auto ms-auto d-print-none">
+        <div class="btn-list">
+          <span class="d-none d-sm-inline">
+            <a href="#" class="btn">
+              New view
+            </a>
+          </span>
+          <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+             data-bs-target="#modal-plan-create" (click)="resetCreatePlanForm()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                 stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M12 5l0 14"/>
+              <path d="M5 12l14 0"/>
+            </svg>
+            create new Plan
+          </a>
+          <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
+             data-bs-target="#modal-report"
+             aria-label="Create new report">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                 stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M12 5l0 14"/>
+              <path d="M5 12l14 0"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-body">
+  <div class="container-xl">
+    <div class="card" style="padding : 20px; ">
+
+      <div class="d-flex justify-content-end">
+        <input type="text" class="form-control" style="width: 30%;" placeholder="Search..."
+              />
+      </div>
+      <br>
+      <ngx-datatable
+        class="bootstrap"
+        [rows]="plans"
+        [columns]="columnsPlan"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="5"
+        style="border: 1px solid #ddd; border-radius: 4px;"
+        [scrollbarH]="true"
+        [sortType]=SortType.multi
+      >
+        <ngx-datatable-column name="Plan Name" prop="planName" [sortable]="true"></ngx-datatable-column>
+        <ngx-datatable-column name="Plan Description" prop="planDescription" [sortable]="true"></ngx-datatable-column>
+        <ngx-datatable-column name="Plan Price" prop="planPrice" [sortable]="true"></ngx-datatable-column>
+
+        <ngx-datatable-column name="Created At" prop="createdAt" [sortable]="true">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{ value | date:'yyyy-MM-dd HH:mm:ss' }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Plan Features Details" [width]="100" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <button class="btn btn-info btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#modal-plan-features" (click)="loadPlanFeatures(row.planId)">
+              Plan Features
+            </button>
+          </ng-template>
+        </ngx-datatable-column>
+
+
+        <ngx-datatable-column name="Actions" [width]="130" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <button class="btn btn-primary btn-sm" style="margin-right: 2px"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-plan-update"
+                    (click)="getPlanById(row.planId)" >Update</button>
+            <button class="btn btn-danger btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-plan-delete"
+                    (click)="changePlanIdNow(row.planId)" >Delete</button>
+          </ng-template>
+        </ngx-datatable-column>
+
+      </ngx-datatable>
+    </div>
+  </div>
+</div>
+
+
+<!-- todo: Plan Features Table -->
+<div class="modal modal-blur " id="modal-plan-features" tabindex="-1" style="display: none;" aria-modal="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Plan Features</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="page-header d-print-none">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <div class="page-pretitle">
+                  Overview
+                </div>
+                <h2 class="page-title">
+                  Plan
+                </h2>
+              </div>
+              <div class="col-auto ms-auto d-print-none">
+                <div class="btn-list">
+          <span class="d-none d-sm-inline">
+            <a href="#" class="btn">
+              New view
+            </a>
+          </span>
+                  <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+                     data-bs-target="#modal-create-plan-feature">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M12 5l0 14"/>
+                      <path d="M5 12l14 0"/>
+                    </svg>
+                    create new Plan Feature
+                  </a>
+                  <a href="#" (click)="resetCreatePlanFeatureForm()" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
+                     data-bs-target="#modal-create-plan-feature"
+
+                     aria-label="Create new report">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M12 5l0 14"/>
+                      <path d="M5 12l14 0"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="card" style="padding : 20px; ">
+
+              <div class="d-flex justify-content-end">
+                <input type="text" class="form-control" style="width: 30%;" placeholder="Search..."
+                     />
+              </div>
+              <br>
+              <ngx-datatable
+                class="bootstrap"
+                [rows]="planFeatures"
+                [columns]="columnsPlanFeature"
+                [columnMode]="'force'"
+                [headerHeight]="50"
+                [footerHeight]="50"
+                [rowHeight]="'auto'"
+                [limit]="5"
+                style="border: 1px solid #ddd; border-radius: 4px;"
+                [scrollbarH]="true"
+                [sortType]=SortType.multi
+              >
+                <ngx-datatable-column name="Feature Name" prop="featuresName" [sortable]="true"></ngx-datatable-column>
+                <ngx-datatable-column name="Created At" prop="createdAt" [sortable]="true">
+                  <ng-template ngx-datatable-cell-template let-value="value">
+                    {{ value | date:'yyyy-MM-dd HH:mm:ss' }}
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Actions" [width]="130" [sortable]="false">
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                    <button class="btn btn-primary btn-sm"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modal-plan-feature-update"
+                            style="margin-right: 2px" (click)="getPlanFeatureById(row.planFeatureId)">Update
+                    </button>
+                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#modal-plan-feature-delete"(click)="changePlanFeatureIdNow(row.planFeatureId)">Delete</button>
+                  </ng-template>
+                </ngx-datatable-column>
+
+              </ngx-datatable>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- todo: Create Plan -->
+<div class="modal modal-blur" id="modal-plan-create" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create New Plan</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="createPlanForm" (ngSubmit)="createPlan()">
+          <div class="mb-3">
+            <label class="form-label">Plan Name</label>
+            <input type="text" class="form-control" formControlName="planName" />
+            <span class="text-danger" *ngIf="createPlanForm.get('planName')?.invalid && createPlanForm.get('planName')?.touched">
+              Plan Name is required
+            </span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Plan Description</label>
+            <input type="text" class="form-control" formControlName="planDescription" />
+            <span class="text-danger" *ngIf="createPlanForm.get('planDescription')?.invalid && createPlanForm.get('planDescription')?.touched">
+              Plan Description is required
+            </span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Plan Price</label>
+            <input type="text" class="form-control" formControlName="planPrice" />
+            <span class="text-danger" *ngIf="createPlanForm.get('planPrice')?.invalid && createPlanForm.get('planPrice')?.touched">
+              Plan Price is required and must be a number
+            </span>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="createPlanForm.invalid">Create Plan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- todo: Create Plan Feature -->
+<div class="modal modal-blur" id="modal-create-plan-feature" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create New Plan Feature</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="createPlanFeatureForm" (ngSubmit)="createPlanFeature()">
+          <div class="mb-3">
+            <label class="form-label">Feature Name</label>
+            <input type="text" class="form-control" formControlName="featuresName" />
+            <span class="text-danger" *ngIf="createPlanFeatureForm.get('featuresName')?.invalid && createPlanFeatureForm.get('featuresName')?.touched">
+              Feature Name is required
+            </span>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="createPlanFeatureForm.invalid">Create Plan Feature</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Update Plan Modal -->
+<div class="modal modal-blur" id="modal-plan-update" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Plan</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="createPlanForm" (ngSubmit)="updatePlan()">
+
+          <div class="mb-3">
+            <label class="form-label">Plan Name</label>
+            <input type="text" class="form-control" formControlName="planName" />
+            <span class="text-danger" *ngIf="createPlanForm.get('planName')?.invalid && createPlanForm.get('planName')?.touched">
+              Plan Name is required
+            </span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Plan Description</label>
+            <input type="text" class="form-control" formControlName="planDescription" />
+            <span class="text-danger" *ngIf="createPlanForm.get('planDescription')?.invalid && createPlanForm.get('planDescription')?.touched">
+              Plan Description is required
+            </span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Plan Price</label>
+            <input type="text" class="form-control" formControlName="planPrice" />
+            <span class="text-danger" *ngIf="createPlanForm.get('planPrice')?.invalid && createPlanForm.get('planPrice')?.touched">
+              Plan Price is required and must be a number
+            </span>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="createPlanForm.invalid">Update Plan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- todo: delete Plan -->
+<div class="modal modal-blur " id="modal-plan-delete" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-status bg-danger"></div>
+      <div class="modal-body text-center py-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24"
+             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+             stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z">
+          </path>
+          <path d="M12 9v4"></path>
+          <path d="M12 17h.01"></path>
+        </svg>
+        <form id="deleteExamForm" class="" method="post">
+          <h3>Are you sure?</h3>
+          <div class="text-muted">Do you really want to remove this Item? What you've done cannot be undone.</div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="w-100">
+          <div class="row">
+            <div class="col">
+              <a href="#" class="btn w-100" data-bs-dismiss="modal">
+                Cancel
+              </a>
+            </div>
+            <div class="col">
+              <button type="button" (click)="deletePlan()" class="btn btn-danger w-100">
+                Delete this Item
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- todo: Update Plan Feature -->
+<div class="modal modal-blur" id="modal-plan-feature-update" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Plan Feature</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="createPlanFeatureForm" (ngSubmit)="updatePlanFeatures()">
+          <div class="mb-3">
+            <label class="form-label">Feature Name</label>
+            <input type="text" class="form-control" formControlName="featuresName" />
+            <span class="text-danger" *ngIf="createPlanFeatureForm.get('featuresName')?.invalid && createPlanFeatureForm.get('featuresName')?.touched">
+              Feature Name is required
+            </span>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="createPlanFeatureForm.invalid">Create Plan Feature</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- todo: delete Plan Feature -->
+<div class="modal modal-blur " id="modal-plan-feature-delete" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-status bg-danger"></div>
+      <div class="modal-body text-center py-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24"
+             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+             stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z">
+          </path>
+          <path d="M12 9v4"></path>
+          <path d="M12 17h.01"></path>
+        </svg>
+        <form  class="" method="post">
+          <h3>Are you sure?</h3>
+          <div class="text-muted">Do you really want to remove this Item? What you've done cannot be undone.</div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="w-100">
+          <div class="row">
+            <div class="col">
+              <a href="#" class="btn w-100" data-bs-dismiss="modal">
+                Cancel
+              </a>
+            </div>
+            <div class="col">
+              <button type="button" (click)="deletePlanFeatures()" class="btn btn-danger w-100">
+                Delete this Item
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

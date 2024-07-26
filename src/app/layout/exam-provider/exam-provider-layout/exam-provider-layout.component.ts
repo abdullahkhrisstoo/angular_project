@@ -1,9 +1,17 @@
-import { Component } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-exam-provider-layout',
   templateUrl: './exam-provider-layout.component.html',
-  styleUrls: ['./exam-provider-layout.component.css']
+  styleUrls: ['./exam-provider-layout.component.css',
+  '../../../../../public/dashboard-assets/dist/libs/plyr/dist/plyr.css',
+  '../../../../../public/dashboard-assets/dist/css/tabler.min.css',
+  '../../../../../public/dashboard-assets/dist/css/tabler-payments.min.css',
+  '../../../../../public/dashboard-assets/dist/css/tabler-vendors.min.css',
+  '../../../../../public/dashboard-assets/dist/css/demo.min.css',
+
+],
+encapsulation:ViewEncapsulation.None,
 })
 export class ExamProviderLayoutComponent {
   constructor() {

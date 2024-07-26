@@ -3,8 +3,14 @@ import {Component, ViewEncapsulation, ChangeDetectorRef, OnInit} from '@angular/
 @Component({
   selector: 'app-auth-layout',
   templateUrl: './auth-layout.component.html',
-  styleUrl: './auth-layout.component.css'
-
+  styleUrls: ['./auth-layout.component.css',
+    '../../../../../public/dashboard-assets/dist/libs/plyr/dist/plyr.css',
+    '../../../../../public/dashboard-assets/dist/css/tabler.min.css',
+    '../../../../../public/dashboard-assets/dist/css/tabler-payments.min.css',
+    '../../../../../public/dashboard-assets/dist/css/tabler-vendors.min.css',
+    '../../../../../public/dashboard-assets/dist/css/demo.min.css',
+  ],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AuthLayoutComponent  implements OnInit {
   constructor() {

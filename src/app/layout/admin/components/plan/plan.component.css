@@ -1,0 +1,8 @@
+.datatable-header-cell {
+  border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
+  text-align: center !important;
+}
+.datatable-body-cell {
+  border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
+  text-align: center !important;
+}

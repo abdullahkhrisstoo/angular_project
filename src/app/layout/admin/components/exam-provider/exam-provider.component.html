@@ -1,0 +1,667 @@
+<div class="page-header d-print-none">
+  <div class="container-xl">
+    <div class="row g-2 align-items-center">
+      <div class="col">
+        <div class="page-pretitle">
+          Overview
+        </div>
+        <h2 class="page-title">
+          Exam Providers Page
+        </h2>
+      </div>
+      <div class="col-auto ms-auto d-print-none">
+        <div class="btn-list">
+          <span class="d-none d-sm-inline">
+            <a href="#" class="btn">
+              New view
+            </a>
+          </span>
+          <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+             data-bs-target="#modal-create">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M12 5l0 14"/>
+              <path d="M5 12l14 0"/>
+            </svg>
+            create new About-us
+          </a>
+          <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report"
+             aria-label="Create new report">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M12 5l0 14"/>
+              <path d="M5 12l14 0"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-body">
+  <div class="container-xl">
+    <div class="card" style="padding : 20px; ">
+      <div class="d-flex justify-content-end">
+        <input type="text" class="form-control" style="width: 30%;" placeholder="Search..."
+               (keyup)="updateFilter($event)"/>
+      </div>
+      <br>
+      <ngx-datatable
+        class="bootstrap"
+        [rows]="rows"
+        [columns]="columns"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="5"
+        style="border: 1px solid #ddd; border-radius: 4px;"
+        [scrollbarH]="true"
+        [sortType]=SortType.multi
+      >
+        <ngx-datatable-column name="Name" prop="examProviderName" [sortable]="true">
+          <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="State" prop="state" [sortable]="true">
+          <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Created At" prop="createdAt" [sortable]="true">
+          <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+            {{ value | customDateFormat }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Exams" [width]="100" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <button class="btn btn-info btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#modal-exams" (click)="loadExams(row.examProviderId)">Exams
+            </button>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Plan Details" [width]="100" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <button class="btn btn-info btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#modal-plan"  (click)="loadPlan(row.examProviderId)">Plan Details</button>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Testimonials" [width]="100" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <button class="btn btn-info btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#modal-testimonials"  (click)="loadTestimonials(row.examProviderId)">Testimonials</button>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Actions" [width]="130" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <button class="btn btn-primary btn-sm" style="margin-right: 2px" (click)="updateRow(row)">Update</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteRow(row)">Delete</button>
+          </ng-template>
+        </ngx-datatable-column>
+
+      </ngx-datatable>
+    </div>
+  </div>
+</div>
+
+
+<!-- todo: delete About-us -->
+<div class="modal modal-blur " id="modal-delete-exam" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-status bg-danger"></div>
+      <div class="modal-body text-center py-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24"
+             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+             stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z">
+          </path>
+          <path d="M12 9v4"></path>
+          <path d="M12 17h.01"></path>
+        </svg>
+        <form id="deleteExamForm" class="" method="post">
+          <h3>Are you sure?</h3>
+          <div class="text-muted">Do you really want to remove this Item? What you've done cannot be undone.</div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="w-100">
+          <div class="row">
+            <div class="col">
+              <a href="#" class="btn w-100" data-bs-dismiss="modal">
+                Cancel
+              </a>
+            </div>
+            <div class="col">
+              <button type="submit" form="deleteExamForm" class="btn btn-danger w-100">
+                Delete this Item
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- todo: Exams Table -->
+
+<div class="modal modal-blur" id="modal-exams" tabindex="-1" style="display: none;" aria-modal="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="table">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="page-header d-print-none">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <div class="page-pretitle">
+                  Overview
+                </div>
+                <h2 class="page-title">
+                  Exams
+                </h2>
+              </div>
+             </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="card" style="padding : 20px; ">
+              <div class="d-flex justify-content-end">
+                <input type="text" class="form-control" style="width: 30%;" placeholder="Search..."
+                       (keyup)="updateFilterExams($event)"/>
+              </div>
+              <br>
+              <ngx-datatable
+                class="bootstrap"
+
+                [rows]="exams"
+                [columns]="columnsExamsTable"
+                [columnMode]="'force'"
+                [headerHeight]="50"
+                [footerHeight]="50"
+                [rowHeight]="'auto'"
+                [limit]="5"
+                style="border: 1px solid #ddd; border-radius: 4px;"
+                [scrollbarH]="true"
+                [sortType]=SortType.multi
+              >
+                <ngx-datatable-column name="Title" prop="examTitle" [sortable]="true">
+                  <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+                    {{ value }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Created At" prop="createdAt" [sortable]="true">
+                  <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+                    {{ value | customDateFormat }}
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Exam Reservations Details" [width]="100" [sortable]="false">
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                    <button class="btn btn-info btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#modal-exam-reservations" (click)="loadExamReservations(row.examId)">Exam
+                      Reservations
+                    </button>
+                  </ng-template>
+                </ngx-datatable-column>
+
+
+                <!--                <ngx-datatable-column name="Actions" [width]="130" [sortable]="false">-->
+                <!--                  <ng-template ngx-datatable-cell-template let-row="row">-->
+                <!--                    <button class="btn btn-primary btn-sm" style="margin-right: 2px" (click)="updateRow(row)">Update</button>-->
+                <!--                    <button class="btn btn-danger btn-sm" (click)="deleteRow(row)">Delete</button>-->
+                <!--                  </ng-template>-->
+                <!--                </ngx-datatable-column>-->
+
+              </ngx-datatable>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- todo: Exam Reservations Table -->
+
+<div class="modal modal-blur " id="modal-exam-reservations" tabindex="-1" style="display: none;" aria-modal="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Exam</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="page-header d-print-none">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <div class="page-pretitle">
+                  Overview
+                </div>
+                <h2 class="page-title">
+                  Exam Reservations
+                </h2>
+              </div>
+              <div class="col-auto ms-auto d-print-none">
+                <div class="btn-list">
+          <span class="d-none d-sm-inline">
+            <a href="#" class="btn">
+              New view
+            </a>
+          </span>
+                  <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+                     data-bs-target="#modal-create">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M12 5l0 14"/>
+                      <path d="M5 12l14 0"/>
+                    </svg>
+                    create new About-us
+                  </a>
+                  <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
+                     data-bs-target="#modal-report"
+                     aria-label="Create new report">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M12 5l0 14"/>
+                      <path d="M5 12l14 0"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="card" style="padding : 20px; ">
+              <div class="d-flex justify-content-end">
+                <input type="text" class="form-control" style="width: 30%;" placeholder="Search..."
+                       (keyup)="updateFilterExamReservations($event)"/>
+              </div>
+              <br>
+              <ngx-datatable
+                class="bootstrap"
+                [rows]="reservations"
+                [columns]="columnsExamReservation"
+                [columnMode]="'force'"
+                [headerHeight]="50"
+                [footerHeight]="50"
+                [rowHeight]="'auto'"
+                [limit]="5"
+                style="border: 1px solid #ddd; border-radius: 4px;"
+                [scrollbarH]="true"
+                [sortType]=SortType.multi
+              >
+                <ngx-datatable-column name="Student Name" prop="studentName" [sortable]="true"></ngx-datatable-column>
+                <ngx-datatable-column name="Email" prop="email" [sortable]="true"></ngx-datatable-column>
+                <ngx-datatable-column name="Phone" prop="phone" [sortable]="true"></ngx-datatable-column>
+                <ngx-datatable-column name="Start Date" prop="startDate" [sortable]="true">
+                  <ng-template ngx-datatable-cell-template let-value="value">
+                    {{ value | date:'yyyy-MM-dd HH:mm:ss' }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="End Date" prop="endDate" [sortable]="true">
+                  <ng-template ngx-datatable-cell-template let-value="value">
+                    {{ value | date:'yyyy-MM-dd HH:mm:ss' }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Score" prop="score" [sortable]="true"></ngx-datatable-column>
+                <ngx-datatable-column name="Created At" prop="createdAt" [sortable]="true">
+                  <ng-template ngx-datatable-cell-template let-value="value">
+                    {{ value | date:'yyyy-MM-dd HH:mm:ss' }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Updated At" prop="updatedAt" [sortable]="true">
+                  <ng-template ngx-datatable-cell-template let-value="value">
+                    {{ value | date:'yyyy-MM-dd HH:mm:ss' }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Complement Details" [width]="100" [sortable]="false">
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                    <button class="btn btn-info btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#modal-complement" (click)="loadComplement(row.examReservationId)">Complement
+                    </button>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Proctor Details" [width]="100" [sortable]="false">
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                    <button class="btn btn-info btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#modal-proctor" (click)="loadProctor(row.examReservationId)">Proctor
+                    </button>
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <!--                <ngx-datatable-column name="Actions" [width]="130" [sortable]="false">-->
+                <!--                  <ng-template ngx-datatable-cell-template let-row="row">-->
+                <!--                    <button class="btn btn-primary btn-sm" style="margin-right: 2px" (click)="updateRow(row)">Update</button>-->
+                <!--                    <button class="btn btn-danger btn-sm" (click)="deleteRow(row)">Delete</button>-->
+                <!--                  </ng-template>-->
+                <!--                </ngx-datatable-column>-->
+
+              </ngx-datatable>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- todo: Plan Table -->
+<div class="modal modal-blur " id="modal-plan" tabindex="-1" style="display: none;" aria-modal="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Exam</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="page-header d-print-none">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <div class="page-pretitle">
+                  Overview
+                </div>
+                <h2 class="page-title">
+                  Plan
+                </h2>
+              </div>
+              <div class="col-auto ms-auto d-print-none">
+                <div class="btn-list">
+          <span class="d-none d-sm-inline">
+            <a href="#" class="btn">
+              New view
+            </a>
+          </span>
+                  <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+                     data-bs-target="#modal-create">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M12 5l0 14"/>
+                      <path d="M5 12l14 0"/>
+                    </svg>
+                    create new About-us
+                  </a>
+                  <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
+                     data-bs-target="#modal-report"
+                     aria-label="Create new report">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M12 5l0 14"/>
+                      <path d="M5 12l14 0"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="card" style="padding : 20px; ">
+              <div class="d-flex justify-content-start">
+                <h3 >{{ selectedPlanName }}</h3>
+              </div>
+              <div class="d-flex justify-content-end">
+                <input type="text" class="form-control" style="width: 30%;" placeholder="Search..."
+                       (keyup)="updateFilter($event)"/>
+              </div>
+              <br>
+              <ngx-datatable
+                class="bootstrap"
+                [rows]="planFeatures"
+                [columns]="columnsPlanFeature"
+                [columnMode]="'force'"
+                [headerHeight]="50"
+                [footerHeight]="50"
+                [rowHeight]="'auto'"
+                [limit]="5"
+                style="border: 1px solid #ddd; border-radius: 4px;"
+                [scrollbarH]="true"
+                [sortType]=SortType.multi
+              >
+                <ngx-datatable-column name="Feature Name" prop="featuresName" [sortable]="true"></ngx-datatable-column>
+                <ngx-datatable-column name="Created At" prop="createdAt" [sortable]="true">
+                  <ng-template ngx-datatable-cell-template let-value="value">
+                    {{ value | date:'yyyy-MM-dd HH:mm:ss' }}
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <!--                <ngx-datatable-column name="Actions" [width]="130" [sortable]="false">-->
+                <!--                  <ng-template ngx-datatable-cell-template let-row="row">-->
+                <!--                    <button class="btn btn-primary btn-sm" style="margin-right: 2px" (click)="updateRow(row)">Update</button>-->
+                <!--                    <button class="btn btn-danger btn-sm" (click)="deleteRow(row)">Delete</button>-->
+                <!--                  </ng-template>-->
+                <!--                </ngx-datatable-column>-->
+
+              </ngx-datatable>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- todo: Testimonial Table -->
+<div class="modal modal-blur " id="modal-testimonials" tabindex="-1" style="display: none;" aria-modal="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Exam</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="page-header d-print-none">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <div class="page-pretitle">
+                  Overview
+                </div>
+                <h2 class="page-title">
+                  Testimonials
+                </h2>
+              </div>
+              <div class="col-auto ms-auto d-print-none">
+                <div class="btn-list">
+          <span class="d-none d-sm-inline">
+            <a href="#" class="btn">
+              New view
+            </a>
+          </span>
+                  <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+                     data-bs-target="#modal-create">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M12 5l0 14"/>
+                      <path d="M5 12l14 0"/>
+                    </svg>
+                    create new About-us
+                  </a>
+                  <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
+                     data-bs-target="#modal-report"
+                     aria-label="Create new report">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M12 5l0 14"/>
+                      <path d="M5 12l14 0"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="card" style="padding : 20px; ">
+              <div class="d-flex justify-content-end">
+                <input type="text" class="form-control" style="width: 30%;" placeholder="Search..."
+                       (keyup)="updateFilterTestimonials($event)"/>
+              </div>
+              <br>
+              <ngx-datatable
+                class="bootstrap"
+                [rows]="testimonials"
+                [columns]="columnsTestimonial"
+                [columnMode]="'force'"
+                [headerHeight]="50"
+                [footerHeight]="50"
+                [rowHeight]="'auto'"
+                [limit]="5"
+                style="border: 1px solid #ddd; border-radius: 4px;"
+                [scrollbarH]="true"
+                [sortType]=SortType.multi
+              >
+                <ngx-datatable-column name="Text" prop="testimonialText" [sortable]="true"></ngx-datatable-column>
+
+                <ngx-datatable-column name="State" prop="testimonialState" [sortable]="true"></ngx-datatable-column>
+                 <ngx-datatable-column name="Created At" prop="createdAt" [sortable]="true">
+                  <ng-template ngx-datatable-cell-template let-value="value">
+                    {{ value | date:'yyyy-MM-dd HH:mm:ss' }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Updated At" prop="updatedAt" [sortable]="true">
+                  <ng-template ngx-datatable-cell-template let-value="value">
+                    {{ value | date:'yyyy-MM-dd HH:mm:ss' }}
+                  </ng-template>
+                </ngx-datatable-column>
+
+
+                <ngx-datatable-column name="Actions" [width]="130" [sortable]="false">
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                    <button class="btn btn-success btn-sm" style="margin-right: 2px" (click)="changeTestimonialStateToAccepted(row.testimonialId,row.examProviderId)">
+                      Accept
+                    </button>
+                    <button class="btn btn-danger btn-sm" (click)="changeTestimonialStateToRejected(row.testimonialId,row.examProviderId)">Reject</button>
+                  </ng-template>
+                </ngx-datatable-column>
+
+              </ngx-datatable>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- todo: show Complement -->
+<div class="modal modal-blur" id="modal-complement" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Complement Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <div class="mb-3">
+            <label class="form-label">Proctor Request</label>
+            <textarea type="text" class="form-control" [value]="complement?.proctorDesc" readonly></textarea>
+            <span class="text-danger"></span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Student Response</label>
+            <textarea type="text" class="form-control" [value]="complement?.studentDesc" readonly></textarea>
+            <span class="text-danger"></span>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-link link-secondary"   data-bs-toggle="modal"
+           data-bs-target="#modal-exam-reservations">Back</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- todo: show Proctor -->
+<div class="modal modal-blur" id="modal-proctor" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Proctor Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <div class="mb-3">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-control" [value]="proctor?.firstName" readonly/>
+            <span class="text-danger"></span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-control" [value]="proctor?.lastName" readonly/>
+            <span class="text-danger"></span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="text" class="form-control" [value]="proctor?.email" readonly/>
+            <span class="text-danger"></span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Phone</label>
+            <input type="text" class="form-control" [value]="proctor?.phone" readonly/>
+            <span class="text-danger"></span>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-link link-secondary"
+
+           data-bs-toggle="modal"
+           data-bs-target="#modal-exam-reservations"
+
+        >Back</a>
+      </div>
+    </div>
+  </div>
+</div>

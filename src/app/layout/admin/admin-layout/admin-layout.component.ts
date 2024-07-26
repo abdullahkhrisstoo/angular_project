@@ -1,11 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { EXAM_PROVIDER_ROLE } from '../../../core/constants/app.constants';
 
 @Component({
   selector: 'app-admin-layout',
   templateUrl: './admin-layout.component.html',
-  styleUrl: './admin-layout.component.css',
+  styleUrls: ['./admin-layout.component.css',
+    '../../../../../public/dashboard-assets/dist/libs/plyr/dist/plyr.css',
+    '../../../../../public/dashboard-assets/dist/css/tabler.min.css',
+    '../../../../../public/dashboard-assets/dist/css/tabler-payments.min.css',
+    '../../../../../public/dashboard-assets/dist/css/tabler-vendors.min.css',
+    '../../../../../public/dashboard-assets/dist/css/demo.min.css',
 
+  ],
+  encapsulation:ViewEncapsulation.None,
 })
 export class AdminLayoutComponent  implements OnInit {
   constructor() {

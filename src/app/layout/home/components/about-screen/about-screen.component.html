@@ -79,51 +79,24 @@
           <div class="container" data-aos="fade-up" data-aos-delay="100">
 
             <div class="swiper init-swiper">
-              <script type="application/json" class="swiper-config">
-                {
-                  "loop": true,
-                  "speed": 600,
-                  "autoplay": {
-                    "delay": 5000
-                  },
-                  "slidesPerView": "auto",
-                  "pagination": {
-                    "el": ".swiper-pagination",
-                    "type": "bullets",
-                    "clickable": true
-                  },
-                  "breakpoints": {
-                    "320": {
-                      "slidesPerView": 1,
-                      "spaceBetween": 40
-                    },
-                    "1200": {
-                      "slidesPerView": 2,
-                      "spaceBetween": 20
-                    }
-                  }
-                }
-              </script>
-              <div class="swiper-wrapper">
 
-                <div *ngFor="let item of approvedTestimonal" class="swiper-slide">
+              <div class="swiper-wrapper"   >
+                <div class="swiper-slide">
                   <div class="testimonial-wrap">
                     <div class="testimonial-item">
-                      <img [src]="item.image" class="testimonial-img" alt="">
-                      <h3>{{item.firstName}} {{item.lastName}}</h3>
+                      <img [src]="randomTestimonial.examProviderImage" class="testimonial-img" alt="">
+                      <h3>{{randomTestimonial.examProviderName}}</h3>
                       <div class="stars">
                         <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                       </div>
                       <p>
                         <i class="bi bi-quote quote-icon-left"></i>
-                        <span>{{item.testimonialtext}}</span>
+                        <span>{{randomTestimonial.testimonialtext}}</span>
                         <i class="bi bi-quote quote-icon-right"></i>
                       </p>
                     </div>
                   </div>
-                </div><!-- End testimonial item -->
-
-
+                </div>
               </div>
               <div class="swiper-pagination"></div>
             </div>
