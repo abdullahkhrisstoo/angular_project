@@ -1,10 +1,8 @@
 export const API_ENDPOINTS = {
-  baseUrl : 'https://localhost:5001/api/',
+  baseUrl : 'https://localhost:1111/api/',
 
 
-
-
-
+  // https://localhost:1111;http://localhost:2222;
   //todo:contact us
   GET_ALL_CONTACT: 'ContactUs/GetAllContactUs',
   CREATE_CONTACT: 'ContactUs/CreateContactUs',
@@ -69,9 +67,7 @@ export const API_ENDPOINTS = {
   GET_TOP_EXAM:'ExamProvider/GetTopExamProvider/3',
 
 
-
-
-  COMPLEMENT_TABLE:'Complement/',
+    COMPLEMENT_TABLE:'Complement/',
     GET_ALL_COMPLEMENT : 'Complement/GetAllComplements',
     CREATE_COMPLEMENT : 'Complement/createComplement',
     GET_COMPLEMENT_BY_ID : 'Complement/GetComplementById',
@@ -79,12 +75,6 @@ export const API_ENDPOINTS = {
     UPDATE_COMPLEMENT : 'Complement/UpdateComplement',
     GET_COMPLEMENT_BY_EXAM_RESERVATION_ID : 'Complement/GetComplementByExamReservationId',
     GET_COMPLEMENT_BY_PROCOTR_ID : 'Complement/GetComplementsByProctorId',
-
-
-
-
-
-
 
 
     // todo:Testimonal

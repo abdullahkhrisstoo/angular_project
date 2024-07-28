@@ -1,0 +1,86 @@
+<div class="container">
+  <!-- Step 1: Confirm Preferred Time Zone -->
+  <div class="step mb-3">
+    <h2>1. Confirm your preferred time zone</h2>
+    <p>Is this your preferred time zone?</p>
+    <p>{{ currentTimezone }}</p>
+    <button class="btn btn-primary" (click)="changeTimezone()">No, change time zone</button>
+    <button class="btn btn-success" *ngIf="!showTimezoneDropdown">Yes, that's right!</button>
+    <div *ngIf="showTimezoneDropdown">
+      <select class="form-select" [(ngModel)]="currentTimezone" (change)="selectTimezone($event)">
+        <option *ngFor="let timezone of timezones" [value]="timezone">{{ timezone }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Step 2: Select Your Date -->
+  <div class="step mb-3">
+    <h2>2. Select your date</h2>
+    <input type="date" class="form-control" [(ngModel)]="selectedDate" (change)="onDateChange($event)" />
+  </div>
+
+  <!-- Step 3: Select Your Appointment Start Time -->
+  <div class="step mb-3">
+    <h2>3. Select your appointment start time</h2>
+    <div class="form-group mb-2">
+      <label class="form-check-label me-2">
+        <input type="radio" id="timeFormat12" name="timeFormat" class="form-check-input" value="12"
+               (change)="onTimeFormatChange('12')" [checked]="timeFormat === '12'" />
+        12 hr (e.g., 2:00 PM)
+      </label>
+      <label class="form-check-label">
+        <input type="radio" id="timeFormat24" name="timeFormat" class="form-check-input" value="24"
+               (change)="onTimeFormatChange('24')" [checked]="timeFormat === '24'" />
+        24 hr (e.g., 14:00)
+      </label>
+    </div>
+    <div class="appointment-time bg-light p-3 border rounded">
+      <div class="d-flex align-items-center">
+        <img src="https://via.placeholder.com/50" alt="Recommended time icon" class="me-3 rounded-circle">
+        <div>
+          <p class="mb-0">Thursday, July 18, 2024</p>
+          <p class="mb-0 text-primary fw-bold">{{ recommendedTime }}</p>
+          <p class="text-muted mb-0">Your check-in time will be 07:30 Asia/Amman-EET</p>
+        </div>
+      </div>
+      <div class="mt-3 d-flex justify-content-between">
+        <button class="btn btn-warning" (click)="openTimePicker()">Explore more times</button>
+        <button class="btn btn-primary">Book this appointment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="d-flex justify-content-between mt-4">
+    <button class="btn btn-secondary">Previous</button>
+    <button class="btn btn-secondary">Next</button>
+  </div>
+
+  <!-- Time Picker Modal -->
+  <div class="modal fade" id="timePickerModal" tabindex="-1" aria-labelledby="timePickerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-slideout modal-full-height modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="timePickerModalLabel">Select Time</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="time-picker-container">
+            <div class="time-display">
+              <label class="time-label">Start Time:</label>
+              <input type="time" class="form-control time-input" [value]="startTime" (change)="onTimeChange($event, 'start')" [attr.step]="timeFormat === '12' ? '60' : '1'" />
+            </div>
+            <div class="time-display">
+              <label class="time-label">End Time:</label>
+              <input type="time" class="form-control time-input" [value]="endTime" (change)="onTimeChange($event, 'end')" [attr.step]="timeFormat === '12' ? '60' : '1'" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="submitTimes()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

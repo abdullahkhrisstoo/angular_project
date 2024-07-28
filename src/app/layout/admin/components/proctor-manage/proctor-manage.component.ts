@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ColumnMode, SortType} from '@swimlane/ngx-datatable';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProctorService } from '../../../../core/services/proctor.service';
 import { ToastMsgService } from '../../../../core/services/toast.service';
 import { AuthService } from '../../../../core/services/auth.service';
@@ -22,6 +22,7 @@ import {UpdateAccountDTO} from "../../../../core/DTO/update-account-dto";
 export class ProctorManageComponent implements OnInit {
   AppMessages = APP_MESSAGES;
   proctorForm: FormGroup;
+  updateProctorForm: FormGroup;
   deleteProctorId: number | null = null;
   updateProctorId: number | null = null;
   updateProctorData: CreateAccountViewModel | null = null;
@@ -51,6 +52,13 @@ export class ProctorManageComponent implements OnInit {
       email: EMAIL_CONTROL,
       phonenum: PHONE_CONTROL,
       password: PASSWORD_CONTROL
+    });
+    //
+    this.updateProctorForm = this.fb.group({
+      firstName:  ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', Validators.required],
+      phonenum: ['', Validators.required],
     });
   }
 
@@ -105,7 +113,7 @@ export class ProctorManageComponent implements OnInit {
 
   populateFormWithData(): void {
     if (this.updateProctorData) {
-      this.proctorForm.patchValue({
+      this.updateProctorForm.patchValue({
         firstName: this.updateProctorData.firstName,
         lastName: this.updateProctorData.lastName,
         email: this.updateProctorData.email,
@@ -125,11 +133,11 @@ export class ProctorManageComponent implements OnInit {
   }
 
   updateProctor(): void {
-    if (this.proctorForm.invalid || !this.updateProctorId) {
+    if (this.updateProctorForm.invalid || !this.updateProctorId) {
       return;
     }
 
-    const formValue = this.proctorForm.value;
+    const formValue = this.updateProctorForm.value;
     const proctorViewModel: UpdateAccountDTO = {
       firstName: formValue.firstName,
       lastName: formValue.lastName,

@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <h1 class="text-center">Select exam options</h1>
+  <h2 class="text-center text-muted">AZ-900: Microsoft Azure Fundamentals</h2>
+  <div class="row justify-content-center my-4">
+    <div class="col-md-3 text-center">
+      <button class="btn btn-outline-primary w-100 mb-2">In person at a test center</button>
+    </div>
+    <div class="col-md-3 text-center">
+      <button class="btn btn-primary w-100 mb-2">Online with OnVUE</button>
+    </div>
+    <div class="col-md-3 text-center">
+      <button class="btn btn-outline-primary w-100 mb-2">I have a Private Access Code</button>
+    </div>
+  </div>
+  <div class="row text-center my-4">
+    <div class="col-md-3">
+      <img src="assets/computer-icon.png" class="img-fluid mb-2" alt="Computer">
+      <p>Your computer<br><small>Use a personal computer that has a reliable webcam and internet connection. Run <a href="#">system test</a>.</small></p>
+    </div>
+    <div class="col-md-3">
+      <img src="assets/testing-space-icon.png" class="img-fluid mb-2" alt="Testing Space">
+      <p>Your testing space<br><small>The room should be a distraction-free, private place. See <a href="#">acceptable spaces</a> and view permitted <a href="#">comfort aid list</a>.</small></p>
+    </div>
+    <div class="col-md-3">
+      <img src="assets/photo-id-icon.png" class="img-fluid mb-2" alt="Photo ID">
+      <p>Your photo ID<br><small>We'll verify your government-issued identification (ID) when you arrive for your exam. Review <a href="#">admission & ID policies</a>.</small></p>
+    </div>
+    <div class="col-md-3">
+      <img src="assets/clock-icon.png" class="img-fluid mb-2" alt="Clock">
+      <p>What to expect<br><small>Check in for your OnVUE exam 30 minutes before your appointment time. Watch our <a href="#">short video</a> to get familiar with the process.</small></p>
+    </div>
+  </div>
+  <div class="text-center my-4">
+    <p>Questions? Check out the <a href="#">OnVUE FAQs</a> and <a href="#">minimum technical requirements</a>.</p>
+  </div>
+  <div class="d-flex justify-content-between mt-4">
+    <button class="btn btn-secondary" (click)="onPrevious()">Previous</button>
+    <button class="btn btn-primary" (click)="onNext()">Next</button>
+  </div>
+</div>

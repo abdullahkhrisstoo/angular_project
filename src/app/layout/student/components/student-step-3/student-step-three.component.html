@@ -1,0 +1,49 @@
+<div class="container mt-5">
+  <p><strong>Required information is marked with an asterisk (*).</strong></p>
+  <p>Enter information on this page in the Roman alphabet. (Alphanumeric)</p>
+  <div *ngIf="isSubmitted && (!agreement1 || !agreement2 || !acknowledgment)" class="alert alert-danger">
+    Please provide a valid response for the required information:
+    <ul>
+      <li *ngIf="!agreement1">Have you read and do you agree to the Microsoft Candidate Code of Conduct Agreement (Non-Disclosure)? An answer is required.</li>
+      <li *ngIf="!agreement2">Have you read and do you agree to the Microsoft Credentials Program Agreement? An answer is required.</li>
+      <li *ngIf="!acknowledgment">By clicking yes, you acknowledge that you have read both agreements. An answer is required.</li>
+    </ul>
+  </div>
+  <form>
+    <div class="form-group">
+      <label><strong>*Have you read and do you agree to the Microsoft Candidate Code of Conduct Agreement (Non-Disclosure)?</strong> <a href="#">This link is to the Code of Conduct.</a></label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="agreement1" value="yes" [(ngModel)]="agreement1">
+        <label class="form-check-label">Yes</label>
+      </div>
+      <div *ngIf="isSubmitted && !agreement1" class="text-danger">
+        <strong>✘ An answer is required.</strong>
+      </div>
+    </div>
+    <div class="form-group">
+      <label><strong>*Have you read and do you agree to the Microsoft Credentials Program Agreement?</strong> <a href="#">This link is to the Certification Exam Candidate Agreement Terms.</a></label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="agreement2" value="yes" [(ngModel)]="agreement2">
+        <label class="form-check-label">Yes</label>
+      </div>
+      <div *ngIf="isSubmitted && !agreement2" class="text-danger">
+        <strong>✘ An answer is required.</strong>
+      </div>
+    </div>
+    <div class="form-group">
+      <label><strong>*By clicking yes, you acknowledge that you have read both agreements. Any violations of these agreements can result in exam revocation or being banned from the Microsoft Credential program.</strong></label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="acknowledgment" value="yes" [(ngModel)]="acknowledgment">
+        <label class="form-check-label">Yes</label>
+      </div>
+      <div *ngIf="isSubmitted && !acknowledgment" class="text-danger">
+        <strong>✘ An answer is required.</strong>
+      </div>
+    </div>
+  </form>
+  <p>Please contact <a href="#">customer service</a> for any information that cannot be updated online.</p>
+  <div class="d-flex justify-content-between mt-4">
+    <button class="btn btn-secondary" (click)="onPrevious()">Previous</button>
+    <button class="btn btn-primary" (click)="onNext()">Next</button>
+  </div>
+</div>

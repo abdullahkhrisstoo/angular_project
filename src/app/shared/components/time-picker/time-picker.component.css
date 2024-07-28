@@ -1,0 +1,121 @@
+body {
+  background-color: grey;
+}
+
+.timepicker {
+  width: 300px;
+  height: 450px;
+  background-color: white;
+  position: relative;
+  font-family: Calibri;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.timepicker .top {
+  background-color: #009788;
+  color: rgba(255, 255, 255, .7);
+  height: 100px;
+  line-height: 100px;
+  font-size: 50px;
+  text-align: center;
+  border-radius: 8px 8px 0 0;
+}
+
+.timepicker .top .active {
+  color: white;
+}
+
+.timepicker .circle {
+  user-select: none;
+  background-color: rgba(0, 0, 0, .1);
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  position: relative;
+  margin: 25px auto;
+  box-sizing: border-box;
+}
+
+.timepicker .circle .mid {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.timepicker .circle .hour,
+.timepicker .circle .hour2,
+.timepicker .circle .min {
+  position: absolute;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.timepicker .circle .hour {
+  height: 40px;
+  line-height: 40px;
+  width: 40px;
+  border-radius: 40px;
+}
+
+.timepicker .circle .hour.selected,
+.timepicker .circle .hour:hover,
+.timepicker .circle .hour2:hover,
+.timepicker .circle .min:hover {
+  background-color: #009788;
+  color: white;
+}
+
+.timepicker .circle .hour2 {
+  height: 30px;
+  line-height: 30px;
+  width: 30px;
+  font-size: 14px;
+}
+
+.timepicker .circle .min {
+  height: 20px;
+  line-height: 20px;
+  width: 20px;
+  font-size: 12px;
+}
+
+.timepicker .actions {
+  color: #009788;
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
+  box-sizing: border-box;
+}
+
+.timepicker .actions .action {
+  display: inline-block;
+  width: 100px;
+  text-align: center;
+  height: 37.5px;
+  line-height: 37.5px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 0.3s;
+}
+
+.timepicker .actions .action:hover {
+  background-color: rgba(0, 0, 0, .1);
+}
+
+.timepicker .actions .action:active {
+  background-color: rgba(0, 0, 0, .3);
+}

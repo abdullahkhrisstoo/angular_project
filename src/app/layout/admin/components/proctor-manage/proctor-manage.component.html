@@ -198,23 +198,23 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="proctorForm" id="createExamForm">
-          <app-input [formGroup]="proctorForm" controlName="firstName" label="First Name"
+        <form [formGroup]="updateProctorForm" >
+          <app-input [formGroup]="updateProctorForm" controlName="firstName" label="First Name"
             [errorMessages]="{ required: AppMessages.REQUIRED_FIELD }">
           </app-input>
 
-          <app-input [formGroup]="proctorForm" controlName="lastName" label="Last Name"
+          <app-input [formGroup]="updateProctorForm" controlName="lastName" label="Last Name"
             [errorMessages]="{ required: AppMessages.REQUIRED_FIELD }">
           </app-input>
 
-          <app-input placeholder="ex@mail.com" [formGroup]="proctorForm" controlName="email" label="Email"
+          <app-input placeholder="ex@mail.com" [formGroup]="updateProctorForm" controlName="email" label="Email"
             [type]="'email'" [errorMessages]="{
             required: AppMessages.REQUIRED_FIELD,
             email: AppMessages.INVALID_EMAIL
           }">
           </app-input>
 
-          <app-input [formGroup]="proctorForm" controlName="phonenum" label="Phone Number"
+          <app-input [formGroup]="updateProctorForm" controlName="phonenum" label="Phone Number"
             [errorMessages]="{ required: AppMessages.REQUIRED_FIELD }">
           </app-input>
 
@@ -226,7 +226,7 @@
         <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
           Cancel
         </a>
-        <button (click)="updateProctor()" data-bs-dismiss="modal" href="#" type="submit" form="createExamForm"
+        <button (click)="updateProctor()" data-bs-dismiss="modal" href="#" type="submit"
           class="btn btn-primary ms-auto">
           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

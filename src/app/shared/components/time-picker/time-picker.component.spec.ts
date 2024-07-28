@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StudentNavBarComponent } from './student-nav-bar.component';
+import { TimePickerComponent } from './time-picker.component';
 
-describe('StudentNavBarComponent', () => {
-  let component: StudentNavBarComponent;
-  let fixture: ComponentFixture<StudentNavBarComponent>;
+describe('TimePickerComponent', () => {
+  let component: TimePickerComponent;
+  let fixture: ComponentFixture<TimePickerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [StudentNavBarComponent]
+      declarations: [TimePickerComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(StudentNavBarComponent);
+
+    fixture = TestBed.createComponent(TimePickerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

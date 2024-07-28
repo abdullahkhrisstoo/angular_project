@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AdminSideBarComponent } from './admin/admin-side-bar/admin-side-bar.component';
 import { ProctorSideBarComponent } from './proctor/proctor-side-bar/proctor-side-bar.component';
 import { ExamProviderSideBarComponent } from './exam-provider/exam-provider-side-bar/exam-provider-side-bar.component';
-import { StudentNavBarComponent } from './student/student-nav-bar/student-nav-bar.component';
-import { StudentFooterComponent } from './student/student-footer/student-footer.component';
 import { DashNavBarComponent } from './dash/dash-nav-bar/dash-nav-bar.component';
 import { DashbardAssetsComponent } from './dash/dashbard-assets/dashbard-assets.component';
 import { HomeAssetsComponent } from './dash/home-assets/home-assets.component';
@@ -23,14 +21,14 @@ import { AuthService } from '../core/services/auth.service';
 import { TokenInterceptor } from '../core/interceptors/auth-interceptor';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ChoosePlanComponent } from './user-profile/choose-plan/choose-plan.component';
+import { NgxDatesPickerModule } from 'ngx-dates-picker';
+import { TimePickerComponent } from './components/time-picker/time-picker.component';
 
 @NgModule({
   declarations: [
     AdminSideBarComponent,
     ProctorSideBarComponent,
     ExamProviderSideBarComponent,
-    StudentNavBarComponent,
-    StudentFooterComponent,
     DashNavBarComponent,
     DashbardAssetsComponent,
     HomeAssetsComponent,
@@ -42,6 +40,7 @@ import { ChoosePlanComponent } from './user-profile/choose-plan/choose-plan.comp
     UpdateNameComponent,
     UpdatePasswordComponent,
     ChoosePlanComponent,
+    TimePickerComponent,
 
   ],
   imports: [
@@ -54,11 +53,10 @@ import { ChoosePlanComponent } from './user-profile/choose-plan/choose-plan.comp
     NgxDatatableModule,
   ],
   exports: [
+    TimePickerComponent,
     AdminSideBarComponent,
     ProctorSideBarComponent,
     ExamProviderSideBarComponent,
-    StudentNavBarComponent,
-    StudentFooterComponent,
     DashNavBarComponent,
     ReactiveFormsModule,
     InputComponent,

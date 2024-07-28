@@ -15,12 +15,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { SpinnerService } from './core/services/spinner.service';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxDatesPickerModule } from 'ngx-dates-picker';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
+    
     CommonModule,
     BrowserModule,
     AppRoutingModule,
@@ -31,7 +34,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 3000,
-      positionClass: 'toast-top-right',
+      positionClass: 'toast-bottom-right',
       preventDuplicates: true,
       progressBar: true,
       progressAnimation: 'increasing',
