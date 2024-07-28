@@ -132,8 +132,11 @@ export const API_ENDPOINTS = {
   UPDATE_EXAM_RESERVATION : 'ExamReservation/UpdateExamReservation',
   GET_EXAM_RESERVATIONS_BY_EXAM_ID: "ExamReservation/GetAllExamReservationsByExamId",
   GET_EXAM_RESERVATIONS_BY_PROCTOR_ID: "ExamReservation/GetAllExamReservationsByProctorId",
+  GET_TIME_SLOTS : 'ExamReservation/GetAvailableTimesByDate',
 
   GET_PROCTOR_BY_EXAM_RESERVATION_ID : 'Proctor/GetProctorByExamReservationId',
+
+
 
 
 };

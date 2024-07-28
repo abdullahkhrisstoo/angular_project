@@ -1,0 +1,53 @@
+<div *ngIf="question" class="col-12">
+  <div class="row row-cards row-deck">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">{{ question.content }}</h3>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li *ngFor="let answer of question.answers">
+              <label>
+                <input type="radio" name="answer" [value]="answer.text">
+                {{ answer.text }}
+              </label>
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          {{ question.title }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-around mt-4">
+    <button class="btn btn-primary" (click)="onPrevQuestion()" [disabled]="selectedQuestionId === 1">Previous</button>
+    <button class="btn btn-primary" *ngIf="!isLastQuestion" (click)="onNextQuestion()">Next</button>
+    <button class="btn btn-success" *ngIf="isLastQuestion" (click)="onSubmitExam()">Submit</button>
+  </div>
+</div>
+
+<!-- Floating Action Button -->
+<button class="floating-action-button" (click)="openChatModal()">Chat</button>
+
+<!-- Chat Modal -->
+<div id="chatModal" class="chat-modal">
+  <div class="chat-modal-content">
+    <div class="chat-modal-header">
+      <button class="back-button" (click)="closeChatModal()">&larr;</button>
+      <img src="img.jpg" alt="" class="chat-header-image">
+      <button class="close-button" (click)="closeChatModal()">&times;</button>
+    </div>
+    <div class="chat-modal-body">
+      <div *ngFor="let message of messages" [ngClass]="{'user-message': message.user, 'bot-message': !message.user}">
+        <div>{{ message.text }}</div>
+      </div>
+    </div>
+    <div class="chat-modal-footer">
+      <input [(ngModel)]="messageText" (keyup.enter)="sendMessage()" class="chat-input" placeholder="Type a message...">
+      <button type="button" class="send-button" (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>
+

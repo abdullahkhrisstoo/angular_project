@@ -1,0 +1,51 @@
+body:-webkit-full-screen,
+body:-moz-full-screen,
+body:-ms-fullscreen,
+body:fullscreen {
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.nav-item.active .nav-link {
+  background-color: #007bff; 
+  color: white;
+}
+
+.nav-item.active .nav-link .nav-link-icon {
+  color: white;
+}
+
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.container-fluid {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.row {
+  height: calc(100% - 60px);
+}
+
+.col-md-3, .col-md-9 {
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Disable text selection */
+* {
+  -webkit-user-select: none;  /* Safari */
+  -moz-user-select: none;     /* Firefox */
+  -ms-user-select: none;      /* Internet Explorer/Edge */
+  user-select: none;          /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
+/* Disable text dragging */
+* {
+  -webkit-user-drag: none;
+  /* user-drag: none; */
+}

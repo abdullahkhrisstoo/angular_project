@@ -10,6 +10,8 @@ import { ProctorLayoutComponent } from './proctor/proctor-layout/proctor-layout.
 import { ExamProviderLayoutComponent } from './exam-provider/exam-provider-layout/exam-provider-layout.component';
 import { AuthLayoutComponent } from './auth/auth-layout/auth-layout.component';
 import { AdminModule } from "./admin/admin.module";
+import { ExaminationLayoutComponent } from './examination/examination-layout/examination-layout.component';
+import { ExaminationModule } from "./examination/examination.module";
 
 
 
@@ -20,13 +22,16 @@ import { AdminModule } from "./admin/admin.module";
     HomeLayoutComponent,
     ProctorLayoutComponent,
     ExamProviderLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    ExaminationLayoutComponent
+
   ],
   imports: [
     CommonModule,
     SharedModule,
     AppRoutingModule,
-    AdminModule
+    AdminModule,
+    ExaminationModule
 ],
   exports: [
     AdminLayoutComponent,
@@ -34,7 +39,10 @@ import { AdminModule } from "./admin/admin.module";
     HomeLayoutComponent,
     ProctorLayoutComponent,
     ExamProviderLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    ExaminationLayoutComponent
+
+
 
 
   ],
