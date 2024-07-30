@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { PlanDto } from '../DTO/get-exam-provider-by-user-id-view-model';
+import { PlanDto } from '../DTO/get-exam-provider-by-user-id-dto';
 import { Plan } from '../models/plan-model';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class DataSharedService {
   }
 
 
-  
+
   private selectedPlanSubject = new BehaviorSubject<Plan | null>(null);
   selectedPlan$ = this.selectedPlanSubject.asObservable();
 

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Question } from '../../../../core/DTO/examination-dto';
 
 @Component({
@@ -6,7 +6,7 @@ import { Question } from '../../../../core/DTO/examination-dto';
   templateUrl: './examination-body.component.html',
   styleUrls: ['./examination-body.component.css']
 })
-export class ExaminationBodyComponent {
+export class ExaminationBodyComponent implements OnInit {
 
   @Input() question!: Question;
   @Input() selectedQuestionId!: number;
@@ -16,8 +16,16 @@ export class ExaminationBodyComponent {
   @Output() nextQuestion = new EventEmitter<void>();
   @Output() submitExam = new EventEmitter<void>();
 
-  messages: { user: boolean, text: string }[] = [];
+  messages: { user: boolean, text: string, time: string }[] = [];
   messageText: string = '';
+
+  ngOnInit() {
+    // Initialize with some messages for testing
+    this.messages = [
+      { user: false, text: 'Hello. How may I help you?', time: '09:32' },
+      { user: true, text: 'I have some problem', time: '09:34' }
+    ];
+  }
 
   onPrevQuestion() {
     this.prevQuestion.emit();
@@ -51,11 +59,12 @@ export class ExaminationBodyComponent {
 
   sendMessage() {
     if (this.messageText.trim()) {
-      this.messages.push({ user: true, text: this.messageText });
+      const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      this.messages.push({ user: true, text: this.messageText, time: currentTime });
       this.messageText = '';
       // Simulate a bot response
       setTimeout(() => {
-        this.messages.push({ user: false, text: 'Hello. How may I help you?' });
+        this.messages.push({ user: false, text: 'Hello. How may I help you?', time: currentTime });
       }, 1000);
     }
   }

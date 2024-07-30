@@ -37,11 +37,10 @@
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             Available Times
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <ul class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownMenuButton">
             <li *ngFor="let slot of timeSlots">
-              <!-- <button class="dropdown-item" (click)="selectTimeSlot(slot.startTimeFormatted!, slot.endTimeFormatted!)"> -->
-                <button class="dropdown-item" >
-                  {{ slot.startTime?.substring(11, 16) }}- {{ slot.endTime?.substring(11, 16) }}
+              <button class="dropdown-item">
+                {{ slot.startTime?.substring(11, 16) }} - {{ slot.endTime?.substring(11, 16) }}
               </button>
             </li>
           </ul>

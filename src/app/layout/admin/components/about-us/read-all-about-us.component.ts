@@ -3,7 +3,7 @@ import {ColumnMode, id, SortType} from '@swimlane/ngx-datatable';
 import { AboutUsService } from '../../../../core/services/about-us.service';
 import { ApiResponse } from '../../../../core/utils/ApiResponse';
 import { About } from '../../../../core/models/about-us-model';
-import { CreateAboutDTO } from '../../../../core/DTO/create-about-us-view-model';
+import { CreateAboutDTO } from '../../../../core/DTO/create-about-us-dto';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { APP_MESSAGES } from '../../../../core/constants/error-messages.constants';
 import { ToastMsgService } from '../../../../core/services/toast.service';

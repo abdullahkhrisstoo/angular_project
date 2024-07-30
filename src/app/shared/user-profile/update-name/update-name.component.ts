@@ -7,7 +7,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { ToastMsgService } from '../../../core/services/toast.service';
 import { FIRST_NAME_CONTROL, LAST_NAME_CONTROL, PASSWORD_CONTROL, PHONE_CONTROL } from '../../../core/constants/form-control.constant';
-import { UpdateNameViewModel } from '../../../core/DTO/update-name-view-model';
+import { UpdateNameDTO } from '../../../core/DTO/update-name-dto';
 import { ApiResponse } from '../../../core/utils/ApiResponse';
 
 @Component({
@@ -46,7 +46,7 @@ export class UpdateNameComponent {
     if (this.updateNameForm.invalid) {
       return;
     }
-    let user: UpdateNameViewModel = <UpdateNameViewModel>this.updateNameForm.value;
+    let user: UpdateNameDTO = <UpdateNameDTO>this.updateNameForm.value;
     user.userId = this.userData?.userId;
     console.log(user);
     this.authService.updateUserName(user).subscribe(

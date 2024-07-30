@@ -1,6 +1,6 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {ComplementService} from "../../../../core/services/complement.service";
-import {CreateAboutDTO} from "../../../../core/DTO/create-about-us-view-model";
+import {CreateAboutDTO} from "../../../../core/DTO/create-about-us-dto";
 import {CreateComplementDTO} from "../../../../core/DTO/create-complement-dto";
 import {UpdateComplementDTO} from "../../../../core/DTO/update-complement-dto";
 import {ExamProviderService} from "../../../../core/services/exam-provider.service";

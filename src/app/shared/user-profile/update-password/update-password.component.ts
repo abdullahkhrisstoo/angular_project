@@ -6,7 +6,7 @@ import { ToastMsgService } from '../../../core/services/toast.service';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { CONFIRM_PASSWORD_CONTROL, NEW_PASSWORD_CONTROL, PASSWORD_CONTROL } from '../../../core/constants/form-control.constant';
 import { CurrentUserData } from '../../../core/models/current-user-data';
-import { UpdatePasswordViewModel } from '../../../core/DTO/update-password-view-model';
+import { UpdatePasswordDTO } from '../../../core/DTO/update-password-dto';
 import { ApiResponse } from '../../../core/utils/ApiResponse';
 import { APP_MESSAGES } from '../../../core/constants/error-messages.constants';
 import { matchPasswordValidator } from '../../../core/constants/regex-patterns.constants';
@@ -53,7 +53,7 @@ export class UpdatePasswordComponent implements OnInit {
     }
 
 
-    let user: UpdatePasswordViewModel = <UpdatePasswordViewModel>this.updatePasswordForm.value;
+    let user: UpdatePasswordDTO = <UpdatePasswordDTO>this.updatePasswordForm.value;
     user.credentialId = this.userData!.credentialId;
     this.authService.updatePassword(user).subscribe(
       (response: ApiResponse<any>) => {

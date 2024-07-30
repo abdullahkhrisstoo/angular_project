@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { GenericApiHandlerService } from './api.service';
 
 import { Observable } from 'rxjs';
-import { CreateContactMessageViewModel } from '../DTO/create-contact-message-view-model';
+import { CreateContactMessageDTO } from '../DTO/create-contact-message-dto';
 import { ApiResponse } from '../utils/ApiResponse';
 import { API_ENDPOINTS } from '../constants/api.constants';
 import { ContactModel } from '../models/contact-us-model';
@@ -14,8 +14,8 @@ export class ContactService {
   constructor(private apis:GenericApiHandlerService) {}
 
 //todo:create
-  create(contactmessageViewModel: CreateContactMessageViewModel): Observable<ApiResponse<CreateContactMessageViewModel>> {
-    return this.apis.post<ApiResponse<CreateContactMessageViewModel>>(API_ENDPOINTS.CREATE_CONTACT, contactmessageViewModel).pipe();
+  create(contactmessageViewModel: CreateContactMessageDTO): Observable<ApiResponse<CreateContactMessageDTO>> {
+    return this.apis.post<ApiResponse<CreateContactMessageDTO>>(API_ENDPOINTS.CREATE_CONTACT, contactmessageViewModel).pipe();
   }
 
 

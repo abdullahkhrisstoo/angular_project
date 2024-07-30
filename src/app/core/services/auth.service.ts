@@ -3,15 +3,15 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { GenericApiHandlerService } from './api.service';
 import { CurrentUserData } from '../models/current-user-data';
-import { UpdateNameViewModel } from '../DTO/update-name-view-model';
-import { UpdatePhoneViewModel } from '../DTO/Update-Phone-View-Model';
+import { UpdateNameDTO } from '../DTO/update-name-dto';
+import { UpdatePhoneDTO } from '../DTO/Update-Phone-dto';
 import { GetUserByCredential } from '../DTO/get-user-by-credential';
 import { ApiResponse } from '../utils/ApiResponse';
-import { CreateAccountViewModel } from '../DTO/create-account-view-model';
+import { CreateAccountDTO } from '../DTO/create-account-dto';
 import { API_ENDPOINTS } from '../constants/api.constants';
 import { LocalStorageService } from './local-storage.service';
-import { UpdateEmailViewModel } from '../DTO/update-email-view-model';
-import { UpdatePasswordViewModel } from '../DTO/update-password-view-model';
+import { UpdateEmailDTO } from '../DTO/update-email-dto';
+import { UpdatePasswordDTO } from '../DTO/update-password-dto';
 import { EXAM_PROVIDER_ROLE } from '../constants/app.constants';
 import { Router } from '@angular/router';
 
@@ -32,7 +32,7 @@ export class AuthService {
         })
       );
   }
-  register(user: CreateAccountViewModel): Observable<ApiResponse<CurrentUserData>> {
+  register(user: CreateAccountDTO): Observable<ApiResponse<CurrentUserData>> {
     return this.apiHandler.post<ApiResponse<CurrentUserData>>(API_ENDPOINTS.CREATE_ACCOUNT, user)
       .pipe(
         tap(response => {
@@ -44,18 +44,18 @@ export class AuthService {
       );
 
   }
-  updateUserName(data: UpdateNameViewModel): Observable<ApiResponse<UpdateNameViewModel>> {
-    return this.apiHandler.put<ApiResponse<UpdateNameViewModel>>(API_ENDPOINTS.UPDATE_NAME, data);
+  updateUserName(data: UpdateNameDTO): Observable<ApiResponse<UpdateNameDTO>> {
+    return this.apiHandler.put<ApiResponse<UpdateNameDTO>>(API_ENDPOINTS.UPDATE_NAME, data);
   }
-  updateEmail(data: UpdateEmailViewModel): Observable<ApiResponse<UpdateEmailViewModel>> {
-    return this.apiHandler.put<ApiResponse<UpdateEmailViewModel>>(API_ENDPOINTS.UPDATE_Email, data);
+  updateEmail(data: UpdateEmailDTO): Observable<ApiResponse<UpdateEmailDTO>> {
+    return this.apiHandler.put<ApiResponse<UpdateEmailDTO>>(API_ENDPOINTS.UPDATE_Email, data);
   }
-  updatePhone(data: UpdatePhoneViewModel): Observable<ApiResponse<UpdatePhoneViewModel>> {
-    return this.apiHandler.put<ApiResponse<UpdatePhoneViewModel>>(API_ENDPOINTS.UPDATE_PHONE, data);
+  updatePhone(data: UpdatePhoneDTO): Observable<ApiResponse<UpdatePhoneDTO>> {
+    return this.apiHandler.put<ApiResponse<UpdatePhoneDTO>>(API_ENDPOINTS.UPDATE_PHONE, data);
   }
 
-  updatePassword(data: UpdatePasswordViewModel): Observable<ApiResponse<UpdatePasswordViewModel>> {
-    return this.apiHandler.put<ApiResponse<UpdatePasswordViewModel>>(API_ENDPOINTS.UPDATE_PASSWORD, data);
+  updatePassword(data: UpdatePasswordDTO): Observable<ApiResponse<UpdatePasswordDTO>> {
+    return this.apiHandler.put<ApiResponse<UpdatePasswordDTO>>(API_ENDPOINTS.UPDATE_PASSWORD, data);
   }
 
   deleteUser(id:number): Observable<ApiResponse<any>> {

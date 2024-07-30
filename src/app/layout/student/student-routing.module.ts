@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StudentLayoutComponent } from './student-layout/student-layout.component';
-import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
 import { StudentProfileComponent } from './components/student-profile/student-profile.component';
 import { StudentStepOneComponent } from './components/student-step-1/student-step-one.component';
 import { StudentStepTwoComponent } from './components/student-step-2/student-step-two.component';
@@ -15,8 +14,7 @@ const routes: Routes = [
     path: '',
     component: StudentLayoutComponent,
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: StudentDashboardComponent },
+      { path: '', redirectTo: 'step-1', pathMatch: 'full' },
       { path: 'step-1', component: StudentStepOneComponent },
       { path: 'step-2', component: StudentStepTwoComponent },
       { path: 'step-3', component: StudentStepThreeComponent },

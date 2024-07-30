@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewEncapsulation, HostListener } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Exam, Question } from '../../../core/DTO/examination-dto';
 import { QuestionService } from '../../../core/services/question.service';
+import { faShare, faUpload, faCreditCard, faUsers, faMicrophoneSlash, faMessage } from '@fortawesome/free-solid-svg-icons';
+
+type IconType = 'microphone' | 'video' | 'upload' | 'creditCard' | 'users';
 
 @Component({
   selector: 'app-examination-layout',
@@ -24,6 +27,23 @@ export class ExaminationLayoutComponent implements OnInit {
   remainingTime!: number;
   interval: any;
 
+  faMicrophoneSlash = faMicrophoneSlash;
+  faMessage = faMessage;
+  faUpload = faUpload;
+  faCreditCard = faCreditCard;
+  faUsers = faUsers;
+
+  activeIcons: { [key in IconType]: boolean } = {
+    microphone: false,
+    video: false,
+    upload: false,
+    creditCard: false,
+    users: false
+  };
+
+  isChatVisible = false;
+  showOverlay = true;
+
   constructor(private questionService: QuestionService) {}
 
   ngOnInit(): void {
@@ -44,6 +64,23 @@ export class ExaminationLayoutComponent implements OnInit {
     this.selectedQuestionId = id;
     this.loadQuestion();
   }
+  startExam() {
+    this.showOverlay = false;
+    this.openFullscreen();
+  }
+
+  openFullscreen() {
+    const elem = document.documentElement as any;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+      elem.msRequestFullscreen();
+    }
+  }
 
   prevQuestion() {
     if (this.selectedQuestionId > 1) {
@@ -60,6 +97,7 @@ export class ExaminationLayoutComponent implements OnInit {
   }
 
   submitExam() {
+
   }
 
   startTimer() {
@@ -76,5 +114,12 @@ export class ExaminationLayoutComponent implements OnInit {
     const minutes: number = Math.floor(this.remainingTime / 60);
     const seconds: number = this.remainingTime % 60;
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  }
+
+  toggleIcon(iconName: IconType) {
+    this.activeIcons[iconName] = !this.activeIcons[iconName];
+    if (iconName === 'video') {
+      this.isChatVisible = !this.isChatVisible;
+    }
   }
 }

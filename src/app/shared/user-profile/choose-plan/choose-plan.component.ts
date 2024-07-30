@@ -3,7 +3,7 @@ import { Plan } from '../../../core/models/plan-model';
 import { PlanService } from '../../../core/services/plan.service';
 import { ApiResponse } from '../../../core/utils/ApiResponse';
 import { DataSharedService } from '../../../core/services/data-shared.service';
-import { PlanDto } from '../../../core/DTO/get-exam-provider-by-user-id-view-model';
+import { PlanDto } from '../../../core/DTO/get-exam-provider-by-user-id-dto';
 
 @Component({
   selector: 'app-choose-plan',

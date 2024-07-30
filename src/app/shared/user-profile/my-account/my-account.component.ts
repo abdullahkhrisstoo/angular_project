@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { ADMIN_ROLE, EXAM_PROVIDER_ROLE, PROCTOR_ROLE } from '../../../core/constants/app.constants';
 import { ExamProviderService } from '../../../core/services/exam-provider.service';
-import { GetExamProviderByUserIdDto, PlanDto } from '../../../core/DTO/get-exam-provider-by-user-id-view-model';
+import { GetExamProviderByUserIdDto, PlanDto } from '../../../core/DTO/get-exam-provider-by-user-id-dto';
 import { ApiResponse } from '../../../core/utils/ApiResponse';
 import { DataSharedService } from '../../../core/services/data-shared.service';
 

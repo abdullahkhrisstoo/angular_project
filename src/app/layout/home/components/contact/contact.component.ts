@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { FormControllerService } from '../../../../core/services/form-controller.service';
 import { CONTACT_MSG_CONTROL, EMAIL_CONTROL, FULL_NAME_CONTROL, SUBJECT_CONTACT_CONTROL } from '../../../../core/constants/form-control.constant';
 import { ToastMsgService } from '../../../../core/services/toast.service';
-import { CreateContactMessageViewModel } from '../../../../core/DTO/create-contact-message-view-model';
+import { CreateContactMessageDTO } from '../../../../core/DTO/create-contact-message-dto';
 import { ApiResponse } from '../../../../core/utils/ApiResponse';
 import { APP_MESSAGES } from '../../../../core/constants/error-messages.constants';
 
@@ -36,9 +36,9 @@ export class ContactComponent {
   }
 
   createContact(): void {
-    let contactViweModel: CreateContactMessageViewModel = <CreateContactMessageViewModel>this.contactForm.value;
+    let contactViweModel: CreateContactMessageDTO = <CreateContactMessageDTO>this.contactForm.value;
     this.contactService.create(contactViweModel).subscribe(
-      (response: ApiResponse<CreateContactMessageViewModel>) => {
+      (response: ApiResponse<CreateContactMessageDTO>) => {
         console.log(response);
         if (response.status === 200) {
           this.toast.showSuccess(this.AppMessages.CONTACT_SUCCESS);

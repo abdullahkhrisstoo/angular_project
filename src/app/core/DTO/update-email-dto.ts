@@ -1,4 +1,4 @@
-export interface  UpdateEmailViewModel {
+export interface  UpdateEmailDTO {
   userId?: number;
   email: string;
   password?: string;

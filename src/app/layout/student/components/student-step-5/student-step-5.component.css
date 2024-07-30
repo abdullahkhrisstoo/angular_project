@@ -104,3 +104,8 @@
 .modal.show .modal-dialog-slideout {
   transform: translate3d(0, 0, 0);
 }
+
+.scrollable-dropdown{
+  max-height: 200px;
+  overflow-y: auto;
+}

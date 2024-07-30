@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AuthService } from '../../../../core/services/auth.service';
-import { CreateAccountViewModel } from '../../../../core/DTO/create-account-view-model';
+import { CreateAccountDTO } from '../../../../core/DTO/create-account-dto';
 import { ApiResponse } from '../../../../core/utils/ApiResponse';
 import { ToastMsgService } from '../../../../core/services/toast.service';
 import { APP_MESSAGES } from '../../../../core/constants/error-messages.constants';
@@ -65,7 +65,7 @@ export class SignUpComponent implements OnInit {
       this.examProviderApis.selectPlan(this.defaultPlan);
     }
 
-    const user: CreateAccountViewModel = {
+    const user: CreateAccountDTO = {
       ...this.signUpForm.value,
       roleId: EXAM_PROVIDER_ROLE
     };

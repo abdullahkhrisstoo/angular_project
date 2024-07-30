@@ -1,4 +1,4 @@
-export interface CreateContactMessageViewModel {
+export interface CreateContactMessageDTO {
   name: string;
   message: string;
   Subject: string;

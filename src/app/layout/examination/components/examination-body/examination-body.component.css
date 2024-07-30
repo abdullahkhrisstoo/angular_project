@@ -102,26 +102,6 @@
   background-color: #fff;
 }
 
-.chat-modal-body .user-message {
-  text-align: right;
-  margin: 5px 0;
-  background-color: #007bff;
-  color: white;
-  padding: 10px;
-  border-radius: 10px;
-  display: inline-block;
-}
-
-.chat-modal-body .bot-message {
-  text-align: left;
-  margin: 5px 0;
-  background-color: #f1f1f1;
-  color: black;
-  padding: 10px;
-  border-radius: 10px;
-  display: inline-block;
-}
-
 .chat-modal-footer {
   display: flex;
   padding: 10px;
@@ -144,4 +124,33 @@
   color: white;
   border-radius: 5px;
   cursor: pointer;
+}
+
+/* Chat Bubble Styles */
+.chat-bubble {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px 0;
+}
+
+.chat-bubble-me {
+  background-color: #007bff;
+  color: white;
+}
+
+.chat-bubble-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.chat-bubble-body p {
+  margin: 0;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }

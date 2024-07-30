@@ -4,7 +4,7 @@ import { map, Observable } from 'rxjs';
 import { About } from '../models/about-us-model';
 import { ApiResponse } from '../utils/ApiResponse';
 import { API_ENDPOINTS } from '../constants/api.constants';
-import { CreateAboutDTO } from '../DTO/create-about-us-view-model';
+import { CreateAboutDTO } from '../DTO/create-about-us-dto';
 import {ComplementDTO} from "../DTO/complement-dto";
 import {CreateComplementDTO} from "../DTO/create-complement-dto";
 import {UpdateComplementDTO} from "../DTO/update-complement-dto";

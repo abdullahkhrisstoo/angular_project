@@ -1,11 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminSideBarComponent } from './admin/admin-side-bar/admin-side-bar.component';
-import { ProctorSideBarComponent } from './proctor/proctor-side-bar/proctor-side-bar.component';
-import { ExamProviderSideBarComponent } from './exam-provider/exam-provider-side-bar/exam-provider-side-bar.component';
-import { DashNavBarComponent } from './dash/dash-nav-bar/dash-nav-bar.component';
-import { DashbardAssetsComponent } from './dash/dashbard-assets/dashbard-assets.component';
-import { HomeAssetsComponent } from './dash/home-assets/home-assets.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { InputComponent } from './components/input/input.component';
@@ -23,15 +18,12 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ChoosePlanComponent } from './user-profile/choose-plan/choose-plan.component';
 import { NgxDatesPickerModule } from 'ngx-dates-picker';
 import { TimePickerComponent } from './components/time-picker/time-picker.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ChatSectionComponent } from './components/chat-section/chat-section.component';
 
 @NgModule({
   declarations: [
-    AdminSideBarComponent,
-    ProctorSideBarComponent,
-    ExamProviderSideBarComponent,
-    DashNavBarComponent,
-    DashbardAssetsComponent,
-    HomeAssetsComponent,
+
     InputComponent,
     MyAccountComponent,
     UserProfileComponent,
@@ -41,6 +33,7 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
     UpdatePasswordComponent,
     ChoosePlanComponent,
     TimePickerComponent,
+    ChatSectionComponent,
 
   ],
   imports: [
@@ -51,13 +44,10 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
     FormsModule,
     UserProfileRoutingModule,
     NgxDatatableModule,
+    FontAwesomeModule
   ],
   exports: [
     TimePickerComponent,
-    AdminSideBarComponent,
-    ProctorSideBarComponent,
-    ExamProviderSideBarComponent,
-    DashNavBarComponent,
     ReactiveFormsModule,
     InputComponent,
     HttpClientModule,
@@ -70,7 +60,10 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
     MyAccountComponent,
     UserProfileRoutingModule,
     NgxDatatableModule,
-    CommonModule
+    CommonModule,
+    FontAwesomeModule,
+        ChatSectionComponent,
+
 
 
   ],

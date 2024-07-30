@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { TimeSlotsService } from '../../../../core/services/time-slots.service';
 import { ApiResponse } from '../../../../core/utils/ApiResponse';
-import { AvailableTimeDTO } from '../../../../core/DTO/AvailableTimeDTO';
+import { AvailableTimeDTO } from '../../../../core/DTO/available-time-dto';
 import { parseISO, format, isValid } from 'date-fns';
 
 declare var bootstrap: any;

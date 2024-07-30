@@ -12,7 +12,7 @@ import {CreatePlanDTO} from "../DTO/create-plan-dto";
 import {UpdatePlanDTO} from "../DTO/update-plan-dto";
 import {ProctorDTO} from "../DTO/proctor-dto";
 import {ProctorModel} from "../models/proctor-model";
-import {CreateAccountViewModel} from "../DTO/create-account-view-model";
+import {CreateAccountDTO} from "../DTO/create-account-dto";
 import {UpdateAccountDTO} from "../DTO/update-account-dto";
 
 @Injectable({

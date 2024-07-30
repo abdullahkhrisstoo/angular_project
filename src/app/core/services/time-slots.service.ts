@@ -3,7 +3,7 @@ import { GenericApiHandlerService } from './api.service';
 import { ApiResponse } from '../utils/ApiResponse';
 import { Observable } from 'rxjs';
 import { API_ENDPOINTS } from '../constants/api.constants';
-import { AvailableTimeDTO } from '../DTO/AvailableTimeDTO';
+import { AvailableTimeDTO } from '../DTO/available-time-dto';
 
 @Injectable({
   providedIn: 'root'

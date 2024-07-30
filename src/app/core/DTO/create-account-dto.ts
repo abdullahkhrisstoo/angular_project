@@ -1,4 +1,4 @@
-export interface CreateAccountViewModel {
+export interface CreateAccountDTO {
   firstName: string;
   lastName: string;
   email: string;

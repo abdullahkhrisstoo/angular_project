@@ -8,7 +8,7 @@ import {CreateComplementDTO} from "../DTO/create-complement-dto";
 import {UpdateComplementDTO} from "../DTO/update-complement-dto";
 import {ExamProviderDTO} from "../DTO/exam-provider-dto";
 import {CreateExamProviderDTO} from "../DTO/create-exam-provider-dto";
-import {GetExamProviderByUserIdDto} from "../DTO/get-exam-provider-by-user-id-view-model";
+import {GetExamProviderByUserIdDto} from "../DTO/get-exam-provider-by-user-id-dto";
 import {PlanService} from "./plan.service";
 import {Plan} from "../models/plan-model";
 

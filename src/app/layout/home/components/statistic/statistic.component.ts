@@ -38,10 +38,10 @@ export class StatisticComponent implements OnInit {
   setCounterAttributes(): void {
     const counters = this.el.nativeElement.querySelectorAll('.purecounter');
     if (counters.length > 0) {
-      this.renderer.setAttribute(counters[0], 'data-purecounter-end', this.statistics.allStudentCount.toString());
-      this.renderer.setAttribute(counters[1], 'data-purecounter-end', this.statistics.allProctorCount.toString());
-      this.renderer.setAttribute(counters[2], 'data-purecounter-end', this.statistics.allExamProviderCount.toString());
-      this.renderer.setAttribute(counters[3], 'data-purecounter-end', this.statistics.allExamProviderCount.toString());
+      this.renderer.setAttribute(counters[0], 'data-purecounter-end', this.statistics?.allStudentCount?.toString()??"0");
+      this.renderer.setAttribute(counters[1], 'data-purecounter-end', this.statistics?.allProctorCount?.toString()??"0");
+      this.renderer.setAttribute(counters[2], 'data-purecounter-end', this.statistics?.allExamProviderCount?.toString()??"0");
+      this.renderer.setAttribute(counters[3], 'data-purecounter-end', this.statistics?.allExamProviderCount?.toString()??"0");
     }
   }
 

@@ -7,7 +7,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { ToastMsgService } from '../../../core/services/toast.service';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { PASSWORD_CONTROL, PHONE_CONTROL } from '../../../core/constants/form-control.constant';
-import { UpdatePhoneViewModel } from '../../../core/DTO/Update-Phone-View-Model';
+import { UpdatePhoneDTO } from '../../../core/DTO/Update-Phone-dto';
 import { ApiResponse } from '../../../core/utils/ApiResponse';
 
 @Component({
@@ -44,7 +44,7 @@ export class UpdatePhoneComponent implements OnInit{
     if (this.updatePhoneForm.invalid) {
       return;
     }
-    let user: UpdatePhoneViewModel = <UpdatePhoneViewModel>this.updatePhoneForm.value;
+    let user: UpdatePhoneDTO = <UpdatePhoneDTO>this.updatePhoneForm.value;
     user.userId = this.userData?.userId;
     console.log(user);
     this.authService.updatePhone(user).subscribe(

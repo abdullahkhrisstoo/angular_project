@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminNavBarComponent } from './admin-nav-bar.component';
+import { ChatSectionComponent } from './chat-section.component';
 
-describe('AdminNavBarComponent', () => {
-  let component: AdminNavBarComponent;
-  let fixture: ComponentFixture<AdminNavBarComponent>;
+describe('ChatSectionComponent', () => {
+  let component: ChatSectionComponent;
+  let fixture: ComponentFixture<ChatSectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AdminNavBarComponent]
+      declarations: [ChatSectionComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(AdminNavBarComponent);
+
+    fixture = TestBed.createComponent(ChatSectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,4 +1,4 @@
-export interface UpdateNameViewModel {
+export interface UpdateNameDTO {
     userId?: number;
     firstName?: string;
     lastName?: string;

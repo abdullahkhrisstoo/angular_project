@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ProctorService } from '../../../../core/services/proctor.service';
 import { ToastMsgService } from '../../../../core/services/toast.service';
 import { AuthService } from '../../../../core/services/auth.service';
-import { CreateAccountViewModel } from '../../../../core/DTO/create-account-view-model';
+import { CreateAccountDTO } from '../../../../core/DTO/create-account-dto';
 import { APP_MESSAGES } from '../../../../core/constants/error-messages.constants';
 import { EMAIL_CONTROL, FIRST_NAME_CONTROL, LAST_NAME_CONTROL, PASSWORD_CONTROL, PHONE_CONTROL } from '../../../../core/constants/form-control.constant';
 import { PROCTOR_ROLE } from '../../../../core/constants/app.constants';
@@ -25,7 +25,7 @@ export class ProctorManageComponent implements OnInit {
   updateProctorForm: FormGroup;
   deleteProctorId: number | null = null;
   updateProctorId: number | null = null;
-  updateProctorData: CreateAccountViewModel | null = null;
+  updateProctorData: CreateAccountDTO | null = null;
 
   rows: any[] = [];
   temp: any[] = [];
@@ -126,7 +126,7 @@ export class ProctorManageComponent implements OnInit {
     this.deleteProctorId = id;
   }
 
-  setUpdateProctorData(data: CreateAccountViewModel, id: number): void {
+  setUpdateProctorData(data: CreateAccountDTO, id: number): void {
     this.updateProctorData = data;
     this.updateProctorId = id;
     this.populateFormWithData();
@@ -167,7 +167,7 @@ export class ProctorManageComponent implements OnInit {
       return;
     }
 
-    const user: CreateAccountViewModel = { ...this.proctorForm.value, roleId: PROCTOR_ROLE };
+    const user: CreateAccountDTO = { ...this.proctorForm.value, roleId: PROCTOR_ROLE };
 
     this.proctorAuth.register(user).subscribe(
       (response: ApiResponse<CurrentUserData>) => {

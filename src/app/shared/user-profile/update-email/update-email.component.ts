@@ -8,7 +8,7 @@ import { FormGroup } from '@angular/forms';
 import { ApiResponse } from '../../../core/utils/ApiResponse';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { CurrentUserData } from '../../../core/models/current-user-data';
-import { UpdateEmailViewModel } from '../../../core/DTO/update-email-view-model';
+import { UpdateEmailDTO } from '../../../core/DTO/update-email-dto';
 
 @Component({
   selector: 'app-update-email',
@@ -44,7 +44,7 @@ export class UpdateEmailComponent implements OnInit{
     if (this.updateEmailForm.invalid) {
       return;
     }
-    let user: UpdateEmailViewModel = <UpdateEmailViewModel>this.updateEmailForm.value;
+    let user: UpdateEmailDTO = <UpdateEmailDTO>this.updateEmailForm.value;
     user.userId = this.userData?.userId;
     console.log(user);
     this.authService.updateEmail(user).subscribe(
