@@ -9,4 +9,5 @@ export interface ExamProviderDTO {
   commercialRecordImg?: string;
   image?: string;
   state?: string;
+  examProviderEmail:string;
 }

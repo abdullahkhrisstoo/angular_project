@@ -1,0 +1,58 @@
+<div class="container mt-4 p-4 card ">
+  <!-- Step 1: Confirm Preferred Time Zone -->
+  <div class="step mb-3">
+    <h2>1. Confirm your preferred time zone</h2>
+    <p>Is this your preferred time zone?</p>
+    <p>{{ currentTimezone }}</p>
+    <button class="btn btn-primary" (click)="changeTimezone()">No, change time zone</button>
+    <button class="btn btn-success" *ngIf="!showTimezoneDropdown">Yes, that's right!</button>
+    <div *ngIf="showTimezoneDropdown">
+      <select class="form-select" [(ngModel)]="currentTimezone" (change)="selectTimezone($event)">
+        <option *ngFor="let timezone of timezones" [value]="timezone">{{ timezone }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Step 2: Select Your Date -->
+  <div class="step mb-3">
+    <h2>2. Select your date</h2>
+    <input type="date" class="form-control" [(ngModel)]="selectedDate" (change)="onDateChange($event)" />
+  </div>
+
+  <!-- Step 3: Select Your Appointment Start Time -->
+  <div class="step mb-3">
+    <h2>3. Select your appointment start time</h2>
+    <div class="appointment-time bg-light p-3 border rounded">
+      <div class="d-flex align-items-center">
+        <img src="https://via.placeholder.com/50" alt="Recommended time icon" class="me-3 rounded-circle">
+        <div>
+          <p class="mb-0">{{ selectedDate | date: 'fullDate' }}</p>
+          <p class="mb-0 text-primary fw-bold">{{ recommendedTime }}</p>
+          <p class="text-muted mb-0">{{ checkInTimeString }}</p>
+        </div>
+      </div>
+      <div class="mt-3 d-flex justify-content-between">
+        <button class="btn btn-warning" (click)="toggleTimeDropdown()">Explore more times</button>
+        <div class="dropdown" *ngIf="showAvailableTimesDropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            Available Times
+          </button>
+          <ul class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownMenuButton">
+            <li *ngFor="let slot of timeSlots">
+              <button (click)="changeTime(slot)" class="dropdown-item">
+                {{ slot.startTime?.substring(11, 16) }} - {{ slot.endTime?.substring(11, 16) }}
+              </button>
+            </li>
+          </ul>
+        </div>
+        <button class="btn btn-primary" (click)="onNext()">Book this appointment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="d-flex justify-content-between mt-4">
+    <button class="btn btn-secondary">Previous</button>
+    <button class="btn btn-primary" (click)="onNext()" >Next</button>
+  </div>
+</div>

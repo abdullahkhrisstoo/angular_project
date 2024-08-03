@@ -22,6 +22,7 @@ import {UpdateAccountDTO} from "../../../../core/DTO/update-account-dto";
 export class ProctorManageComponent implements OnInit {
   AppMessages = APP_MESSAGES;
   proctorForm: FormGroup;
+
   deleteProctorId: number | null = null;
   updateProctorId: number | null = null;
   updateProctorData: CreateAccountViewModel | null = null;

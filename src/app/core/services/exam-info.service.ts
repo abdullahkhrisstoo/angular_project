@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GenericApiHandlerService } from './api.service';
-import { map, Observable } from 'rxjs';
+import { map, Observable, throwError } from 'rxjs';
 import { ApiResponse } from '../utils/ApiResponse';
 import { API_ENDPOINTS } from '../constants/api.constants';
 import { CreateAboutDTO } from '../DTO/create-about-us-view-model';
@@ -10,6 +10,7 @@ import {UpdateComplementDTO} from "../DTO/update-complement-dto";
 import {ExamInfoDTO} from "../DTO/exam-info-dto.model";
 import {CreateExamInfoDTO} from "../DTO/create-exam-info-dto";
 import {UpdateExamInfoDTO} from "../DTO/update-exam-info-dto";
+import { ExamInfoStructureDTO } from '../DTO/exam-info-structure-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,24 @@ export class ExamInfoService {
       .pipe(
         map(response => response.data)
       );
+  }
+
+  getExamByName(name:string): Observable<ApiResponse<ExamInfoStructureDTO>> {
+
+    const token = localStorage.getItem('auth-token');
+    if (!token) {
+      // If the token is missing, throw an error
+      return throwError(() => new Error('Authorization token is missing.'));
+    }
+    return this.apis.get<ApiResponse<ExamInfoStructureDTO>>(API_ENDPOINTS.GET_EXAM_BY_NAME,{
+      'examName':name
+    }
+    ,
+    // {
+    //       'Authorization': `Bearer ${token}`
+    // }
+  
+  
+  );
   }
 }

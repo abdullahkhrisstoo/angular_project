@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../core/services/auth.service';
 import { CreateAccountViewModel } from '../../../../core/DTO/create-account-view-model';
 import { ApiResponse } from '../../../../core/utils/ApiResponse';
@@ -14,6 +14,8 @@ import { Plan } from '../../../../core/models/plan-model';
 import { Router } from '@angular/router';
 import { DataSharedService } from '../../../../core/services/data-shared.service';
 import {CreateExamProviderDTO} from "../../../../core/DTO/create-exam-provider-dto";
+import { RegisterExamProviderDTO } from '../../../../core/DTO/register-exam-provider-dto';
+import { error } from 'console';
 
 @Component({
   selector: 'app-sign-up',
@@ -25,11 +27,13 @@ export class SignUpComponent implements OnInit {
   AppMessages = APP_MESSAGES;
   plans: Plan[] = [];
   defaultPlan: Plan | undefined;
+  selectedFile: File | null = null;
   createExamProviderViewModel: CreateExamProviderDTO = {
     userId: 0,
     planId: 0,
     examProviderUniqueKey: ''
   };
+  registerExamProviderForm: FormGroup;
 
   constructor(
     private formController: FormControllerService,
@@ -37,7 +41,8 @@ export class SignUpComponent implements OnInit {
     private toast: ToastMsgService,
     private examProviderApis: ExamProviderService,
     private sharedPlanService: DataSharedService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) {
     this.signUpForm = this.formController.createFormGroup({
       firstName: FIRST_NAME_CONTROL,
@@ -47,6 +52,14 @@ export class SignUpComponent implements OnInit {
       password: PASSWORD_CONTROL,
       plan: PLAN_CONTROL,
     });
+
+    this.registerExamProviderForm = this.fb.group({
+      cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
+      cardHolderName: ['', Validators.required],
+      cardCvv: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
+      cardExpireDate: ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}$/)]]
+    });
+
   }
 
   ngOnInit(): void {
@@ -83,6 +96,31 @@ export class SignUpComponent implements OnInit {
     );
   }
 
+ onFileChange(event: any): void {
+    const file = event.target.files[0];
+    if (file && file.type === 'application/pdf') {
+      this.selectedFile = file;
+    } else {
+      alert('Please select a valid PDF file.');
+    }
+  }
+
+  get cardNumber() {
+    return this.registerExamProviderForm.get('cardNumber')!;
+  }
+  
+  get cardHolderName() {
+    return this.registerExamProviderForm.get('cardHolderName')!;
+  }
+  
+  get cardCvv() {
+    return this.registerExamProviderForm.get('cardCvv')!;
+  }
+  
+  get cardExpireDate() {
+    return this.registerExamProviderForm.get('cardExpireDate')!;
+  }
+  
   createExamProvider(userId: number, encToken: string): void {
     this.createExamProviderViewModel.userId = userId;
     this.createExamProviderViewModel.planId = this.signUpForm.get('plan')?.value;
@@ -132,4 +170,44 @@ export class SignUpComponent implements OnInit {
       }
     );
   }
+
+
+  onSubmit(): void {
+    if (this.signUpForm.invalid || this.registerExamProviderForm.invalid) {
+      return;
+    }
+
+    const accountDetails = this.signUpForm.value;
+    const cardDetails = this.registerExamProviderForm.value;
+    const planId = this.signUpForm.get('plan')?.value;
+    const formData = new FormData();
+
+    formData.append('CreateAccountViewModel.FirstName', accountDetails.firstName);
+    formData.append('CreateAccountViewModel.LastName', accountDetails.lastName);
+    formData.append('CreateAccountViewModel.Email', accountDetails.email);
+    formData.append('CreateAccountViewModel.Phonenum', accountDetails.phonenum);
+    formData.append('CreateAccountViewModel.Password', accountDetails.password);
+    formData.append('CreateAccountViewModel.RoleId', '2');
+    formData.append('PlanId', planId);
+    formData.append('CardInfoDTO.CardNumber', cardDetails.cardNumber);
+    formData.append('CardInfoDTO.CardHolderName', cardDetails.cardHolderName);
+    formData.append('CardInfoDTO.CardCvv', cardDetails.cardCvv);
+    formData.append('CardInfoDTO.CardExpireDate', cardDetails.cardExpireDate);
+    if (this.selectedFile) {
+      formData.append('CommercialRecord', this.selectedFile, this.selectedFile.name);
+    }
+
+    this.authService.registerExamProvider(formData).subscribe(
+      response => {
+        // Handle success
+        console.log('Registration successful', response);
+      },
+      error => {
+        // Handle error
+        console.error('Registration error', error);
+      }
+    );
+  }
+
+
 }

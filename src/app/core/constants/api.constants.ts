@@ -1,5 +1,5 @@
 export const API_ENDPOINTS = {
-  baseUrl : 'https://localhost:5001/api/',
+  baseUrl : 'https://localhost:1111/api/',
 
 
 
@@ -145,5 +145,28 @@ export const API_ENDPOINTS = {
 
   GET_PROCTOR_BY_EXAM_RESERVATION_ID : 'Proctor/GetProctorByExamReservationId',
 
+  GET_ALL_EXAM_PROVIDER_LINKS : 'ExamProviderLink/GetAllExamProviderLinks',
+  GET_EXAM_PROVIDER_LINK_BY_COMPANY : 'ExamProviderLink/GetExamProviderLinkByCompany',
+  UPDATE_EXAM_PROVIDER_LINK : 'ExamProviderLink/UpdateExamProviderLink',
 
+  GET_ALL_EXAM_PROVIDER_ACTIONS : 'ExamProviderAction/GetAllExamProviderActions',
+
+  GET_TIME_SLOTS : 'ExamReservation/GetAvailableTimesByDate',
+  GET_STUDENT_INFO_BY_ID : 'Student/GetStudentInfoById',
+  GET_STUDENT_INFO_BY_EMAIL : 'Student/GetStudentInfoByEmail',
+  GET_EXAM_BY_NAME : 'ExamInfo/GetExamByName',
+
+
+  GET_IDENTIFICATION_IMAGE_BY:'Identification/GetIdentificationImageBy',
+  CREATE_IDENTIFICATION_IMAGE:'IdentificationImage/CreateIdentificationImage',
+  UPDATE_IDENTIFICATION_IMAGE:'IdentificationImage/UpdateIdentificationImage',
+  GET_ROOM_RESERVATION_IMAGES_BY:'RoomReservationImage/GetRoomReservationImagesBy',
+  CREATE_ROOM_RESERVATION_IMAGE:'RoomReservationImage/CreateRoomReservationImage',
+  UPDATE_ROOM_RESERVATION_IMAGE:'RoomReservationImage/UpdateRoomReservationImage',
+
+  CREATE_PROCESS_EXAM_RESERVATION:'ExamReservation/CreateProcessExamReservation',
+  REGISTER_EXAM_PROVIDER:'Auth/RegisterExamProvider',
+  UPDATE_EXAM_PROVIDER_STATE:'ExamProvider/UpdateExamProviderState',
+  GET_ALL_PLAN_INVOICES_DETAILS:'PlanInvoice/GetAllPlanInvoicesDetails',
+  GET_ALL_RESRVATION_INVOICES_DETAILS:'ReservationInvoice/GetAllReservationInvoicesDetails',
 };

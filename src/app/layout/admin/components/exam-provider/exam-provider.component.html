@@ -66,6 +66,11 @@
             {{ value }}
           </ng-template>
         </ngx-datatable-column>
+        <ngx-datatable-column name="Email" prop="examProviderEmail" [sortable]="true">
+          <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
         <ngx-datatable-column name="State" prop="state" [sortable]="true">
           <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
             {{ value }}
@@ -101,8 +106,25 @@
 
         <ngx-datatable-column name="Actions" [width]="130" [sortable]="false">
           <ng-template ngx-datatable-cell-template let-row="row">
-            <button class="btn btn-primary btn-sm" style="margin-right: 2px" (click)="updateRow(row)">Update</button>
-            <button class="btn btn-danger btn-sm" (click)="deleteRow(row)">Delete</button>
+            <ng-container *ngIf="row.state === 'PENDING'">
+              <button class="btn btn-success btn-sm" style="margin-right: 2px" (click)="updateState(row,2)">Accept</button>
+              <button class="btn btn-danger btn-sm" (click)="updateState(row,3)">Reject</button>
+            </ng-container>
+            <ng-container *ngIf="row.state === 'APPROVED'">
+              <button class="btn btn-warning btn-sm" (click)="updateState(row,5)">
+                {{  'Deactivate' }}
+              </button>
+            </ng-container>
+            <ng-container *ngIf="row.state === 'ACTIVATE'">
+              <button class="btn btn-warning btn-sm" (click)="updateState(row,5)">
+                {{ 'Deactivate' }}
+              </button>
+            </ng-container>
+            <ng-container *ngIf="row.state === 'DEACTIVATE'">
+              <button class="btn btn-success btn-sm" (click)="updateState(row,4)">
+                {{ 'Activate' }}
+              </button>
+            </ng-container>
           </ng-template>
         </ngx-datatable-column>
 

@@ -11,6 +11,7 @@ import {CreateExamProviderDTO} from "../DTO/create-exam-provider-dto";
 import {GetExamProviderByUserIdDto} from "../DTO/get-exam-provider-by-user-id-view-model";
 import {PlanService} from "./plan.service";
 import {Plan} from "../models/plan-model";
+import { UpdateExamProviderStateDTO } from '../DTO/update-exam-provider-state-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -38,9 +39,9 @@ export class ExamProviderService {
     const endpoint = `${API_ENDPOINTS.GET_EXAM_PROVIDER_BY_USER_ID}/${userID}`;
     return this.apis.get<ApiResponse<GetExamProviderByUserIdDto>>(endpoint);
   }
-  updateStateExamProvider(viewModel: UpdateComplementDTO): Observable<any> {
-    const endpoint = `${API_ENDPOINTS.UPDATE_COMPLEMENT}`;
-    return this.apis.put<ApiResponse<any>>(endpoint,viewModel)
+  updateExamProviderState(updateExamProviderStateDTO: UpdateExamProviderStateDTO): Observable<any> {
+    const endpoint = `${API_ENDPOINTS.UPDATE_EXAM_PROVIDER_STATE}`;
+    return this.apis.put<ApiResponse<any>>(endpoint,updateExamProviderStateDTO)
       .pipe(
         map(response => response.data)
       );

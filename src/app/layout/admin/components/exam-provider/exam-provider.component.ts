@@ -17,6 +17,11 @@ import {ComplementDTO} from "../../../../core/DTO/complement-dto";
 import {ProctorDTO} from "../../../../core/DTO/proctor-dto";
 import {CommonUtils} from "../../../../core/utils/CommonUtils";
 
+
+// pending -> two buttons (accecpt and rejected)
+// accecpt -> one button (decative or active)
+// reject-> no button
+
 interface FakeData {
   id: number;
   name: string;
@@ -39,6 +44,7 @@ export class ExamProviderComponent {
   selectedPlanName:string=''
   columns = [
     { name: 'Name', prop: 'examProviderName' },
+    { name: 'Email', prop: 'examProviderEmail' },
     // { name: 'Unique Key', prop: 'examProviderUniqueKey' },
     // { name: 'Plan ID', prop: 'planId' },
     { name: 'State', prop: 'state' },
@@ -273,6 +279,40 @@ export class ExamProviderComponent {
     console.log('Exams:', row);
   }
 
+
+  updateState(row:ExamProviderDTO, stateId:number){
+
+    this.examProviderService.updateExamProviderState({
+      examProviderId:row.examProviderId!,
+    stateId:stateId
+    }).subscribe(
+      response => {
+        this.getAllExamProviders();
+        console.log('Testimonial state updated successfully:', response);
+      },
+      error => {
+        console.error('Error updating testimonial state:', error);
+      }
+    );
+
+  }
+
+
+  acceptRow(row: any) {
+    // Logic to accept the row
+    console.log('Accepted:', row);
+  }
+
+  rejectRow(row: any) {
+    // Logic to reject the row
+    console.log('Rejected:', row);
+  }
+ isActive:boolean=false;
+  toggleActive(row: any) {
+    // Logic to toggle active state
+    this.isActive= !this.isActive;
+    console.log('Toggled active state:', row);
+  }
 
   protected readonly SortType = SortType;
 }

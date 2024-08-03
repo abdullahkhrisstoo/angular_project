@@ -11,6 +11,7 @@ import {TestimonialsComponent} from "../home/components/testimonials/testimonial
 import {ExamComponent} from "./components/exam/exam.component";
 import {TestimonialComponent} from "./components/testimonial/testimonial.component";
 import {ChoosePlanComponent} from "../../shared/user-profile/choose-plan/choose-plan.component";
+import { ApiDetailsComponent } from './components/api-details/api-details.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'profile', redirectTo: 'profile/my-account', pathMatch: 'full' },
       { path: 'exams', component: ExamComponent },
+      { path: 'api-details', component: ApiDetailsComponent },
       { path: 'testimonial', component: TestimonialComponent },
       { path: 'profile', component: UserProfileComponent, children: [
         { path: 'update-email', component: UpdateEmailComponent },

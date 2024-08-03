@@ -49,7 +49,7 @@
 
             ],
             "scripts": [
-
+              "node_modules/dropzone/dist/dropzone.js"
             ]
 
 

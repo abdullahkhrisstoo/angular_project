@@ -1,0 +1,18 @@
+<div class="container mt-5 p-5 card">
+  <h2 class="mb-4">What is your preferred language for the exam?</h2>
+  <form>
+    <div class="form-check" *ngFor="let language of languages">
+      <input class="form-check-input" type="radio" name="language" [value]="language" [(ngModel)]="preferredLanguage">
+      <label class="form-check-label">
+        {{ language }}
+      </label>
+    </div>
+    <div *ngIf="isSubmitted && !preferredLanguage" class="text-danger mt-2">
+      <strong>✘ Please select a language.</strong>
+    </div>
+  </form>
+  <div class="d-flex justify-content-between mt-4">
+    <button class="btn btn-secondary" (click)="onPrevious()">Previous</button>
+    <button class="btn btn-primary" (click)="onNext()">Next</button>
+  </div>
+</div>
