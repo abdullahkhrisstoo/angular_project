@@ -1,13 +1,12 @@
-<div *ngIf="showOverlay" class="overlay" (click)="startExam()">
+<!-- <div *ngIf="showOverlay" class="overlay" (click)="startExam()">
   <div class="overlay-content">
     Start the exam
   </div>
-</div>
-<!-- todo: -->
+</div> -->
 <div class="page">
   <!-- Sidebar -->
   <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
-    <div class="container-fluid">
+    <div class="container-fluid h-100 overflow-hidden">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu"
         aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -69,22 +68,23 @@
           <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"></div>
         </div>
       </div>
-      <div class="collapse navbar-collapse" id="sidebar-menu">
-        <ul class="navbar-nav pt-lg-3">
-          <li *ngFor="let question of questions" (click)="onSelectQuestion(question.id)"
-            [class.active]="selectedQuestionId === question.id" class="nav-item" style="cursor: pointer;">
+      <div class="collapse navbar-collapse h-100 overflow-hidden" id="sidebar-menu">
+        <ul class="navbar-nav pt-lg-3 h-100 overflow-hidden">
+          <li *ngFor="let question of questions; index as i" (click)="onSelectQuestion(question.questionId ?? 0)"
+              [ngClass]="{'active': selectedQuestionId === question.questionId}"
+              class="nav-item cursor-pointer">
             <a class="nav-link">
-              <span class="nav-link-icon d-md-none d-lg-inline-block">
+              <span class="nav-link-icon d-md-none d-lg-inline-block "[ngClass]="{'text-warning fw-bold': isQuestionUnanswered(question)}">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                  stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
                   <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
                   <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
                 </svg>
               </span>
-              <span class="nav-link-title">
-                {{ question.title }}
+              <span class="nav-link-title text-white" [ngClass]="{'text-warning fw-bold': isQuestionUnanswered(question)}">
+                Question {{ i+1 }}
               </span>
             </a>
           </li>
@@ -98,18 +98,20 @@
   <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none">
     <div class="container-xl d-flex justify-content-between align-items-center">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
-        aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+              aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="text-center mx-auto">
-        <a class="navbar-brand fs-3 fw-bold">{{ exam.exam_name }}</a>
+        <a class="navbar-brand fs-3 fw-bold">{{ exam?.examName }}</a>
         <div class="navbar-collapse collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <span class="nav-link fs-5">{{ exam.student_name }}</span>
+              <span class="nav-link fs-5">{{ exam?.examDescription }}</span>
             </li>
             <li class="nav-item">
-              <span class="nav-link fs-5">Time Remaining: {{ formattedTime }}</span>
+              <span class="nav-link fs-5"
+              [class.text-danger]="isLastTwentySeconds"
+              [class.fw-bold]="isLastTwentySeconds">Time Remaining: {{ formattedTime }}</span>
             </li>
           </ul>
         </div>
@@ -118,35 +120,20 @@
   </header>
   <!-- End Header -->
 
-
   <div class="page-wrapper">
     <div class="page-body">
-      <div class="container">
-        <div class="row">
+      <div class="container h-100 overflow-hidden">
+        <div class="row h-100">
           <div [ngClass]="{'col-12 col-md-8': isChatVisible, 'col-12': !isChatVisible}">
-            <div class="mb-3">
-              <div class="col-lg-6 mx-auto">
-                <div class="d-flex justify-content-center">
-                  <div class="me-2" style="width: 250px;">
-                    <a>
-                      <div class="img-responsive  rounded-3 border" style="height: 150px;">
-                      </div>
-                    </a>
-                  </div>
-                  <div class="ms-2" style="width: 250px;">
-                    <a>
-                      <div class="img-responsive  rounded-3 border" style="height: 150px;">
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <app-examination-body *ngIf="question" [question]="question" [selectedQuestionId]="selectedQuestionId"
-              [isLastQuestion]="isLastQuestion" (prevQuestion)="prevQuestion()" (nextQuestion)="nextQuestion()"
+            <app-examination-body
+             *ngIf="question" [question]="question"
+              [selectedQuestionId]="selectedQuestionId??0"
+              [isLastQuestion]="isLastQuestion!" (prevQuestion)="prevQuestion()" (nextQuestion)="nextQuestion()"
               (submitExam)="submitExam()"></app-examination-body>
           </div>
+          <span *ngIf="hasUnansweredQuestions" class="text-danger">
+            Please complete all questions before submitting the exam.
+          </span>
           <div class="col-12 col-md-4" *ngIf="isChatVisible">
             <!-- Chat Section -->
             <app-chat-section></app-chat-section>

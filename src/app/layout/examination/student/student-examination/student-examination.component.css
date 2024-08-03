@@ -4,7 +4,9 @@ body:-ms-fullscreen,
 body:fullscreen {
   background-color: #fff;
   overflow: hidden;
+  margin: 0; height: 100%;
 }
+html, body {margin: 0 !important; height: 100% !important; overflow: hidden !important}
 
 .nav-item.active .nav-link {
   background-color: #007bff;
@@ -58,7 +60,6 @@ body {
 .page-wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 .page-body {
@@ -69,14 +70,15 @@ body {
   position: sticky;
   bottom: 0;
   width: 100%;
-  background-color: rgba(227, 56, 56, 0.8);
+  background-color: #d2d2d2;
   backdrop-filter: blur(10px);
   z-index: 10;
+  height: 70px;
 }
 
 .footer-icon {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   background-color: #e9f4ff;
   display: flex;
   align-items: center;
@@ -131,4 +133,9 @@ body {
   padding: 20px;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
+}
+
+.error {
+  background-color: #ff0000;
+  color: #ffffff;
 }

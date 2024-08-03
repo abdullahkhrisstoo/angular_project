@@ -136,7 +136,10 @@ export const API_ENDPOINTS = {
 
   GET_PROCTOR_BY_EXAM_RESERVATION_ID : 'Proctor/GetProctorByExamReservationId',
 
-
-
+  // todo: Exam
+  GET_EXAM_WITHOUT_ANSWER : 'ExamInfo/GetExamDetailsWithoutAnswersByName?examName',
+  // GET_EXAM_WITHOUT_ANSWER : 'ExamInfo/GetExamDetailsByName?examName',
+//
+  GET_CORRECTION_ANSWER : 'ExamInfo/ExamCorrection?examName',
 
 };

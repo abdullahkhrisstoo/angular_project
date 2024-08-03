@@ -11,6 +11,7 @@ import { StudentStep4Component } from './components/student-step-4/student-step-
 import { StudentStep5Component } from './components/student-step-5/student-step-5.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StudentStep6Component } from './components/student-step-6/student-step-6.component';
+import { MicrophoneTestComponent } from './components/microphone-test/microphone-test.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { StudentStep6Component } from './components/student-step-6/student-step-
     StudentStep4Component,
     StudentStep5Component,
     StudentStep6Component,
+    MicrophoneTestComponent,
   ],
   imports: [
     CommonModule,

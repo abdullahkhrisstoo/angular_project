@@ -1,0 +1,80 @@
+<div class="page">
+  <!-- Sidebar -->
+
+  <!-- End Sidebar -->
+
+  <!-- Header -->
+  <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none">
+    <div class="container-xl d-flex justify-content-between align-items-center">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
+              aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="text-center mx-auto">
+        Exam Guardian
+      </div>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <div class="page-wrapper">
+    <div class="page-body">
+      <div class="container h-100 overflow-hidden">
+        <div class="row h-100">
+          <div class="col-12 col-md-8">
+            <div class="screen-share-container" [ngClass]="{'open': activeIcons.screenShare}">
+              <!-- Screen Share Content -->
+              <h3>Screen Sharing</h3>
+            </div>
+            <div class="remote-camera-container" [ngClass]="{'open': activeIcons.remoteCamera}">
+              <!-- Remote Camera Content -->
+              <h3>Remote Camera</h3>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <app-chat-section></app-chat-section>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer class="modal-footer footer">
+      <div class="container-xl">
+        <div class="row text-center justify-content-center align-items-center">
+          <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+            <ul class="list-inline list-inline-dots mb-0">
+              <li class="d-inline-block footer-icon" [ngClass]="{'active': activeIcons.microphone}"
+                (click)="toggleIcon('microphone')">
+                <fa-icon [icon]="faMicrophoneSlash"></fa-icon>
+              </li>
+              <li class="d-inline-block footer-icon" [ngClass]="{'active': activeIcons.video}"
+                (click)="toggleIcon('video')">
+                <fa-icon [icon]="faMessage"></fa-icon>
+              </li>
+              <li class="d-inline-block footer-icon" [ngClass]="{'active': activeIcons.upload}"
+                (click)="toggleIcon('upload')">
+                <fa-icon [icon]="faUpload"></fa-icon>
+              </li>
+              <li class="d-inline-block footer-icon" [ngClass]="{'active': activeIcons.creditCard}"
+                (click)="toggleIcon('creditCard')">
+                <fa-icon [icon]="faCreditCard"></fa-icon>
+              </li>
+              <li class="d-inline-block footer-icon" [ngClass]="{'active': activeIcons.users}"
+                (click)="toggleIcon('users')">
+                <fa-icon [icon]="faUsers"></fa-icon>
+              </li>
+              <li class="d-inline-block footer-icon" [ngClass]="{'active': activeIcons.screenShare}"
+                (click)="toggleIcon('screenShare')">
+                <fa-icon icon="fa-solid fa-desktop"></fa-icon>
+              </li>
+              <li class="d-inline-block footer-icon" [ngClass]="{'active': activeIcons.remoteCamera}"
+                (click)="toggleIcon('remoteCamera')">
+                <fa-icon icon="fa-solid fa-video"></fa-icon>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>

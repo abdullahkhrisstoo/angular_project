@@ -1,0 +1,17 @@
+<div class="microphone-test-container">
+  <h2>Microphone Test</h2>
+  <button (click)="startTest()">Start Test</button>
+  <button (click)="stopTest()">Stop Test</button>
+  <p *ngIf="errorMessage">{{ errorMessage }}</p>
+  <div *ngIf="isTesting">
+    <p>Speak into your microphone...</p>
+    <div class="volume-indicator" [ngClass]="volumeLevel">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <p *ngIf="noSoundDetected" style="color: red;">NO Sound Detected</p>
+  </div>
+</div>
