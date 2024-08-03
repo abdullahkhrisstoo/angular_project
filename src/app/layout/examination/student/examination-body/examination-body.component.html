@@ -1,0 +1,29 @@
+<div *ngIf="question" class="col-12">
+  <div class="row row-cards row-deck">
+    <div class="col">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h3 class="card-title m-0">{{ question.questionDescription }}</h3>
+          <div>
+            <button class="btn btn-primary me-2" (click)="onPrevQuestion()" [disabled]="selectedQuestionId === 1">Previous</button>
+            <button class="btn btn-primary me-2" *ngIf="!isLastQuestion" (click)="onNextQuestion()">Next</button>
+            <button class="btn btn-success" *ngIf="isLastQuestion" (click)="onSubmitExam()">Submit</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li *ngFor="let answer of question.options">
+              <label>
+                <input type="radio" name="answer" [value]="answer.optionId" [(ngModel)]="question.selectedAnswer">
+                {{ answer.title }}
+              </label>
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          {{ question.questionDescription }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

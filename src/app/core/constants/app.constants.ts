@@ -6,4 +6,6 @@ export const SHOW_SPINNER="X-Show-Spinner";
 export const ADMIN_ROLE=1;
 export const EXAM_PROVIDER_ROLE=2;
 export const PROCTOR_ROLE=3;
+export const THIRTY_SECONDS=30;
+
 

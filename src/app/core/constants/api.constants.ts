@@ -169,4 +169,8 @@ export const API_ENDPOINTS = {
   UPDATE_EXAM_PROVIDER_STATE:'ExamProvider/UpdateExamProviderState',
   GET_ALL_PLAN_INVOICES_DETAILS:'PlanInvoice/GetAllPlanInvoicesDetails',
   GET_ALL_RESRVATION_INVOICES_DETAILS:'ReservationInvoice/GetAllReservationInvoicesDetails',
+
+    GET_EXAM_WITHOUT_ANSWER : 'ExamInfo/GetExamDetailsWithoutAnswersByName?examName',
+   
+    GET_CORRECTION_ANSWER : 'ExamInfo/ExamCorrection?examName',
 };
