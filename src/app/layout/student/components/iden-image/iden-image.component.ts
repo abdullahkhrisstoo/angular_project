@@ -82,7 +82,7 @@ export class IdenImageComponent {
     }
 
     const createIdentificationImageDTO: CreateIdentificationImageDTO = {
-      examReservationId: this.identificationImageForm.get('examReservationId')?.value,
+      examReservationId: 69,
       imageBack: this.selectedBackImage!,
       imageFront: this.selectedFrontImage!
     };

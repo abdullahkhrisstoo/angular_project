@@ -7,12 +7,14 @@ import { ExamComponent } from './components/exam/exam.component';
 import { TestimonialComponent } from './components/testimonial/testimonial.component';
 import { ApiDetailsComponent } from './components/api-details/api-details.component';
 
+
 @NgModule({
   declarations: [
 
     ExamComponent,
     TestimonialComponent,
     ApiDetailsComponent,
+
     // Add more exam provider components here
   ],
   imports: [

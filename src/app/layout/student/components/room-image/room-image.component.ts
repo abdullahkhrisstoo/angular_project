@@ -44,13 +44,13 @@ export class RoomImageComponent {
         const dropzone = Dropzone.forElement(this.dropzoneElement.nativeElement);
   
         dropzone.on('addedfile', (file) => {
-          if (file.name.toLowerCase().includes('front')) {
+          if (this.images['front']==undefined) {
             this.images['front'] = file;
-          } else if (file.name.toLowerCase().includes('back')) {
+          } else if (this.images['back']==undefined) {
             this.images['back'] = file;
-          } else if (file.name.toLowerCase().includes('left')) {
+          } else if (this.images['left']==undefined) {
             this.images['left'] = file;
-          } else if (file.name.toLowerCase().includes('right')) {
+          } else if (this.images['right']==undefined) {
             this.images['right'] = file;
           }
   
@@ -79,19 +79,30 @@ export class RoomImageComponent {
   }
   createRoomImage(): void {
     const dtoList: CreateRoomReservationImageDTO[] = Object.keys(this.images).map(key => ({
-      path: key,
       image: this.images[key],
-      examReservationId: this.roomImageForm.get('examReservationId')?.value,
-      place: this.roomImageForm.get('place')?.value || ''
+      examReservationId: 69,
+      place: key
     }));
-
-    this.roomService.createRoomImage(dtoList).subscribe(
-      response => {
-        console.log('Room images created successfully', response);
-      },
-      error => {
-        console.error('Error creating room images', error);
+  
+    dtoList.forEach(e=>{
+     
+      if(e.image==null){
+        alert("upload four images")
+        return;
       }
-    );
+
+    })
+    dtoList.forEach(e=>{
+      this.roomService.createRoomImage(e).subscribe(
+        response => {
+          console.log('Room images created successfully', response);
+        },
+        error => {
+          console.error('Error creating room images', error);
+        }
+      );
+
+    });
+  
   }
 }

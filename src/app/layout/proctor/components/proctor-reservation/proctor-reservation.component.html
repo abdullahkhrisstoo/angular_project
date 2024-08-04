@@ -93,6 +93,21 @@
                   </ng-template>
                 </ngx-datatable-column>
 
+
+                <ngx-datatable-column name="Identification Details" [width]="100" [sortable]="false">
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                    <button class="btn btn-info btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#modal-iden"  (click)="loadIden(row.examReservationId)">Identification Details</button>
+                  </ng-template>
+                </ngx-datatable-column>
+        
+                
+                <ngx-datatable-column name="Room Details" [width]="100" [sortable]="false">
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                    <button class="btn btn-info btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#modal-room"  (click)="loadRoomImages(row.examReservationId)">Room Details</button>
+                  </ng-template>
+                </ngx-datatable-column>
                 <!--                <ngx-datatable-column name="Actions" [width]="130" [sortable]="false">-->
                 <!--                  <ng-template ngx-datatable-cell-template let-row="row">-->
                 <!--                    <button class="btn btn-primary btn-sm" style="margin-right: 2px" (click)="updateRow(row)">Update</button>-->
@@ -137,3 +152,57 @@
             </div>
           </div>
         </div>
+      <!-- todo: show Complement -->
+      <div class="modal modal-blur" id="modal-iden" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Identification Detail</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="image-container d-flex flex-wrap">
+                <div class="image-item m-2">
+                  <label class="form-label">Image Front</label>
+                  <img [src]="this.baseUrl+iden?.pathImageFront" class="img-fluid" alt="Front Image"/>
+                </div>
+                <div class="image-item m-2">
+                  <label class="form-label">Image Back</label>
+                  <img [src]="this.baseUrl+ iden?.pathImageBack" class="img-fluid" alt="Back Image"/>
+                </div>
+              </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <a class="btn btn-link link-secondary" data-bs-toggle="modal" data-bs-target="#modal-exam-reservations">Back</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal modal-blur" id="modal-room" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Room Images</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="image-container d-flex flex-wrap">
+                  <div *ngFor="let image of roomImages; let i = index" class="image-item m-2">
+                    <label class="form-label">{{image.place}}</label>
+                    <img [src]="this.baseUrl + image.path" class="img-fluid" alt="Room Image {{ i + 1 }}"/>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <a class="btn btn-link link-secondary" data-bs-toggle="modal" data-bs-target="#modal-exam-reservations">Back</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      

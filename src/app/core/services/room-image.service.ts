@@ -34,15 +34,14 @@ export class RoomImageService {
   }
 
 
-  createRoomImage(createRoomReservationImageDTOs: CreateRoomReservationImageDTO[]): Observable<any> {
+  createRoomImage(createRoomReservationImageDTOs: CreateRoomReservationImageDTO): Observable<any> {
     const formData: FormData = new FormData();
   
-    createRoomReservationImageDTOs.forEach((dto, index) => {
-      formData.append(`image`, dto.image as Blob);
-      formData.append(`path`, dto.path || '');
-      formData.append(`examReservationId`,'1');
-      formData.append(`place`, dto.place || '');
-    });
+           
+      formData.append('image', createRoomReservationImageDTOs.image!);
+      formData.append('examReservationId', createRoomReservationImageDTOs.examReservationId?.toString()!);
+      formData.append('place', createRoomReservationImageDTOs.place!);
+
   
     return this.http.post(`${API_ENDPOINTS.baseUrl}${API_ENDPOINTS.CREATE_ROOM_RESERVATION_IMAGE}`, formData);
   }

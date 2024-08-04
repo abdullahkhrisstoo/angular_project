@@ -1,7 +1,7 @@
 export const API_ENDPOINTS = {
   baseUrl : 'https://localhost:1111/api/',
 
-
+  baseUrlImage : 'https://localhost:1111/',
 
 
 
@@ -157,7 +157,7 @@ export const API_ENDPOINTS = {
   GET_EXAM_BY_NAME : 'ExamInfo/GetExamByName',
 
 
-  GET_IDENTIFICATION_IMAGE_BY:'Identification/GetIdentificationImageBy',
+  GET_IDENTIFICATION_IMAGE_BY:'IdentificationImage/GetIdentificationImageBy',
   CREATE_IDENTIFICATION_IMAGE:'IdentificationImage/CreateIdentificationImage',
   UPDATE_IDENTIFICATION_IMAGE:'IdentificationImage/UpdateIdentificationImage',
   GET_ROOM_RESERVATION_IMAGES_BY:'RoomReservationImage/GetRoomReservationImagesBy',
