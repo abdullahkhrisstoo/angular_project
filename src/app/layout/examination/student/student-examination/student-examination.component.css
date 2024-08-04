@@ -139,3 +139,12 @@ body {
   background-color: #ff0000;
   color: #ffffff;
 }
+unanswered::after {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  margin-left: 5px;
+}

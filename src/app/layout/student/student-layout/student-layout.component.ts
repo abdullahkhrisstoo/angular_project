@@ -22,8 +22,8 @@ import { loadavg } from 'os';
 })
 export class StudentLayoutComponent {
   studentDTO?:StudentDTO;
-  studentName:String="Abdullah abdulrhamn khrais";
-  studentID:String="MS-3101939";
+  studentName:String="";
+  studentID:String="";
   constructor(
     private route: ActivatedRoute,
     private router: Router,

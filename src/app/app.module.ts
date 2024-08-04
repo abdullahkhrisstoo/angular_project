@@ -15,10 +15,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { SpinnerService } from './core/services/spinner.service';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SafeUrlPipe } from './core/pipes/safe-url.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     CommonModule,

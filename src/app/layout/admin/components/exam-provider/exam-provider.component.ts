@@ -16,6 +16,7 @@ import {TestimonialDTO} from "../../../../core/DTO/testimonial-dto";
 import {ComplementDTO} from "../../../../core/DTO/complement-dto";
 import {ProctorDTO} from "../../../../core/DTO/proctor-dto";
 import {CommonUtils} from "../../../../core/utils/CommonUtils";
+import { API_ENDPOINTS } from '../../../../core/constants/api.constants';
 
 
 // pending -> two buttons (accecpt and rejected)
@@ -312,6 +313,20 @@ export class ExamProviderComponent {
     // Logic to toggle active state
     this.isActive= !this.isActive;
     console.log('Toggled active state:', row);
+  }
+  pdfUrl:string |null =null;
+  baseUrl:string=API_ENDPOINTS.baseUrlImage;
+  loadCommercialRecord(id:number){
+    this.rows.forEach(e=>{
+    if(e.examProviderId==id)
+     {
+      if(e.commercialRecordImg){
+        console.log(e.commercialRecordImg)
+        this.pdfUrl=e.commercialRecordImg;
+      }
+    }
+    })
+    
   }
 
   protected readonly SortType = SortType;

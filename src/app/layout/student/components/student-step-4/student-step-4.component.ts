@@ -16,6 +16,7 @@ export class StudentStep4Component {
   onNext(): void {
     this.isSubmitted = true;
     if (this.preferredLanguage) {
+      localStorage.setItem('proctor-lang',this.preferredLanguage);
       this.router.navigate(['/student/step-5']);
       console.log('Next button clicked');
     } else {

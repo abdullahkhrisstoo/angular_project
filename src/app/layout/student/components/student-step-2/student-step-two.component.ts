@@ -20,6 +20,8 @@ export class StudentStepTwoComponent {
   onNext(): void {
     this.isSubmitted = true;
     if (this.preferredLanguage) {
+      console.log(this.preferredLanguage)
+      localStorage.setItem('exam-lang',this.preferredLanguage);
       console.log('Next button clicked');
       this.router.navigate(['/student/step-3']);
     } else {

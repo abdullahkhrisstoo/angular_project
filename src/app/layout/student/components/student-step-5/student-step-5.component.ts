@@ -31,7 +31,7 @@ export class StudentStep5Component implements OnInit {
   startTime: string = '08:00';
   endTime: string = '17:00';
   dateForm: FormGroup;
-
+  minDate: string="";
   constructor(
     private fb: FormBuilder,
     private el: ElementRef,
@@ -42,6 +42,8 @@ export class StudentStep5Component implements OnInit {
     this.dateForm = this.fb.group({
       date: new FormControl('')
     });
+    const today = new Date();
+    this.minDate = today.toISOString().split('T')[0];
   }
 
   ngOnInit(): void {

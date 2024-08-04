@@ -16,7 +16,8 @@
   <!-- Step 2: Select Your Date -->
   <div class="step mb-3">
     <h2>2. Select your date</h2>
-    <input type="date" class="form-control" [(ngModel)]="selectedDate" (change)="onDateChange($event)" />
+    <input type="date" class="form-control" [(ngModel)]="selectedDate" [min]="minDate" (change)="onDateChange($event)" />
+
   </div>
 
   <!-- Step 3: Select Your Appointment Start Time -->

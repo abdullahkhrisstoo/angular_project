@@ -1,0 +1,62 @@
+.microphone-test-container {
+    text-align: center;
+  }
+  
+  .volume-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    margin: 20px auto;
+  }
+  button {
+    width: 100px;
+  }
+  .bar {
+    width: 10px;
+    height: 10px;
+    margin: 0 2px;
+    animation: pulse 1s infinite;
+  }
+  
+  .bar:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  
+  .bar:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  
+  .bar:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+  
+  .bar:nth-child(5) {
+    animation-delay: 0.4s;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scaleY(1);
+    }
+    50% {
+      transform: scaleY(2.5);
+    }
+  }
+  
+  /* Add classes for different volume levels */
+  .no-sound .bar {
+    background-color: red;
+  }
+  
+  .low-volume .bar {
+    background-color: orange;
+  }
+  
+  .medium-volume .bar {
+    background-color: rgb(18, 220, 18);
+  }
+  
+  .high-volume .bar {
+    background-color: rgb(18, 220, 18);
+  }

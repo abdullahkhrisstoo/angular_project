@@ -15,6 +15,8 @@ import {ContactUsComponent} from "./components/contact-us/contact-us.component";
 import {ReadAllAboutUsComponent} from "./components/about-us/read-all-about-us.component";
 import { PlanInvoiceComponent } from './components/plan-invoice/plan-invoice.component';
 import { ReservationInvoiceComponent } from './components/reservation-invoice/reservation-invoice.component';
+import { SafeUrlPipe } from '../../core/pipes/safe-url.pipe';
+import { ProctorWorkTimeComponent } from './proctor-work-time/proctor-work-time.component';
 @NgModule({
   declarations: [
 
@@ -23,16 +25,19 @@ import { ReservationInvoiceComponent } from './components/reservation-invoice/re
     PlanComponent,
     ProctorManageComponent,
     ContactUsComponent,
-
+    SafeUrlPipe ,
     CustomDateFormatPipe,
     PlanInvoiceComponent,
     ReservationInvoiceComponent,
+    ProctorWorkTimeComponent,
+    
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MatButtonModule,
     SharedModule
+
   ],
   exports:[
 

@@ -11,6 +11,10 @@ const routes: Routes = [
     children: [
       { path: 'student', component: StudentExaminationComponent },
       { path: 'proctor', component: ProctorExaminationComponent },
+      {
+        path: 'student-test',
+        loadChildren: () => import('./student-test/student-test.module').then(m => m.StudentTestModule)
+      },
     ],
   },
 ];

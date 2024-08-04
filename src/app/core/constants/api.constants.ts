@@ -3,7 +3,8 @@ export const API_ENDPOINTS = {
 
   baseUrlImage : 'https://localhost:1111/',
 
-
+   GET_PROCTOR_WORK_TIMES : 'ProctorWorkTimes/GetProctorsWorkTimeById',
+    UPDATE_PROCTOR_ANSWER : 'ProctorWorkTimes/UpdateProctorsWorkTimeById',
 
   //todo:contact us
   GET_ALL_CONTACT: 'ContactUs/GetAllContactUs',

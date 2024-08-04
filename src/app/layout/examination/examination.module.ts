@@ -7,11 +7,13 @@ import { StudentExaminationComponent } from './student/student-examination/stude
 import { SharedModule } from "../../shared/shared.module";
 import { ProctorExaminationComponent } from './proctor/proctor-examination/proctor-examination.component';
 
+
 @NgModule({
   declarations: [
     ExaminationBodyComponent,
     StudentExaminationComponent,
     ProctorExaminationComponent,
+
 
 
   ],

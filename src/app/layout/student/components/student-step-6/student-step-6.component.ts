@@ -48,6 +48,9 @@ constructor(
   private fb: FormBuilder,
   private examReservationService: ExamReservationService
 ) {
+
+  
+
   this.examReservationForm = this.fb.group({
     cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
     cardHolderName: ['', Validators.required],
@@ -55,8 +58,14 @@ constructor(
     cardExpireDate: ['', Validators.required]
   });
 }
+examLang:string='';
+proctorLang:string='';
 
 ngOnInit(): void {
+
+  this.proctorLang=localStorage.getItem('proctor-lang')!;
+  
+  this.examLang=localStorage.getItem('exam-lang')!;
   this.studentDto = JSON.parse(localStorage.getItem("studentDto")!);
   this.examDto = JSON.parse(localStorage.getItem("examDto")!);
   this.formatSelectedTime = localStorage.getItem("formatSelectedTime")!;
