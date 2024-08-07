@@ -235,7 +235,7 @@
                 </svg>
               </span>
               <span class="nav-link-title">
-              
+
               </span>
             </a>
           </li> -->
@@ -267,7 +267,7 @@
       </button>
       <div class="navbar-nav flex-row order-md-last">
         <div class="d-none d-md-flex">
-          <a href="http://localhost:4200/admin/dashboard?theme=dark" class="nav-link px-0 hide-theme-dark"
+          <a [href]="darkTheme" class="nav-link px-0 hide-theme-dark"
             title="Enable dark mode" data-bs-toggle="tooltip" data-bs-placement="bottom">
             <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
@@ -276,7 +276,7 @@
               <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
             </svg>
           </a>
-          <a href="http://localhost:4200/admin/dashboard?theme=light" class="nav-link px-0 hide-theme-light"
+          <a [href]="lightTheme" class="nav-link px-0 hide-theme-light"
             title="Enable light mode" data-bs-toggle="tooltip" data-bs-placement="bottom">
             <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
@@ -290,7 +290,7 @@
         </div>
 
         <div class="nav-item dropdown">
-          <a href="http://localhost:4200/admin/dashboard" class="nav-link d-flex lh-1 text-reset p-0"
+          <a  class="nav-link d-flex lh-1 text-reset p-0"
             data-bs-toggle="dropdown" aria-label="Open user menu">
             <span class="avatar avatar-sm"
               style="background-image: url(/dashboard-assets/static/avatars/000m.jpg)"></span>

@@ -1,4 +1,5 @@
 import {Component, ViewEncapsulation, ChangeDetectorRef, OnInit} from '@angular/core';
+import { DARK_THEME, LIGHT_THEME, LOCAL_HOST } from '../../../core/constants/app.constants';
 
 @Component({
   selector: 'app-auth-layout',
@@ -13,8 +14,9 @@ import {Component, ViewEncapsulation, ChangeDetectorRef, OnInit} from '@angular/
   encapsulation: ViewEncapsulation.None,
 })
 export class AuthLayoutComponent  implements OnInit {
+  lightTheme = LIGHT_THEME;
+  darkTheme = DARK_THEME;
   constructor() {
-
   }
   ngOnInit(): void {
     console.log('remove', 'load')
@@ -24,9 +26,9 @@ export class AuthLayoutComponent  implements OnInit {
 
   loadScripts() {
     const dynamicScripts = [
-      'http://localhost:4200/dashboard-assets/dist/js/demo-theme.min.js',
-      'http://localhost:4200/dashboard-assets/dist/js/tabler.min.js',
-      'http://localhost:4200/dashboard-assets/dist/js/demo.min.js',
+      `${LOCAL_HOST}/dashboard-assets/dist/js/demo-theme.min.js`,
+      `${LOCAL_HOST}/dashboard-assets/dist/js/tabler.min.js`,
+      `${LOCAL_HOST}/dashboard-assets/dist/js/demo.min.js`,
     ];
     for (let i = 0; i < dynamicScripts.length; i++) {
       const node = document.createElement('script');

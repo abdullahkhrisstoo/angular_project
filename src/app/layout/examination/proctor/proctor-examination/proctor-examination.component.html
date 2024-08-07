@@ -1,17 +1,32 @@
-<div class="page">
-  <!-- Sidebar -->
-
-  <!-- End Sidebar -->
-
+<div appUnsavedChanges class="page">
   <!-- Header -->
   <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none">
     <div class="container-xl d-flex justify-content-between align-items-center">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
-              aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbar-menu"
+        aria-controls="navbar-menu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="text-center mx-auto">
-        Exam Guardian
+        <a class="navbar-brand fs-3 fw-bold">Exam Guardian</a>
+        <div class="navbar-collapse collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <span class="nav-link fs-5">Exam Name: {{ examName }}</span>
+            </li>
+            <li class="nav-item">
+              <span class="nav-link fs-5"
+                >reservation Number: {{ reservationNumber }}</span
+              >
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </header>
@@ -19,62 +34,202 @@
 
   <div class="page-wrapper">
     <div class="page-body">
-      <div class="container h-100 overflow-hidden">
+      <div class="h-100 overflow-hidden">
         <div class="row h-100">
-          <div class="col-12 col-md-8">
-            <div class="screen-share-container" [ngClass]="{'open': activeIcons.screenShare}">
-              <!-- Screen Share Content -->
-              <h3>Screen Sharing</h3>
-            </div>
-            <div class="remote-camera-container" [ngClass]="{'open': activeIcons.remoteCamera}">
-              <!-- Remote Camera Content -->
-              <h3>Remote Camera</h3>
+          <div
+            [ngClass]="{
+              'col-12 col-md-8': isChatVisible,
+              'col-12': !isChatVisible
+            }"
+          >
+            <!-- todo: Remote Share And video -->
+            <div class="video-wrapper container">
+              <div class="row">
+                <div class="col-6">
+                  <div
+                    class="video-container"
+                    [ngClass]="{
+                      fullscreen: isFullscreen && activeVideo === 'video1',
+                      'small-container':
+                        isSmallContainer && activeVideo !== 'video1'
+                    }"
+                    id="video1"
+                  >
+                    <video id="remoteVideo" autoplay></video>
+                    <div class="icon" (click)="toggleExpand('video1')">
+                      <i class="fa fa-expand"></i>
+                    </div>
+                    <!-- Reset button inside the fullscreen container -->
+                    <button
+                      *ngIf="isFullscreen && activeVideo === 'video1'"
+                      class="reset-button"
+                      (click)="resetAll($event)"
+                    >
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div
+                    class="video-container"
+                    [ngClass]="{
+                      fullscreen: isFullscreen && activeVideo === 'video2',
+                      'small-container':
+                        isSmallContainer && activeVideo !== 'video2'
+                    }"
+                    id="video2"
+                  >
+                    <video id="remoteVideo_2" autoplay></video>
+                    <div class="icon" (click)="toggleExpand('video2')">
+                      <i class="fa fa-expand"></i>
+                    </div>
+                    <!-- Reset button inside the fullscreen container -->
+                    <button
+                      *ngIf="isFullscreen && activeVideo === 'video2'"
+                      class="reset-button"
+                      (click)="resetAll($event)"
+                    >
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col-12 col-md-4">
-            <app-chat-section></app-chat-section>
+
+          <!--todo: start Chat Section -->
+          <div class="col-12 col-md-4" *ngIf="isChatVisible">
+            <div class="card">
+              <div class="chat-section">
+                <div class="card-body scrollable" style="height: 25rem">
+                  <div class="chat">
+                    <div class="chat-bubbles" *ngFor="let message of messages">
+                      <div
+                        class="chat-item mb-1"
+                        *ngIf="message[1] === 'proctor'"
+                      >
+                        <div class="row align-items-end justify-content-end">
+                          <div class="col col-lg-6">
+                            <div class="chat-bubble chat-bubble-me">
+                              <div class="chat-bubble-body">
+                                <p>{{ message[0] }}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="chat-item mb-1"
+                        *ngIf="message[1] === 'student'"
+                      >
+                        <div class="row align-items-end">
+                          <div class="col col-lg-6">
+                            <div class="chat-bubble">
+                              <div class="chat-bubble-body">
+                                <p>{{ message[0] }}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="input-group input-group-flat chat-input">
+                    <input
+                      id="test"
+                      type="text"
+                      class="form-control"
+                      placeholder="Type message"
+                      [(ngModel)]="chatMessage"
+                      (keyup.enter)="sendMessage()"
+                    />
+                    <button class="btn btn-primary" (click)="sendMessage()">
+                      Send
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          <!--todo: End chat section -->
         </div>
+      </div>
+      <!-- Footer -->
+      <footer
+        class="footer bg-light fixed-bottom d-flex align-items-center justify-content-center shadow-sm"
+      >
+        <div class="container">
+          <ul class="list-inline mb-0 d-flex justify-content-center flex-wrap">
+            <li
+              class="list-inline-item footer-icon"
+              [ngClass]="{ active: activeIcons.microphone }"
+              (click)="toggleMicrophone()"
+            >
+              <i class="fas fa-microphone"></i>
+            </li>
+            <li
+              class="list-inline-item footer-icon"
+              [ngClass]="{ active: activeIcons.chat }"
+              (click)="toggleChat()"
+            >
+              <i class="fas fa-comments"></i>
+            </li>
+            <li
+              class="list-inline-item footer-icon"
+              [ngClass]="{ active: activeIcons.shareScreen }"
+              (click)="toggleRecording()"
+            >
+              <i class="fas fa-desktop"></i>
+            </li>
+
+            <li class="list-inline-item footer-icon" style="margin-left: 40px;">
+          <div class="btn btn-danger "data-bs-toggle="modal" data-bs-target="#modal-proctor" style="margin-left: 40px;"> End Exam</div>
+          </li>
+
+          </ul>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<!--todo: create complemnt  -->
+
+<div
+  class="modal modal-blur"
+  id="modal-proctor"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create Complaint</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="createComplementForm" (ngSubmit)="updateComplemntByProctor()">
+          <div class="mb-3">
+            <label class="form-label">Feature Name</label>
+            <input type="text" class="form-control" formControlName="proctorDesc" />
+            <span class="text-danger" *ngIf="createComplementForm.get('proctorDesc')?.invalid && createComplementForm.get('proctorDesc')?.touched">
+              Feature Name is required
+            </span>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="createComplementForm.invalid">Create Plan Feature</button>
+          </div>
+        </form>
       </div>
     </div>
-    <!-- Footer -->
-    <footer class="modal-footer footer">
-      <div class="container-xl">
-        <div class="row text-center justify-content-center align-items-center">
-          <div class="col-12 col-lg-auto mt-3 mt-lg-0">
-            <ul class="list-inline list-inline-dots mb-0">
-              <li class="d-inline-block footer-icon" [ngClass]="{'active': activeIcons.microphone}"
-                (click)="toggleIcon('microphone')">
-                <fa-icon [icon]="faMicrophoneSlash"></fa-icon>
-              </li>
-              <li class="d-inline-block footer-icon" [ngClass]="{'active': activeIcons.video}"
-                (click)="toggleIcon('video')">
-                <fa-icon [icon]="faMessage"></fa-icon>
-              </li>
-              <li class="d-inline-block footer-icon" [ngClass]="{'active': activeIcons.upload}"
-                (click)="toggleIcon('upload')">
-                <fa-icon [icon]="faUpload"></fa-icon>
-              </li>
-              <li class="d-inline-block footer-icon" [ngClass]="{'active': activeIcons.creditCard}"
-                (click)="toggleIcon('creditCard')">
-                <fa-icon [icon]="faCreditCard"></fa-icon>
-              </li>
-              <li class="d-inline-block footer-icon" [ngClass]="{'active': activeIcons.users}"
-                (click)="toggleIcon('users')">
-                <fa-icon [icon]="faUsers"></fa-icon>
-              </li>
-              <li class="d-inline-block footer-icon" [ngClass]="{'active': activeIcons.screenShare}"
-                (click)="toggleIcon('screenShare')">
-                <fa-icon icon="fa-solid fa-desktop"></fa-icon>
-              </li>
-              <li class="d-inline-block footer-icon" [ngClass]="{'active': activeIcons.remoteCamera}"
-                (click)="toggleIcon('remoteCamera')">
-                <fa-icon icon="fa-solid fa-video"></fa-icon>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
   </div>
 </div>

@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { StudentExaminationComponent } from './student/student-examination/student-examination.component';
 import { SharedModule } from "../../shared/shared.module";
 import { ProctorExaminationComponent } from './proctor/proctor-examination/proctor-examination.component';
+import { StudentScoreComponent } from './student/student-score/student-score.component';
 
 
 @NgModule({
@@ -13,9 +14,7 @@ import { ProctorExaminationComponent } from './proctor/proctor-examination/proct
     ExaminationBodyComponent,
     StudentExaminationComponent,
     ProctorExaminationComponent,
-
-
-
+    StudentScoreComponent,
   ],
   imports: [
     CommonModule,

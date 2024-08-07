@@ -22,10 +22,29 @@ html, body {margin: 0 !important; height: 100% !important; overflow: hidden !imp
   cursor: pointer !important;
 }
 
+.container-fluid {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
 
+.row {
+  height: calc(100% - 60px);
+}
 
+.col-md-3, .col-md-9 {
+  height: 100%;
+  overflow-y: auto;
+}
 
-
+/* Disable text selection */
+* {
+  -webkit-user-select: none;  /* Safari */
+  -moz-user-select: none;     /* Firefox */
+  -ms-user-select: none;      /* Internet Explorer/Edge */
+  user-select: none;          /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
 
 /* Disable text dragging */
 * {
@@ -41,19 +60,18 @@ body {
 
 
 .footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #d2d2d2;
-  backdrop-filter: blur(10px);
-  z-index: 10;
-  height: 70px;
+  /* margin-left: 15rem; */
+   height: 70px; /* Fixed height for the footer */
+  background-color: #d2d2d2; /* Light gray background */
+  backdrop-filter: blur(10px); /* Blurred background effect */
 }
 
+
+/* Footer icon styling */
 .footer-icon {
   width: 35px;
   height: 35px;
-  background-color: #e9f4ff;
+  background-color: #e9f4ff; /* Light blue background */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,57 +79,123 @@ body {
   font-weight: bold;
   cursor: pointer;
   padding: 10px;
-  margin: 8px;;
-  margin-right: 20px;
+  margin: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
-.footer-icon fa-icon {
+.footer-icon i {
   color: #10304f;
   font-size: 18px;
   line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-
 
 
 .footer-icon.active {
   background-color: #181871;
 }
 
-.footer-icon.active fa-icon {
+.footer-icon.active i {
   color: #fff;
 }
 
+/* Hover effect for icons */
+.footer-icon:hover {
+  background-color: #cfe2ff; /* Slightly darker blue on hover */
+}
+
+.footer-icon:hover i {
+  color: #0b3d91; /* Darker color for icon on hover */
+}
+.error {
+  background-color: #ff0000;
+  color: #ffffff;
+}
+.unanswered::after {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  margin-left: 5px;
+}
 
 
 
 
 
 
-/* Containers */
-.screen-share-container, .remote-camera-container {
-  display: none;
-  transition: all 0.5s ease;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background-color: #f1f1f1;
+
+/* todo */
+.video-wrapper {
+  margin-top: 20px;
+}
+
+.video-container {
+  height: 250px;
+  background-color: rgb(217, 217, 217);
+  border-radius: 8px; /* Add border-radius here */
+  overflow: hidden; /* Ensure content fits within the border radius */
+  position: relative; /* Position relative for absolute positioning of the icon and button */
+  transition: all 0.3s ease; /* Smooth transition for expansion */
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the video covers the container */
+}
+
+.icon {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.icon i {
+  margin: 0;
+}
+
+/* Fullscreen mode */
+.video-container.fullscreen {
+  width: 100vw; /* Expand to full viewport width */
+  height: 100vh; /* Expand to full viewport height */
+  position: fixed; /* Fixed positioning to keep it on top */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure it’s above other content */
+}
+
+/* Small container mode */
+.video-container.small-container {
+  width: 150px; /* Small size */
+  height: 150px; /* Small size */
+  position: fixed; /* Fixed positioning to keep it on top */
+  top: 20px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
+  z-index: 1001; /* Ensure it’s above the fullscreen video */
+}
+
+/* Reset button */
+.reset-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ff0000;
+  color: white;
+  border: none;
   border-radius: 5px;
+  cursor: pointer;
+  z-index: 1001; /* Ensure it's above other elements */
 }
 
-.screen-share-container.open, .remote-camera-container.open {
-  display: block;
-  transform: scale(1);
-  opacity: 1;
-}
-
-.screen-share-container {
-  transform: scale(0.95);
-  opacity: 0;
-}
-
-.remote-camera-container {
-  transform: scale(0.95);
-  opacity: 0;
+.reset-button:hover {
+  background-color: #0056b3;
 }

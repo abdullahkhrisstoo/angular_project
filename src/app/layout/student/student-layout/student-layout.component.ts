@@ -6,6 +6,7 @@ import { StudentService } from '../../../core/services/student.service';
 import { StudentDTO } from '../../../core/DTO/student-dto';
 import { ExamInfoService } from '../../../core/services/exam-info.service';
 import { loadavg } from 'os';
+import { DARK_THEME, LIGHT_THEME, LOCAL_HOST } from '../../../core/constants/app.constants';
 @Component({
   selector: 'app-student-layout',
   templateUrl: './student-layout.component.html',
@@ -21,22 +22,24 @@ import { loadavg } from 'os';
   encapsulation:ViewEncapsulation.None,
 })
 export class StudentLayoutComponent {
+  lightTheme = LIGHT_THEME;
+  darkTheme = DARK_THEME;
   studentDTO?:StudentDTO;
   studentName:String="";
   studentID:String="";
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private localStorageService:LocalStorageService,
+    private cache:LocalStorageService,
     private studentService:StudentService,
     private examService:ExamInfoService
   ) {
-    
+
    }
 
   ngOnInit(): void {
     // Extract the token from query parameters
-       
+
     console.log('remove', 'load')
 
     this.removeScripts();
@@ -52,45 +55,52 @@ export class StudentLayoutComponent {
 
     this.route.queryParams.subscribe(params => {
       const token = params['token'];
-      
+
       const exam = decodeURIComponent(params['exam']);
-  
+
       if(exam && token){
 
         console.log(token);
         console.log(exam);
         const payload =jwtDecode(token)
         console.log(payload)
-        localStorage.setItem("auth-token",token);
-        localStorage.setItem("exam",exam);
+        this.cache.setItem(this.cache.AUTH_TOKEN, token)
+        // localStorage.setItem("auth-token",token);
+        this.cache.setItem(this.cache.EXAM, exam)
+
+        // localStorage.setItem("exam",exam);
         const payloadJson=JSON.parse(JSON.stringify(payload));
        // this.getStudentInfoById(payload.userId);
-        console.log(payloadJson.Company)
-        localStorage.setItem("company",payloadJson.Company);
-        localStorage.setItem("userId",payloadJson.UserId);
-        localStorage.setItem("roleId",payloadJson.RoleId);
+        console.log(payloadJson.Company);
+        this.cache.setItem(this.cache.COMPANY, payloadJson.Company);
+        this.cache.setItem(this.cache.USER_ID, payloadJson.UserId);
+        this.cache.setItem(this.cache.ROLE_ID, payloadJson.RoleId);
+        this.cache.setItem(this.cache.PAYLOAD, payload);
+
+
+
+
+
+        // localStorage.setItem("company",payloadJson.Company);
+        // localStorage.setItem("userId",payloadJson.UserId);
+        // localStorage.setItem("roleId",payloadJson.RoleId);
        // this.localStorageService.setItem("payload",payload);
-
         this.getStudentInfoById(payloadJson.UserId);
-       
       }
-
       else if(localStorage.getItem("auth-token") == null) {
         this.router.navigate(['/home']);
       }
-       
-       
 
 
     });
 
 
- 
+
 
 
   }
 
-  
+
   getStudentInfoById(id:number){
     this.studentService.getStudentInfoById(id).subscribe(
       response => {
@@ -105,7 +115,7 @@ export class StudentLayoutComponent {
         this.router.navigate(['/student/step-1']);
       },
       error => {
-        
+
         console.error('Error fetching complement by ExamReservationId:', error);
         this.router.navigate(['/home']);
       }
@@ -119,14 +129,14 @@ export class StudentLayoutComponent {
         this.router.navigate(['/student/step-1']);
       },
       error => {
-        
+
         console.error('Error fetching complement by ExamReservationId:', error);
         //this.router.navigate(['/home']);
       }
     );
   }
 
-  
+
   getExamByName(email:string){
     this.examService.getExamByName(email).subscribe(
       response => {
@@ -135,20 +145,19 @@ export class StudentLayoutComponent {
         this.router.navigate(['/student/step-1']);
       },
       error => {
-        
+
         console.error('Error fetching complement by ExamReservationId:', error);
         //this.router.navigate(['/home']);
       }
     );
   }
 
-
   loadScripts() {
     const dynamicScripts = [
-      'http://localhost:4200/dashboard-assets/dist/js/demo-theme.min.js',
-      'http://localhost:4200/dashboard-assets/dist/js/tabler.min.js',
-      'http://localhost:4200/dashboard-assets/dist/js/demo.min.js',
-      'http://localhost:4200/dashboard-assets/dist/libs/dropzone/dist/dropzone-min.js'
+      `${LOCAL_HOST}/dashboard-assets/dist/js/demo-theme.min.js`,
+      `${LOCAL_HOST}/dashboard-assets/dist/js/tabler.min.js`,
+      `${LOCAL_HOST}/dashboard-assets/dist/js/demo.min.js`,
+      `${LOCAL_HOST}/dashboard-assets/dist/libs/dropzone/dist/dropzone-min.js`,
     ];
     for (let i = 0; i < dynamicScripts.length; i++) {
       const node = document.createElement('script');

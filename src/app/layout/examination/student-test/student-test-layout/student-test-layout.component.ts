@@ -4,6 +4,7 @@ import { LocalStorageService } from '../../../../core/services/local-storage.ser
 import { StudentService } from '../../../../core/services/student.service';
 import { ExamInfoService } from '../../../../core/services/exam-info.service';
 import { jwtDecode } from 'jwt-decode';
+import { DARK_THEME, LIGHT_THEME } from '../../../../core/constants/app.constants';
 
 @Component({
   selector: 'app-student-test-layout',
@@ -15,6 +16,8 @@ import { jwtDecode } from 'jwt-decode';
   encapsulation:ViewEncapsulation.None,
 })
 export class StudentTestLayoutComponent {
+  lightTheme = LIGHT_THEME;
+  darkTheme = DARK_THEME;
   studentName:String="";
   studentID:String="";
   constructor(
@@ -24,7 +27,7 @@ export class StudentTestLayoutComponent {
     private studentService:StudentService,
     private examService:ExamInfoService
   ) {
-    
+
     if(localStorage.getItem('examerDTO')){
       const examerDTO=JSON.parse(localStorage.getItem("examerDTO")!);
       this.studentName=examerDTO.StudentName;
@@ -34,12 +37,12 @@ export class StudentTestLayoutComponent {
      }
     this.route.queryParams.subscribe(params => {
       const token = params['token'];
-      
-  
+
+
       if(token){
 
         console.log(token);
-  
+
         const payload =jwtDecode(token)
         console.log(payload)
         localStorage.setItem("auth-token",token);
@@ -61,9 +64,9 @@ export class StudentTestLayoutComponent {
    if(localStorage.getItem("auth-token") == null || localStorage.getItem("examerDTO")==null) {
       this.router.navigate(['/home']);
     }
-     
+
    }
 
 
-   
+
 }

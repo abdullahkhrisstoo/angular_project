@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { DARK_THEME, LIGHT_THEME, LOCAL_HOST } from '../../../core/constants/app.constants';
 
 @Component({
   selector: 'app-examination-layout',
@@ -13,6 +14,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class ExaminationLayoutComponent implements OnInit {
+  lightTheme = LIGHT_THEME;
+  darkTheme = DARK_THEME;
   ngOnInit(): void {
     console.log('remove', 'load');
 
@@ -22,9 +25,9 @@ export class ExaminationLayoutComponent implements OnInit {
 
   loadScripts() {
     const dynamicScripts = [
-      'http://localhost:4200/dashboard-assets/dist/js/demo-theme.min.js',
-      'http://localhost:4200/dashboard-assets/dist/js/tabler.min.js',
-      'http://localhost:4200/dashboard-assets/dist/js/demo.min.js',
+      `${LOCAL_HOST}/dashboard-assets/dist/js/demo-theme.min.js`,
+      `${LOCAL_HOST}/dashboard-assets/dist/js/tabler.min.js`,
+      `${LOCAL_HOST}/dashboard-assets/dist/js/demo.min.js`,
     ];
     for (let i = 0; i < dynamicScripts.length; i++) {
       const node = document.createElement('script');

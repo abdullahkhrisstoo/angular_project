@@ -17,12 +17,9 @@ export class CameraTestComponent implements OnInit {
   }
 
   onPrevious(){
-
     this.router.navigate(['./examination/student-test/mic-test']);
-
   }
 onNext(){
-
   this.router.navigate(['./examination/student-test/iden-test']);
 }
   isDisabled:boolean=false;

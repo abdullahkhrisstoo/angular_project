@@ -1,5 +1,6 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {AuthService} from "../../../core/services/auth.service";
+import { DARK_THEME, LIGHT_THEME, LOCAL_HOST } from '../../../core/constants/app.constants';
 
 @Component({
   selector: 'app-exam-provider-layout',
@@ -15,6 +16,8 @@ import {AuthService} from "../../../core/services/auth.service";
 encapsulation:ViewEncapsulation.None,
 })
 export class ExamProviderLayoutComponent {
+  lightTheme = LIGHT_THEME;
+  darkTheme = DARK_THEME;
   constructor(protected authService:AuthService) {
 
   }
@@ -27,9 +30,9 @@ export class ExamProviderLayoutComponent {
 
   loadScripts() {
     const dynamicScripts = [
-      'http://localhost:4200/dashboard-assets/dist/js/demo-theme.min.js',
-      'http://localhost:4200/dashboard-assets/dist/js/tabler.min.js',
-      'http://localhost:4200/dashboard-assets/dist/js/demo.min.js',
+      `${LOCAL_HOST}/dashboard-assets/dist/js/demo-theme.min.js`,
+      `${LOCAL_HOST}/dashboard-assets/dist/js/tabler.min.js`,
+      `${LOCAL_HOST}/dashboard-assets/dist/js/demo.min.js`,
     ];
     for (let i = 0; i < dynamicScripts.length; i++) {
       const node = document.createElement('script');

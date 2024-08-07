@@ -29,6 +29,8 @@ constructor(  private router: Router){}
 onNext(){
 
   this.router.navigate(['./examination/student-test/cam-test']);
+
+  this.stopTest();
 }
   startTest() {
     this.isTesting = true;

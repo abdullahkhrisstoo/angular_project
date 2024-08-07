@@ -57,29 +57,39 @@ body {
   margin: 0;
 }
 
-.page-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.page-body {
-  flex: 1;
-}
 
 .footer {
-  position: sticky;
-  bottom: 0;
-  width: 100%;
-  background-color: #d2d2d2;
-  backdrop-filter: blur(10px);
-  z-index: 10;
-  height: 70px;
+  margin-left: 15rem;
+  height: 70px; /* Fixed height for the footer */
+  background-color: #d2d2d2; /* Light gray background */
+  backdrop-filter: blur(10px); /* Blurred background effect */
 }
 
+/* Styles for medium screens */
+@media (max-width: 1024px) { /* Adjust the max-width value as needed for medium screens */
+  .footer {
+    margin-left: 0; /* Adjust the margin as needed for medium screens */
+    height: 70px; /* Fixed height for the footer */
+    background-color: #d2d2d2; /* Light gray background */
+    backdrop-filter: blur(10px); /* Blurred background effect */
+  }
+}
+
+/* Styles for smaller screens */
+@media (max-width: 768px) { /* Adjust the max-width value as needed for small screens */
+  .footer {
+    margin-left: 0;
+    height: 70px; /* Fixed height for the footer */
+    background-color: #d2d2d2; /* Light gray background */
+    backdrop-filter: blur(10px); /* Blurred background effect */
+  }
+}
+
+/* Footer icon styling */
 .footer-icon {
   width: 35px;
   height: 35px;
-  background-color: #e9f4ff;
+  background-color: #e9f4ff; /* Light blue background */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,59 +97,38 @@ body {
   font-weight: bold;
   cursor: pointer;
   padding: 10px;
-  margin: 8px;;
-  margin-right: 20px;
+  margin: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
-.footer-icon fa-icon {
-  color: #10304f;
+.footer-icon i {
+  color: #10304f; /* Dark color for icons */
   font-size: 18px;
   line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-
-
+/* Active state */
 .footer-icon.active {
-  background-color: #181871;
+  background-color: #181871; /* Darker background for active state */
 }
 
-.footer-icon.active fa-icon {
-  color: #fff;
+.footer-icon.active i {
+  color: #fff; /* White color for active icon */
 }
 
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.75);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  cursor: pointer;
-  backdrop-filter: blur(5px);
+/* Hover effect for icons */
+.footer-icon:hover {
+  background-color: #cfe2ff; /* Slightly darker blue on hover */
 }
 
-.overlay-content {
-  color: white;
-  font-size: 2rem;
-  text-align: center;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
+.footer-icon:hover i {
+  color: #0b3d91; /* Darker color for icon on hover */
 }
-
 .error {
   background-color: #ff0000;
   color: #ffffff;
 }
-unanswered::after {
+.unanswered::after {
   content: '';
   display: inline-block;
   width: 10px;
@@ -147,4 +136,21 @@ unanswered::after {
   background-color: red;
   border-radius: 50%;
   margin-left: 5px;
+}
+
+
+.video-container {
+  background-color: rgb(228, 226, 226);
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* or 'contain' or 'fill' depending on your needs */
 }

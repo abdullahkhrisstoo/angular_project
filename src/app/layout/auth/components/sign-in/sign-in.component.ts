@@ -49,7 +49,6 @@ export class SignInComponent {
           this.toast.showSuccess(this.AppMessages.LOGIN_SUCCESFULLY);
 
           const roleId = response.data.roleId;
-
           switch (roleId) {
             case EXAM_PROVIDER_ROLE:
               this.router.navigate(['/exam-provider/profile']);
@@ -64,7 +63,7 @@ export class SignInComponent {
               console.warn('Unknown role:', roleId);
               break;
           }
-        
+
       //    localStorage.setItem('userId',response.data.userId.toString());
           if (this.loginForm.get('rememberMe')?.value) {
             // Implement remember me logic here if needed

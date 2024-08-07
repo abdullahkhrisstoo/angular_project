@@ -5,10 +5,19 @@ import { Injectable } from '@angular/core';
 })
 export class LocalStorageService {
 
+
   public AUTH_TOKEN: string = "auth-token";
   public USER_SESSION_KEY: string = "user-session-key";
   public ANSWER_SAVED: string = "answer-save";
   public TIME_REMAINING: string = "time-remaining";
+  public EXAM: string = "exam";
+  public COMPANY: string = "company";
+  public USER_ID: string = "userId";
+  public ROLE_ID: string = "roleId";
+  public PAYLOAD: string = "payload";
+  public STUDENT_SCORE: string = "student-score";
+  public NUMBER_OF_QUESTIONS: string = "number-of-Qusstions";
+
   constructor() { }
 
   setItem(key: string, value: any): void {

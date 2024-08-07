@@ -16,14 +16,14 @@ export class ExaminationService {
 
   constructor(private apiHandler: GenericApiHandlerService) { }
 
-  getExamWithoutAnswerCallingAPIs(examName: string): Observable<ApiResponseFromExamProvider> {
-    const endpoint = `${API_ENDPOINTS.GET_EXAM_WITHOUT_ANSWER}=${examName}`;
+  getExamWithoutAnswerCallingAPIs(): Observable<ApiResponseFromExamProvider> {
+    const endpoint = `${API_ENDPOINTS.GET_EXAM_WITHOUT_ANSWER}`;
     return this.apiHandler.get<ApiResponseFromExamProvider>(endpoint);
   }
 
-  fetchAndSetExam(examName: string): Promise<void> {
+  fetchAndSetExam(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.getExamWithoutAnswerCallingAPIs(examName).subscribe(response => {
+      this.getExamWithoutAnswerCallingAPIs().subscribe(response => {
         if (response.success && response.data && response.data.length > 0) {
           this.setCurrentExam(response.data[0]);
           resolve();
@@ -52,8 +52,8 @@ export class ExaminationService {
     return this.currentExam ? this.currentExam.questions?.find(q => q.questionId === id) || null : null;
   }
 
-  calculateScoreCallingApi(examName: string,answeredQuestions: StudentQuestionAnswerListDTO ): Observable<CorrectionAnswerOptionApiResponse> {
-    const endpoint = `${API_ENDPOINTS.GET_CORRECTION_ANSWER}=${examName}`;
+  calculateScoreCallingApi(answeredQuestions: StudentQuestionAnswerListDTO ): Observable<CorrectionAnswerOptionApiResponse> {
+    const endpoint = `${API_ENDPOINTS.GET_CORRECTION_ANSWER}`;
     return this.apiHandler.post<CorrectionAnswerOptionApiResponse>(endpoint,answeredQuestions);
 
   }

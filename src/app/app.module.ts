@@ -16,11 +16,10 @@ import { SpinnerService } from './core/services/spinner.service';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SafeUrlPipe } from './core/pipes/safe-url.pipe';
+import { UnsavedChangesDirective } from './core/directive/unsaved-changes.directive';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     CommonModule,
     BrowserModule,

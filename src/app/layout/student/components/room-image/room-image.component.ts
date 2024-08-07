@@ -42,7 +42,7 @@ export class RoomImageComponent {
       acceptedFiles: 'image/*',
       init: () => {
         const dropzone = Dropzone.forElement(this.dropzoneElement.nativeElement);
-  
+
         dropzone.on('addedfile', (file) => {
           if (this.images['front']==undefined) {
             this.images['front'] = file;
@@ -53,12 +53,12 @@ export class RoomImageComponent {
           } else if (this.images['right']==undefined) {
             this.images['right'] = file;
           }
-  
+
           if (dropzone.files.length > 4) {
             dropzone.removeFile(dropzone.files[0]);
           }
         });
-  
+
         dropzone.on('removedfile', (file) => {
           if (file === this.images['front']) {
             this.images['front'] = undefined;
@@ -72,7 +72,7 @@ export class RoomImageComponent {
         });
       }
     };
-  
+
     if (this.dropzoneElement.nativeElement) {
       new Dropzone(this.dropzoneElement.nativeElement, dropzoneOptions);
     }
@@ -83,15 +83,13 @@ export class RoomImageComponent {
       examReservationId: 69,
       place: key
     }));
-  
-    dtoList.forEach(e=>{
-     
-      if(e.image==null){
-        alert("upload four images")
-        return;
-      }
 
-    })
+    const isAnyImageNull= dtoList.some(e=>(e.image===null) ||(e.image===undefined) );
+    console.warn(isAnyImageNull)
+    if(isAnyImageNull){
+      alert("upload four images")
+    }
+   else {
     dtoList.forEach(e=>{
       this.roomService.createRoomImage(e).subscribe(
         response => {
@@ -103,6 +101,7 @@ export class RoomImageComponent {
       );
 
     });
-  
+   }
+
   }
 }

@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { API_ENDPOINTS } from '../constants/api.constants';
+import { response } from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,7 @@ export class GenericApiHandlerService {
     const url = this.apiUrl(endpoint);
     const options = { headers, params };
     return this.http.get<T>(url, options).pipe(
+      
       catchError(this.handleError)
     );
   }

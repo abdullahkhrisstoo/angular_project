@@ -4,6 +4,7 @@
         <h3>Microphone Test</h3>
       </div>
       <div class="card-body">
+        <p *ngIf="noSoundDetected" class="no-sound-message">NO Sound Detected</p>
         <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
         <div *ngIf="isTesting">
           <p>Speak into your microphone...</p>
@@ -14,16 +15,15 @@
             <div class="bar" *ngIf="volumeLevel == 'high-volume'"></div>
             <div class="bar" *ngIf="volumeLevel == 'high-volume'"></div>
           </div>
-          <p *ngIf="noSoundDetected" class="no-sound-message">NO Sound Detected</p>
         </div>
         <p class="test-paragraph">
           Please read this paragraph out loud to test your microphone: "The quick brown fox jumps over the lazy dog. This sentence contains every letter in the English language, making it perfect for testing your microphone."
         </p>
-       
+
         <div style="text-align: center;">
           <button class="btn btn-primary" (click)="startTest()">Start Test</button>
         </div>
-    
+
         <!-- <button class="btn btn-danger" (click)="stopTest()">Stop Test</button> -->
         <div class="d-flex justify-content-between mt-4">
           <button class="btn btn-secondary"  (click)="onPrevious()">Previous</button>

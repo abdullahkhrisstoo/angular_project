@@ -1,7 +1,8 @@
 export const API_ENDPOINTS = {
-  baseUrl : 'https://localhost:1111/api/',
 
-  baseUrlImage : 'https://localhost:1111/',
+  baseUrl : 'http://192.168.1.17:1111/api/',
+
+  baseUrlImage : 'http://192.168.1.17:1111/',
 
    GET_PROCTOR_WORK_TIMES : 'ProctorWorkTimes/GetProctorsWorkTimeById',
     UPDATE_PROCTOR_ANSWER : 'ProctorWorkTimes/UpdateProctorsWorkTimeById',
@@ -77,7 +78,9 @@ export const API_ENDPOINTS = {
     CREATE_COMPLEMENT : 'Complement/createComplement',
     GET_COMPLEMENT_BY_ID : 'Complement/GetComplementById',
     DELETE_COMPLEMENT : 'Complement/DeleteComplement',
-    UPDATE_COMPLEMENT : 'Complement/UpdateComplement',
+    // UPDATE_COMPLEMENT : 'Complement/UpdateComplement',
+    UPDATE_COMPLEMENT_BY_STUDENT : 'Complement/UpdateComplementByStudent',
+    UPDATE_COMPLEMENT_BY_PROCTOR : 'Complement/UpdateComplementByProctor',
     GET_COMPLEMENT_BY_EXAM_RESERVATION_ID : 'Complement/GetComplementByExamReservationId',
     GET_COMPLEMENT_BY_PROCOTR_ID : 'Complement/GetComplementsByProctorId',
 
@@ -171,7 +174,7 @@ export const API_ENDPOINTS = {
   GET_ALL_PLAN_INVOICES_DETAILS:'PlanInvoice/GetAllPlanInvoicesDetails',
   GET_ALL_RESRVATION_INVOICES_DETAILS:'ReservationInvoice/GetAllReservationInvoicesDetails',
 
-    GET_EXAM_WITHOUT_ANSWER : 'ExamInfo/GetExamDetailsWithoutAnswersByName?examName',
-   
-    GET_CORRECTION_ANSWER : 'ExamInfo/ExamCorrection?examName',
+    GET_EXAM_WITHOUT_ANSWER : 'ExamInfo/GetExamDetailsWithoutAnswersByName',
+
+    GET_CORRECTION_ANSWER : 'ExamInfo/ExamCorrection',
 };

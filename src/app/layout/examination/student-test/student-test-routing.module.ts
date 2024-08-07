@@ -7,12 +7,13 @@ import { IdenImageComponent } from './components/iden-image/iden-image.component
 import { CheckInProcessComponent } from './components/check-in-process/check-in-process.component';
 import { ExamRulesComponent } from './components/exam-rules/exam-rules.component';
 import { CameraTestComponent } from './components/camera-test/camera-test.component';
+import { StartComponent } from './components/start/start.component';
 
 const routes: Routes = [
   {
     path: '',
     component: StudentTestLayoutComponent,
-    
+
     children: [
       { path: 'check', component: CheckInProcessComponent },
       { path: 'iden-test', component: IdenImageComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'mic-test', component: MicrophoneTestComponent },
       { path: 'exam-rules', component: ExamRulesComponent },
       { path: 'cam-test', component: CameraTestComponent },
+      { path: 'start', component: StartComponent },
     ]
   }
 ];

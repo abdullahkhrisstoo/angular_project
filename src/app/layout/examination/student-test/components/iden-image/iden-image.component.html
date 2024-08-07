@@ -19,9 +19,8 @@
         </form>
         <div class="d-flex justify-content-between mt-4">
           <button class="btn btn-secondary" (click)="onPrevious()" style="width: 100px;">Previous</button>
-          <button class="btn btn-primary" (click)="onNext()" style="width: 100px;">Next</button>
+          <button class="btn btn-primary" (click)="onNext()" [disabled]="isDisabled" style="width: 100px;">Next</button>
         </div>
       </div>
     </div>
   </div>
-  

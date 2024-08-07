@@ -40,20 +40,24 @@ export class MyAccountComponent implements OnInit {
 
   loadExamProviderData() {
 
-    this.examProviderCall.getExamProviderByUserId(this.userData?.userId??0) .subscribe(
-      (response: ApiResponse<GetExamProviderByUserIdDto>) => {
-      if (response.status === 200) {
-        this.examProviderData=response.data;
-        this.currentExamProviderPlan = response.data.plan;
-        this.planSharedService.setPlan(this.currentExamProviderPlan);
-      } else {
-        console.error('Failed to load about data:', response.message);
-      }
-    });
+    if(this.userRole==EXAM_PROVIDER_ROLE){
+
+      this.examProviderCall.getExamProviderByUserId(this.userData?.userId??0) .subscribe(
+        (response: ApiResponse<GetExamProviderByUserIdDto>) => {
+        if (response.status === 200) {
+          this.examProviderData=response.data;
+          this.currentExamProviderPlan = response.data.plan;
+          this.planSharedService.setPlan(this.currentExamProviderPlan);
+        } else {
+          console.error('Failed to load about data:', response.message);
+        }
+      });
+
+    }
   }
 
   isExamProvider(): boolean {
-    console.log(this.userRole)
+  
     return this.userRole === EXAM_PROVIDER_ROLE;
   }
 

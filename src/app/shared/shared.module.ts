@@ -1,13 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminSideBarComponent } from './admin/admin-side-bar/admin-side-bar.component';
-import { ProctorSideBarComponent } from './proctor/proctor-side-bar/proctor-side-bar.component';
-import { ExamProviderSideBarComponent } from './exam-provider/exam-provider-side-bar/exam-provider-side-bar.component';
-import { StudentNavBarComponent } from './student/student-nav-bar/student-nav-bar.component';
-import { StudentFooterComponent } from './student/student-footer/student-footer.component';
-import { DashNavBarComponent } from './dash/dash-nav-bar/dash-nav-bar.component';
-import { DashbardAssetsComponent } from './dash/dashbard-assets/dashbard-assets.component';
-import { HomeAssetsComponent } from './dash/home-assets/home-assets.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { InputComponent } from './components/input/input.component';
@@ -25,9 +17,13 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ChoosePlanComponent } from './user-profile/choose-plan/choose-plan.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChatSectionComponent } from './components/input/chat-section/chat-section.component';
+import { DisableRightClickDirective } from '../core/directive/disable-right-click.directive';
+import { RestrictedScreenComponent } from './components/restricted-screen/restricted-screen.component';
+import { UnsavedChangesDirective } from '../core/directive/unsaved-changes.directive';
+import { DraggableComponent } from './components/draggable/draggable.component';
 @NgModule({
   declarations: [
-     InputComponent,
+    InputComponent,
     MyAccountComponent,
     UserProfileComponent,
     UpdateEmailComponent,
@@ -35,7 +31,11 @@ import { ChatSectionComponent } from './components/input/chat-section/chat-secti
     UpdateNameComponent,
     UpdatePasswordComponent,
     ChoosePlanComponent,
-    ChatSectionComponent
+    ChatSectionComponent,
+    DisableRightClickDirective,
+    RestrictedScreenComponent,
+    UnsavedChangesDirective,
+    DraggableComponent
   ],
   imports: [
     CommonModule,
@@ -45,11 +45,10 @@ import { ChatSectionComponent } from './components/input/chat-section/chat-secti
     FormsModule,
     UserProfileRoutingModule,
     NgxDatatableModule,
-    FontAwesomeModule 
-    
+    FontAwesomeModule,
+
   ],
   exports: [
-
     ReactiveFormsModule,
     InputComponent,
     HttpClientModule,
@@ -64,8 +63,10 @@ import { ChatSectionComponent } from './components/input/chat-section/chat-secti
     NgxDatatableModule,
     CommonModule,
     FontAwesomeModule,
-    ChatSectionComponent
-
+    ChatSectionComponent,
+    DisableRightClickDirective,
+    UnsavedChangesDirective,
+    DraggableComponent
 
   ],
   providers: [

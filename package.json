@@ -28,6 +28,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@swimlane/ngx-datatable": "^20.1.0",
+    "@microsoft/signalr": "^8.0.7",
     "aos": "^2.3.4",
     "date-fns": "^3.6.0",
     "decibel-meter": "^2.0.0",

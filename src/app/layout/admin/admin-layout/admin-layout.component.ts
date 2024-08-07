@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import { EXAM_PROVIDER_ROLE } from '../../../core/constants/app.constants';
+import { LOCAL_HOST, EXAM_PROVIDER_ROLE, LIGHT_THEME, DARK_THEME } from '../../../core/constants/app.constants';
 import {AuthService} from "../../../core/services/auth.service";
 
 @Component({
@@ -16,8 +16,11 @@ import {AuthService} from "../../../core/services/auth.service";
   encapsulation:ViewEncapsulation.None,
 })
 export class AdminLayoutComponent  implements OnInit {
-  constructor(protected authService:AuthService) {
+  lightTheme = LIGHT_THEME;
+  darkTheme = DARK_THEME;
 
+
+  constructor(protected authService:AuthService) {
   }
   ngOnInit(): void {
     console.log('remove', 'load')
@@ -28,9 +31,9 @@ export class AdminLayoutComponent  implements OnInit {
 
   loadScripts() {
     const dynamicScripts = [
-      'http://localhost:4200/dashboard-assets/dist/js/demo-theme.min.js',
-      'http://localhost:4200/dashboard-assets/dist/js/tabler.min.js',
-      'http://localhost:4200/dashboard-assets/dist/js/demo.min.js',
+      `${LOCAL_HOST}/dashboard-assets/dist/js/demo-theme.min.js`,
+      `${LOCAL_HOST}/dashboard-assets/dist/js/tabler.min.js`,
+      `${LOCAL_HOST}/dashboard-assets/dist/js/demo.min.js`,
     ];
     for (let i = 0; i < dynamicScripts.length; i++) {
       const node = document.createElement('script');
