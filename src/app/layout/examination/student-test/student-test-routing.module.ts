@@ -7,6 +7,7 @@ import { IdenImageComponent } from './components/iden-image/iden-image.component
 import { CheckInProcessComponent } from './components/check-in-process/check-in-process.component';
 import { ExamRulesComponent } from './components/exam-rules/exam-rules.component';
 import { CameraTestComponent } from './components/camera-test/camera-test.component';
+import { StartComponent } from './components/start/start.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
     
     children: [
       { path: 'check', component: CheckInProcessComponent },
+      { path: 'start', component: StartComponent},
       { path: 'iden-test', component: IdenImageComponent },
       { path: 'room-test', component: RoomImageComponent },
       { path: 'mic-test', component: MicrophoneTestComponent },

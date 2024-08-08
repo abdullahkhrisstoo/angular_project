@@ -35,6 +35,7 @@ export class PlanComponent {
   createPlanForm: FormGroup;
   createPlanFeatureForm: FormGroup;
   planFeatures: PlanFeatureDTO[] = [];
+  planFeaturesFilter: PlanFeatureDTO[] = [];
   columnsPlanFeature = [
     { name: 'Feature Name', prop: 'featuresName' },
     { name: 'Created At', prop: 'createdAt' },
@@ -44,6 +45,7 @@ export class PlanComponent {
   planIdNow:number=1;
   planFeatureIdNow: number=1;
   plans: PlanDTO[] = [];
+  plansFilter: PlanDTO[] = [];
   columnsPlan = [
     { name: 'Plan Name', prop: 'planName' },
     { name: 'Plan Description', prop: 'planDescription' },
@@ -138,6 +140,7 @@ export class PlanComponent {
     this.planService.getAllPlans().subscribe(
       response => {
         this.plans=response.data;
+        this.plansFilter=response.data;
         console.log('All Plans:', response);
       },
       error => {
@@ -266,6 +269,10 @@ export class PlanComponent {
   resetCreatePlanFeatureForm() {
     this.createPlanFeatureForm.reset();
   }
+
+  filterPlans(){}
+  filterPlanFeatures(){}
+
 }
 
 // //complement testing

@@ -1,5 +1,9 @@
 import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import * as AOS from 'aos';
+import { ADMIN_ROLE, EXAM_PROVIDER_ROLE, PROCTOR_ROLE } from '../../../core/constants/app.constants';
+import { Router } from '@angular/router';
+import { LocalStorageService } from '../../../core/services/local-storage.service';
+import { CurrentUserData } from '../../../core/models/current-user-data';
 
 @Component({
   selector: 'app-home-layout',
@@ -15,13 +19,24 @@ import * as AOS from 'aos';
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeLayoutComponent  implements OnInit {
-  constructor() {
+  constructor(private router: Router,private localStorageService:LocalStorageService) {
 
   }
+
+  isExist=false;
   ngOnInit(): void {
     console.log('remove', 'load')
     this.removeScripts();
     this.loadScripts();
+
+    const user= <CurrentUserData> this.localStorageService.getItem(this.localStorageService.USER_SESSION_KEY);
+
+    
+   if(user.roleId){
+     this.isExist=true;
+    }
+
+
   }
 
   // Method to dynamically load JavaScript
@@ -67,6 +82,32 @@ export class HomeLayoutComponent  implements OnInit {
 
 
 
+
+  }
+  goToDash(){
+   const user= <CurrentUserData> this.localStorageService.getItem(this.localStorageService.USER_SESSION_KEY);
+
+    
+   if(user.roleId){
+
+    switch (user.roleId) {
+      case EXAM_PROVIDER_ROLE:
+        this.router.navigate(['/exam-provider/profile']);
+        break;
+      case PROCTOR_ROLE:
+        this.router.navigate(['/proctor/profile']);
+        break;
+      case ADMIN_ROLE:
+        this.router.navigate(['/admin/profile']);
+        break;
+      default:
+        console.warn('Unknown role:', user.roleId);
+        break;
+    }
+
+
+   }
+   
 
   }
 }

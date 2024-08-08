@@ -1,7 +1,7 @@
 export const API_ENDPOINTS = {
-  baseUrl : 'https://localhost:1111/api/',
+  baseUrl : 'http://192.168.100.67:7220/api/',
 
-  baseUrlImage : 'https://localhost:1111/',
+  baseUrlImage : 'http://192.168.100.67:7220/',
 
    GET_PROCTOR_WORK_TIMES : 'ProctorWorkTimes/GetProctorsWorkTimeById',
     UPDATE_PROCTOR_ANSWER : 'ProctorWorkTimes/UpdateProctorsWorkTimeById',

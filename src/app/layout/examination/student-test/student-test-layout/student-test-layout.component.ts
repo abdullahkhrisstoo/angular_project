@@ -59,7 +59,7 @@ export class StudentTestLayoutComponent {
     });
 
    if(localStorage.getItem("auth-token") == null || localStorage.getItem("examerDTO")==null) {
-      this.router.navigate(['/home']);
+      //this.router.navigate(['/home']);
     }
      
    }
