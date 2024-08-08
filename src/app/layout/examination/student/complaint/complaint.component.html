@@ -1,0 +1,17 @@
+<div class="complaint-container">
+    <h2>Complaint Form</h2>
+    <p>It appears that there was a concern about potential cheating during your exam. If you believe this decision was made in error, please provide a detailed explanation below. If we are convinced by your words, we will reschedule your exam or return your payment.</p>
+    <p class="warning">This page will expire in <span id="timer">{{minutes}}:{{seconds | number: '2.0'}}</span>. Please submit your complaint before time runs out.</p>
+    <form [formGroup]="createComplementForm"  (ngSubmit)="updateComplemntByStudent()" *ngIf="!isExpired">
+      <div class="form-group">
+        <label for="complaint">Your Complaint:</label>
+        <textarea id="complaint"  formControlName="studentDesc"  class="form-control" rows="5" required></textarea>
+      </div>
+      <button type="submit" [disabled]="createComplementForm.invalid" class="btn btn-primary">Send</button>
+    </form>
+    <div *ngIf="isExpired" class="expired-message">
+      <p>The time to submit your complaint has expired.</p>
+    </div>
+  </div>
+
+ 

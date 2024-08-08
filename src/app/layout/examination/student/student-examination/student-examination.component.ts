@@ -34,6 +34,13 @@ import { PlatformLocation } from '@angular/common';
 import { fromEvent, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UpdateComplementDTO } from '../../../../core/DTO/update-complement-dto';
+import { ComplementService } from '../../../../core/services/complement.service';
+import { ApiResponse } from '../../../../core/utils/ApiResponse';
+import { ToastrService } from 'ngx-toastr';
+import { ToastMsgService } from '../../../../core/services/toast.service';
+import { APP_MESSAGES } from '../../../../core/constants/error-messages.constants';
 
 type IconType = 'microphone' | 'chat' | 'camera';
 
@@ -96,6 +103,9 @@ localVideo_3!: ElementRef<HTMLVideoElement>;
     private platformLocation: PlatformLocation,
     private router: Router,
     private cdr: ChangeDetectorRef,
+    private complainService:ComplementService,
+    private toast: ToastMsgService,
+    private fb: FormBuilder,
   ) {
     this.warningSound = new Audio('/sounds/10-minutes.mp3');
 
@@ -109,7 +119,47 @@ localVideo_3!: ElementRef<HTMLVideoElement>;
       //history.forward();
       // });
     });
+
+
+
+
+    this.createComplementForm = this.fb.group({
+      studentDesc: ['', Validators.required],
+    });
   }
+
+
+
+
+  createComplementForm!: FormGroup;
+  AppMessages = APP_MESSAGES;
+
+  updateComplemntByStudent() {
+
+
+  
+    const updateComplementDTO: UpdateComplementDTO = this.createComplementForm.value;
+ 
+    const examerDTO=JSON.parse(localStorage.getItem("examerDTO")!);
+    updateComplementDTO.examReservationId=examerDTO.ReservationId;
+
+    this.complainService.updateComplementByStudent(updateComplementDTO).subscribe(
+      (response) => {
+        console.log("response: "+response.message);
+       // localStorage.clear();
+      },
+      error => {
+        console.error('API error:', error);
+        this.toast.showError(this.AppMessages.YOU_CANT_UPDATED_NOW);
+      }
+    );
+    //this.endCall();
+  }
+
+
+
+
+
 
 
   ngOnDestroy(): void {
@@ -126,6 +176,16 @@ localVideo_3!: ElementRef<HTMLVideoElement>;
         history.pushState(null, '');
         alert(`You can't make changes or go back at this time.`);
       });
+
+   
+      this.webRtc.HubConnection.on('ReciveFormComplaint', async () => {
+      
+        this.router.navigate(['examination/complaint']);
+        //document.getElementById("but-modal-sim")?.click();
+      
+      });
+    
+
     // todo: signlR and webRTC init
     this.remoteAudio=document.getElementById("remoteAudio") as HTMLAudioElement;
      this.remoteAudio.srcObject=this.webRtc.RemoteAudioStream;
@@ -139,6 +199,9 @@ localVideo_3!: ElementRef<HTMLVideoElement>;
       this.cdr.markForCheck();
     };
     this.shareScreen = this.webRtc.ShareScreenStream;
+    
+
+
 
     if (this.shareScreen != null && this.localVideo != null) {
       // this.startExam();

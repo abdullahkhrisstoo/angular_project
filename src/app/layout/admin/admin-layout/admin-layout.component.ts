@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { LOCAL_HOST, EXAM_PROVIDER_ROLE, LIGHT_THEME, DARK_THEME } from '../../../core/constants/app.constants';
 import {AuthService} from "../../../core/services/auth.service";
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -19,14 +20,29 @@ export class AdminLayoutComponent  implements OnInit {
   lightTheme = LIGHT_THEME;
   darkTheme = DARK_THEME;
 
-
-  constructor(protected authService:AuthService) {
+  messages:string[]=[];
+  constructor(protected authService:AuthService,private notificationService: NotificationService) {
   }
   ngOnInit(): void {
     console.log('remove', 'load')
 
     this.removeScripts();
     this.loadScripts();
+    
+    try{
+      this.notificationService.notifications$.subscribe(notification => {
+
+        this.messages.push(notification.toString());
+        sessionStorage.setItem('messages', JSON.stringify(this.messages));
+        console.log('Notification in component:', notification);
+      });
+
+    }
+    catch(e){}
+    
+    const savedMessages = sessionStorage.getItem('messages');
+    this.messages = savedMessages ? JSON.parse(savedMessages) : [];
+    
   }
 
   loadScripts() {

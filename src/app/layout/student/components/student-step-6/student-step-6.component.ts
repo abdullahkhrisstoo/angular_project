@@ -6,6 +6,7 @@ import { ExamReservationService } from '../../../../core/services/exam-reservati
 import { CardInfoDTO } from '../../../../core/DTO/card-info-dto';
 import { ExamReservationPaymentDTO } from '../../../../core/DTO/exam-reservation-payment-dto';
 import { AvailableTimeDTO } from '../../../../core/DTO/available-time-dto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-step-6',
@@ -46,7 +47,8 @@ formatSelectedTime: string = '';
 time?:AvailableTimeDTO;
 constructor(
   private fb: FormBuilder,
-  private examReservationService: ExamReservationService
+  private examReservationService: ExamReservationService,
+  private router:Router
 ) {
 
   
@@ -119,7 +121,13 @@ onSubmit() {
 
     this.examReservationService.createProcessExamReservation(examReservationDTO).subscribe(
       response => {
-        // Handle successful response
+
+        setTimeout(()=>{
+          //localStorage.clear();
+          this.router.navigate(['/home']);
+       
+        }, 3100);
+       
         console.log('Exam reservation created successfully', response);
       },
       error => {

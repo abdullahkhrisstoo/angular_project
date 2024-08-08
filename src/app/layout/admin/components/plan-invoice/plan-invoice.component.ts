@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PlanInvoiceService } from '../../../../core/services/plan-invoice.service';
 import { SortType } from '@swimlane/ngx-datatable';
 import { PlanInvoiceDetailsDTO } from '../../../../core/DTO/plan-invoice-details-dto';
+import { CommonUtils } from '../../../../core/utils/CommonUtils';
 
 @Component({
   selector: 'app-plan-invoice',
@@ -11,6 +12,7 @@ import { PlanInvoiceDetailsDTO } from '../../../../core/DTO/plan-invoice-details
 export class PlanInvoiceComponent {
 
   planInvoices: PlanInvoiceDetailsDTO[] = [];
+  planInvoicesFilter: PlanInvoiceDetailsDTO[] = [];
   columns = [
     { prop: 'planName', name: 'Plan Name' },
     { prop: 'examProviderName', name: 'Exam Provider' },
@@ -29,6 +31,7 @@ export class PlanInvoiceComponent {
     this.planInvoiceService.getPlanInvoices().subscribe(
       response => {
         this.planInvoices=response.data;
+        this.planInvoicesFilter=this.planInvoices;
         console.log(`Exams by Provider ID :`, response);
       },
       error => {
@@ -39,7 +42,8 @@ export class PlanInvoiceComponent {
   }
 
   updateFilter(event: any) {
-
+    let val = event.target.value.toLowerCase();
+    this.planInvoices= CommonUtils.filterData(this.planInvoicesFilter,val)
   }
 
   protected readonly SortType = SortType;

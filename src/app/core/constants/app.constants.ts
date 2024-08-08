@@ -10,7 +10,7 @@ export const THIRTY_SECONDS=30;
 
 // href="http://localhost:4200/admin/dashboard?theme=dark"
 
-export const LOCAL_HOST="http://192.168.1.17:4200"
-export const LIGHT_THEME="http://192.168.1.17:4200/admin/exam-provider?theme=light"
-export const DARK_THEME="http://192.168.1.17:4200/admin/exam-provider?theme=dark"
+export const LOCAL_HOST="http://192.168.100.67:4200"
+export const LIGHT_THEME="http://192.168.100.67:4200/admin/exam-provider?theme=light"
+export const DARK_THEME="http://192.168.100.67:4200/admin/exam-provider?theme=dark"
 

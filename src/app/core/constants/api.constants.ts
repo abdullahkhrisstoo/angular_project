@@ -1,11 +1,9 @@
 export const API_ENDPOINTS = {
 
-  baseUrl : 'http://192.168.1.17:1111/api/',
-
-  baseUrlImage : 'http://192.168.1.17:1111/',
-
-   GET_PROCTOR_WORK_TIMES : 'ProctorWorkTimes/GetProctorsWorkTimeById',
-    UPDATE_PROCTOR_ANSWER : 'ProctorWorkTimes/UpdateProctorsWorkTimeById',
+  baseUrl : 'http://192.168.100.67:1111/api/',
+  baseUrlImage : 'http://192.168.100.67:1111/',
+  GET_PROCTOR_WORK_TIMES : 'ProctorWorkTimes/GetProctorsWorkTimeById',
+  UPDATE_PROCTOR_ANSWER : 'ProctorWorkTimes/UpdateProctorsWorkTimeById',
 
   //todo:contact us
   GET_ALL_CONTACT: 'ContactUs/GetAllContactUs',

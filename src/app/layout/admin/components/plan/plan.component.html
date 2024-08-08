@@ -50,7 +50,7 @@
 
       <div class="d-flex justify-content-end">
         <input type="text" class="form-control" style="width: 30%;" placeholder="Search..."
-              />
+        (keyup)="updatePlanFilter($event)"/>
       </div>
       <br>
       <ngx-datatable
@@ -166,7 +166,7 @@
 
               <div class="d-flex justify-content-end">
                 <input type="text" class="form-control" style="width: 30%;" placeholder="Search..."
-                     />
+                (keyup)="updatePlanFeaturesFilter($event)"  />
               </div>
               <br>
               <ngx-datatable

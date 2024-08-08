@@ -50,7 +50,9 @@
           <div class="container-xl">
             <div class="card" style="padding : 20px; ">
               <div class="d-flex justify-content-end">
-                <input type="text" class="form-control" style="width: 30%;" placeholder="Search..." />
+                <input type="text" class="form-control" style="width: 30%;" placeholder="Search..."
+                (keyup)="updateProctorReservationsFilter($event)"
+                />
 <!--                       (keyup)="updateFilterExamReservations($event)"-->
 
               </div>
@@ -85,10 +87,10 @@
                     {{ value | date:'yyyy-MM-dd HH:mm:ss' }}
                   </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Complement Details" [width]="100" [sortable]="false">
+                <ngx-datatable-column name="Complaint Details" [width]="100" [sortable]="false">
                   <ng-template ngx-datatable-cell-template let-row="row">
                     <button class="btn btn-info btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#modal-complement" (click)="loadComplement(row.examReservationId)">Complement
+                            data-bs-target="#modal-complement" (click)="loadComplement(row.examReservationId)">Complaint
                     </button>
                   </ng-template>
                 </ngx-datatable-column>

@@ -4,7 +4,25 @@
   top: 12px;
   right: 12px;
 }
+.toast-bottom-center {
 
+  bottom: 0%;                /* 20px above the bottom of the parent element */
+  left: 50%;                   /* Center horizontally within the parent */
+  transform: translateX(-50%); /* Center exactly by shifting left by 50% of its own width */
+  width: auto;                 /* Adjust width as necessary */
+  max-width: 90%;              /* Ensure it doesn't get too wide on small screens */
+  vertical-align: bottom;
+}
+
+
+
+
+
+
+/* Optional: You can also add padding or margin to separate the toast from the edge of the viewport */
+.toast-bottom-center .toast {
+  margin-bottom: 10px;
+}
 .toast-success {
   background-color: #28a745 !important;
   color: #fff !important;
@@ -125,3 +143,11 @@
   }
 
 
+  @font-face {
+    font-display: block;
+    font-family: "bootstrap-icons";
+    src: url('/home-assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2?dd67030699838ea613ee6dbda90effa6') format('woff2'),
+         url('/home-assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff?dd67030699838ea613ee6dbda90effa6') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }

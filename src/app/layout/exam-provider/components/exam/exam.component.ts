@@ -15,6 +15,7 @@ import {ExamReservationService} from "../../../../core/services/exam-reservation
 import {TestimonialService} from "../../../../core/services/testimonial.service";
 import {ProctorService} from "../../../../core/services/proctor.service";
 import { SortType } from '@swimlane/ngx-datatable';
+import { CommonUtils } from '../../../../core/utils/CommonUtils';
 
 @Component({
   selector: 'app-exam',
@@ -29,12 +30,14 @@ export class ExamComponent {
 
 
   exams: ExamInfoDTO[] = [];
+  examsFilter: ExamInfoDTO[] = [];
   columnsExamsTable = [
     { name: 'Title', prop: 'examTitle' },
     { name: 'Created At', prop: 'createdAt' },
   ];
 
   reservations: ExamReservationDTO[] = [];
+  reservationsFilter: ExamReservationDTO[] = [];
   columnsExamReservation = [
     { name: 'Student Name', prop: 'studentName' },
     { name: 'Email', prop: 'email' },
@@ -89,7 +92,7 @@ export class ExamComponent {
     this.examService.getAllExamsByExamProviderId(providerId).subscribe(
       response => {
         this.exams=response;
-
+        this.examsFilter=this.exams;
         console.log(`Exams by Provider ID ${providerId}:`, response);
       },
       error => {
@@ -103,6 +106,7 @@ export class ExamComponent {
     this.examReservationService.getExamReservationsByExamId(examId).subscribe(
       response => {
         this.reservations=response;
+        this.reservationsFilter=this.reservations;
         console.log(`Exam Reservations by Exam ID ${examId}:`, response);
       },
       error => {
@@ -140,10 +144,14 @@ export class ExamComponent {
   }
 
 
-  updateFilter(event: any) {
-
+  updateExamsFilter(event: any) {
+    let val = event.target.value.toLowerCase();
+    this.exams= CommonUtils.filterData(this.examsFilter,val)
   }
-
+  updateExamReservationsFilter(event: any) {
+    let val = event.target.value.toLowerCase();
+    this.reservations= CommonUtils.filterData(this.reservationsFilter,val)
+  }
 
 
   protected readonly SortType = SortType;

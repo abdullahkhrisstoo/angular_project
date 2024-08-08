@@ -5,6 +5,7 @@ import Dropzone from 'dropzone';
 import { RoomImageService } from '../../../../../core/services/room-image.service';
 import { CreateRoomReservationImageDTO } from '../../../../../core/DTO/create-room-image-dto';
 import { Router } from '@angular/router';
+import { ToastMsgService } from '../../../../../core/services/toast.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class RoomImageComponent {
     this.router.navigate(['./examination/student-test/exam-rules']);
   }
 
-  constructor(private fb: FormBuilder, private roomService: RoomImageService,  private router: Router) {
+  constructor(private fb: FormBuilder,private toast:ToastMsgService, private roomService: RoomImageService,  private router: Router) {
     this.roomImageForm = this.fb.group({
       examReservationId: [''],
       place: ['']
@@ -99,9 +100,11 @@ export class RoomImageComponent {
       this.roomService.createRoomImage(e).subscribe(
         response => {
           this.isDisabled=false;
+          this.toast.showSuccess("the process has been successfully")
           console.log('Room images created successfully', response);
         },
         error => {
+          this.toast.showError("there is a problem")
           console.error('Error creating room images', error);
         }
       );

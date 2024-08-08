@@ -6,6 +6,8 @@ import { IdentificationImageService } from '../../../../../core/services/identif
 import { CreateIdentificationImageDTO } from '../../../../../core/DTO/create-identification-image-dto';
 import { Router } from '@angular/router';
 import { faSlash } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
+import { ToastMsgService } from '../../../../../core/services/toast.service';
 @Component({
   selector: 'app-iden-image',
   templateUrl: './iden-image.component.html',
@@ -19,7 +21,7 @@ export class IdenImageComponent {
   isDisabled:boolean=true;
   @ViewChild('dropzoneElement', { static: false }) dropzoneElement!: ElementRef;
 
-  constructor(private fb: FormBuilder, private identificationService: IdentificationImageService,  private router: Router,) {
+  constructor(private fb: FormBuilder,private toast:ToastMsgService, private identificationService: IdentificationImageService,  private router: Router,) {
     this.identificationImageForm = this.fb.group({
       imageBack: [null, Validators.required],
       imageFront: [null, Validators.required],
@@ -101,10 +103,12 @@ onNext(){
     this.identificationService.createIdentificationImage(createIdentificationImageDTO).subscribe(
       response => {
         this.isDisabled=false;
+        this.toast.showSuccess("the process has been successfully")
         console.log('Identification image created successfully', response);
 
       },
       error => {
+        this.toast.showError("there is a problem")
         console.error('Error creating identification image', error);
       }
     );

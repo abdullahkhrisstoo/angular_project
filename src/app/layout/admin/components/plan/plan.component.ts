@@ -9,6 +9,7 @@ import {PlanFeatureDTO} from "../../../../core/DTO/plan-feature-dto";
 import {PlanDTO} from "../../../../core/DTO/plan-dto";
 import {SortType} from "@swimlane/ngx-datatable";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { CommonUtils } from '../../../../core/utils/CommonUtils';
 
 @Component({
   selector: 'app-plan',
@@ -20,6 +21,7 @@ export class PlanComponent {
   createPlanForm: FormGroup;
   createPlanFeatureForm: FormGroup;
   planFeatures: PlanFeatureDTO[] = [];
+  planFeaturesFilter: PlanFeatureDTO[] = [];
   columnsPlanFeature = [
     { name: 'Feature Name', prop: 'featuresName' },
     { name: 'Created At', prop: 'createdAt' },
@@ -29,6 +31,7 @@ export class PlanComponent {
   planIdNow:number=1;
   planFeatureIdNow: number=1;
   plans: PlanDTO[] = [];
+  plansFilter: PlanDTO[] = [];
   columnsPlan = [
     { name: 'Plan Name', prop: 'planName' },
     { name: 'Plan Description', prop: 'planDescription' },
@@ -123,6 +126,7 @@ export class PlanComponent {
     this.planService.getAllPlans().subscribe(
       response => {
         this.plans=response.data;
+        this.plansFilter=this.plans;
         console.log('All Plans:', response);
       },
       error => {
@@ -134,7 +138,7 @@ export class PlanComponent {
     this.planFeatureService.getPlanFeaturesByPlanId(planId).subscribe(
       response => {
         this.planFeatures = response;
-
+        this.planFeaturesFilter=this.planFeatures;
       },
       error => {
         this.planFeatures=[]
@@ -250,6 +254,16 @@ export class PlanComponent {
 
   resetCreatePlanFeatureForm() {
     this.createPlanFeatureForm.reset();
+  }
+
+
+  updatePlanFeaturesFilter(event: any) {
+    let val = event.target.value.toLowerCase();
+    this.planFeatures= CommonUtils.filterData(this.planFeaturesFilter,val)
+  }
+  updatePlanFilter(event: any) {
+    let val = event.target.value.toLowerCase();
+    this.plans= CommonUtils.filterData(this.plansFilter,val)
   }
 }
 

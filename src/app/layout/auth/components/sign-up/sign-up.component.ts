@@ -199,11 +199,13 @@ export class SignUpComponent implements OnInit {
 
     this.authService.registerExamProvider(formData).subscribe(
       response => {
-        // Handle success
+
+        this.toast.showSuccess("the process has been succssfully")
         console.log('Registration successful', response);
       },
       error => {
         // Handle error
+        this.toast.showError("There is a problem");
         console.error('Registration error', error);
       }
     );

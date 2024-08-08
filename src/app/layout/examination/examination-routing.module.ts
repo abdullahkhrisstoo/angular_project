@@ -4,6 +4,7 @@ import { ExaminationLayoutComponent } from './examination-layout/examination-lay
 import { StudentExaminationComponent } from './student/student-examination/student-examination.component';
 import { ProctorExaminationComponent } from './proctor/proctor-examination/proctor-examination.component';
 import { StudentScoreComponent } from './student/student-score/student-score.component';
+import { ComplaintComponent } from './student/complaint/complaint.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
       { path: 'student', component: StudentExaminationComponent },
       { path: 'proctor', component: ProctorExaminationComponent },
       { path: 'score', component: StudentScoreComponent },
-
+      { path: 'complaint', component: ComplaintComponent },
 
       {
         path: 'student-test',

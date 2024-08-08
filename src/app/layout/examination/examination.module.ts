@@ -7,6 +7,7 @@ import { StudentExaminationComponent } from './student/student-examination/stude
 import { SharedModule } from "../../shared/shared.module";
 import { ProctorExaminationComponent } from './proctor/proctor-examination/proctor-examination.component';
 import { StudentScoreComponent } from './student/student-score/student-score.component';
+import { ComplaintComponent } from './student/complaint/complaint.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { StudentScoreComponent } from './student/student-score/student-score.com
     StudentExaminationComponent,
     ProctorExaminationComponent,
     StudentScoreComponent,
+    ComplaintComponent,
   ],
   imports: [
     CommonModule,

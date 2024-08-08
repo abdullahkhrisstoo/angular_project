@@ -25,7 +25,7 @@ export class WebrtcService {
 
   initializeConnection(routeFunc:Function) {
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl('http://192.168.1.17:1111/signalingHub')
+      .withUrl('http://192.168.100.67:1111/signalingHub')
       .build();
 
     this.hubConnection
@@ -144,5 +144,8 @@ export class WebrtcService {
   }
   get RemoteAudioStream() {
     return this.remoteStream;
+  }
+  get HubConnection() {
+    return this.hubConnection;
   }
 }

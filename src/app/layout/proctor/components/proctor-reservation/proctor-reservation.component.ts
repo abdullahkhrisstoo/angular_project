@@ -13,6 +13,7 @@ import { IdentificationImageDTO } from '../../../../core/DTO/identification-imag
 import { API_ENDPOINTS } from '../../../../core/constants/api.constants';
 import { RoomReservationImageDTO } from '../../../../core/DTO/room-rservation-image-dto';
 import { throwIfEmpty } from 'rxjs';
+import { CommonUtils } from '../../../../core/utils/CommonUtils';
 
 @Component({
   selector: 'app-proctor-reservation',
@@ -107,6 +108,10 @@ export class ProctorReservationComponent {
      }
    );
    }
+   updateProctorReservationsFilter(event: any) {
+    let val = event.target.value.toLowerCase();
+    this.reservations= CommonUtils.filterData(this.reservationsFilter,val)
+  }
 
   protected readonly SortType = SortType;
 }

@@ -53,7 +53,13 @@ export class ComplementService {
       );
   }
 
-
+  updateComplementByProctor(viewModel: UpdateComplementDTO): Observable<any> {
+    const endpoint = `${API_ENDPOINTS.UPDATE_COMPLEMENT_BY_PROCTOR}`;
+    return this.apis.put<ApiResponse<any>>(endpoint,viewModel)
+      .pipe(
+        map(response => response.data)
+      );
+  }
   updateComplement(viewModel: UpdateComplementDTO): Observable<any> {
     const endpoint = `${API_ENDPOINTS.UPDATE_COMPLEMENT_BY_PROCTOR}`;
     return this.apis.put<ApiResponse<any>>(endpoint,viewModel)

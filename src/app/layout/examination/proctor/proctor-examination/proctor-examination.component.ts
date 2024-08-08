@@ -47,28 +47,33 @@ type IconType = 'microphone' | 'chat' | 'shareScreen';
 })
 export class ProctorExaminationComponent implements OnInit {
   createComplementForm!: FormGroup;
-  updateComplementDTO!:  UpdateComplementDTO;
   AppMessages = APP_MESSAGES;
 
   updateComplemntByProctor() {
-    this.reservationNumber;
-    
-    this.complementService.updateComplementByStudent(this.updateComplementDTO).subscribe(
-      (response: ApiResponse<UpdateComplementDTO>) => {
-        console.log("response: "+response.message);
-        if (response.status === 200) {
-          this.toast.showSuccess(this.AppMessages.UPDATED_SUCCESSFULLY);
 
-        } else {
-          console.error('Update failed:', response.message);
-        }
+    const updateComplementDTO: UpdateComplementDTO = this.createComplementForm.value;
+    updateComplementDTO.examReservationId=71;
+    
+    this.complementService.updateComplementByProctor(updateComplementDTO).subscribe(
+      async (response) => {
+      console.log("response: "+response);
+     
+        // if (response.status === 200) {
+        //   this.toast.showSuccess(this.AppMessages.UPDATED_SUCCESSFULLY);
+
+        // } else {
+        //   console.error('Update failed:', response.message);
+        // }
+        //this.endCall();
+        await this.hubConnection.invoke('SendFormComplaintToUser');
+        this.endCall();
       },
       error => {
         console.error('API error:', error);
         this.toast.showError(this.AppMessages.YOU_CANT_UPDATED_NOW);
       }
     );
-    this.endCall();
+    
   }
 
   // TODO: signlR & web RTC variable
@@ -155,6 +160,8 @@ export class ProctorExaminationComponent implements OnInit {
         const payloadJson = JSON.parse(JSON.stringify(payload));
         this.reservationNumber = payloadJson.ReservationId as number;
         this.examName = payloadJson.ExamName as string;
+
+        //localStorage.setItem("payload-proctor",JSON.stringify(payload));
         //   this.cache.setItem(this.cache.AUTH_TOKEN, token)
         //   // localStorage.setItem("auth-token",token);
         //   this.cache.setItem(this.cache.EXAM, exam)
@@ -167,6 +174,7 @@ export class ProctorExaminationComponent implements OnInit {
         //   this.cache.setItem(this.cache.USER_ID, payloadJson.UserId);
         //   this.cache.setItem(this.cache.ROLE_ID, payloadJson.RoleId);
         //   this.cache.setItem(this.cache.PAYLOAD, payload);
+        this.router.navigate(['/examination/proctor']);
       } else if (localStorage.getItem('auth-token') == null) {
         this.router.navigate(['/home']);
       }
@@ -186,7 +194,7 @@ export class ProctorExaminationComponent implements OnInit {
       'remoteVideo_2'
     ) as HTMLVideoElement;
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl('http://192.168.1.17:1111/signalingHub')
+      .withUrl('http://192.168.100.67:1111/signalingHub')
       .build();
     this.hubConnection
       .start()
@@ -211,6 +219,11 @@ export class ProctorExaminationComponent implements OnInit {
           JSON.stringify(answer)
         );
       }
+     else {
+      await this.hubConnection.invoke('SendRejected');
+     }
+
+
     });
 
     this.hubConnection.on('ReceiveIceCandidate', async (user, candidate) => {

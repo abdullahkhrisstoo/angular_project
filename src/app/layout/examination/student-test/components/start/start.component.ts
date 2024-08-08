@@ -41,9 +41,20 @@ export class StartComponent implements OnInit {
       elem.msRequestFullscreen();
     }
   }
-
+   closeFullscreen(): void {
+    const elem = document.documentElement as any;
+    if (elem.exitFullscreen) {
+      elem.exitFullscreen();
+    } else if (elem.mozCancelFullScreen) { // Firefox
+      elem.mozCancelFullScreen();
+    } else if (elem.webkitExitFullscreen) { // Chrome, Safari, Opera
+      elem.webkitExitFullscreen();
+    } else if (elem.msExitFullscreen) { // IE/Edge
+      elem.msExitFullscreen();
+    }
+  }
   async join(){
-
+    
     this.webrtc.initializeConnection(()=>{
        this.route.navigate(['/examination/student']);
     });
@@ -55,15 +66,27 @@ export class StartComponent implements OnInit {
         this.webrtc.createPeerConnection();
       }
       await this.webrtc.startCall();
+      this.openFullscreen();
+      this.openFullscreen();
     }).catch(error => {
       alert("give me permission: " + error);
       console.error('Error starting local stream:', error);
     });
+ 
+    this.openFullscreen();
+    this.openFullscreen();
+      this.webrtc.HubConnection.on('ReceiveRejected', async () => {
+        this.closeFullscreen();
+           alert("you are rejected, your information is worng") 
+                 console.log("ReceiveRejected");
+                 
+      });
+    
+    
 
-        this.openFullscreen();
 
 
-
+      
 
      //setTimeout(()=>{this.enterFullScreen();},5000)
 

@@ -13,8 +13,8 @@ export class ReservationInvoiceService {
   constructor(private apis:GenericApiHandlerService) {}
 
  
-  getReservationInvoices(): Observable<ApiResponse<ReservationInvoiceDetailsDTO[]>> {
-    const endpoint = `${API_ENDPOINTS.GET_ALL_RESRVATION_INVOICES_DETAILS}`;
-    return this.apis.get<ApiResponse<ReservationInvoiceDetailsDTO[]>>(endpoint)
+  getReservationInvoices(page:number, size:number): Observable<any> {
+    const endpoint = `${API_ENDPOINTS.GET_ALL_RESRVATION_INVOICES_DETAILS}?page=${page}&size=${size}`;
+    return this.apis.get(endpoint)
   }
 }

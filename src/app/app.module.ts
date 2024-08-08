@@ -31,13 +31,14 @@ import { UnsavedChangesDirective } from './core/directive/unsaved-changes.direct
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 3000,
-      positionClass: 'toast-top-right',
+      positionClass: 'toast-bottom-center',  // Updated position
       preventDuplicates: true,
       progressBar: true,
       progressAnimation: 'increasing',
       closeButton: true,
       tapToDismiss: true
     }),
+    
   ],
   providers: [
     provideClientHydration(),

@@ -33,7 +33,7 @@ export class HomeLayoutComponent  implements OnInit {
     const user= <CurrentUserData> this.localStorageService.getItem(this.localStorageService.USER_SESSION_KEY);
 
 
-   if(user.roleId){
+   if(user !=null && user.roleId){
      this.isExist=true;
     }
 
