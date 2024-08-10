@@ -256,7 +256,7 @@
                   </div>
                 </div>
                 <div class="card-footer d-flex justify-content-end">
-                  <button class="btn btn-primary me-2" (click)="startExam()">
+                  <button class="btn btn-primary me-2" [disabled]="isDisabled" (click)="startExam()">
                     Start
                   </button>
                 </div>
@@ -332,8 +332,8 @@
           </div>
           <!-- todo: -->
         </div>
-      
-     
+
+
       </div>
     </div>
     <!-- Footer -->

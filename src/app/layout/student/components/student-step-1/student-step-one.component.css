@@ -4,20 +4,3 @@
   padding: 20px;
 }
 
-h1, h2 {
-  margin-bottom: 20px;
-}
-
-button {
-  padding: 10px 20px;
-}
-
-.btn-outline-primary {
-  border-color: #007bff;
-  color: #007bff;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-}

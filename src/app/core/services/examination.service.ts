@@ -52,7 +52,7 @@ export class ExaminationService {
     return this.currentExam ? this.currentExam.questions?.find(q => q.questionId === id) || null : null;
   }
 
-  calculateScoreCallingApi(answeredQuestions: StudentQuestionAnswerListDTO ): Observable<CorrectionAnswerOptionApiResponse> {
+  calculateScoreCallingApi(answeredQuestions: StudentQuestionAnswerListDTO ): Observable<any> {
     const endpoint = `${API_ENDPOINTS.GET_CORRECTION_ANSWER}`;
     return this.apiHandler.post<CorrectionAnswerOptionApiResponse>(endpoint,answeredQuestions);
 

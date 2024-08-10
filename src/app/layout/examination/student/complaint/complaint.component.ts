@@ -29,21 +29,20 @@ export class ComplaintComponent implements OnInit {
   updateComplemntByStudent() {
 
 
-  
+
     const updateComplementDTO: UpdateComplementDTO = this.createComplementForm.value;
- 
+
     const examerDTO=JSON.parse(localStorage.getItem("examerDTO")!);
-    updateComplementDTO.examReservationId=71;
+    updateComplementDTO.examReservationId=examerDTO.ReservationId;
 
     this.complainService.updateComplementByStudent(updateComplementDTO).subscribe(
       (response) => {
         console.log("response: "+response.message);
         //localStorage.clear();
-        this.router.navigate(['/home']); 
+        this.router.navigate(['/home']);
       },
       error => {
         console.error('API error:', error);
-      //  this.toast.showError(this.AppMessages.YOU_CANT_UPDATED_NOW);
       }
     );
     //this.endCall();

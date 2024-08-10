@@ -46,20 +46,35 @@ type IconType = 'microphone' | 'chat' | 'shareScreen';
   styleUrl: './proctor-examination.component.css',
 })
 export class ProctorExaminationComponent implements OnInit {
+
   createComplementForm!: FormGroup;
   AppMessages = APP_MESSAGES;
+  isExamStarted = false;
 
+ async toggleExam() {
+
+
+    if(this.isExamStarted===false){
+      this.isExamStarted=true;
+      await this.hubConnection.invoke('EnableStartExam');
+
+    }
+
+
+  }
   updateComplemntByProctor() {
 
     const updateComplementDTO: UpdateComplementDTO = this.createComplementForm.value;
-    updateComplementDTO.examReservationId=71;
-    
+    // let
+
+
+    updateComplementDTO.examReservationId=this.reservationNumber;
+
     this.complementService.updateComplementByProctor(updateComplementDTO).subscribe(
       async (response) => {
       console.log("response: "+response);
-     
+
         // if (response.status === 200) {
-        //   this.toast.showSuccess(this.AppMessages.UPDATED_SUCCESSFULLY);
 
         // } else {
         //   console.error('Update failed:', response.message);
@@ -67,13 +82,13 @@ export class ProctorExaminationComponent implements OnInit {
         //this.endCall();
         await this.hubConnection.invoke('SendFormComplaintToUser');
         this.endCall();
+        this.router.navigate(['**']);
       },
       error => {
         console.error('API error:', error);
-        this.toast.showError(this.AppMessages.YOU_CANT_UPDATED_NOW);
       }
     );
-    
+
   }
 
   // TODO: signlR & web RTC variable
@@ -143,7 +158,8 @@ export class ProctorExaminationComponent implements OnInit {
     private router: Router,
     private complementService: ComplementService,
     private fb: FormBuilder,
-    private toast: ToastMsgService
+    private toast: ToastMsgService,
+    private cache:LocalStorageService
 
   ) {
     this.route.queryParams.subscribe((params) => {
@@ -161,8 +177,9 @@ export class ProctorExaminationComponent implements OnInit {
         this.reservationNumber = payloadJson.ReservationId as number;
         this.examName = payloadJson.ExamName as string;
 
-        //localStorage.setItem("payload-proctor",JSON.stringify(payload));
-        //   this.cache.setItem(this.cache.AUTH_TOKEN, token)
+        localStorage.setItem("payload-proctor",JSON.stringify(payload));
+
+      //  this.cache.setItem(this.cache.AUTH_TOKEN, token)
         //   // localStorage.setItem("auth-token",token);
         //   this.cache.setItem(this.cache.EXAM, exam)
 
@@ -186,6 +203,27 @@ export class ProctorExaminationComponent implements OnInit {
     });
   }
 
+  Offer:string='';
+
+  async rejectOffer() {
+    await this.hubConnection.invoke('SendRejected');
+  }
+  async acceptOffer() {
+          const offerDesc: RTCSessionDescriptionInit = JSON.parse(this.Offer);
+          console.log('recive offer');
+          console.log(this.Offer);
+          await this.peerConnection.setRemoteDescription(new RTCSessionDescription(offerDesc));
+          const answer = await this.peerConnection.createAnswer();
+          await this.peerConnection.setLocalDescription(answer);
+          await this.hubConnection.invoke('SendAnswer',this.id,JSON.stringify(answer));
+    
+  }
+
+
+
+
+
+
   ngOnInit(): void {
     this.remoteVideo = document.getElementById(
       'remoteVideo'
@@ -194,37 +232,27 @@ export class ProctorExaminationComponent implements OnInit {
       'remoteVideo_2'
     ) as HTMLVideoElement;
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl('http://192.168.100.67:1111/signalingHub')
+      .withUrl('http://192.168.1.17:1111/signalingHub')
       .build();
     this.hubConnection
       .start()
       .catch((err) => console.error('Error while starting connection: ' + err));
 
     this.hubConnection.on('ReceiveOffer', async (user, offer) => {
-      if (
-        confirm(`User ${user} is inviting you to a call. Do you want to join?`)
-      ) {
-        const offerDesc: RTCSessionDescriptionInit = JSON.parse(offer);
-        console.log('recive offer');
+      // if (
+      //   confirm(`User ${user} is inviting you to a call. Do you want to join?`)
+      // ) {
+        this.Offer=offer;
+        document.getElementById("but-open-conn")?.click();
 
-        console.log(offer);
-        await this.peerConnection.setRemoteDescription(
-          new RTCSessionDescription(offerDesc)
-        );
-        const answer = await this.peerConnection.createAnswer();
-        await this.peerConnection.setLocalDescription(answer);
-        await this.hubConnection.invoke(
-          'SendAnswer',
-          this.id,
-          JSON.stringify(answer)
-        );
+
       }
-     else {
-      await this.hubConnection.invoke('SendRejected');
-     }
+    //  else {
+    //   await this.hubConnection.invoke('SendRejected');
+    //  }
 
 
-    });
+    );
 
     this.hubConnection.on('ReceiveIceCandidate', async (user, candidate) => {
       const iceCandidateInit: RTCIceCandidateInit = JSON.parse(candidate);

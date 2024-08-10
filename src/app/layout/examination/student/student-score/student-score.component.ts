@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./student-score.component.css']
 })
 export class StudentScoreComponent implements OnInit {
-  score!: any;
+
   mark!: number;
   numberOfQuestion!: number | null;
 
@@ -20,8 +20,7 @@ export class StudentScoreComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.score = this.cache.getItem(this.cache.STUDENT_SCORE) ?? 0;
-    this.mark= this.score.mark;
+    this.mark= this.cache.getItem(this.cache.STUDENT_SCORE) ?? 0;
     this.numberOfQuestion = this.cache.getItem(this.cache.NUMBER_OF_QUESTIONS);
   }
 

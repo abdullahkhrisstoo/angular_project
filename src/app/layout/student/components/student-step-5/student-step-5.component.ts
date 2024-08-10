@@ -17,6 +17,8 @@ declare var bootstrap: any;
 })
 export class StudentStep5Component implements OnInit {
 
+  currentImage: string = '';
+
   duration: number = 30;
   checkInTimeString: string = '';
   selectedTimeSlot: string = '';
@@ -48,12 +50,14 @@ export class StudentStep5Component implements OnInit {
 
   ngOnInit(): void {
     this.detectTimeZone();
+    this.updateImageBasedOnTime();
+
    if(localStorage.getItem("exam")){
 
     this.getExamByName(localStorage.getItem("exam")!)
    }
   }
- 
+
   getExamByName(name:string){
     this.examService.getExamByName(name).subscribe(
       response => {
@@ -68,10 +72,10 @@ export class StudentStep5Component implements OnInit {
           throw new Error("duration is null")
         }
 
-       
+
       },
       error => {
-        
+
         console.error('Error fetching complement by ExamReservationId:', error);
         //this.router.navigate(['/home']);
       }
@@ -134,7 +138,7 @@ export class StudentStep5Component implements OnInit {
     if (this.timeSlots.length > 0) {
       const startTime = new Date(this.timeSlots[0].startTime!);
       this.checkInTimeString = this.getCheckInTimeString(startTime, this.currentTimezone);
- 
+
       this.recommendedTime = this.getRecommendedTimeString(startTime, this.duration, this.currentTimezone);
 
     }
@@ -228,7 +232,7 @@ export class StudentStep5Component implements OnInit {
       console.log('Validation failed');
     }
   }
-  
+
   onPrevious(): void {
     this.router.navigate(['/student/step-4']);
     console.log('Previous button clicked');
@@ -236,25 +240,43 @@ export class StudentStep5Component implements OnInit {
 
 
   changeTime(time: AvailableTimeDTO) {
-   // this.recommendedTime=time.startTime+" "+time.endTime;
-   this.recommendedTime=""
-  if(time && time.startTime){
-    
-    const startTime = new Date(time.startTime!);
-    
-  
-    this.recommendedTime= this.getPresentedFormat(time.startTimeFormatted,time.endTimeFormatted,'Asia/Amman')
-    this.checkInTimeString=this.getCheckInTimePresentedFormat(time.startTimeFormatted,'Asia/Amman');
+    this.recommendedTime = "";
+    if (time && time.startTime) {
+      const startTime = new Date(time.startTime!);
 
-    console.log("start time",startTime)
-    localStorage.setItem("startTime",time.startTime)
-    localStorage.setItem("endTime",time.endTime!)
-    localStorage.setItem("formatSelectedTime",this.recommendedTime)
-    localStorage.setItem("time",(JSON.stringify(time)))
-    console.log(this.recommendedTime);
-  }
-   console.log(time)
+      this.recommendedTime = this.getPresentedFormat(time.startTimeFormatted, time.endTimeFormatted, 'Asia/Amman');
+      this.checkInTimeString = this.getCheckInTimePresentedFormat(time.startTimeFormatted, 'Asia/Amman');
+
+      console.log("start time", startTime);
+      localStorage.setItem("startTime", time.startTime);
+      localStorage.setItem("endTime", time.endTime!);
+      localStorage.setItem("formatSelectedTime", this.recommendedTime);
+      localStorage.setItem("time", (JSON.stringify(time)));
+      console.log(this.recommendedTime);
+
+      // Pass the startTime to updateImageBasedOnTime
+      this.updateImageBasedOnTime(startTime);
     }
+    console.log(time);
+  }
+
+
+
+    updateImageBasedOnTime(time?: Date) {
+      const currentTime = time || new Date();
+      const hour = currentTime.getHours();
+      if (hour >= 0 && hour < 6) {
+        this.currentImage = './image/morning.png';
+      } else if (hour >= 6 && hour < 12) {
+        this.currentImage = './image/midday.png';
+      } else if (hour >= 12 && hour < 18) {
+        this.currentImage = './image/afternoon.png';
+      } else {
+        this.currentImage = './image/evening.png';
+      }
+    }
+
+
 
 
 

@@ -1,3 +1,4 @@
+import { ExamReservationPaymentDTO } from './../../../../core/DTO/exam-reservation-payment-dto';
 import {
   AfterViewChecked,
   AfterViewInit,
@@ -5,6 +6,7 @@ import {
   Component,
   ElementRef,
   HostListener,
+  NgZone,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -41,6 +43,9 @@ import { ApiResponse } from '../../../../core/utils/ApiResponse';
 import { ToastrService } from 'ngx-toastr';
 import { ToastMsgService } from '../../../../core/services/toast.service';
 import { APP_MESSAGES } from '../../../../core/constants/error-messages.constants';
+import { ExamReservationService } from '../../../../core/services/exam-reservation.service';
+import { UpdateExamReservationDTO } from '../../../../core/DTO/update-exam-reservation-dto';
+import { FullscreenDetectionService } from '../../../../core/services/fullscreen-detection.service';
 
 type IconType = 'microphone' | 'chat' | 'camera';
 
@@ -53,6 +58,8 @@ export class StudentExaminationComponent
   implements OnInit, OnDestroy, AfterViewInit
 {
   // todo: webrtc, signlR varibles
+  isFullscreen: boolean = false;
+  updateExamReservationDTO!: UpdateExamReservationDTO;
   public butColor: string = 'blue';
   public butColorCam: string = 'blue';
   private isCameraOn = true;
@@ -62,7 +69,9 @@ export class StudentExaminationComponent
   @ViewChild('localVideo') localVideo!: ElementRef<HTMLVideoElement>;
   @ViewChild('localVideo_2') localVideo_2!: ElementRef<HTMLVideoElement>;
   @ViewChild('localVideo_3')
-localVideo_3!: ElementRef<HTMLVideoElement>;
+  localVideo_3!: ElementRef<HTMLVideoElement>;
+
+
 
   public dataFromProctro = '';
   shareScreen!: MediaStream;
@@ -95,7 +104,7 @@ localVideo_3!: ElementRef<HTMLVideoElement>;
   warningSound!: HTMLAudioElement;
   isVideoToggled: boolean = false;
   isMicrophoneToggled!: boolean;
-  remoteAudio!:HTMLAudioElement;
+  remoteAudio!: HTMLAudioElement;
   constructor(
     private questionService: ExaminationService,
     private cache: LocalStorageService,
@@ -103,9 +112,12 @@ localVideo_3!: ElementRef<HTMLVideoElement>;
     private platformLocation: PlatformLocation,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private complainService:ComplementService,
+    private complainService: ComplementService,
     private toast: ToastMsgService,
     private fb: FormBuilder,
+    private examReservationService: ExamReservationService,
+    private zone: NgZone,
+    private fullscreenDetectionService: FullscreenDetectionService
   ) {
     this.warningSound = new Audio('/sounds/10-minutes.mp3');
 
@@ -118,49 +130,47 @@ localVideo_3!: ElementRef<HTMLVideoElement>;
       //this.router.navigateByUrl(‘/multicomponent’);
       //history.forward();
       // });
+      this.updateExamReservationDTO = {
+        examReservationId: 0,
+        score: 0
+      };
     });
-
-
-
 
     this.createComplementForm = this.fb.group({
       studentDesc: ['', Validators.required],
     });
+
+    // this.fullscreenDetectionService.fullscreenChange$.subscribe(isFullscreen => {
+    //   if (!isFullscreen) {
+    //     alert('You have exited fullscreen mode!');
+    //   }
+    // });
+
   }
-
-
-
 
   createComplementForm!: FormGroup;
   AppMessages = APP_MESSAGES;
-
+  isDisabled:boolean=true;
   updateComplemntByStudent() {
+    const updateComplementDTO: UpdateComplementDTO =
+      this.createComplementForm.value;
 
+    const examerDTO = JSON.parse(localStorage.getItem('examerDTO')!);
+    updateComplementDTO.examReservationId = examerDTO.ReservationId;
 
-  
-    const updateComplementDTO: UpdateComplementDTO = this.createComplementForm.value;
- 
-    const examerDTO=JSON.parse(localStorage.getItem("examerDTO")!);
-    updateComplementDTO.examReservationId=examerDTO.ReservationId;
-
-    this.complainService.updateComplementByStudent(updateComplementDTO).subscribe(
-      (response) => {
-        console.log("response: "+response.message);
-       // localStorage.clear();
-      },
-      error => {
-        console.error('API error:', error);
-        this.toast.showError(this.AppMessages.YOU_CANT_UPDATED_NOW);
-      }
-    );
+    this.complainService
+      .updateComplementByStudent(updateComplementDTO)
+      .subscribe(
+        (response) => {
+          console.log('response: ' + response.message);
+          // localStorage.clear();
+        },
+        (error) => {
+          console.error('API error:', error);
+        }
+      );
     //this.endCall();
   }
-
-
-
-
-
-
 
   ngOnDestroy(): void {
     this.unsubscriber.next();
@@ -177,29 +187,35 @@ localVideo_3!: ElementRef<HTMLVideoElement>;
         alert(`You can't make changes or go back at this time.`);
       });
 
-   
-      this.webRtc.HubConnection.on('ReciveFormComplaint', async () => {
-      
-        this.router.navigate(['examination/complaint']);
-        //document.getElementById("but-modal-sim")?.click();
-      
-      });
-    
+    this.webRtc.HubConnection.on('ReciveFormComplaint', async () => {
+      this.router.navigate(['examination/complaint']);
+      //document.getElementById("but-modal-sim")?.click();
+    });
 
     // todo: signlR and webRTC init
-    this.remoteAudio=document.getElementById("remoteAudio") as HTMLAudioElement;
-     this.remoteAudio.srcObject=this.webRtc.RemoteAudioStream;
-     console.warn(this.webRtc.RemoteAudioStream);
+    this.remoteAudio = document.getElementById(
+      'remoteAudio'
+    ) as HTMLAudioElement;
+    this.remoteAudio.srcObject = this.webRtc.RemoteAudioStream;
+    console.warn(this.webRtc.RemoteAudioStream);
 
     this.webRtc.DataChannel.onmessage = (event) => {
       const message = event.data;
-      console.log(message,"from proctor");
+      console.log(message, 'from proctor');
       this.dataFromProctro = message.toString();
-      this.messages.push([this.dataFromProctro, 'proctor']);
-      this.cdr.markForCheck();
+
+      this.zone.run(() => {
+        this.messages.push([this.dataFromProctro, 'proctor']);
+        this.cdr.markForCheck();
+      });
     };
     this.shareScreen = this.webRtc.ShareScreenStream;
-    
+
+
+    this.webRtc.HubConnection.on('ReceiveEnableStartExam', () => {
+      this.isDisabled=false;
+    });
+
 
 
 
@@ -219,14 +235,12 @@ localVideo_3!: ElementRef<HTMLVideoElement>;
     this.localVideo_2.nativeElement.srcObject = this.webRtc.ShareScreenStream;
     this.localVideo_3.nativeElement.srcObject = this.webRtc.LocalCameraStream;
 
-    this.localVideo.nativeElement.volume=0;
-    this.localVideo_2.nativeElement.volume=0;
-    this.localVideo.nativeElement.muted=true;
-    this.localVideo_2.nativeElement.muted=true;
-    this.localVideo_3.nativeElement.volume=0;
-    this.localVideo_3.nativeElement.muted=true;
-
-
+    this.localVideo.nativeElement.volume = 0;
+    this.localVideo_2.nativeElement.volume = 0;
+    this.localVideo.nativeElement.muted = true;
+    this.localVideo_2.nativeElement.muted = true;
+    this.localVideo_3.nativeElement.volume = 0;
+    this.localVideo_3.nativeElement.muted = true;
   }
   async startExam() {
     try {
@@ -359,23 +373,65 @@ localVideo_3!: ElementRef<HTMLVideoElement>;
     if (this.hasUnansweredQuestions) {
       console.warn('Unanswered Questions:', unansweredQuestions);
     } else {
-      this.questionService
-        .calculateScoreCallingApi(this.answeredQuestions)
-        .subscribe({
-          next: (response) => {
-            console.log('Score:', response.data);
-            if(response.data !==null && response.data !==undefined){
-              this.cache.setItem(this.cache.STUDENT_SCORE,response.data);
-              this.cache.setItem(this.cache.NUMBER_OF_QUESTIONS,this.questions!.length);
+this.questionService
+  .calculateScoreCallingApi(this.answeredQuestions)
+  .subscribe({
+    next: (response) => {
+      console.log('Score:', response.data);
+      if (response.data !== null && response.data !== undefined) {
+        this.cache.setItem(this.cache.STUDENT_SCORE, response.data.mark);
+        this.cache.setItem(
+          this.cache.NUMBER_OF_QUESTIONS,
+          this.questions!.length
+        );
+        let score = response.data.mark;
+        let examerDTO = localStorage.getItem('examerDTO');
+        if (examerDTO) {
+          let examerData = JSON.parse(examerDTO);
+          let reservationId = examerData.ReservationId as number;
 
-              this.router.navigate(['/examination/score']);
-            }
-          },
-          error: (error) => {
-            console.error('Error submitting exam:', error);
-          },
-        });
+          if (!this.updateExamReservationDTO) {
+            this.updateExamReservationDTO = {
+              examReservationId: reservationId,
+              score: score,
+            };
+          } else {
+            this.updateExamReservationDTO.examReservationId = reservationId;
+            this.updateExamReservationDTO.score = score;
+          }
+          console.log("abood: "+reservationId);
+          this.storeScore();
+
+          this.router.navigate(['/examination/score']);
+          this.webRtc.endCall();
+        } else {
+          console.error('examerDTO not found in localStorage');
+        }
+        console.warn("this.updateExamReservationDTO: ", this.updateExamReservationDTO);
+      }
+    },
+    error: (error) => {
+      console.error('Error submitting exam:', error);
+    },
+  });
+
+
     }
+  }
+
+  storeScore() {
+    this.examReservationService
+      .updateExamReservation(this.updateExamReservationDTO!)
+      .subscribe(
+        (response: ApiResponse<any>) => {
+          if (response.status === 200) {
+            console.log('UpdatePassword successful:', response);
+          }
+        },
+        (error) => {
+          console.error('UpdatePassword error:', error);
+        }
+      );
   }
 
   isQuestionUnanswered(question: QuestionWithoutAnswerDTO): boolean {
@@ -435,7 +491,6 @@ localVideo_3!: ElementRef<HTMLVideoElement>;
   // todo: signlR , web rtc
 
   toggleCamera() {
-
     if (this.butColorCam == 'blue') this.butColorCam = 'red';
     else {
       this.butColorCam = 'blue';
@@ -463,5 +518,4 @@ localVideo_3!: ElementRef<HTMLVideoElement>;
       track.enabled = this.isMicrophoneOn;
     });
   }
-
 }

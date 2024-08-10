@@ -91,7 +91,6 @@ export class SignUpComponent implements OnInit {
         }
       },
       error => {
-        this.toast.showError(this.AppMessages.CHECK_EMAIL_PASSWORD);
       }
     );
   }
@@ -108,19 +107,19 @@ export class SignUpComponent implements OnInit {
   get cardNumber() {
     return this.registerExamProviderForm.get('cardNumber')!;
   }
-  
+
   get cardHolderName() {
     return this.registerExamProviderForm.get('cardHolderName')!;
   }
-  
+
   get cardCvv() {
     return this.registerExamProviderForm.get('cardCvv')!;
   }
-  
+
   get cardExpireDate() {
     return this.registerExamProviderForm.get('cardExpireDate')!;
   }
-  
+
   createExamProvider(userId: number, encToken: string): void {
     this.createExamProviderViewModel.userId = userId;
     this.createExamProviderViewModel.planId = this.signUpForm.get('plan')?.value;
@@ -200,12 +199,10 @@ export class SignUpComponent implements OnInit {
     this.authService.registerExamProvider(formData).subscribe(
       response => {
 
-        this.toast.showSuccess("the process has been succssfully")
         console.log('Registration successful', response);
       },
       error => {
         // Handle error
-        this.toast.showError("There is a problem");
         console.error('Registration error', error);
       }
     );

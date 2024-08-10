@@ -25,7 +25,7 @@ export class WebrtcService {
 
   initializeConnection(routeFunc:Function) {
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl('http://192.168.100.67:1111/signalingHub')
+      .withUrl('http://192.168.1.17:1111/signalingHub')
       .build();
 
     this.hubConnection
@@ -128,6 +128,16 @@ export class WebrtcService {
     }
   }
 
+  endCall() {
+    if (this.peerConnection) {
+      this.peerConnection.close();
+    }
+    if (this.localStream) {
+      this.localStream.getTracks().forEach((track) => track.stop());
+      this.screenStream.getTracks().forEach((track) => track.stop());
+    }
+    this.remoteStream.getTracks().forEach((track) => track.stop());
+  }
 
 
   get PeerConnection() {

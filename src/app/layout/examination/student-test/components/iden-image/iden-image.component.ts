@@ -103,12 +103,10 @@ onNext(){
     this.identificationService.createIdentificationImage(createIdentificationImageDTO).subscribe(
       response => {
         this.isDisabled=false;
-        this.toast.showSuccess("the process has been successfully")
         console.log('Identification image created successfully', response);
 
       },
       error => {
-        this.toast.showError("there is a problem")
         console.error('Error creating identification image', error);
       }
     );

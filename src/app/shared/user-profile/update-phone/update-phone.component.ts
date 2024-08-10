@@ -50,7 +50,6 @@ export class UpdatePhoneComponent implements OnInit{
     this.authService.updatePhone(user).subscribe(
       (response: ApiResponse<any>) => {
         if (response.status === 200) {
-          this.toast.showSuccess(this.AppMessages.UPDATE_EMAIL_SUCCESS);
           this.userData!.phonenum = user.phoneNo??"";
 
           this.cache.setItem(this.cache.USER_SESSION_KEY,this.userData);
@@ -61,7 +60,6 @@ export class UpdatePhoneComponent implements OnInit{
       },
       error => {
         console.error('updatePhone error:', error);
-        this.toast.showError(this.AppMessages.ERROR_TO_UPDATE_PHONE);
 
       }
     );

@@ -71,7 +71,6 @@ export class ProctorManageComponent implements OnInit {
       },
       error => {
         console.error('API error:', error);
-        this.toast.showError(error);
       }
     );
   }
@@ -142,15 +141,12 @@ export class ProctorManageComponent implements OnInit {
     this.callApi.update(this.updateProctorId, proctorViewModel).subscribe(
       (response: ApiResponse<any>) => {
         if (response.status === 200) {
-          this.toast.showSuccess(this.AppMessages.PROCTOR_UPDATED_SUCCESSFULLY);
           this.loadProctorData();
         } else {
-          this.toast.showError(this.AppMessages.ERROR_PROCTOR_UPDATED);
         }
       },
       error => {
         console.error('Update error:', error);
-        this.toast.showError(this.AppMessages.ERROR_PROCTOR_UPDATED);
       }
     );
   }
@@ -166,13 +162,11 @@ export class ProctorManageComponent implements OnInit {
       (response: ApiResponse<CurrentUserData>) => {
         if (response.status === 200) {
           this.proctorForm.reset();
-          this.toast.showSuccess(this.AppMessages.PROCTOR_CREATED_SUCCESSFULLY);
           this.loadProctorData();
         }
       },
       error => {
         console.error('Registration error:', error);
-        this.toast.showError(this.AppMessages.ERROR_PROCTOR_CREATED);
       }
     );
   }
@@ -186,14 +180,11 @@ export class ProctorManageComponent implements OnInit {
       (response: ApiResponse<any>) => {
         if (response.status === 200) {
           this.loadProctorData();
-          this.toast.showSuccess(response.message);
         } else {
-          this.toast.showError(this.AppMessages.YOU_CANT_DELETED_NOW);
         }
       },
       error => {
         console.error('Delete error:', error);
-        this.toast.showError(this.AppMessages.YOU_CANT_DELETED_NOW);
       }
     );
   }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -21,6 +21,8 @@ import { DisableRightClickDirective } from '../core/directive/disable-right-clic
 import { RestrictedScreenComponent } from './components/restricted-screen/restricted-screen.component';
 import { UnsavedChangesDirective } from '../core/directive/unsaved-changes.directive';
 import { DraggableComponent } from './components/draggable/draggable.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 @NgModule({
   declarations: [
     InputComponent,
@@ -35,7 +37,9 @@ import { DraggableComponent } from './components/draggable/draggable.component';
     DisableRightClickDirective,
     RestrictedScreenComponent,
     UnsavedChangesDirective,
-    DraggableComponent
+    DraggableComponent,
+
+
   ],
   imports: [
     CommonModule,
@@ -46,6 +50,8 @@ import { DraggableComponent } from './components/draggable/draggable.component';
     UserProfileRoutingModule,
     NgxDatatableModule,
     FontAwesomeModule,
+    NgxSpinnerModule
+
 
   ],
   exports: [
@@ -66,7 +72,9 @@ import { DraggableComponent } from './components/draggable/draggable.component';
     ChatSectionComponent,
     DisableRightClickDirective,
     UnsavedChangesDirective,
-    DraggableComponent
+    DraggableComponent,
+    NgxSpinnerModule
+
 
   ],
   providers: [

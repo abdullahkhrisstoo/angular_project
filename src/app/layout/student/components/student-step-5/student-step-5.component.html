@@ -1,7 +1,7 @@
 <div class="container mt-4 p-4 card ">
   <!-- Step 1: Confirm Preferred Time Zone -->
   <div class="step mb-3">
-    <h2>1. Confirm your preferred time zone</h2>
+    <h4>1. Confirm your preferred time zone</h4>
     <p>Is this your preferred time zone?</p>
     <p>{{ currentTimezone }}</p>
     <button class="btn btn-primary" (click)="changeTimezone()">No, change time zone</button>
@@ -15,17 +15,17 @@
 
   <!-- Step 2: Select Your Date -->
   <div class="step mb-3">
-    <h2>2. Select your date</h2>
+    <h4>2. Select your date</h4>
     <input type="date" class="form-control" [(ngModel)]="selectedDate" [min]="minDate" (change)="onDateChange($event)" />
 
   </div>
 
   <!-- Step 3: Select Your Appointment Start Time -->
   <div class="step mb-3">
-    <h2>3. Select your appointment start time</h2>
+    <h5>3. Select your appointment start time</h5>
     <div class="appointment-time bg-light p-3 border rounded">
       <div class="d-flex align-items-center">
-        <img src="https://via.placeholder.com/50" alt="Recommended time icon" class="me-3 rounded-circle">
+        <img [src]="currentImage" alt="Recommended time icon" class="me-3 rounded-circle">
         <div>
           <p class="mb-0">{{ selectedDate | date: 'fullDate' }}</p>
           <p class="mb-0 text-primary fw-bold">{{ recommendedTime }}</p>
@@ -53,7 +53,7 @@
 
   <!-- Navigation Buttons -->
   <div class="d-flex justify-content-between mt-4">
-    <button class="btn btn-secondary">Previous</button>
+    <div ></div>
     <button class="btn btn-primary" (click)="onNext()" >Next</button>
   </div>
 </div>

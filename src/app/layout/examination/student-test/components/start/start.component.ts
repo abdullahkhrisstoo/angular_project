@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Router } from '@angular/router';
 import { WebrtcService } from '../../../../../core/services/webrtc.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-start',
@@ -15,7 +16,7 @@ export class StartComponent implements OnInit {
   private localVideo!: HTMLVideoElement;
   private localVideo_2!: HTMLVideoElement;
   isDisabled = false;
-  constructor(private webrtc:WebrtcService,private route:Router){}
+  constructor(private webrtc:WebrtcService,private route:Router, private spinner: NgxSpinnerService){}
   async ngOnInit(): Promise<void> {
     this.localVideo = document.getElementById('localVideo') as HTMLVideoElement;
     this.localVideo_2 = document.getElementById('localVideo_2') as HTMLVideoElement;
@@ -54,8 +55,9 @@ export class StartComponent implements OnInit {
     }
   }
   async join(){
-    
+
     this.webrtc.initializeConnection(()=>{
+      this.spinner.hide('spinnerName');
        this.route.navigate(['/examination/student']);
     });
   await  this.webrtc.startLocalStream().then( async streams => {
@@ -72,21 +74,30 @@ export class StartComponent implements OnInit {
       alert("give me permission: " + error);
       console.error('Error starting local stream:', error);
     });
- 
+
     this.openFullscreen();
     this.openFullscreen();
-      this.webrtc.HubConnection.on('ReceiveRejected', async () => {
-        this.closeFullscreen();
-           alert("you are rejected, your information is worng") 
-                 console.log("ReceiveRejected");
-                 
-      });
-    
-    
+    this.webrtc.HubConnection.on('ReceiveRejected', async () => {
+    this.closeFullscreen();
+    alert("you are rejected, your information is worng")
+    console.log("ReceiveRejected");
+
+    });
 
 
 
-      
+    this.spinner.show('spinnerName', {
+      type: 'timer',
+      size: 'medium',
+      bdColor:"#0053A64E",
+       color:"#FFFFFF",
+      fullScreen: true,
+
+    });
+
+
+
+
 
      //setTimeout(()=>{this.enterFullScreen();},5000)
 

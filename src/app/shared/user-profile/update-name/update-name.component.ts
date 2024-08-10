@@ -52,7 +52,6 @@ export class UpdateNameComponent {
     this.authService.updateUserName(user).subscribe(
       (response: ApiResponse<any>) => {
         if (response.status === 200) {
-          this.toast.showSuccess(this.AppMessages.UPDATE_NAME_SUCCESS);
           this.userData!.firstName = user.firstName??"";
           this.userData!.lastName = user.lastName??"";
 
@@ -64,7 +63,6 @@ export class UpdateNameComponent {
       },
       error => {
         console.error('UpdateName error:', error);
-        this.toast.showError(this.AppMessages.ERROR_TO_UPDATE_NAME);
 
       }
     );

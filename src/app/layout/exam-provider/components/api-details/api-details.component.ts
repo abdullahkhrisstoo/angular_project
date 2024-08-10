@@ -4,6 +4,7 @@ import { LocalStorageService } from '../../../../core/services/local-storage.ser
 import { ExamProviderLinkDTO } from '../../../../core/DTO/exam-provider-link-dto';
 import { UpdateExamProviderLinkDTO } from '../../../../core/DTO/update-exam-provider-link-dto';
 import { forkJoin } from 'rxjs';
+import { CurrentUserData } from '../../../../core/models/current-user-data';
 
 @Component({
   selector: 'app-api-details',
@@ -11,15 +12,15 @@ import { forkJoin } from 'rxjs';
   styleUrl: './api-details.component.css'
 })
 export class ApiDetailsComponent {
- 
-  
+
+
   examProviderLinksDTO: ExamProviderLinkDTO[] = [];
   constructor(private examProviderLinkService:ExamProviderLinkService, private localStorageService:LocalStorageService) {
-   let companyName= localStorage.getItem("companyName");
-   if(companyName){
-    this.getExamProviderLinkByCompanyName(companyName)
+   let userData= <CurrentUserData> this.localStorageService.getItem(this.localStorageService.USER_SESSION_KEY);
+   if(userData.firstName){
+    this.getExamProviderLinkByCompanyName(userData.firstName)
    }
-  
+
   }
   getExamProviderLinkByCompanyName(companyName:string){
     this.examProviderLinkService.getExamProviderLinkByCompany(companyName).subscribe(

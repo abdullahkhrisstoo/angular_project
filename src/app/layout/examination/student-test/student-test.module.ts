@@ -13,6 +13,7 @@ import { CheckInProcessComponent } from './components/check-in-process/check-in-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ExamRulesComponent } from './components/exam-rules/exam-rules.component';
 import { StartComponent } from './components/start/start.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -24,13 +25,14 @@ import { StartComponent } from './components/start/start.component';
     IdenImageComponent,
     CheckInProcessComponent,
     ExamRulesComponent,
-    StartComponent
+    StartComponent,
   ],
   imports: [
     CommonModule,
     StudentTestRoutingModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxSpinnerModule
   ]
 })
 export class StudentTestModule { }

@@ -1,3 +1,4 @@
+import { ExamProviderService } from './../../../../core/services/exam-provider.service';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms'; // Add FormControl import
 import { FormControllerService } from '../../../../core/services/form-controller.service';
@@ -27,7 +28,8 @@ export class SignInComponent {
     private authService: AuthService,
     private router: Router,
     private cache: LocalStorageService,
-    private toast: ToastMsgService
+    private toast: ToastMsgService,
+    private examProviderService:ExamProviderService
   ) {
     this.loginForm = new FormGroup({
       email: EMAIL_CONTROL,
@@ -46,11 +48,21 @@ export class SignInComponent {
     this.authService.login(credentials).subscribe(
       (response: ApiResponse<CurrentUserData>) => {
         if (response.status === 200) {
-          this.toast.showSuccess(this.AppMessages.LOGIN_SUCCESFULLY);
 
           const roleId = response.data.roleId;
           switch (roleId) {
             case EXAM_PROVIDER_ROLE:
+              this.examProviderService.getExamProviderByUserId(response.data.userId)
+              .subscribe(
+                response=>{
+
+                console.log(response);
+                localStorage.setItem('examProviderId',response.data.examProviderId.toString())
+
+              },error=>{
+
+
+              });
               this.router.navigate(['/exam-provider/profile']);
               break;
             case PROCTOR_ROLE:
@@ -71,12 +83,10 @@ export class SignInComponent {
 
           this.loginForm.reset();
         } else {
-          this.toast.showError(this.AppMessages.CHECK_EMAIL_PASSWORD);
         }
       },
       error => {
         console.error('Login error:', error);
-        this.toast.showError(this.AppMessages.CHECK_EMAIL_PASSWORD);
       }
     );
   }

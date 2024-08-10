@@ -1,7 +1,7 @@
 export const API_ENDPOINTS = {
 
-  baseUrl : 'http://192.168.100.67:1111/api/',
-  baseUrlImage : 'http://192.168.100.67:1111/',
+  baseUrl : 'http://192.168.1.17:1111/api/',
+  baseUrlImage : 'http://192.168.1.17:1111/',
   GET_PROCTOR_WORK_TIMES : 'ProctorWorkTimes/GetProctorsWorkTimeById',
   UPDATE_PROCTOR_ANSWER : 'ProctorWorkTimes/UpdateProctorsWorkTimeById',
 
@@ -171,8 +171,6 @@ export const API_ENDPOINTS = {
   UPDATE_EXAM_PROVIDER_STATE:'ExamProvider/UpdateExamProviderState',
   GET_ALL_PLAN_INVOICES_DETAILS:'PlanInvoice/GetAllPlanInvoicesDetails',
   GET_ALL_RESRVATION_INVOICES_DETAILS:'ReservationInvoice/GetAllReservationInvoicesDetails',
-
-    GET_EXAM_WITHOUT_ANSWER : 'ExamInfo/GetExamDetailsWithoutAnswersByName',
-
-    GET_CORRECTION_ANSWER : 'ExamInfo/ExamCorrection',
+  GET_EXAM_WITHOUT_ANSWER : 'ExamInfo/GetExamDetailsWithoutAnswersByName',
+  GET_CORRECTION_ANSWER : 'ExamInfo/ExamCorrection',
 };

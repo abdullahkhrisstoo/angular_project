@@ -3,6 +3,7 @@ import { ADMIN_ROLE, DARK_THEME, EXAM_PROVIDER_ROLE, LIGHT_THEME, LOCAL_HOST, PR
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { CurrentUserData } from '../../../core/models/current-user-data';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-home-layout',
@@ -20,7 +21,7 @@ import { CurrentUserData } from '../../../core/models/current-user-data';
 export class HomeLayoutComponent  implements OnInit {
   lightTheme = LIGHT_THEME;
   darkTheme = DARK_THEME;
-  constructor(private router: Router,private localStorageService:LocalStorageService) {
+  constructor(private router: Router,private localStorageService:LocalStorageService,private spinner: NgxSpinnerService) {
 
   }
 
@@ -100,6 +101,9 @@ export class HomeLayoutComponent  implements OnInit {
          break;
      }
     }
-   }
+  }
+
+
 }
+
 

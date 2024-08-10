@@ -86,14 +86,11 @@ export class ContactUsComponent implements OnInit {
       (response: ApiResponse<any>) => {
         if (response.status === 200) {
           this.loadMessage();
-          this.toast.showSuccess(response.message);
         } else {
-          this.toast.showError(this.AppMessages.YOU_CANT_DELETED_NOW);
         }
       },
       error => {
         console.error('Delete error:', error);
-        this.toast.showError(this.AppMessages.YOU_CANT_DELETED_NOW);
       }
     );
   }

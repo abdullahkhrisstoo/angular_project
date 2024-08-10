@@ -185,14 +185,23 @@
             </li>
 
             <li class="list-inline-item footer-icon" style="margin-left: 40px;">
-              <div class="btn btn-danger "data-bs-toggle="modal" data-bs-target="#modal-proctor" style="margin-left: 40px;"> End Exam</div>
-              </li>
+              <div
+              class="btn"
+              [ngClass]="isExamStarted ? 'btn-danger' : 'btn-success'"
+              (click)="toggleExam()"
+              style="margin-left: 40px;"
+              [attr.data-bs-toggle]="isExamStarted ? 'modal' : null"
+              [attr.data-bs-target]="isExamStarted ? '#modal-proctor' : null">
+              {{ isExamStarted ? 'End Exam' : 'Start Exam' }}
+            </div>
+
+ </li>
 
           </ul>
         </div>
       </footer>
 
-    
+
     </div>
   </div>
 </div>
@@ -233,4 +242,39 @@ aria-hidden="true"
     </div>
   </div>
 </div>
+</div>
+
+
+<button data-bs-toggle="modal" style="display: none;" data-bs-target="#accept-conn" id="but-open-conn" ></button>
+
+<div class="modal modal-blur " id="accept-conn" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-status bg-danger"></div>
+      <div class="modal-body text-center py-4">
+        <form id="deleteExamForm" class="" method="post">
+          <h3>Are you sure?</h3>
+          <div class="text-muted">Do you want to accept this Connection ? .</div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="w-100">
+          <div class="row">
+            <div class="col">
+              <button type="button" (click)="rejectOffer()" class="btn btn-danger w-100" data-bs-dismiss="modal">
+                Reject
+              </button>
+            </div>
+            <div class="col">
+              <button type="button" (click)="acceptOffer()" class="btn btn-success w-100" data-bs-dismiss="modal">
+               Accept
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

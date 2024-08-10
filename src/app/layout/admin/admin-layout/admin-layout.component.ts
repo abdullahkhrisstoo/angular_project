@@ -20,7 +20,7 @@ export class AdminLayoutComponent  implements OnInit {
   lightTheme = LIGHT_THEME;
   darkTheme = DARK_THEME;
 
-  messages:string[]=[];
+  notifications: any[] = [];
   constructor(protected authService:AuthService,private notificationService: NotificationService) {
   }
   ngOnInit(): void {
@@ -28,21 +28,21 @@ export class AdminLayoutComponent  implements OnInit {
 
     this.removeScripts();
     this.loadScripts();
-    
+
     try{
       this.notificationService.notifications$.subscribe(notification => {
 
-        this.messages.push(notification.toString());
-        sessionStorage.setItem('messages', JSON.stringify(this.messages));
+        this.notifications.push(notification);
+        sessionStorage.setItem('messages', JSON.stringify(this.notifications));
         console.log('Notification in component:', notification);
       });
 
     }
     catch(e){}
-    
+
     const savedMessages = sessionStorage.getItem('messages');
-    this.messages = savedMessages ? JSON.parse(savedMessages) : [];
-    
+    this.notifications = savedMessages ? JSON.parse(savedMessages) : [];
+
   }
 
   loadScripts() {

@@ -68,7 +68,7 @@ export class ExamComponent {
   }
 
   ngOnInit(): void {
-    localStorage.setItem('examProviderId','1');
+   
     let examProviderID=localStorage.getItem('examProviderId');
     if(examProviderID)
     this.getExamsByProviderId(Number.parseInt(examProviderID));

@@ -114,7 +114,6 @@ export class ReadAllAboutUsComponent implements OnInit {
         console.log("response: About"+response.message);
         if (response.status === 200) {
           this.loadAboutData();
-          this.toast.showSuccess(this.AppMessages.UPDATED_SUCCESSFULLY);
           this.aboutFormCreate.reset();
 
           this.updateAboutId = null;
@@ -124,7 +123,6 @@ export class ReadAllAboutUsComponent implements OnInit {
       },
       error => {
         console.error('API error:', error);
-        this.toast.showError(this.AppMessages.YOU_CANT_UPDATED_NOW);
       }
     );
   }
@@ -155,14 +153,12 @@ export class ReadAllAboutUsComponent implements OnInit {
         if (response.status === 200) {
           this.loadAboutData();
           this.deleteAboutId = null;
-          this.toast.showSuccess(response.message);
         } else {
           console.error('delete:', response.message);
         }
       },
       error => {
         console.error('API error:', error);
-        this.toast.showError(this.AppMessages.YOU_CANT_DELETED_NOW);
       }
     );
   }
@@ -190,7 +186,6 @@ export class ReadAllAboutUsComponent implements OnInit {
       (response: ApiResponse<CreateAboutDTO>) => {
         console.log(response);
         if (response.status === 200) {
-          this.toast.showSuccess(this.AppMessages.CREATE_ABOUT_SUCCESS);
           this.aboutFormCreate.reset();
           this.loadAboutData();
 
@@ -202,7 +197,6 @@ export class ReadAllAboutUsComponent implements OnInit {
       },
       error => {
         console.error('API error:', error);
-        this.toast.showError(this.AppMessages.ERROR_CREATE_ABOUT);
       }
     );
   }

@@ -5,13 +5,15 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { API_ENDPOINTS } from '../constants/api.constants';
 import { response } from 'express';
 import { ToastMsgService } from './toast.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GenericApiHandlerService {
 
-  constructor(private http: HttpClient,private toast:ToastMsgService) { }
+  constructor(private http: HttpClient,private toast:ToastMsgService,    private spinner: NgxSpinnerService
+  ) { }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
 
@@ -22,8 +24,9 @@ export class GenericApiHandlerService {
       errorMessage = `Server-side error: ${error.status} - ${error.error.message}`;
     }
 
-   
+
     console.error(errorMessage);
+    this.spinner.hide();
     return throwError(errorMessage);
   }
 
@@ -47,8 +50,10 @@ export class GenericApiHandlerService {
     const headers = this.setHeaders(customHeaders);
     const url = this.apiUrl(endpoint);
     const options = { headers, params };
+    this.spinner.show();
     return this.http.get<T>(url, options).pipe(
-      
+      tap(() => this.spinner.hide()),
+
       catchError(this.handleError)
     );
   }
@@ -56,10 +61,10 @@ export class GenericApiHandlerService {
   post<T>(endpoint: string, body: any, customHeaders?: { [key: string]: string }): Observable<T> {
     const headers = this.setHeaders(customHeaders);
     const url = this.apiUrl(endpoint);
-  
+    this.spinner.show();
+
     return this.http.post<T>(url, body, { headers, observe: 'response' }).pipe(
       tap(response => {
-        // Check if status code is in the 2xx range
         if (response.status >= 200 && response.status < 300) {
           this.toast.showSuccess("the process has been successfully")
 
@@ -67,8 +72,8 @@ export class GenericApiHandlerService {
           this.toast.showError("there is a problem")
           console.log('Response is not successful');
         }
+        this.spinner.hide();
       }),
-      // Map the response back to the body
       map(response => response.body as T),
       catchError(error => {
         this.toast.showError("There is a problem");
@@ -81,10 +86,10 @@ export class GenericApiHandlerService {
   put<T>(endpoint: string, body: any, customHeaders?: { [key: string]: string }): Observable<T> {
     const headers = this.setHeaders(customHeaders);
     const url = this.apiUrl(endpoint);
-  
+    this.spinner.show();
+
     return this.http.put<T>(url, body, { headers, observe: 'response' }).pipe(
       tap(response => {
-        // Check if status code is in the 2xx range
         if (response.status >= 200 && response.status < 300) {
           this.toast.showSuccess("the process has been successfully")
 
@@ -92,8 +97,8 @@ export class GenericApiHandlerService {
           this.toast.showError("there is a problem")
           console.log('Response is not successful');
         }
+        this.spinner.hide();
       }),
-      // Map the response back to the body
       map(response => response.body as T),
       catchError(error => {
         this.toast.showError("There is a problem");
@@ -108,10 +113,9 @@ export class GenericApiHandlerService {
     const headers = this.setHeaders(customHeaders);
     const url = this.apiUrl(endpoint);
     const options = { headers, params, observe: 'response' as 'response' };
-  
+    this.spinner.show();
     return this.http.delete<T>(url, options).pipe(
       tap(response => {
-        // Check if status code is in the 2xx range
         if (response.status >= 200 && response.status < 300) {
           this.toast.showSuccess("the process has been successfully")
 
@@ -119,8 +123,9 @@ export class GenericApiHandlerService {
           this.toast.showError("there is a problem")
           console.log('Response is not successful');
         }
+        this.spinner.hide();
+
       }),
-      // Map the response back to the body
       map(response => response.body as T),
       catchError(error => {
         this.toast.showError("There is a problem");

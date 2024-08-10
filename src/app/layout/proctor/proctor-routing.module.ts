@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProctorLayoutComponent } from './proctor-layout/proctor-layout.component';
-import { ProctorDashboardComponent } from './components/proctor-dashboard/proctor-dashboard.component';
 import { UserProfileComponent } from '../../shared/user-profile/user-profile/user-profile.component';
 import { UpdateEmailComponent } from '../../shared/user-profile/update-email/update-email.component';
 import { UpdatePhoneComponent } from '../../shared/user-profile/update-phone/update-phone.component';
@@ -17,7 +16,6 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'profile', redirectTo: 'profile/my-account', pathMatch: 'full' },
-      { path: 'dashboard', component: ProctorDashboardComponent },
       { path: 'reservation', component: ProctorReservationComponent},
       { path: 'profile', component: UserProfileComponent, children: [
         { path: 'update-email', component: UpdateEmailComponent },

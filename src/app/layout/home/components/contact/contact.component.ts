@@ -41,13 +41,11 @@ export class ContactComponent {
       (response: ApiResponse<CreateContactMessageViewModel>) => {
         console.log(response);
         if (response.status === 200) {
-          this.toast.showSuccess(this.AppMessages.CONTACT_SUCCESS);
           this.contactForm.reset()
         }
       },
       error => {
         console.error('Login error:', error);
-        this.toast.showError(this.AppMessages.CONTACT_ERROR);
       }
     );
   }

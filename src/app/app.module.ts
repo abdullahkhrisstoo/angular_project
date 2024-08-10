@@ -27,18 +27,17 @@ import { UnsavedChangesDirective } from './core/directive/unsaved-changes.direct
     SharedModule,
     LayoutModule,
     HomeModule,
-    NgxSpinnerModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 3000,
-      positionClass: 'toast-bottom-center',  // Updated position
+      positionClass: 'toast-bottom-center',
       preventDuplicates: true,
       progressBar: true,
       progressAnimation: 'increasing',
       closeButton: true,
       tapToDismiss: true
     }),
-    
+
   ],
   providers: [
     provideClientHydration(),

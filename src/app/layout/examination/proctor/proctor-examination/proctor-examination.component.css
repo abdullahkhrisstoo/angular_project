@@ -143,7 +143,7 @@ body {
 video {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensure the video covers the container */
+  /* object-fit: cover;  */
 }
 
 .icon {
@@ -163,6 +163,7 @@ video {
 
 /* Fullscreen mode */
 .video-container.fullscreen {
+  /* margin: 50px; */
   width: 100vw; /* Expand to full viewport width */
   height: 100vh; /* Expand to full viewport height */
   position: fixed; /* Fixed positioning to keep it on top */

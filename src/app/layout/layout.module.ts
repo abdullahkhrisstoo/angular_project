@@ -11,6 +11,7 @@ import { ExamProviderLayoutComponent } from './exam-provider/exam-provider-layou
 import { AuthLayoutComponent } from './auth/auth-layout/auth-layout.component';
 import { AdminModule } from "./admin/admin.module";
 import { ExaminationLayoutComponent } from './examination/examination-layout/examination-layout.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -22,13 +23,15 @@ import { ExaminationLayoutComponent } from './examination/examination-layout/exa
     ProctorLayoutComponent,
     ExamProviderLayoutComponent,
     AuthLayoutComponent,
-    ExaminationLayoutComponent
+    ExaminationLayoutComponent,
+
   ],
   imports: [
     CommonModule,
     SharedModule,
     AppRoutingModule,
-    AdminModule
+    AdminModule,
+    NgxSpinnerModule
 ],
   exports: [
     AdminLayoutComponent,

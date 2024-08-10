@@ -30,18 +30,14 @@ export class ExamReservationService {
 
   getExamReservationsByProctorId(id: number): Observable<ExamReservationProctorDTO[]> {
     const endpoint = `${API_ENDPOINTS.GET_EXAM_RESERVATIONS_BY_PROCTOR_ID}/${id}`;
-    return this.apiHandler.get<ApiResponse<ExamReservationProctorDTO[]>>(endpoint)
-      .pipe(map(response => response.data));
+    return this.apiHandler.get<ApiResponse<ExamReservationProctorDTO[]>>(endpoint).pipe(map(response => response.data));
   }
 
 
 
   getExamReservationsByExamId(id: number): Observable<ExamReservationDTO[]> {
     const endpoint = `${API_ENDPOINTS.GET_EXAM_RESERVATIONS_BY_EXAM_ID}/${id}`;
-    return this.apiHandler.get<ApiResponse<ExamReservationDTO[]>>(endpoint)
-      .pipe(
-        map(response => response.data)
-      );
+    return this.apiHandler.get<ApiResponse<ExamReservationDTO[]>>(endpoint).pipe(map(response => response.data));
   }
 
   getExamReservationById(id: number): Observable<ExamReservationDTO> {
@@ -54,26 +50,22 @@ export class ExamReservationService {
 
   deleteExamReservation(id: number): Observable<any> {
     const endpoint = `${API_ENDPOINTS.DELETE_EXAM_RESERVATION}/${id}`;
+
     return this.apiHandler.delete<any>(endpoint);
   }
 
   createExamReservation(viewModel: CreateExamReservationDTO): Observable<any> {
-    return this.apiHandler.post<ApiResponse<any>>(API_ENDPOINTS.CREATE_EXAM_RESERVATION, viewModel)
-      .pipe();
+    return this.apiHandler.post<ApiResponse<any>>(API_ENDPOINTS.CREATE_EXAM_RESERVATION, viewModel).pipe();
   }
 
   updateExamReservation(viewModel: UpdateExamReservationDTO): Observable<any> {
     const endpoint = `${API_ENDPOINTS.UPDATE_EXAM_RESERVATION}`;
-    return this.apiHandler.put<ApiResponse<any>>(endpoint,viewModel)
-      .pipe(
-        map(response => response.data)
-      );
+    return this.apiHandler.put<ApiResponse<any>>(endpoint,viewModel).pipe(map(response => response.data));
   }
 
 
   createProcessExamReservation(viewModel: ExamReservationPaymentDTO): Observable<any> {
-    return this.apiHandler.post<ApiResponse<any>>(API_ENDPOINTS.CREATE_PROCESS_EXAM_RESERVATION, viewModel)
-      .pipe();
+    return this.apiHandler.post<ApiResponse<any>>(API_ENDPOINTS.CREATE_PROCESS_EXAM_RESERVATION, viewModel).pipe();
   }
 
 

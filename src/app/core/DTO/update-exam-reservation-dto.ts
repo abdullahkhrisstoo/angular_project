@@ -9,8 +9,8 @@ export interface UpdateExamReservationDTO {
   uniqueKey?: string;
   userId?: number;
   studentName?: string;
-  phone?: string;
-  score?: number; 
-  email?: string;
-  examId?: number;
+  phone?  : string;
+  score   : number;
+  email?  : string;
+  examId? : number;
 }

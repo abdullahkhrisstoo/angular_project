@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './student-step-two.component.html',
   styleUrls: ['./student-step-two.component.css']
 })
-export class StudentStepTwoComponent {
+export class StudentStepTwoComponent implements OnInit {
   preferredLanguage: string = '';
 
   languages = [
@@ -16,7 +16,13 @@ export class StudentStepTwoComponent {
 
   isSubmitted: boolean = false;
   constructor(private router: Router) {}
-  
+  ngOnInit(): void {
+    const storedLanguage = localStorage.getItem('exam-lang');
+    if (storedLanguage) {
+      this.preferredLanguage = storedLanguage;
+    }
+  }
+
   onNext(): void {
     this.isSubmitted = true;
     if (this.preferredLanguage) {

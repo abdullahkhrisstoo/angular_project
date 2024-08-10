@@ -43,12 +43,14 @@ export class TestimonialComponent {
 
   });
   }
-
+   examProviderId!:number;
   ngOnInit(): void {
-    localStorage.setItem('examProviderId', '2');
+
     let examProviderID = localStorage.getItem('examProviderId');
-    if (examProviderID)
-      this.getTestimonialsByExamProviderId(Number.parseInt(examProviderID));
+    if (examProviderID){
+       this.examProviderId=Number.parseInt(examProviderID);
+       this.getTestimonialsByExamProviderId(Number.parseInt(examProviderID));
+    }
   }
   getTestimonialsByExamProviderId(providerId: number): void {
     this.testimonialService.getTestimonialsByExamProviderId(providerId).subscribe(
@@ -71,12 +73,11 @@ export class TestimonialComponent {
   createTestimonial() {
     if (this.createTestimonialForm.valid) {
       const createTestimonialDTO: CreateTestimonialDTO = this.createTestimonialForm.value;
-      createTestimonialDTO.examProviderId=2;
+      createTestimonialDTO.examProviderId=this.examProviderId;
       this.testimonialService.createTestimonial(createTestimonialDTO).subscribe(
         response => {
           this.createTestimonialForm.reset();
           console.log('Plan created successfully:', response);
-          localStorage.setItem('examProviderId', '2');
           let examProviderID = localStorage.getItem('examProviderId');
           if (examProviderID)
             this.getTestimonialsByExamProviderId(Number.parseInt(examProviderID));

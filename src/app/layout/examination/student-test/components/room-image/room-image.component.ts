@@ -100,11 +100,9 @@ export class RoomImageComponent {
       this.roomService.createRoomImage(e).subscribe(
         response => {
           this.isDisabled=false;
-          this.toast.showSuccess("the process has been successfully")
           console.log('Room images created successfully', response);
         },
         error => {
-          this.toast.showError("there is a problem")
           console.error('Error creating room images', error);
         }
       );
