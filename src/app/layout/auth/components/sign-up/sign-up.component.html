@@ -40,20 +40,113 @@
             </select>
           </div>
           <div class="mb-3">
+            <label class="form-label">Commercial Record (PDF)</label>
+            <input type="file" class="form-control" (change)="onFileChange($event)" accept="application/pdf">
+          </div>
+          <div class="mb-3">
             <label class="form-check">
               <input type="checkbox" class="form-check-input" />
               <span class="form-check-label">Agree to the <a tabindex="-1">terms and policy</a>.</span>
             </label>
           </div>
           <div class="form-footer">
-            <button type="submit" [disabled]="signUpForm.invalid" class="btn btn-primary w-100">Create new
+            <button type="button" [disabled]="signUpForm.invalid" 
+            data-bs-toggle="modal"
+            data-bs-target="#modal-payment"
+            class="btn btn-primary w-100">Create new
               account</button>
           </div>
         </div>
       </div>
     </form>
     <div class="text-center text-secondary mt-3">
-      Already have an account? <a routerLink="/auth/sign-in" tabindex="-1">Sign in</a>
+      Already have an account? <a routerLink="/auth/sign-in" tabindex="-1">Sign in </a> 
+      or go to <a routerLink="/" tabindex="-1">Home</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal modal-blur" id="modal-payment" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Payment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       
+
+        <form [formGroup]="registerExamProviderForm" (ngSubmit)="onSubmit()" class="card">
+          <div class="card-body">
+            <h3 class="card-title">Card Details</h3>
+            <div class="row row-cards">
+              <div class="col-sm-12 col-md-6">
+                <div class="mb-3">
+                  <label class="form-label">Card Number</label>
+                  <input 
+                    type="text" 
+                    class="form-control"  
+                    placeholder="Enter card number" 
+                    formControlName="cardNumber" 
+                    required>
+                  <div *ngIf="cardNumber.invalid && (cardNumber.dirty || cardNumber.touched)" class="text-danger">
+                    <div *ngIf="cardNumber.errors?.['required']">Card number is required.</div>
+                    <div *ngIf="cardNumber.errors?.['pattern']">Invalid card number.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-6">
+                <div class="mb-3">
+                  <label class="form-label">Card Holder's Name</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Enter name" 
+                    formControlName="cardHolderName" 
+                    required>
+                  <div *ngIf="cardHolderName.invalid && (cardHolderName?.dirty || cardHolderName?.touched)" class="text-danger">
+                    <div *ngIf="cardHolderName.errors?.['required']">Card holder's name is required.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-md-6">
+                <div class="mb-3">
+                  <label class="form-label">VCC</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="VCC" 
+                    formControlName="cardCvv" 
+                    required>
+                  <div *ngIf="cardCvv.invalid && (cardCvv.dirty || cardCvv.touched)" class="text-danger">
+                    <div *ngIf="cardCvv.errors?.['required']">VCC is required.</div>
+                    <div *ngIf="cardCvv.errors?.['pattern']">Invalid VCC.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-md-6">
+                <div class="mb-3">
+                  <label class="form-label">Expiration Date</label>
+                  <input 
+                    type="text" 
+                    class="form-control"  
+                    placeholder="MM/YY" 
+                    formControlName="cardExpireDate" 
+                    required>
+                  <div *ngIf="cardExpireDate.invalid && (cardExpireDate.dirty || cardExpireDate.touched)" class="text-danger">
+                    <div *ngIf="cardExpireDate.errors?.['required']">Expiration date is required.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-end">
+            <button type="submit" class="btn btn-primary" [disabled]="registerExamProviderForm.invalid">Confirm</button>
+          </div>
+        </form>
+        
+      </div>
     </div>
   </div>
 </div>

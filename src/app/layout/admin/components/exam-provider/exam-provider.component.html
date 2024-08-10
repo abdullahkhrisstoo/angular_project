@@ -66,6 +66,11 @@
             {{ value }}
           </ng-template>
         </ngx-datatable-column>
+        <ngx-datatable-column name="Email" prop="examProviderEmail" [sortable]="true">
+          <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
         <ngx-datatable-column name="State" prop="state" [sortable]="true">
           <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
             {{ value }}
@@ -92,6 +97,13 @@
           </ng-template>
         </ngx-datatable-column>
 
+        <ngx-datatable-column name="Commercial Record Details" [width]="100" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <button class="btn btn-info btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#modal-com-pdf"  (click)="loadCommercialRecord(row.examProviderId)">Commercial Record</button>
+          </ng-template>
+        </ngx-datatable-column>
+
         <ngx-datatable-column name="Testimonials" [width]="100" [sortable]="false">
           <ng-template ngx-datatable-cell-template let-row="row">
             <button class="btn btn-info btn-sm" data-bs-toggle="modal"
@@ -99,10 +111,29 @@
           </ng-template>
         </ngx-datatable-column>
 
+
+
         <ngx-datatable-column name="Actions" [width]="130" [sortable]="false">
           <ng-template ngx-datatable-cell-template let-row="row">
-            <button class="btn btn-primary btn-sm" style="margin-right: 2px" (click)="updateRow(row)">Update</button>
-            <button class="btn btn-danger btn-sm" (click)="deleteRow(row)">Delete</button>
+            <ng-container *ngIf="row.state === 'PENDING'">
+              <button class="btn btn-success btn-sm" style="margin-right: 2px" (click)="updateState(row,2)">Accept</button>
+              <button class="btn btn-danger btn-sm" (click)="updateState(row,3)">Reject</button>
+            </ng-container>
+            <ng-container *ngIf="row.state === 'APPROVED'">
+              <button class="btn btn-warning btn-sm" (click)="updateState(row,5)">
+                {{  'Deactivate' }}
+              </button>
+            </ng-container>
+            <ng-container *ngIf="row.state === 'ACTIVATE'">
+              <button class="btn btn-warning btn-sm" (click)="updateState(row,5)">
+                {{ 'Deactivate' }}
+              </button>
+            </ng-container>
+            <ng-container *ngIf="row.state === 'DEACTIVATE'">
+              <button class="btn btn-success btn-sm" (click)="updateState(row,4)">
+                {{ 'Activate' }}
+              </button>
+            </ng-container>
           </ng-template>
         </ngx-datatable-column>
 
@@ -661,6 +692,24 @@
            data-bs-target="#modal-exam-reservations"
 
         >Back</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal modal-blur" id="modal-com-pdf" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Commercial Record PDF</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe [src]="baseUrl+pdfUrl | safeUrl" class="pdf-viewer"></iframe>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-link link-secondary" data-bs-dismiss="modal">Close</a>
       </div>
     </div>
   </div>

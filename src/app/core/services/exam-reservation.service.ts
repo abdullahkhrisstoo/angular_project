@@ -14,6 +14,7 @@ import {ExamReservationDTO} from "../DTO/exam-reservation-dto";
 import {CreateExamReservationDTO} from "../DTO/create-exam-reservation-dto";
 import {UpdateExamReservationDTO} from "../DTO/update-exam-reservation-dto";
 import {ExamReservationProctorDTO} from "../DTO/exam-reservation-proctor-dto";
+import { ExamReservationPaymentDTO } from '../DTO/exam-reservation-payment-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -68,4 +69,13 @@ export class ExamReservationService {
         map(response => response.data)
       );
   }
+
+
+  createProcessExamReservation(viewModel: ExamReservationPaymentDTO): Observable<any> {
+    return this.apiHandler.post<ApiResponse<any>>(API_ENDPOINTS.CREATE_PROCESS_EXAM_RESERVATION, viewModel)
+      .pipe();
+  }
+
+
+
 }

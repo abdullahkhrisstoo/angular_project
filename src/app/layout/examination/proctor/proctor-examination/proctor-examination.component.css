@@ -1,0 +1,117 @@
+body:-webkit-full-screen,
+body:-moz-full-screen,
+body:-ms-fullscreen,
+body:fullscreen {
+  background-color: #fff;
+  overflow: hidden;
+  margin: 0; height: 100%;
+}
+html, body {margin: 0 !important; height: 100% !important; overflow: hidden !important}
+
+.nav-item.active .nav-link {
+  background-color: #007bff;
+  color: white;
+}
+
+.nav-item.active .nav-link .nav-link-icon {
+  color: white;
+}
+
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+
+
+
+
+
+/* Disable text dragging */
+* {
+  -webkit-user-drag: none;
+  /* user-drag: none; */
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #d2d2d2;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  height: 70px;
+}
+
+.footer-icon {
+  width: 35px;
+  height: 35px;
+  background-color: #e9f4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px;
+  margin: 8px;;
+  margin-right: 20px;
+}
+
+.footer-icon fa-icon {
+  color: #10304f;
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.footer-icon.active {
+  background-color: #181871;
+}
+
+.footer-icon.active fa-icon {
+  color: #fff;
+}
+
+
+
+
+
+
+
+/* Containers */
+.screen-share-container, .remote-camera-container {
+  display: none;
+  transition: all 0.5s ease;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+}
+
+.screen-share-container.open, .remote-camera-container.open {
+  display: block;
+  transform: scale(1);
+  opacity: 1;
+}
+
+.screen-share-container {
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+.remote-camera-container {
+  transform: scale(0.95);
+  opacity: 0;
+}

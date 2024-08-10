@@ -1,0 +1,23 @@
+<div class="container p-5 mt-5">
+    <div class="card shadow">
+      <div class="card-header text-center">
+        <h4>Upload Room Images</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="roomImageForm" (ngSubmit)="createRoomImage()">
+          <div class="form-group dropzone-container mt-4">
+            <label class="d-block">Upload Room Images (Front, Back, Left, Right)</label>
+            <div #dropzoneElement id="dropzone-default" class="dropzone dz-clickable">
+              <div class="dz-default dz-message">
+                <button class="dz-button" type="button">Drop files here to upload</button>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Create Room Images</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

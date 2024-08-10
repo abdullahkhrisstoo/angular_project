@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'auth', 
     loadChildren: () => import('./layout/auth/auth.module').then(m => m.AuthModule) 
   },
+  {
+    path: 'examination',
+    loadChildren: () => import('./layout/examination/examination.module').then(m => m.ExaminationModule)
+  },
   { 
     path: '', 
     redirectTo: '/home', 

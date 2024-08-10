@@ -1,0 +1,56 @@
+<div class="container mt-5">
+    <div class="row">
+      <!-- Proctor Work Time Card -->
+      <div class="col-12 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">Proctor Work Time</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text"><strong>Start Time</strong> {{ proctorWorkTime.workFrom }}</p>
+            <p class="card-text"><strong>End Time</strong> {{ proctorWorkTime.workTo }}</p>
+          </div>
+  
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">Edit Proctor Work Time</h5>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="updateProctorWorkTimeForm" (ngSubmit)="updateProctorWorkTime()">
+              <div class="row">
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="workFrom" class="form-label">Start Time</label>
+                    <app-input [formGroup]="updateProctorWorkTimeForm" controlName="workFrom" type="text"
+                      placeholder="HH:mm" [errorMessages]="{
+                      required: 'Start time is required.',
+                      pattern: 'Invalid time format. Use HH:mm.'
+                    }"></app-input>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="workTo" class="form-label">End Time</label>
+                    <app-input [formGroup]="updateProctorWorkTimeForm" controlName="workTo" type="text"
+                      placeholder="HH:mm" [errorMessages]="{
+                    required: 'End time is required.',
+                    pattern: 'Invalid time format. Use HH:mm.'
+                  }"></app-input>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="updateProctorWorkTimeForm.hasError('endTimeBeforeStartTime')" class="alert alert-danger">
+                End time must be after start time.
+              </div>
+              <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary mt-3" [disabled]="updateProctorWorkTimeForm.invalid">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

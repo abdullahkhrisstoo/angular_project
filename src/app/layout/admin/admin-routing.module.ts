@@ -12,6 +12,9 @@ import {ExamProviderComponent} from "./components/exam-provider/exam-provider.co
 import {ReadAllAboutUsComponent} from "./components/about-us/read-all-about-us.component";
 import {ProctorManageComponent} from "./components/proctor-manage/proctor-manage.component";
 import {ContactUsComponent} from "./components/contact-us/contact-us.component";
+import { ReservationInvoiceComponent } from './components/reservation-invoice/reservation-invoice.component';
+import { PlanInvoiceComponent } from './components/plan-invoice/plan-invoice.component';
+import { ProctorWorkTimeComponent } from './proctor-work-time/proctor-work-time.component';
 
 const routes: Routes = [
   {
@@ -25,7 +28,9 @@ const routes: Routes = [
       { path: 'exam-provider', component: ExamProviderComponent },
       { path: 'manage-proctor', component: ProctorManageComponent },
       { path: 'contact-us', component: ContactUsComponent },
-
+      { path: 'reservation-invoice', component: ReservationInvoiceComponent },
+      { path: 'plan-invoice', component: PlanInvoiceComponent },
+      { path: 'proctor-work-time', component: ProctorWorkTimeComponent },
       { path: 'profile', component: UserProfileComponent, children: [
           { path: 'update-email', component: UpdateEmailComponent },
           { path: 'update-phone', component: UpdatePhoneComponent },

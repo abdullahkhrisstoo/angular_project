@@ -23,18 +23,11 @@ import { AuthService } from '../core/services/auth.service';
 import { TokenInterceptor } from '../core/interceptors/auth-interceptor';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ChoosePlanComponent } from './user-profile/choose-plan/choose-plan.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ChatSectionComponent } from './components/input/chat-section/chat-section.component';
 @NgModule({
   declarations: [
-    AdminSideBarComponent,
-    ProctorSideBarComponent,
-    ExamProviderSideBarComponent,
-    StudentNavBarComponent,
-    StudentFooterComponent,
-    DashNavBarComponent,
-    DashbardAssetsComponent,
-    HomeAssetsComponent,
-    InputComponent,
+     InputComponent,
     MyAccountComponent,
     UserProfileComponent,
     UpdateEmailComponent,
@@ -42,7 +35,7 @@ import { ChoosePlanComponent } from './user-profile/choose-plan/choose-plan.comp
     UpdateNameComponent,
     UpdatePasswordComponent,
     ChoosePlanComponent,
-
+    ChatSectionComponent
   ],
   imports: [
     CommonModule,
@@ -52,14 +45,11 @@ import { ChoosePlanComponent } from './user-profile/choose-plan/choose-plan.comp
     FormsModule,
     UserProfileRoutingModule,
     NgxDatatableModule,
+    FontAwesomeModule 
+    
   ],
   exports: [
-    AdminSideBarComponent,
-    ProctorSideBarComponent,
-    ExamProviderSideBarComponent,
-    StudentNavBarComponent,
-    StudentFooterComponent,
-    DashNavBarComponent,
+
     ReactiveFormsModule,
     InputComponent,
     HttpClientModule,
@@ -72,7 +62,9 @@ import { ChoosePlanComponent } from './user-profile/choose-plan/choose-plan.comp
     MyAccountComponent,
     UserProfileRoutingModule,
     NgxDatatableModule,
-    CommonModule
+    CommonModule,
+    FontAwesomeModule,
+    ChatSectionComponent
 
 
   ],

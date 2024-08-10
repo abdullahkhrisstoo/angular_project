@@ -1,9 +1,10 @@
 export const API_ENDPOINTS = {
-  baseUrl : 'https://localhost:1111/api/',
+  baseUrl : 'http://192.168.100.67:7220/api/',
 
+  baseUrlImage : 'http://192.168.100.67:7220/',
 
-
-
+   GET_PROCTOR_WORK_TIMES : 'ProctorWorkTimes/GetProctorsWorkTimeById',
+    UPDATE_PROCTOR_ANSWER : 'ProctorWorkTimes/UpdateProctorsWorkTimeById',
 
   //todo:contact us
   GET_ALL_CONTACT: 'ContactUs/GetAllContactUs',
@@ -145,5 +146,32 @@ export const API_ENDPOINTS = {
 
   GET_PROCTOR_BY_EXAM_RESERVATION_ID : 'Proctor/GetProctorByExamReservationId',
 
+  GET_ALL_EXAM_PROVIDER_LINKS : 'ExamProviderLink/GetAllExamProviderLinks',
+  GET_EXAM_PROVIDER_LINK_BY_COMPANY : 'ExamProviderLink/GetExamProviderLinkByCompany',
+  UPDATE_EXAM_PROVIDER_LINK : 'ExamProviderLink/UpdateExamProviderLink',
 
+  GET_ALL_EXAM_PROVIDER_ACTIONS : 'ExamProviderAction/GetAllExamProviderActions',
+
+  GET_TIME_SLOTS : 'ExamReservation/GetAvailableTimesByDate',
+  GET_STUDENT_INFO_BY_ID : 'Student/GetStudentInfoById',
+  GET_STUDENT_INFO_BY_EMAIL : 'Student/GetStudentInfoByEmail',
+  GET_EXAM_BY_NAME : 'ExamInfo/GetExamByName',
+
+
+  GET_IDENTIFICATION_IMAGE_BY:'IdentificationImage/GetIdentificationImageBy',
+  CREATE_IDENTIFICATION_IMAGE:'IdentificationImage/CreateIdentificationImage',
+  UPDATE_IDENTIFICATION_IMAGE:'IdentificationImage/UpdateIdentificationImage',
+  GET_ROOM_RESERVATION_IMAGES_BY:'RoomReservationImage/GetRoomReservationImagesBy',
+  CREATE_ROOM_RESERVATION_IMAGE:'RoomReservationImage/CreateRoomReservationImage',
+  UPDATE_ROOM_RESERVATION_IMAGE:'RoomReservationImage/UpdateRoomReservationImage',
+
+  CREATE_PROCESS_EXAM_RESERVATION:'ExamReservation/CreateProcessExamReservation',
+  REGISTER_EXAM_PROVIDER:'Auth/RegisterExamProvider',
+  UPDATE_EXAM_PROVIDER_STATE:'ExamProvider/UpdateExamProviderState',
+  GET_ALL_PLAN_INVOICES_DETAILS:'PlanInvoice/GetAllPlanInvoicesDetails',
+  GET_ALL_RESRVATION_INVOICES_DETAILS:'ReservationInvoice/GetAllReservationInvoicesDetails',
+
+    GET_EXAM_WITHOUT_ANSWER : 'ExamInfo/GetExamDetailsWithoutAnswersByName?examName',
+   
+    GET_CORRECTION_ANSWER : 'ExamInfo/ExamCorrection?examName',
 };

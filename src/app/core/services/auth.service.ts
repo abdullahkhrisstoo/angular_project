@@ -14,6 +14,11 @@ import { UpdateEmailViewModel } from '../DTO/update-email-view-model';
 import { UpdatePasswordViewModel } from '../DTO/update-password-view-model';
 import { EXAM_PROVIDER_ROLE } from '../constants/app.constants';
 import { Router } from '@angular/router';
+import { RegisterExamProviderDTO } from '../DTO/register-exam-provider-dto';
+
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +26,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
 
-  constructor(private router: Router,private apiHandler: GenericApiHandlerService, private  cache : LocalStorageService) { }
+  constructor(private router: Router,private apiHandler: GenericApiHandlerService, private  cache : LocalStorageService,private http: HttpClient) { }
 
   login(credentials: GetUserByCredential): Observable<ApiResponse<CurrentUserData>> {
     return this.apiHandler.post<ApiResponse<CurrentUserData>>(API_ENDPOINTS.GET_USER_BY_CREDENTIAL, credentials)
@@ -44,6 +49,12 @@ export class AuthService {
       );
 
   }
+
+
+  registerExamProvider(data: FormData): Observable<ApiResponse<any>> {
+    return  this.http.post<ApiResponse<any>>(`${API_ENDPOINTS.baseUrl}${API_ENDPOINTS.REGISTER_EXAM_PROVIDER}`, data);
+  }
+
   updateUserName(data: UpdateNameViewModel): Observable<ApiResponse<UpdateNameViewModel>> {
     return this.apiHandler.put<ApiResponse<UpdateNameViewModel>>(API_ENDPOINTS.UPDATE_NAME, data);
   }
@@ -89,4 +100,36 @@ export class AuthService {
     console.log("dddd")
     this.router.navigate(['/auth/sign-in']);
   }
+
+
+
+  registerExamProviderTest() {
+    const formData = new FormData();
+    formData.append('CreateAccountViewModel.FirstName', 'deaaa');
+    formData.append('CreateAccountViewModel.Email', 'd123a123123aa45112@gmail.com');
+    formData.append('CreateAccountViewModel.UserId', '45');
+    formData.append('PlanId', '5');
+    formData.append('CardInfoDTO.CardCvv', '123');
+    formData.append('CardInfoDTO.CardNumber', '4556518604332453');
+    formData.append('CardInfoDTO.CardExpireDate', '13/10');
+    formData.append('CreateAccountViewModel.RoleId', '2');
+    formData.append('CreateAccountViewModel.Phonenum', '4444444446');
+    formData.append('CardInfoDTO.CardHolderName', 'Deya');
+    formData.append('CreateAccountViewModel.Password', '123456');
+    formData.append('CreateAccountViewModel.LastName', 'aldeen');
+
+  
+
+
+    this.http.post(`${API_ENDPOINTS.baseUrl}${API_ENDPOINTS.REGISTER_EXAM_PROVIDER}`, formData)
+      .subscribe(response => {
+        console.log('Success', response);
+      }, error => {
+        console.error('Error', error);
+      });
+  }
+
+
+
+
 }

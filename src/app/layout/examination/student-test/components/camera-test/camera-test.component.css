@@ -1,0 +1,32 @@
+
+  .card {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  
+  
+  video {
+    border: 3px solid #103255;
+    border-radius: 10px;
+  }
+  
+  p {
+    margin-top: 15px;
+    color: #6c757d;
+  }
+  
+  button {
+    width: 100px;
+  }
+  .alert {
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #ffeeba;
+  }

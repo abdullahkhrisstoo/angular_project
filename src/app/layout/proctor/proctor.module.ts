@@ -20,7 +20,8 @@ import {SharedModule} from "../../shared/shared.module";
     ProctorRoutingModule,
     NgxDatatableModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    
   ]
 })
 export class ProctorModule { }

@@ -1,0 +1,68 @@
+<div class="page-header d-print-none">
+    <div class="container-xl">
+      <div class="row g-2 align-items-center">
+        <div class="col">
+          <div class="page-pretitle">
+            Overview
+          </div>
+          <h2 class="page-title">
+            Plan Invoice
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="container-xl">
+      <div class="card" style="padding : 20px; ">
+        <div class="d-flex justify-content-end">
+          <input type="text" class="form-control" style="width: 30%;" placeholder="Search..."
+                 (keyup)="updateFilter($event)"/>
+        </div>
+        <br>
+        <ngx-datatable
+          class="bootstrap"
+
+          [rows]="planInvoices"
+          [columns]="columns"
+          [columnMode]="'force'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [rowHeight]="'auto'"
+          [limit]="5"
+          style="border: 1px solid #ddd; border-radius: 4px;"
+          [scrollbarH]="true"
+          [sortType]=SortType.multi
+        >
+          <!-- <ngx-datatable-column name="PlanName" prop="planName" [sortable]="true">
+            <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+              {{ value }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Created At" prop="createdAt" [sortable]="true">
+            <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+              {{ value | date:'yyyy-MM-dd HH:mm:ss' }}
+            </ng-template>
+          </ngx-datatable-column> -->
+
+          <!-- <ngx-datatable-column name="Exam Reservations Details" [width]="100" [sortable]="false">
+            <ng-template ngx-datatable-cell-template let-row="row">
+              <button class="btn btn-info btn-sm" data-bs-toggle="modal"
+                      data-bs-target="#modal-exam-reservations" (click)="loadExamReservations(row.examId)">Exam
+                Reservations
+              </button>
+            </ng-template>
+          </ngx-datatable-column> -->
+
+
+          <!--                <ngx-datatable-column name="Actions" [width]="130" [sortable]="false">-->
+          <!--                  <ng-template ngx-datatable-cell-template let-row="row">-->
+          <!--                    <button class="btn btn-primary btn-sm" style="margin-right: 2px" (click)="updateRow(row)">Update</button>-->
+          <!--                    <button class="btn btn-danger btn-sm" (click)="deleteRow(row)">Delete</button>-->
+          <!--                  </ng-template>-->
+          <!--                </ngx-datatable-column>-->
+
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
