@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Router } from '@angular/router';
@@ -29,6 +29,12 @@ export class StartComponent implements OnInit {
       elem.requestFullscreen();
     }
   }
+
+
+
+
+
+
 
   openFullscreen() {
     const elem = document.documentElement as any;

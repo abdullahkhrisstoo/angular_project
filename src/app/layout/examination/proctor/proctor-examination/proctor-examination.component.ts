@@ -165,11 +165,10 @@ export class ProctorExaminationComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       const token = params['token'];
 
-      const exam = decodeURIComponent(params['exam']);
 
-      if (exam && token) {
+
+      if (token) {
         console.log(token);
-        console.log(exam);
         const payload = jwtDecode(token);
         console.log(payload);
 
@@ -179,21 +178,21 @@ export class ProctorExaminationComponent implements OnInit {
 
         localStorage.setItem("payload-proctor",JSON.stringify(payload));
 
-      //  this.cache.setItem(this.cache.AUTH_TOKEN, token)
-        //   // localStorage.setItem("auth-token",token);
-        //   this.cache.setItem(this.cache.EXAM, exam)
+       this.cache.setItem(this.cache.AUTH_TOKEN, token)
+          // localStorage.setItem("auth-token",token);
+        this.cache.setItem(this.cache.EXAM, this.examName)
 
-        //   // localStorage.setItem("exam",exam);
-        //   const payloadJson=JSON.parse(JSON.stringify(payload));
-        //  // this.getStudentInfoById(payload.userId);
-        //   console.log(payloadJson.Company);
-        //   this.cache.setItem(this.cache.COMPANY, payloadJson.Company);
-        //   this.cache.setItem(this.cache.USER_ID, payloadJson.UserId);
-        //   this.cache.setItem(this.cache.ROLE_ID, payloadJson.RoleId);
-        //   this.cache.setItem(this.cache.PAYLOAD, payload);
+          // localStorage.setItem("exam",exam);
+          // const payloadJson=JSON.parse(JSON.stringify(payload));
+        //  this.getStudentInfoById(payload.userId);
+
+          // this.cache.setItem(this.cache.COMPANY, payloadJson.Company);
+          this.cache.setItem(this.cache.USER_ID, payloadJson.UserId);
+          this.cache.setItem(this.cache.ROLE_ID, payloadJson.RoleId);
+          this.cache.setItem(this.cache.PAYLOAD, payload);
         this.router.navigate(['/examination/proctor']);
       } else if (localStorage.getItem('auth-token') == null) {
-        this.router.navigate(['/home']);
+     //   this.router.navigate(['/home']);
       }
     });
 
@@ -216,7 +215,6 @@ export class ProctorExaminationComponent implements OnInit {
           const answer = await this.peerConnection.createAnswer();
           await this.peerConnection.setLocalDescription(answer);
           await this.hubConnection.invoke('SendAnswer',this.id,JSON.stringify(answer));
-    
   }
 
 

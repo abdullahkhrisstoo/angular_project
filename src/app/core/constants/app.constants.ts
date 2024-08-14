@@ -6,11 +6,17 @@ export const SHOW_SPINNER="X-Show-Spinner";
 export const ADMIN_ROLE=1;
 export const EXAM_PROVIDER_ROLE=2;
 export const PROCTOR_ROLE=3;
+export const STUDENT_ROLE=4;
+export const EXAMER_ROLE=5;
+
+
+
+
 export const THIRTY_SECONDS=30;
 
 // href="http://localhost:4200/admin/dashboard?theme=dark"
 
-export const LOCAL_HOST="http://192.168.1.17:4200"
-export const LIGHT_THEME="http://192.168.1.17:4200/admin/exam-provider?theme=light"
-export const DARK_THEME="http://192.168.1.17:4200/admin/exam-provider?theme=dark"
+export const LOCAL_HOST="https://guardian-vue.geeksfreelancer.online"
+export const LIGHT_THEME="https://guardian-vue.geeksfreelancer.online/admin/exam-provider?theme=light"
+export const DARK_THEME="https://guardian-vue.geeksfreelancer.online/admin/exam-provider?theme=dark"
 

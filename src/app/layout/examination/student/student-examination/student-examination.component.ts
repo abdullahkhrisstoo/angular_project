@@ -58,7 +58,7 @@ export class StudentExaminationComponent
   implements OnInit, OnDestroy, AfterViewInit
 {
   // todo: webrtc, signlR varibles
-  isFullscreen: boolean = false;
+  // isFullscreen: boolean = false;
   updateExamReservationDTO!: UpdateExamReservationDTO;
   public butColor: string = 'blue';
   public butColorCam: string = 'blue';
@@ -105,6 +105,27 @@ export class StudentExaminationComponent
   isVideoToggled: boolean = false;
   isMicrophoneToggled!: boolean;
   remoteAudio!: HTMLAudioElement;
+  
+  @HostListener('document:fullscreenchange')
+  @HostListener('document:mozfullscreenchange')
+  @HostListener('document:webkitfullscreenchange')
+  @HostListener('document:msfullscreenchange')
+  handleFullscreenChange(): void {
+    if (!this.isFullscreen()) {
+      alert("You have exited fullscreen mode.");
+    }
+  }
+  isFullscreen(): boolean {
+    return !!(
+      document.fullscreenElement ||
+      (document as any).mozFullScreenElement ||
+      (document as any).webkitFullscreenElement ||
+      (document as any).msFullscreenElement
+    );
+  }
+
+
+
   constructor(
     private questionService: ExaminationService,
     private cache: LocalStorageService,

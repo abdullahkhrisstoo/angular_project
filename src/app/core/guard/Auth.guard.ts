@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
     let userToken:any = this.cache.getItem(this.cache.AUTH_TOKEN);
 
     if (!userToken) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/auth/sign-in']);
       return false;
     }
 
@@ -30,24 +30,16 @@ export class AuthGuard implements CanActivate {
       const requiredRoles = next.data['roles'] as Array<number>;
 
       if (requiredRoles && !requiredRoles.includes(userRoleId)) {
-        this.router.navigate(['/unauthorized']);
+        this.router.navigate(['**']);
         return false;
       }
 
       return true;
     } catch (error) {
       console.error('Token decoding error:', error);
-      this.router.navigate(['/login']);
+      this.router.navigate(['/auth/sign-in']);
       return false;
     }
   }
 }
 // todo: example how to use
-// const routes: Routes = [
-//   { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard], data: { roles: [ADMIN_ROLE] } },
-//   { path: 'exam-provider-dashboard', component: ExamProviderDashboardComponent, canActivate: [AuthGuard], data: { roles: [EXAM_PROVIDER_ROLE] } },
-//   { path: 'proctor-dashboard', component: ProctorDashboardComponent, canActivate: [AuthGuard], data: { roles: [PROCTOR_ROLE] } },
-//   { path: 'shared-dashboard', component: SharedDashboardComponent, canActivate: [AuthGuard], data: { roles: [ADMIN_ROLE, EXAM_PROVIDER_ROLE] } },
-//   { path: 'unauthorized', component: UnauthorizedComponent },
-//   { path: '**', redirectTo: '/unauthorized' }
-// ];

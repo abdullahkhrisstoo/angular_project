@@ -1,7 +1,7 @@
 export const API_ENDPOINTS = {
 
-  baseUrl : 'http://192.168.1.17:1111/api/',
-  baseUrlImage : 'http://192.168.1.17:1111/',
+  baseUrl : 'https://exam-guardian.geeksfreelancer.online/api/',
+  baseUrlImage : 'https://exam-guardian.geeksfreelancer.online/',
   GET_PROCTOR_WORK_TIMES : 'ProctorWorkTimes/GetProctorsWorkTimeById',
   UPDATE_PROCTOR_ANSWER : 'ProctorWorkTimes/UpdateProctorsWorkTimeById',
 

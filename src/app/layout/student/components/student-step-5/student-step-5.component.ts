@@ -13,10 +13,9 @@ declare var bootstrap: any;
 @Component({
   selector: 'app-student-step-5',
   templateUrl: './student-step-5.component.html',
-  styleUrls: ['./student-step-5.component.css']
+  styleUrls: ['./student-step-5.component.css'],
 })
 export class StudentStep5Component implements OnInit {
-
   currentImage: string = '';
 
   duration: number = 30;
@@ -26,23 +25,28 @@ export class StudentStep5Component implements OnInit {
 
   timeSlots: AvailableTimeDTO[] = [];
   currentTimezone!: string;
-  timezones: string[] = ['Asia/Amman-EET', 'America/New_York', 'Europe/London', 'Asia/Tokyo'];
+  timezones: string[] = [
+    'Asia/Amman-EET',
+    'America/New_York',
+    'Europe/London',
+    'Asia/Tokyo',
+  ];
   showTimezoneDropdown: boolean = false;
   selectedDate: string | null = null;
   recommendedTime: string = '08:00 - 09:05 Asia/Amman-EET';
   startTime: string = '08:00';
   endTime: string = '17:00';
   dateForm: FormGroup;
-  minDate: string="";
+  minDate: string = '';
   constructor(
     private fb: FormBuilder,
     private el: ElementRef,
     private timeSlotsService: TimeSlotsService,
     private router: Router,
-    private examService:ExamInfoService
+    private examService: ExamInfoService
   ) {
     this.dateForm = this.fb.group({
-      date: new FormControl('')
+      date: new FormControl(''),
     });
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
@@ -52,30 +56,25 @@ export class StudentStep5Component implements OnInit {
     this.detectTimeZone();
     this.updateImageBasedOnTime();
 
-   if(localStorage.getItem("exam")){
-
-    this.getExamByName(localStorage.getItem("exam")!)
-   }
+    if (localStorage.getItem('exam')) {
+      this.getExamByName(localStorage.getItem('exam')!);
+    }
   }
 
-  getExamByName(name:string){
+  getExamByName(name: string) {
     this.examService.getExamByName(name).subscribe(
-      response => {
+      (response) => {
         // this.studentDTO = response.data;
         console.log(response);
-        if(response.data.examDuration!=null){
-         this.duration=response.data.examDuration;
-         localStorage.setItem("examDto",(JSON.stringify(response.data)))
-         this.loadTimeSlots();
+        if (response.data.examDuration != null) {
+          this.duration = response.data.examDuration;
+          localStorage.setItem('examDto', JSON.stringify(response.data));
+          this.loadTimeSlots();
+        } else {
+          throw new Error('duration is null');
         }
-        else {
-          throw new Error("duration is null")
-        }
-
-
       },
-      error => {
-
+      (error) => {
         console.error('Error fetching complement by ExamReservationId:', error);
         //this.router.navigate(['/home']);
       }
@@ -96,27 +95,35 @@ export class StudentStep5Component implements OnInit {
 
       const formattedDate = format(dateTime, 'yyyy-MM-dd');
 
-      this.timeSlotsService.getAvaliableTime(formattedDate, this.duration, true).subscribe(
-        (response: ApiResponse<AvailableTimeDTO[]>) => {
+      this.timeSlotsService
+        .getAvaliableTime(formattedDate, this.duration, true)
+        .subscribe(
+          (response: ApiResponse<AvailableTimeDTO[]>) => {
+            // console.log(response);
+            this.timeSlots = response.data;
+            console.log(response.data);
 
-          // console.log(response);
-          this.timeSlots=response.data;
-          console.log(response.data)
-
-          if (this.timeSlots.length > 0) {
-            const startTime = new Date(this.timeSlots[0].startTime!);
-            this.recommendedTime = this.getPresentedFormat(this.timeSlots[0].startTimeFormatted, this.timeSlots[0].endTimeFormatted, this.currentTimezone);
-            localStorage.setItem("startTime",this.timeSlots[0].startTime!)
-            localStorage.setItem("endTime",this.timeSlots[0].endTime!)
-            localStorage.setItem("formatSelectedTime",this.recommendedTime)
-            console.log(this.recommendedTime)
-            this.checkInTimeString = this.getCheckInTimePresentedFormat(this.timeSlots[0].startTimeFormatted, this.currentTimezone);
+            if (this.timeSlots.length > 0) {
+              const startTime = new Date(this.timeSlots[0].startTime!);
+              this.recommendedTime = this.getPresentedFormat(
+                this.timeSlots[0].startTimeFormatted,
+                this.timeSlots[0].endTimeFormatted,
+                this.currentTimezone
+              );
+              localStorage.setItem('startTime', this.timeSlots[0].startTime!);
+              localStorage.setItem('endTime', this.timeSlots[0].endTime!);
+              localStorage.setItem('formatSelectedTime', this.recommendedTime);
+              console.log(this.recommendedTime);
+              this.checkInTimeString = this.getCheckInTimePresentedFormat(
+                this.timeSlots[0].startTimeFormatted,
+                this.currentTimezone
+              );
+            }
+          },
+          (error) => {
+            console.error('Error:', error);
           }
-        },
-        error => {
-          console.error('Error:', error);
-        }
-      );
+        );
     } catch (e) {
       console.error('Error parsing date:', e);
     }
@@ -137,10 +144,16 @@ export class StudentStep5Component implements OnInit {
 
     if (this.timeSlots.length > 0) {
       const startTime = new Date(this.timeSlots[0].startTime!);
-      this.checkInTimeString = this.getCheckInTimeString(startTime, this.currentTimezone);
+      this.checkInTimeString = this.getCheckInTimeString(
+        startTime,
+        this.currentTimezone
+      );
 
-      this.recommendedTime = this.getRecommendedTimeString(startTime, this.duration, this.currentTimezone);
-
+      this.recommendedTime = this.getRecommendedTimeString(
+        startTime,
+        this.duration,
+        this.currentTimezone
+      );
     }
   }
 
@@ -148,15 +161,15 @@ export class StudentStep5Component implements OnInit {
     const target = event.target as HTMLInputElement;
     this.selectedDate = target.value;
     this.dateForm.controls['date'].setValue(this.selectedDate);
-    localStorage.setItem("examDay",this.selectedDate)
-    console.log("Selected date: " + this.dateForm.controls['date'].value);
+    localStorage.setItem('examDay', this.selectedDate);
+    console.log('Selected date: ' + this.dateForm.controls['date'].value);
     this.loadTimeSlots();
   }
 
-
-
   openTimePicker(): void {
-    const timePickerModal = new bootstrap.Modal(this.el.nativeElement.querySelector('#timePickerModal'));
+    const timePickerModal = new bootstrap.Modal(
+      this.el.nativeElement.querySelector('#timePickerModal')
+    );
     timePickerModal.show();
   }
 
@@ -182,40 +195,53 @@ export class StudentStep5Component implements OnInit {
     }
   }
 
-
   getCheckInTimeString(startTime: Date, timezone: string): string {
-    const checkInTime = startTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+    const checkInTime = startTime.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+    });
     return `Your check-in time will be ${checkInTime} ${timezone}`;
   }
-  getCheckInTimePresentedFormat(formattedStartTime?:string, timezone?: string): string {
+  getCheckInTimePresentedFormat(
+    formattedStartTime?: string,
+    timezone?: string
+  ): string {
     // const checkInTime = startTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
     return `Your check-in time will be ${formattedStartTime} ${timezone}`;
   }
-  getRecommendedTimeString(startTime: Date, duration: number, timezone?: string): string {
+  getRecommendedTimeString(
+    startTime: Date,
+    duration: number,
+    timezone?: string
+  ): string {
     const endTime = new Date(startTime.getTime() + duration * 60000);
 
     const options = {
-        hour: '2-digit',
-        minute: '2-digit',
-        timeZone: 'Asia/Amman'
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: 'Asia/Amman',
     };
 
     const formattedStartTime = new Intl.DateTimeFormat('en-US', {
       hour: '2-digit',
       minute: '2-digit',
-      timeZone: 'Asia/Amman'
-  }).format(startTime);
+      timeZone: 'Asia/Amman',
+    }).format(startTime);
     const formattedEndTime = new Intl.DateTimeFormat('en-US', {
       hour: '2-digit',
       minute: '2-digit',
-      timeZone: 'Asia/Amman'
-  }).format(endTime);
+      timeZone: 'Asia/Amman',
+    }).format(endTime);
 
     return `${formattedStartTime} - ${formattedEndTime} ${timezone}`;
   }
 
-  getPresentedFormat(formattedStartTime?:string,formattedEndTime?:string,timezone?:string){
-
+  getPresentedFormat(
+    formattedStartTime?: string,
+    formattedEndTime?: string,
+    timezone?: string
+  ) {
     return `${formattedStartTime} - ${formattedEndTime} ${timezone}`;
   }
 
@@ -224,8 +250,8 @@ export class StudentStep5Component implements OnInit {
   }
 
   onNext(): void {
-   // this.isSubmitted = true;
-    if (localStorage.getItem("endTime") && localStorage.getItem("startTime")) {
+    // this.isSubmitted = true;
+    if (localStorage.getItem('endTime') && localStorage.getItem('startTime')) {
       this.router.navigate(['/student/step-6']);
       console.log('Next button clicked');
     } else {
@@ -238,48 +264,57 @@ export class StudentStep5Component implements OnInit {
     console.log('Previous button clicked');
   }
 
-
   changeTime(time: AvailableTimeDTO) {
-    this.recommendedTime = "";
+    this.recommendedTime = '';
     if (time && time.startTime) {
       const startTime = new Date(time.startTime!);
 
-      this.recommendedTime = this.getPresentedFormat(time.startTimeFormatted, time.endTimeFormatted, 'Asia/Amman');
-      this.checkInTimeString = this.getCheckInTimePresentedFormat(time.startTimeFormatted, 'Asia/Amman');
+      this.recommendedTime = this.getPresentedFormat(
+        time.startTimeFormatted,
+        time.endTimeFormatted,
+        'Asia/Amman'
+      );
+      this.checkInTimeString = this.getCheckInTimePresentedFormat(
+        time.startTimeFormatted,
+        'Asia/Amman'
+      );
 
-      console.log("start time", startTime);
-      localStorage.setItem("startTime", time.startTime);
-      localStorage.setItem("endTime", time.endTime!);
-      localStorage.setItem("formatSelectedTime", this.recommendedTime);
-      localStorage.setItem("time", (JSON.stringify(time)));
+      console.log('start time', startTime);
+      localStorage.setItem('startTime', time.startTime);
+      localStorage.setItem('endTime', time.endTime!);
+      localStorage.setItem('formatSelectedTime', this.recommendedTime);
+      localStorage.setItem('time', JSON.stringify(time));
       console.log(this.recommendedTime);
 
       // Pass the startTime to updateImageBasedOnTime
-      this.updateImageBasedOnTime(startTime);
+      this.updateImageBasedOnTime(time.startTime);
     }
     console.log(time);
   }
 
+  updateImageBasedOnTime(time?: String) {
+    // const currentTime = time || new Date();
+    // const hour = currentTime.getHours();
+    console.warn("hello: "+time)
 
-
-    updateImageBasedOnTime(time?: Date) {
-      const currentTime = time || new Date();
-      const hour = currentTime.getHours();
-      if (hour >= 0 && hour < 6) {
-        this.currentImage = './image/morning.png';
-      } else if (hour >= 6 && hour < 12) {
-        this.currentImage = './image/midday.png';
-      } else if (hour >= 12 && hour < 18) {
-        this.currentImage = './image/afternoon.png';
-      } else {
-        this.currentImage = './image/evening.png';
-      }
+    const Shour = time?.substring(11, 13);
+    console.warn(Shour)
+    const hour =Number.parseInt(Shour!) ;
+    console.warn(hour);
+    if (hour >= 0 && hour < 6) {
+      this.currentImage = './image/evening.png';
+    } else if (hour >= 6 && hour < 12) {
+      this.currentImage = './image/morning.png';
+    } else if (hour >= 12 && hour < 15) {
+      this.currentImage = './image/afternoon.png';
+    } else if (hour >= 15 && hour < 20) {
+      this.currentImage = './image/midday.png';
+    } else if (hour >= 20 && hour < 24) {
+      this.currentImage = './image/evening.png';
+    } else {
+      this.currentImage = './image/midday.png';
     }
-
-
-
-
-
+  }
 
   // selectTimeSlot(start: string, end: string): void {
   //   this.selectedTimeSlot = `${start} - ${end}`;

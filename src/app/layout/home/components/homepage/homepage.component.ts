@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import {ExamProviderService} from "../../../../core/services/exam-provider.service";
 import {ExamInfoService} from "../../../../core/services/exam-info.service";
 import {ExamProviderDTO} from "../../../../core/DTO/exam-provider-dto";

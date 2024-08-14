@@ -11,3 +11,4 @@ export class SafeUrlPipe implements PipeTransform {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }
+// pdf commerical record
