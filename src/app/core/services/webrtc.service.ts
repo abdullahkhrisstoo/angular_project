@@ -1,10 +1,13 @@
 // webrtc.service.ts
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { API_ENDPOINTS } from '../constants/api.constants';
 
 @Injectable({
   providedIn: 'root',
 })
+
+
 export class WebrtcService {
   private hubConnection!: HubConnection;
   private peerConnection!: RTCPeerConnection;
@@ -18,6 +21,11 @@ export class WebrtcService {
       {
         urls: ['stun:stun1.1.google.com:19302'],
       },
+      {
+        urls: 'turn:numb.viagenie.ca',
+        credential: 'muazkh',
+        username: 'webrtc@live.com'
+      },
     ],
   };
 
@@ -25,7 +33,7 @@ export class WebrtcService {
 
   initializeConnection(routeFunc:Function) {
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl('http://192.168.1.17:1111/signalingHub')
+      .withUrl(API_ENDPOINTS.WEB_RTC_URL)
       .build();
 
     this.hubConnection

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StudentLayoutComponent } from './student-layout/student-layout.component';
-import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
 import { StudentProfileComponent } from './components/student-profile/student-profile.component';
 import { StudentStepTwoComponent } from './components/student-step-2/student-step-two.component';
 import { StudentStep4Component } from './components/student-step-4/student-step-4.component';
@@ -28,7 +27,6 @@ const routes: Routes = [
       { path: 'iden', component: IdenImageComponent },
       { path: 'room', component: RoomImageComponent },
       { path: 'mic', component: MicrophoneTestComponent },
-      { path: 'dash', component: StudentDashboardComponent },
       { path: 'profile', component: StudentProfileComponent },
     ]
   }

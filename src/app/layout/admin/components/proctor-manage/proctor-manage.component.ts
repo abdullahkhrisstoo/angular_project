@@ -22,6 +22,7 @@ import {UpdateAccountDTO} from "../../../../core/DTO/update-account-dto";
 export class ProctorManageComponent implements OnInit {
   AppMessages = APP_MESSAGES;
   proctorForm: FormGroup;
+  // updateProctorForm: FormGroup;
 
   deleteProctorId: number | null = null;
   updateProctorId: number | null = null;
@@ -81,7 +82,7 @@ export class ProctorManageComponent implements OnInit {
       lastName: proctor.lastName,
       email: proctor.credential?.email,
       phonenum: proctor.credential?.phonenum,
-      createdAt: proctor.createdAt,
+      createdAt: proctor.createdAt?.replace('T',' ') ,
       userId: proctor.userId,
     }));
   }
@@ -125,9 +126,9 @@ export class ProctorManageComponent implements OnInit {
   }
 
   updateProctor(): void {
-    if (this.proctorForm.invalid || !this.updateProctorId) {
-      return;
-    }
+    // if (this.proctorForm.invalid || !this.updateProctorId) {
+    //   return;
+    // }
 
     const formValue = this.proctorForm.value;
     const proctorViewModel: UpdateAccountDTO = {
@@ -135,17 +136,21 @@ export class ProctorManageComponent implements OnInit {
       lastName: formValue.lastName,
       phonenum: formValue.phonenum,
       email: formValue.email,
-      userId:this.updateProctorId
+      userId:this.updateProctorId!
     };
 
-    this.callApi.update(this.updateProctorId, proctorViewModel).subscribe(
+    this.callApi.update(this.updateProctorId!, proctorViewModel).subscribe(
       (response: ApiResponse<any>) => {
+
         if (response.status === 200) {
           this.loadProctorData();
-        } else {
         }
+        this.proctorForm.reset();
+
       },
       error => {
+        this.proctorForm.reset();
+
         console.error('Update error:', error);
       }
     );
@@ -161,16 +166,22 @@ export class ProctorManageComponent implements OnInit {
     this.proctorAuth.register(user).subscribe(
       (response: ApiResponse<CurrentUserData>) => {
         if (response.status === 200) {
-          this.proctorForm.reset();
           this.loadProctorData();
         }
+        this.proctorForm.reset();
       },
       error => {
         console.error('Registration error:', error);
+        this.proctorForm.reset();
+
       }
     );
   }
+  resetForm(){
 
+    this.proctorForm.reset();
+
+  }
   delete(): void {
     if (!this.deleteProctorId) {
       return;

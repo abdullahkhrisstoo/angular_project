@@ -2,7 +2,7 @@
     <div class="container-xl">
         <div class="row g-2 align-items-center">
             <div class="col">
-           
+
                 <h2 class="page-title">
                     Exam Provider Api Details Page
                 </h2>
@@ -10,7 +10,7 @@
             <!-- Page title actions -->
             <div class="col-auto ms-auto d-print-none">
                 <div class="btn-list">
-                 
+
                 </div>
             </div>
         </div>
@@ -25,12 +25,12 @@
                 <h3 class="card-title">Edit Api Links</h3>
                 <div class="col-sm-12 col-md-12" *ngFor="let link of examProviderLinksDTO">
                     <div class="mb-3">
-                        <label class="form-label">{{ link.actionName }}</label>
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            placeholder="Enter Link" 
-                            [(ngModel)]="link.linkPath" 
+                        <label class="form-label">{{ link.actionName | spaceBeforeCapital }}</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Enter Link"
+                            [(ngModel)]="link.linkPath"
                             name="linkPath{{link.examProviderLinkId}}"
                         >
                         <span class="text-danger"></span>

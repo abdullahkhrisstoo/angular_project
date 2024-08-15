@@ -16,6 +16,8 @@ import { DataSharedService } from '../../../../core/services/data-shared.service
 import {CreateExamProviderDTO} from "../../../../core/DTO/create-exam-provider-dto";
 import { RegisterExamProviderDTO } from '../../../../core/DTO/register-exam-provider-dto';
 import { error } from 'console';
+import { SpinnerService } from '../../../../core/services/spinner.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-sign-up',
@@ -42,7 +44,8 @@ export class SignUpComponent implements OnInit {
     private examProviderApis: ExamProviderService,
     private sharedPlanService: DataSharedService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private spinner: NgxSpinnerService
   ) {
     this.signUpForm = this.formController.createFormGroup({
       firstName: FIRST_NAME_CONTROL,
@@ -172,6 +175,7 @@ export class SignUpComponent implements OnInit {
 
 
   onSubmit(): void {
+    this.spinner.show();
     if (this.signUpForm.invalid || this.registerExamProviderForm.invalid) {
       return;
     }
@@ -198,12 +202,15 @@ export class SignUpComponent implements OnInit {
 
     this.authService.registerExamProvider(formData).subscribe(
       response => {
-
+        this.toast.showSuccess("The process has been successfully")
         console.log('Registration successful', response);
+        this.spinner.hide();
+        this.router.navigate(['/auth/sign-in']);
       },
       error => {
-        // Handle error
+        this.toast.showError("The process has wrong")
         console.error('Registration error', error);
+        this.spinner.hide();
       }
     );
   }

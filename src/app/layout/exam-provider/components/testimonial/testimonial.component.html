@@ -13,7 +13,7 @@
               <div class="col-auto ms-auto d-print-none">
                 <div class="btn-list">
           <span class="d-none d-sm-inline">
-           
+
           </span>
                   <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
                      data-bs-target="#modal-testimonial-create">
@@ -65,7 +65,12 @@
               >
                 <ngx-datatable-column name="Text" prop="testimonialText" [sortable]="true"></ngx-datatable-column>
 
-                <ngx-datatable-column name="State" prop="testimonialState" [sortable]="true"></ngx-datatable-column>
+                <ngx-datatable-column name="State" prop="testimonialState" [sortable]="true">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row.testimonialState ? row.testimonialState : 'Pending' }}
+                  </ng-template>
+                </ngx-datatable-column>
+
                 <ngx-datatable-column name="Created At" prop="createdAt" [sortable]="true">
                   <ng-template ngx-datatable-cell-template let-value="value">
                     {{ value | date:'yyyy-MM-dd HH:mm:ss' }}

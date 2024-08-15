@@ -1,11 +1,6 @@
 <div class="col-12 col-md-9 d-flex flex-column">
   <div class="card-body">
-    <h2 class="">My Account</h2>
-    <div *ngIf="isExamProvider()" class="row align-items-center">
-      <div class="col-auto">
-        <span class="avatar avatar-xl" style="background-image: url(./static/avatars/000m.jpg)"></span>
-      </div>
-    </div>
+
     <div class="row g-3">
       <div class="col-md">
         <div class="form-label">Business Name</div>
@@ -45,13 +40,7 @@
         </div>
       </div>
     </div>
-    <h3 class="card-title mt-4">Password</h3>
-    <p class="card-subtitle">You can set a permanent password if you don't want to use temporary login codes.</p>
-    <div>
-      <a routerLink="{{updatePassPath}}" routerLinkActive="active" class="btn">
-        Set new password
-      </a>
-    </div>
+
 
 
   </div>

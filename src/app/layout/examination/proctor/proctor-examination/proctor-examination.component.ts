@@ -37,6 +37,7 @@ import { GenericApiHandlerService } from '../../../../core/services/api.service'
 import { ApiResponse } from '../../../../core/utils/ApiResponse';
 import { ToastMsgService } from '../../../../core/services/toast.service';
 import { APP_MESSAGES } from '../../../../core/constants/error-messages.constants';
+import { API_ENDPOINTS } from '../../../../core/constants/api.constants';
 
 type IconType = 'microphone' | 'chat' | 'shareScreen';
 
@@ -110,6 +111,11 @@ export class ProctorExaminationComponent implements OnInit {
     iceServers: [
       {
         urls: ['stun:stun1.1.google.com:19302'],
+      },
+      {
+        urls: 'turn:numb.viagenie.ca', 
+        credential: 'muazkh',
+        username: 'webrtc@live.com'
       },
     ],
   };
@@ -230,7 +236,7 @@ export class ProctorExaminationComponent implements OnInit {
       'remoteVideo_2'
     ) as HTMLVideoElement;
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl('http://192.168.1.17:1111/signalingHub')
+      .withUrl(API_ENDPOINTS.WEB_RTC_URL)
       .build();
     this.hubConnection
       .start()

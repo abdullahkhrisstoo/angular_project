@@ -11,7 +11,7 @@
                 </h2>
               </div>
               <div class="col-auto ms-auto d-print-none">
-               
+
               </div>
             </div>
           </div>
@@ -43,7 +43,13 @@
                 [sortType]=SortType.multi
               >
                 <ngx-datatable-column name="Student Name" prop="studentName" [sortable]="true"></ngx-datatable-column>
-                <ngx-datatable-column name="Link Exam" prop="proctorTokenEmail" [sortable]="true"></ngx-datatable-column>
+
+                <ngx-datatable-column name="Link Exam" prop="proctorTokenEmail" >
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                   <a href="{{baseUrl}}api/examReservation/GetExamDashToProctor?token={{row.proctorTokenEmail }}&reservationId={{row.examReservationId}}">Link Exam</a>
+                  </ng-template>
+                </ngx-datatable-column>
+
                 <ngx-datatable-column name="Start Date" prop="startDate" [sortable]="true">
                   <ng-template ngx-datatable-cell-template let-value="value">
                     {{ value | date:'yyyy-MM-dd HH:mm:ss' }}

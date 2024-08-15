@@ -22,9 +22,11 @@ import { RestrictedScreenComponent } from './components/restricted-screen/restri
 import { UnsavedChangesDirective } from '../core/directive/unsaved-changes.directive';
 import { DraggableComponent } from './components/draggable/draggable.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { SpaceBeforeCapitalPipe } from '../core/pipes/space-before-capital.pipe';
 
 @NgModule({
   declarations: [
+
     InputComponent,
     MyAccountComponent,
     UserProfileComponent,
@@ -38,6 +40,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     RestrictedScreenComponent,
     UnsavedChangesDirective,
     DraggableComponent,
+    SpaceBeforeCapitalPipe
 
 
   ],
@@ -73,7 +76,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     DisableRightClickDirective,
     UnsavedChangesDirective,
     DraggableComponent,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    SpaceBeforeCapitalPipe
 
 
   ],

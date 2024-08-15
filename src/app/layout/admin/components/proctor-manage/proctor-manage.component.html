@@ -130,7 +130,7 @@
       </div>
 
       <div class="modal-footer">
-        <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
+        <a class="btn btn-link link-secondary" (click)="resetForm()" data-bs-dismiss="modal">
           Cancel
         </a>
         <button data-bs-dismiss="modal" href="#" type="submit" form="createExamForm" class="btn btn-primary ms-auto">
@@ -198,7 +198,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="proctorForm" >
+        <form [formGroup]="proctorForm" id="updateExamForm">
           <app-input [formGroup]="proctorForm" controlName="firstName" label="First Name"
             [errorMessages]="{ required: AppMessages.REQUIRED_FIELD }">
           </app-input>
@@ -223,10 +223,10 @@
       </div>
 
       <div class="modal-footer">
-        <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
+        <a class="btn btn-link link-secondary" (click)="resetForm()" data-bs-dismiss="modal">
           Cancel
         </a>
-        <button (click)="updateProctor()" data-bs-dismiss="modal" href="#" type="submit"
+        <button (click)="updateProctor()" form="updateExamForm" data-bs-dismiss="modal" href="#" type="submit"
           class="btn btn-primary ms-auto">
           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

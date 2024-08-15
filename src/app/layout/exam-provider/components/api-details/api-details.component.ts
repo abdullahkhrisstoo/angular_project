@@ -47,7 +47,7 @@ export class ApiDetailsComponent {
 
     forkJoin(updateRequests).subscribe(
       () => {
-        alert('Links updated successfully');
+    
       },
       error => {
         console.error('Error updating links:', error);

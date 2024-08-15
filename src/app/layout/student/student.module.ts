@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { StudentRoutingModule } from './student-routing.module';
-import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
 import { StudentProfileComponent } from './components/student-profile/student-profile.component';
 import { StudentStep5Component } from './components/student-step-5/student-step-5.component';
 import { StudentStepThreeComponent } from './components/student-step-3/student-step-three.component';
@@ -19,7 +18,6 @@ import { MicrophoneTestComponent } from './components/microphone-test/microphone
 
 @NgModule({
   declarations: [
-    StudentDashboardComponent,
     StudentProfileComponent,
     StudentStepOneComponent,
     StudentStepTwoComponent,

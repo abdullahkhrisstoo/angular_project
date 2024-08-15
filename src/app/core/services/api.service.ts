@@ -26,7 +26,7 @@ export class GenericApiHandlerService {
 
 
     console.error(errorMessage);
-    this.spinner.hide();
+
     return throwError(errorMessage);
   }
 
@@ -54,7 +54,12 @@ export class GenericApiHandlerService {
     return this.http.get<T>(url, options).pipe(
       tap(() => this.spinner.hide()),
 
-      catchError(this.handleError)
+      catchError(error => {
+
+        this.spinner.hide();
+        console.error('Handling error:', error);
+        return this.handleError(error);
+      })
     );
   }
 
@@ -77,6 +82,7 @@ export class GenericApiHandlerService {
       map(response => response.body as T),
       catchError(error => {
         this.toast.showError("There is a problem");
+        this.spinner.hide();
         console.error('Handling error:', error);
         return this.handleError(error);
       })
@@ -102,6 +108,7 @@ export class GenericApiHandlerService {
       map(response => response.body as T),
       catchError(error => {
         this.toast.showError("There is a problem");
+        this.spinner.hide();
         console.error('Handling error:', error);
         return this.handleError(error);
       })
@@ -129,6 +136,7 @@ export class GenericApiHandlerService {
       map(response => response.body as T),
       catchError(error => {
         this.toast.showError("There is a problem");
+        this.spinner.hide();
         console.error('Handling error:', error);
         return this.handleError(error);
       })

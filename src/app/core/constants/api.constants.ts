@@ -1,5 +1,6 @@
 export const API_ENDPOINTS = {
 
+  WEB_RTC_URL : 'https://exam-guardian.geeksfreelancer.online/signalingHub',
   baseUrl : 'https://exam-guardian.geeksfreelancer.online/api/',
   baseUrlImage : 'https://exam-guardian.geeksfreelancer.online/',
   GET_PROCTOR_WORK_TIMES : 'ProctorWorkTimes/GetProctorsWorkTimeById',

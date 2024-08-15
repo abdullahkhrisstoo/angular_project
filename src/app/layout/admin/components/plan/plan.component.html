@@ -12,7 +12,7 @@
       <div class="col-auto ms-auto d-print-none">
         <div class="btn-list">
           <span class="d-none d-sm-inline">
-           
+
           </span>
           <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
              data-bs-target="#modal-plan-create" (click)="resetCreatePlanForm()">
@@ -124,11 +124,7 @@
               </div>
               <div class="col-auto ms-auto d-print-none">
                 <div class="btn-list">
-          <span class="d-none d-sm-inline">
-            <a href="#" class="btn">
-              New view
-            </a>
-          </span>
+
                   <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
                      data-bs-target="#modal-create-plan-feature">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
@@ -242,7 +238,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary" [disabled]="createPlanForm.invalid">Create Plan</button>
+            <button type="submit" data-bs-dismiss="modal" class="btn btn-primary" [disabled]="createPlanForm.invalid">Create Plan</button>
           </div>
         </form>
       </div>
@@ -352,7 +348,7 @@
               </a>
             </div>
             <div class="col">
-              <button type="button" (click)="deletePlan()" class="btn btn-danger w-100">
+              <button type="button" data-bs-dismiss="modal" (click)="deletePlan()" class="btn btn-danger w-100">
                 Delete this Item
               </button>
             </div>
@@ -383,7 +379,7 @@
 
           <div class="modal-footer">
             <button type="button" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary" [disabled]="createPlanFeatureForm.invalid">Create Plan Feature</button>
+            <button type="submit" data-bs-dismiss="modal" class="btn btn-primary" [disabled]="createPlanFeatureForm.invalid">Edit Plan Feature</button>
           </div>
         </form>
       </div>
@@ -417,12 +413,12 @@
         <div class="w-100">
           <div class="row">
             <div class="col">
-              <a href="#" class="btn w-100" data-bs-dismiss="modal">
+              <a  class="btn w-100" data-bs-dismiss="modal">
                 Cancel
               </a>
             </div>
             <div class="col">
-              <button type="button" (click)="deletePlanFeatures()" class="btn btn-danger w-100">
+              <button type="button" data-bs-dismiss="modal" (click)="deletePlanFeatures()" class="btn btn-danger w-100">
                 Delete this Item
               </button>
             </div>
