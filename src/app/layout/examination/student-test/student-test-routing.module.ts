@@ -9,6 +9,7 @@ import { ExamRulesComponent } from './components/exam-rules/exam-rules.component
 import { CameraTestComponent } from './components/camera-test/camera-test.component';
 import { StartComponent } from './components/start/start.component';
 
+
 const routes: Routes = [
   {
     path: '',

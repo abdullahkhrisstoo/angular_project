@@ -8,7 +8,10 @@ import { SharedModule } from "../../shared/shared.module";
 import { ProctorExaminationComponent } from './proctor/proctor-examination/proctor-examination.component';
 import { StudentScoreComponent } from './student/student-score/student-score.component';
 import { ComplaintComponent } from './student/complaint/complaint.component';
+import { FirstPageComponent } from './first-page/first-page.component';
 
+import { ProctorComponent } from './proctor_test/proctor.component'
+import { StartTestComponent } from './start_test/start.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,9 @@ import { ComplaintComponent } from './student/complaint/complaint.component';
     ProctorExaminationComponent,
     StudentScoreComponent,
     ComplaintComponent,
+    FirstPageComponent,
+    StartTestComponent,
+    ProctorComponent
   ],
   imports: [
     CommonModule,

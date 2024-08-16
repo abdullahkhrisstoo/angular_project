@@ -12,9 +12,8 @@ import { IdenImageComponent } from './components/iden-image/iden-image.component
 import { CheckInProcessComponent } from './components/check-in-process/check-in-process.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ExamRulesComponent } from './components/exam-rules/exam-rules.component';
-import { StartComponent } from './components/start/start.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { StartComponent } from './components/start/start.component';
 
 @NgModule({
   declarations: [

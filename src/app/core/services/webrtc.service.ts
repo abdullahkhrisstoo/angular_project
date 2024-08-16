@@ -19,15 +19,30 @@ export class WebrtcService {
   private readonly ICE_SERVERS = {
     iceServers: [
       {
-        urls: ['stun:stun1.1.google.com:19302'],
+        urls: "stun:stun.relay.metered.ca:80",
       },
       {
-        urls: 'turn:numb.viagenie.ca',
-        credential: 'muazkh',
-        username: 'webrtc@live.com'
+        urls: "turn:global.relay.metered.ca:80",
+        username: "8b111c5a0cb6392f34e7edbd",
+        credential: "QKz6WkI9XqQw7kez",
       },
-    ],
-  };
+      {
+        urls: "turn:global.relay.metered.ca:80?transport=tcp",
+        username: "8b111c5a0cb6392f34e7edbd",
+        credential: "QKz6WkI9XqQw7kez",
+      },
+      {
+        urls: "turn:global.relay.metered.ca:443",
+        username: "8b111c5a0cb6392f34e7edbd",
+        credential: "QKz6WkI9XqQw7kez",
+      },
+      {
+        urls: "turns:global.relay.metered.ca:443?transport=tcp",
+        username: "8b111c5a0cb6392f34e7edbd",
+        credential: "QKz6WkI9XqQw7kez",
+      },
+  ],
+  };
 
   constructor() {}
 

@@ -19,6 +19,7 @@ export class IdenImageComponent {
   selectedFrontImage: File | null = null;
   dropzone!: Dropzone;
   isDisabled:boolean=true;
+  examResrvationId:number=0;
   @ViewChild('dropzoneElement', { static: false }) dropzoneElement!: ElementRef;
 
   constructor(private fb: FormBuilder,private toast:ToastMsgService, private identificationService: IdentificationImageService,  private router: Router,) {
@@ -26,6 +27,8 @@ export class IdenImageComponent {
       imageBack: [null, Validators.required],
       imageFront: [null, Validators.required],
     });
+    const payload=JSON.parse(localStorage.getItem("examerDTO")!);
+    this.examResrvationId=payload.ReservationId;
   }
   onPrevious(){
 
@@ -95,7 +98,7 @@ onNext(){
     }
 
     const createIdentificationImageDTO: CreateIdentificationImageDTO = {
-      examReservationId: 69,
+      examReservationId: this.examResrvationId,
       imageBack: this.selectedBackImage!,
       imageFront: this.selectedFrontImage!
     };

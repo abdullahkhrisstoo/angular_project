@@ -23,6 +23,7 @@ export class RoomImageComponent {
     left: undefined,
     right: undefined
   };
+  examResrvationId:number;
   onNext(){
 
     this.router.navigate(['./examination/student-test/exam-rules']);
@@ -33,6 +34,8 @@ export class RoomImageComponent {
       examReservationId: [''],
       place: ['']
     });
+    const payload=JSON.parse(localStorage.getItem("examerDTO")!);
+    this.examResrvationId=payload.ReservationId;
   }
 
   ngAfterViewInit(): void {
@@ -86,7 +89,7 @@ export class RoomImageComponent {
   createRoomImage(): void {
     const dtoList: CreateRoomReservationImageDTO[] = Object.keys(this.images).map(key => ({
       image: this.images[key],
-      examReservationId: 69,
+      examReservationId: this.examResrvationId,
       place: key
     }));
 

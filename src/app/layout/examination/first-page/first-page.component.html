@@ -1,0 +1,51 @@
+<div class="container">
+  <h1>WebRTC Video Call</h1>
+
+  <div class="video-chat-container">
+    <div class="video-container">
+      <div class="video-wrapper">
+        <h2>Local Video</h2>
+        <video id="localVideo" autoplay muted></video>
+        <video id="localVideo_2" autoplay muted></video>
+        <div class="controls">
+          <button (click)="toggleCamera()" [style.background-color]="butColorCam">Toggle Camera</button>
+          <button (click)="toggleMicrophone()" [style.background-color]="butColor">Toggle Microphone</button>
+        </div>
+      </div>
+      <div class="video-wrapper">
+        <h2>Remote Video</h2>
+        <video id="remoteVideo" autoplay></video>
+        <video id="remoteVideo_2" autoplay></video>
+      </div>
+    </div>
+    <div class="chat-container">
+      <div class="chat-header">
+        <h2>Chat</h2>
+      </div>
+        <div id="mess">
+
+
+        </div>
+      <div class="chat-messages"  >
+        <div *ngFor="let message of messages">
+          <span class="message">{{ message }}</span>
+        </div>
+      </div>
+      <div class="chat-input">
+        <input id="test" type="text" [(ngModel)]="chatMessage" (keyup.enter)="sendMessage()" placeholder="Type a message">
+        <button (click)="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button (click)="startCall()">Start Call</button>
+    <button (click)="toggleRecording()" [disabled]="!peerConnection || peerConnection.connectionState !== 'connected'">Toggle Recording</button>
+    <button (click)="shareScreen()" [disabled]="!peerConnection || peerConnection.connectionState !== 'connected'">Share Screen</button>
+  </div>
+</div>
+<button (click)="showModal = true">Simulate Receive Offer</button>
+
+
+
+<router-outlet></router-outlet>

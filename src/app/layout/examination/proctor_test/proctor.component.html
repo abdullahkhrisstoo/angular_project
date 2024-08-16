@@ -1,0 +1,76 @@
+<div class="container">
+    <h1>WebRTC Video Call</h1>
+
+    <div class="video-chat-container">
+      <div class="video-container">
+        <div class="video-wrapper">
+          <h2>Local Video</h2>
+          <div class="controls">
+            <button (click)="toggleMicrophone()" [style.background-color]="butColor">Toggle Microphone</button>
+          </div>
+        </div>
+        <div class="video-wrapper">
+          <h2>Remote Video</h2>
+          <video id="remoteVideo" autoplay></video>
+          <video id="remoteVideo_2" autoplay></video>
+        </div>
+      </div>
+      <div class="chat-container">
+        <div class="chat-header">
+          <h2>Chat</h2>
+        </div>
+          <div id="mess">
+
+
+          </div>
+        <div class="chat-messages"  >
+          <div *ngFor="let message of messages">
+            <span class="message">{{ message }}</span>
+          </div>
+        </div>
+        <div class="chat-input">
+          <input id="test" type="text" [(ngModel)]="chatMessage" (keyup.enter)="sendMessage()" placeholder="Type a message">
+          <button (click)="sendMessage()">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button (click)="toggleRecording()" [disabled]="!peerConnection || peerConnection.connectionState !== 'connected'">Toggle Recording</button>
+     </div>
+  </div>
+  <button data-bs-toggle="modal" style="display: none;" data-bs-target="#accept-conn" id="but-open-conn" ></button>
+
+  <div class="modal modal-blur " id="accept-conn" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-status bg-danger"></div>
+        <div class="modal-body text-center py-4">
+          <form id="deleteExamForm" class="" method="post">
+            <h3>Are you sure?</h3>
+            <div class="text-muted">Do you want to accept this Connection ? .</div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="w-100">
+            <div class="row">
+              <div class="col">
+                <button type="button" (click)="rejectOffer()" class="btn btn-danger w-100" data-bs-dismiss="modal">
+                  Reject
+                </button>
+              </div>
+              <div class="col">
+                <button type="button" (click)="acceptOffer()" class="btn btn-success w-100" data-bs-dismiss="modal">
+                 Accept
+                </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>

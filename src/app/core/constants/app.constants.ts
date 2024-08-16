@@ -16,7 +16,7 @@ export const THIRTY_SECONDS=30;
 
 // href="http://localhost:4200/admin/dashboard?theme=dark"
 
-export const LOCAL_HOST="https://guard-test-deaa.geeksfreelancer.online"
-export const LIGHT_THEME="https://guard-test-deaa.geeksfreelancer.online/admin/exam-provider?theme=light"
-export const DARK_THEME="https://guard-test-deaa.geeksfreelancer.online/admin/exam-provider?theme=dark"
+export const LOCAL_HOST="https://receive-offer-plus-hello.geeksfreelancer.online"
+export const LIGHT_THEME="https://receive-offer-plus-hello.geeksfreelancer.online/admin/exam-provider?theme=light"
+export const DARK_THEME="https://receive-offer-plus-hello.geeksfreelancer.online/admin/exam-provider?theme=dark"
 

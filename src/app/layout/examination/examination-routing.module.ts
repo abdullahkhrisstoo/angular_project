@@ -5,6 +5,11 @@ import { StudentExaminationComponent } from './student/student-examination/stude
 import { ProctorExaminationComponent } from './proctor/proctor-examination/proctor-examination.component';
 import { StudentScoreComponent } from './student/student-score/student-score.component';
 import { ComplaintComponent } from './student/complaint/complaint.component';
+import { FirstPageComponent } from './first-page/first-page.component';
+
+import { ProctorComponent } from './proctor_test/proctor.component';
+import { StartTestComponent } from './start_test/start.component';
+
 
 const routes: Routes = [
   {
@@ -15,6 +20,11 @@ const routes: Routes = [
       { path: 'proctor', component: ProctorExaminationComponent },
       { path: 'score', component: StudentScoreComponent },
       { path: 'complaint', component: ComplaintComponent },
+      { path: 'first', component: FirstPageComponent },
+      { path: 'test-start', component: StartTestComponent },
+      { path: 'test-proctor', component: ProctorComponent },
+
+
 
       {
         path: 'student-test',
