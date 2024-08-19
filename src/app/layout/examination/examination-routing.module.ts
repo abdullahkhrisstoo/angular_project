@@ -20,8 +20,8 @@ const routes: Routes = [
       { path: 'proctor', component: ProctorExaminationComponent },
       { path: 'score', component: StudentScoreComponent },
       { path: 'complaint', component: ComplaintComponent },
-      { path: 'first', component: FirstPageComponent },
-      { path: 'test-start', component: StartTestComponent },
+      // { path: 'first', component: FirstPageComponent },
+      // { path: 'test-start', component: StartTestComponent },
       { path: 'test-proctor', component: ProctorComponent },
 
 

@@ -105,7 +105,7 @@ export class StudentExaminationComponent
   isVideoToggled: boolean = false;
   isMicrophoneToggled!: boolean;
   remoteAudio!: HTMLAudioElement;
-  
+
   @HostListener('document:fullscreenchange')
   @HostListener('document:mozfullscreenchange')
   @HostListener('document:webkitfullscreenchange')
@@ -115,6 +115,7 @@ export class StudentExaminationComponent
       alert("You have exited fullscreen mode.");
     }
   }
+  
   isFullscreen(): boolean {
     return !!(
       document.fullscreenElement ||

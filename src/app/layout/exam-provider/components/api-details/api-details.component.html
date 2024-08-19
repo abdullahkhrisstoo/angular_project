@@ -18,28 +18,45 @@
 </div>
 
 <div class="page-body">
-    <div class="container-xl">
-        <form id="editUserForm" class="card">
-            <input type="text" style="display:none">
-            <div class="card-body">
-                <h3 class="card-title">Edit Api Links</h3>
-                <div class="col-sm-12 col-md-12" *ngFor="let link of examProviderLinksDTO">
-                    <div class="mb-3">
-                        <label class="form-label">{{ link.actionName | spaceBeforeCapital }}</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Enter Link"
-                            [(ngModel)]="link.linkPath"
-                            name="linkPath{{link.examProviderLinkId}}"
-                        >
-                        <span class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer text-end">
-                <button type="button" (click)="updateLinks()" class="btn btn-primary">Update Links</button>
-            </div>
-        </form>
-    </div>
+  <div class="container-xl">
+    <form id="editUserForm" class="card">
+      <div class="card-body">
+        <h3 class="card-title">Edit Api Links</h3>
+        <div class="col-sm-12 col-md-12" *ngFor="let link of examProviderLinksDTO; let i = index">
+          <div class="mb-3">
+            <label class="form-label">{{ link.actionName | spaceBeforeCapital }}</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter Link"
+              [(ngModel)]="link.linkPath"
+              name="linkPath{{link.examProviderLinkId}}"
+            >
+            <span class="text-danger"></span>
+            <button type="button"  (click)="toggleInfo(i)" class="btn btn-primary mt-2">Show JSON Signture</button>
+            <pre *ngIf="showInfoStates[i]" class="json-content">
+              <code [innerText]="getJsonContent(i) | json"></code>
+            </pre>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-end">
+        <button type="button" (click)="updateLinks()" class="btn btn-primary">Update Links</button>
+      </div>
+    </form>
+  </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -38,7 +38,7 @@ export class ComplaintComponent implements OnInit {
     this.complainService.updateComplementByStudent(updateComplementDTO).subscribe(
       (response) => {
         console.log("response: "+response.message);
-        //localStorage.clear();
+        localStorage.clear();
         this.router.navigate(['/home']);
       },
       error => {
@@ -65,7 +65,7 @@ export class ComplaintComponent implements OnInit {
         if (this.minutes === 0) {
           this.isExpired = true;
           clearInterval(countdown);
-          //localStorage.clear();
+          localStorage.clear();
           this.router.navigate(['/home']);  // Redirect to home after 10 minutes
         } else {
           this.minutes--;

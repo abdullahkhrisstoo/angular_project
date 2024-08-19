@@ -224,16 +224,10 @@
     <div class="page-body">
       <div class="container h-100 overflow-hidden">
         <div class="row h-100">
-          <div
-            [ngClass]="{
-              'col-12 col-md-8': isChatVisible,
-              'col-12': !isChatVisible
-            }"
-          >
+          <div [ngClass]="{'col-12 col-md-8': isChatVisible,'col-12': !isChatVisible}">
           <div
           [ngClass]="{ 'd-none': isVideoToggled === false }"
-          class="d-flex justify-content-center"
-        >
+          class="d-flex justify-content-center">
           <video style="height: 100px; width: 100px" #localVideo_3 autoplay></video>
         </div>
 
@@ -273,10 +267,10 @@
                 (submitExam)="submitExam()"
               ></app-examination-body>
             </div>
+            <span *ngIf="hasUnansweredQuestions" class="text-danger d-inline">
+              Please complete all questions before submitting the exam.
+            </span>
           </div>
-          <span *ngIf="hasUnansweredQuestions" class="text-danger">
-            Please complete all questions before submitting the exam.
-          </span>
           <!--todo: Chat Section -->
           <div class="col-12 col-md-4" *ngIf="isChatVisible">
             <div class="card">

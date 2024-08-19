@@ -1,0 +1,12 @@
+.json-content {
+  border-radius: 5px;
+  padding: 10px;
+  font-family: monospace;
+  white-space: pre-wrap;
+  overflow: auto;
+  margin-top: 10px;
+}
+
+.json-content code {
+  display: block;
+}

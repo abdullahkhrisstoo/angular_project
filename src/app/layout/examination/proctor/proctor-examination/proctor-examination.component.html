@@ -43,18 +43,10 @@
             }"
           >
             <!-- todo: Remote Share And video -->
-            <div class="video-wrapper container">
+            <div class="video-wrapper container mt-5">
               <div class="row">
                 <div class="col-6">
-                  <div
-                    class="video-container"
-                    [ngClass]="{
-                      fullscreen: isFullscreen && activeVideo === 'video1',
-                      'small-container':
-                        isSmallContainer && activeVideo !== 'video1'
-                    }"
-                    id="video1"
-                  >
+                  <div  class="video-container" [ngClass]="{fullscreen: isFullscreen && activeVideo === 'video1','small-container':isSmallContainer && activeVideo !== 'video1'}"id="video1">
                     <video id="remoteVideo" autoplay></video>
                     <div class="icon" (click)="toggleExpand('video1')">
                       <i class="fa fa-expand"></i>
@@ -173,6 +165,7 @@
               class="list-inline-item footer-icon"
               [ngClass]="{ active: activeIcons.chat }"
               (click)="toggleChat()"
+              title="Chat"
             >
               <i class="fas fa-comments"></i>
             </li>
@@ -180,6 +173,8 @@
               class="list-inline-item footer-icon"
               [ngClass]="{ active: activeIcons.shareScreen }"
               (click)="toggleRecording()"
+              title="Start Recording"
+
             >
               <i class="fas fa-desktop"></i>
             </li>

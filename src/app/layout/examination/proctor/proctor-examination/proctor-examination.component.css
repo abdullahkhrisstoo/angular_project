@@ -132,7 +132,7 @@ body {
 }
 
 .video-container {
-  height: 250px;
+  height: 400px;
   background-color: rgb(217, 217, 217);
   border-radius: 8px; /* Add border-radius here */
   overflow: hidden; /* Ensure content fits within the border radius */
