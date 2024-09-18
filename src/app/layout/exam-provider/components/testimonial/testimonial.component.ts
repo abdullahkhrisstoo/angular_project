@@ -7,7 +7,6 @@ import {ComplementService} from "../../../../core/services/complement.service";
 import {ExamProviderService} from "../../../../core/services/exam-provider.service";
 import {ExamInfoService} from "../../../../core/services/exam-info.service";
 import {PlanService} from "../../../../core/services/plan.service";
-import {PlanFeatureService} from "../../../../core/services/plan-feature.service";
 import {ExamReservationService} from "../../../../core/services/exam-reservation.service";
 import {TestimonialService} from "../../../../core/services/testimonial.service";
 import {ProctorService} from "../../../../core/services/proctor.service";
